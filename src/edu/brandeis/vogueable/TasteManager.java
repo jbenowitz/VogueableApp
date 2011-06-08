@@ -13,7 +13,7 @@ import java.util.Random;
  */
 public class TasteManager {
 	
-	HashMap<Item,Integer> tagCount;
+	HashMap<String,Integer> tagCount;
 	ArrayList<Item> items;
 	
 	/**
@@ -23,7 +23,7 @@ public class TasteManager {
 	 * @param ArrayList of items, to choose next item
 	 */
 	public TasteManager(ArrayList<Item> items){
-		tagCount = new HashMap<Item,Integer>();
+		tagCount = new HashMap<String,Integer>();
 		this.items = items;
 	}
 	
@@ -32,14 +32,14 @@ public class TasteManager {
 	 * 
 	 * @param taglist- tags to add to like HashMap
 	 */
-	public void likeFlavor(ArrayList<Item> taglist){
-		for(Item item:taglist){
+	public void likeFlavor(ArrayList<String> taglist){
+		for(String tag : taglist){
 			Integer likes = 1;
-			if(tagCount.containsKey(item)){
-				likes = likes + tagCount.get(item);
-				tagCount.remove(item);
+			if(tagCount.containsKey(tag)){
+				likes = likes + tagCount.get(tag);
+				tagCount.remove(tag);
 			}
-			tagCount.put(item, likes);
+			tagCount.put(tag, likes);
 		}
 	}
 	
@@ -48,14 +48,14 @@ public class TasteManager {
 	 * 
 	 * @param taglist - to decrement in HashMap
 	 */
-	public void dislikeFlavor(ArrayList<Item> taglist){
-		for(Item item:taglist){
+	public void dislikeFlavor(ArrayList<String> taglist){
+		for(String tag : taglist){
 			Integer dislikes = 1;
-			if(tagCount.containsKey(item)){
-				dislikes = tagCount.get(item) - dislikes;
-				tagCount.remove(item);
+			if(tagCount.containsKey(tag)){
+				dislikes = tagCount.get(tag) - dislikes;
+				tagCount.remove(tag);
 			}
-			tagCount.put(item, dislikes);
+			tagCount.put(tag, dislikes);
 		}
 	}
 	
