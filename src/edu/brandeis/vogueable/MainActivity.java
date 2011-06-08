@@ -17,6 +17,11 @@ import android.view.View;
  */
 public class MainActivity extends Activity implements  android.view.View.OnClickListener{
 
+	//instantiate objects
+	 ItemDB itemDB = new ItemDB();
+	 TasteManager taste_manager =new TasteManager(itemDB.getAllItem());
+	 ItemCursor item_cursor = new ItemCursor(itemDB);
+	
 	/** Called when the activity is first created. */
 	   @Override
 	   public void onCreate(Bundle savedInstanceState) {
@@ -32,36 +37,33 @@ public class MainActivity extends Activity implements  android.view.View.OnClick
 	     
 	   }
 	   
-	   //instantiate objects
-	   ItemDB itemDB = new ItemDB();
-	   TasteManager taste_manager =new TasteManager(itemDB.getAllItem());
-	   ItemCursor item_cursor = new ItemCursor(itemDB);
+	  
 	  
 /**
  * 
  * @param v view 
  */
 	public void onClick(View v) {
+		   
 		Item currItem = item_cursor.getCurrentItem();
-		switch (v.getId()) {
-	      
+		switch (v.getId()) { 
 		case R.id.next_button:
 	    	 taste_manager.getNextItem(currItem);
 	         break;
 	      
-	      case R.id.prev_button:
-	    	  item_cursor.getPrevItem();
-	         break;
+		case R.id.prev_button:
+			item_cursor.getPrevItem();
+			break;
 	      
-	      case R.id.like_button:
-	    	  //adds the current item to the LikeList and also updates your flavors to predict what you have next 
-	    	  taste_manager.likeFlavor(currItem.getTagList());
-	    	  break;	
+		case R.id.like_button:
+			//adds the current item to the LikeList and also updates your flavors to predict what you have next 
+			taste_manager.likeFlavor(currItem.getTagList());
+			break;	
 	    	  
-	      case R.id.dislike_button:
-		    	  //adds the current item to the DisLikeList and also updates your flavors to predict what you have next 
-		    	  taste_manager.dislikeFlavor(currItem.getTagList());
-		    	  break;
+		case R.id.dislike_button:
+			//adds the current item to the DisLikeList and also updates your flavors to predict what you have next 
+			taste_manager.dislikeFlavor(currItem.getTagList());
+			break;
 		    	  
 		    	  
 		}	
