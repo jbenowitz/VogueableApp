@@ -33,39 +33,36 @@ public class MainActivity extends Activity implements  android.view.View.OnClick
 	   }
 	   
 	   //instantiate objects
-	   TasteManager taste_manager =new TasteManager(null);
-	   ItemCursor item_cursor = new ItemCursor(null);
 	   ItemDB itemDB = new ItemDB();
-	   Item item;
+	   TasteManager taste_manager =new TasteManager(itemDB.getAllItem());
+	   ItemCursor item_cursor = new ItemCursor(itemDB);
 	  
 /**
  * 
  * @param v view 
  */
 	public void onClick(View v) {
+		Item currItem = item_cursor.getCurrentItem();
 		switch (v.getId()) {
-	      case R.id.next_button:
-	    	 taste_manager.getNextItem(item_cursor.getCurrentItem());
+	      
+		case R.id.next_button:
+	    	 taste_manager.getNextItem(currItem);
 	         break;
 	      
-	         // do this for all buttons
-	      case R.id.previous_button:
+	      case R.id.prev_button:
 	    	  item_cursor.getPrevItem();
 	         break;
-	         
-	      case R.id.more_info_button:
-	    	  item.getDescription();
-	    	  break;	
 	      
 	      case R.id.like_button:
 	    	  //adds the current item to the LikeList and also updates your flavors to predict what you have next 
-	    	  taste_manager.likeFlavor(item.getTagList());
+	    	  taste_manager.likeFlavor(currItem.getTagList());
 	    	  break;	
 	    	  
-	      case R.id.like_button:
+	      case R.id.dislike_button:
 		    	  //adds the current item to the DisLikeList and also updates your flavors to predict what you have next 
-		    	  taste_manager.dislikeFlavor(item.getTagList());
+		    	  taste_manager.dislikeFlavor(currItem.getTagList());
 		    	  break;
+		    	  
 		    	  
 		}	
 	}//end onClick view
