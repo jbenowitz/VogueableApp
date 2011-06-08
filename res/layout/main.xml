@@ -1,12 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
-    android:layout_width="fill_parent"
-    android:layout_height="fill_parent"
-    >
-<TextView  
-    android:layout_width="fill_parent" 
-    android:layout_height="wrap_content" 
-    android:text="@string/hello"
-    />
+<LinearLayout
+  xmlns:android="http://schemas.android.com/apk/res/android"
+  android:layout_height="fill_parent"
+  android:layout_width="fill_parent"
+  android:padding="30dip"
+  android:orientation="horizontal">
+  <LinearLayout
+     android:orientation="horizontal">
+     <Button
+     	android:id = "@+id/like_button"
+		android:layout_width = "fill_parent"
+		android:layout_height = "wrap_content"
+		android:text = "@string/like_label">
+	</Button>
+  </LinearLayout>
+  <LinearLayout
+  	android:orientation="horizontal">
+  	<Button
+  		android:id="@+id/next_button"
+  		android:layout_width = "fill_parent"
+  		android:layout_height = "wrap_content"
+  		android:layout_gravity="center"
+  		android:text="@string/next_label">
+  	</Button>
+  	<ImageView 
+  		android:id="@+id/imageviewer"
+  		android:layout_gravity="center"/>
+  	<Button
+  	</LinearLayout>
 </LinearLayout>
