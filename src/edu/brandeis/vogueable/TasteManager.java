@@ -2,6 +2,7 @@ package edu.brandeis.vogueable;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Random;
 
 /**
  * Keeps track of what the user likes/dislikes
@@ -13,14 +14,17 @@ import java.util.HashMap;
 public class TasteManager {
 	
 	HashMap<Item,Integer> tagCount;
-	
+	ArrayList<Item> items;
 	
 	/**
 	 * Constructor
 	 * Initialize tagCount HashMap to be empty.
+	 * 
+	 * @param ArrayList of items, to choose next item
 	 */
-	public TasteManager(){
+	public TasteManager(ArrayList<Item> items){
 		tagCount = new HashMap<Item,Integer>();
+		this.items = items;
 	}
 	
 	/**
@@ -58,7 +62,8 @@ public class TasteManager {
 	
 	//TODO finishthis one
 	public Item getNextItem(Item currItem){
-		
+		items.remove(currItem);
+		return items.get(new Random().nextInt(items.size()));
 	}
 
 }
