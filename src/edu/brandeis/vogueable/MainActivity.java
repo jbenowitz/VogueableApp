@@ -33,11 +33,13 @@ public class MainActivity extends Activity implements  android.view.View.OnClick
 	      super.onCreate(savedInstanceState);
 	      setContentView(R.layout.main);
 	      
+	      /*
 	      //Set up objects
 	      itemDB = new ItemDB();
 	      taste_manager = new TasteManager(itemDB.getAllItem());
 	      item_cursor = new ItemCursor(itemDB);
 	      Item currItem = item_cursor.getCurrentItem();
+	      */
 
 	      // Set up click listeners for the next and prev buttons
 	      View nextButton = findViewById(R.id.next_button);
@@ -46,8 +48,10 @@ public class MainActivity extends Activity implements  android.view.View.OnClick
 	      View prevButton = findViewById(R.id.prev_button);
 	      prevButton.setOnClickListener(this);
 	      
+	      
 	      //Display image
-	      this.displayImage(currItem);
+	      //this.displayImage(currItem);
+	      this.displayImage();
 	      
 	      //imgView = (ImageView)findViewById(R.id.imageviewer);
 	      //imgView = setImageResource
@@ -65,13 +69,15 @@ public class MainActivity extends Activity implements  android.view.View.OnClick
 		
 		switch (v.getId()) { 
 		case R.id.next_button:
-	    	 taste_manager.getNextItem(currItem);
+	    	 //taste_manager.getNextItem(currItem)
+			displayNextImage();
 	         break;
 	      
 		case R.id.prev_button:
-			item_cursor.getPrevItem();
+			//item_cursor.getPrevItem();
+			displayImage();
 			break;
-	      
+	   /*   
 		case R.id.like_button:
 			//adds the current item to the LikeList and also updates your flavors to predict what you have next 
 			taste_manager.likeFlavor(currItem.getTagList());
@@ -81,7 +87,7 @@ public class MainActivity extends Activity implements  android.view.View.OnClick
 			//adds the current item to the DisLikeList and also updates your flavors to predict what you have next 
 			taste_manager.dislikeFlavor(currItem.getTagList());
 			break;
-		    	  
+	 */  	  
 		    	  
 		}	
 	}//end onClick view
@@ -91,14 +97,18 @@ public class MainActivity extends Activity implements  android.view.View.OnClick
 	 * @param item
 	 * @return item's name from the DB
 	 */
-	public void displayImage(Item item){
+	//public void displayImage(Item item)
+	public void displayImage(){
 		//Item it = new Item ("/Users/Jackie/Documents/2010-2011/Summer_2011/JBS/VogueableApp/res/drawable-ldpi/itemdb/bedofroses.jpg","res/drawable/itemdb/bedofroses.jpg", "hi", 20, "hi", null, "hi" );
 		//item_cursor.setCurrentItem(it);
 		//Bitmap bits = BitmapFactory.decodeFile(it.getName());
-		Bitmap bits = BitmapFactory.decodeFile(item.getName());
+		//Bitmap bits = BitmapFactory.decodeFile(item.getName());
 		ImageView imag = (ImageView)findViewById(R.id.imageviewer);
-		imag.setImageBitmap(bits);
-		
+		imag.setImageResource(R.drawable.bedofroses);	
+	}
+	public void displayNextImage(){
+		ImageView imag = (ImageView)findViewById(R.id.imageviewer);
+		imag.setImageResource(R.drawable.colorquizdress);	
 	}
 
 }

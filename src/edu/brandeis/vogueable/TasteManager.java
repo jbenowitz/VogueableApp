@@ -14,7 +14,7 @@ import java.util.Random;
 public class TasteManager {
 	
 	HashMap<String,Integer> tagCount;
-	ArrayList<Item> items;
+	ArrayList<Item> itemsNotUsed;
 	
 	/**
 	 * Constructor
@@ -24,7 +24,7 @@ public class TasteManager {
 	 */
 	public TasteManager(ArrayList<Item> items){
 		tagCount = new HashMap<String,Integer>();
-		this.items = items;
+		this.itemsNotUsed = items;
 	}
 	
 	/**
@@ -62,8 +62,8 @@ public class TasteManager {
 	
 	//TODO finishthis one
 	public Item getNextItem(Item currItem){
-		items.remove(currItem);
-		return items.get(new Random().nextInt(items.size()));
+		itemsNotUsed.remove(currItem);
+		return itemsNotUsed.get(new Random().nextInt(itemsNotUsed.size()));
 	}
 
 }
