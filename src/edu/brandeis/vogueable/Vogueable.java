@@ -1,6 +1,7 @@
 package edu.brandeis.vogueable;
 
 import android.app.Activity;
+
 import android.os.Bundle;
 
 public class Vogueable extends Activity {

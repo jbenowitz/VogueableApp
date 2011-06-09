@@ -35,7 +35,7 @@ public class Item {
 	 * @return string of Item's name
 	 */
 	public String getName(){
-		return this.name;
+		return name;
 	}
 	
 	/**
@@ -51,7 +51,7 @@ public class Item {
 	 * @return string name of brand of item
 	 */
 	public String getBrand(){
-		return this.brand;
+		return brand;
 	}
 	
 	/**
@@ -66,7 +66,7 @@ public class Item {
 	 * @return description of item
 	 */
 	public String getDescription(){
-		return this.description;
+		return description;
 	}
 	
 	/**
@@ -74,7 +74,7 @@ public class Item {
 	 * @return list of Tags
 	 */
 	public ArrayList<String> getTagList(){
-		return this.taglist;
+		return taglist;
 	}
 	
 	/**
@@ -93,7 +93,7 @@ public class Item {
 	 * @return string of link
 	 */
 	public String getLink(){
-		return this.link;
+		return link;
 	}
 	
 }
