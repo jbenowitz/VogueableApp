@@ -1,21 +1,14 @@
 package edu.brandeis.vogueable;
 
 
-import java.util.ArrayList;
-
-
 import android.app.Activity;
-import android.content.DialogInterface;
-import android.content.Intent;
-import android.content.DialogInterface.OnClickListener;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
 
 /**
- * This is the main activity for the app.
+ * This is the men's category activity for the app.
+ * The class holds info about stylish apparel 
  * @author gaspar obimba
  *
  */
