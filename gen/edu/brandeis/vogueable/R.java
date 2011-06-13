@@ -17,10 +17,8 @@ public final class R {
     }
     public static final class id {
         public static final int dislike_button=0x7f050001;
-        public static final int imageviewer=0x7f050002;
+        public static final int gallery=0x7f050002;
         public static final int like_button=0x7f050000;
-        public static final int next_button=0x7f050004;
-        public static final int prev_button=0x7f050003;
     }
     public static final class layout {
         public static final int main=0x7f030000;

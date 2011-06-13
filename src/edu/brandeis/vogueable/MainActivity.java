@@ -5,14 +5,23 @@ import java.util.ArrayList;
 
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.DialogInterface.OnClickListener;
+import android.content.res.TypedArray;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.view.View;
+import android.view.ViewGroup;
+import android.view.ViewGroup.LayoutParams;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
+import android.widget.BaseAdapter;
+import android.widget.Gallery;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 /**
  * This is the main activity for the app.
@@ -40,75 +49,91 @@ public class MainActivity extends Activity implements  android.view.View.OnClick
 	      item_cursor = new ItemCursor(itemDB);
 	      Item currItem = item_cursor.getCurrentItem();
 	      */
+	      
+	      // Set up Gallery
+	      Gallery g = (Gallery) findViewById(R.id.gallery);
+	      g.setAdapter(new ImageAdapter(this));
 
-	      // Set up click listeners for the next and prev buttons
-	      View nextButton = findViewById(R.id.next_button);
-	      nextButton.setOnClickListener(this);
-
-	      View prevButton = findViewById(R.id.prev_button);
-	      prevButton.setOnClickListener(this);
-	      
-	      
-	      //Display image
-	      //this.displayImage(currItem);
-	      this.displayImage();
-	      
-	      //imgView = (ImageView)findViewById(R.id.imageviewer);
-	      //imgView = setImageResource
+	      g.setOnItemClickListener(new OnItemClickListener() {
+	          public void onItemClick(AdapterView parent, View v, int position, long id) {
+	              Toast.makeText(MainActivity.this, "" + position, Toast.LENGTH_SHORT).show();
+	          }
+	      });
 	     
 	   }
 	   
+	   /**
+	    * Image Adapter Class, used with Gallery
+	    * Used in Android SDK on Gallery
+	    * 
+	    * @author Jackie
+	    *
+	    */
+	     public class ImageAdapter extends BaseAdapter {
+	         int mGalleryItemBackground;
+	         private Context mContext;
+
+	         private Integer[] mImageIds = {
+	                 R.drawable.colorquizdress,
+	                 R.drawable.bedofroses
+	                // R.drawable.sample_3,
+	                // R.drawable.sample_4,
+	                // R.drawable.sample_5,
+	                // R.drawable.sample_6,
+	                // R.drawable.sample_7
+	         };
+
+	         public ImageAdapter(Context c) {
+	             mContext = c;
+	         }
+
+	         public int getCount() {
+	             return mImageIds.length;
+	         }
+
+	         public Object getItem(int position) {
+	             return position;
+	         }
+
+	         public long getItemId(int position) {
+	             return position;
+	         }
+
+	         public View getView(int position, View convertView, ViewGroup parent) {
+	             ImageView i = new ImageView(mContext);
+
+	             i.setImageResource(mImageIds[position]);
+	             i.setLayoutParams(new Gallery.LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT));
+	             i.setScaleType(ImageView.ScaleType.CENTER_INSIDE);
+	             
+
+	             return i;
+	         }
+	    }
+	
 	  
-	  
-/**
- * 
- * @param v view 
- */
-	public void onClick(View v) {
+	    /**
+	     * 
+	      * @param v view 
+	      */
+	     public void onClick(View v) {
 		   
 		
-		switch (v.getId()) { 
-		case R.id.next_button:
-	    	 //taste_manager.getNextItem(currItem)
-			displayNextImage();
-	         break;
-	      
-		case R.id.prev_button:
-			//item_cursor.getPrevItem();
-			displayImage();
-			break;
-	   /*   
-		case R.id.like_button:
-			//adds the current item to the LikeList and also updates your flavors to predict what you have next 
-			taste_manager.likeFlavor(currItem.getTagList());
-			break;	
+	    	switch (v.getId()) { 
+	    	/*   
+			case R.id.like_button:
+				//adds the current item to the LikeList and also updates your flavors to predict what you have next 
+				taste_manager.likeFlavor(currItem.getTagList());
+				break;	
 	    	  
-		case R.id.dislike_button:
-			//adds the current item to the DisLikeList and also updates your flavors to predict what you have next 
-			taste_manager.dislikeFlavor(currItem.getTagList());
-			break;
-	 */  	  
+			case R.id.dislike_button:
+				//adds the current item to the DisLikeList and also updates your flavors to predict what you have next 
+				taste_manager.dislikeFlavor(currItem.getTagList());
+				break;
+	    	 */  	  
 		    	  
-		}	
-	}//end onClick view
-	
-	/**
-	 * Fetch image from the DB and display
-	 * @param item
-	 * @return item's name from the DB
-	 */
-	//public void displayImage(Item item)
-	public void displayImage(){
-		//Item it = new Item ("/Users/Jackie/Documents/2010-2011/Summer_2011/JBS/VogueableApp/res/drawable-ldpi/itemdb/bedofroses.jpg","res/drawable/itemdb/bedofroses.jpg", "hi", 20, "hi", null, "hi" );
-		//item_cursor.setCurrentItem(it);
-		//Bitmap bits = BitmapFactory.decodeFile(it.getName());
-		//Bitmap bits = BitmapFactory.decodeFile(item.getName());
-		ImageView imag = (ImageView)findViewById(R.id.imageviewer);
-		imag.setImageResource(R.drawable.bedofroses);	
-	}
-	public void displayNextImage(){
-		ImageView imag = (ImageView)findViewById(R.id.imageviewer);
-		imag.setImageResource(R.drawable.colorquizdress);	
-	}
-
+	    	}	
+	  }//end onClick view
 }
+
+
