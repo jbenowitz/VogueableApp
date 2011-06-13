@@ -22,9 +22,9 @@ public class TasteManager {
 	 * 
 	 * @param ArrayList of items, to choose next item
 	 */
-	public TasteManager(ArrayList<Item> items){
+	public TasteManager(){
 		tagCount = new HashMap<String,Integer>();
-		this.itemsNotUsed = items;
+		//this.itemsNotUsed = items;
 	}
 	
 	/**
