@@ -3,4 +3,4 @@
 *.apk
 *.ap_
 R.java
-
+*.DS_STORE
