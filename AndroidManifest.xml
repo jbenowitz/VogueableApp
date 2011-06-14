@@ -7,6 +7,7 @@
     <uses-sdk 
     	android:minSdkVersion="10" />
 
+    
     <application 
     	 android:icon="@drawable/colorquizdress" 
     	 android:label="@string/app_name"
@@ -17,13 +18,17 @@
                 android:label="@string/app_name">
            
         </activity>
-		
+		<activity 
+			android:name=".Settings"
+            android:label="@string/settings_label">
+        </activity>
+        
 		<activity 
 			android:name=".About" 
 			android:label="@string/about_title" 
 			android:theme="@android:style/Theme.Dialog" >
 		</activity>
-		<activity 
+		<!-- <activity 
 			android:icon="@drawable/colorquizdress"
 			android:name=".Men" 
 			android:label="@string/app_name" >
@@ -31,7 +36,7 @@
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-			</activity>
+			</activity> -->
 		<activity 
 			android:icon="@drawable/colorquizdress"
 			android:name=".Women" 
@@ -42,10 +47,6 @@
             </intent-filter>
 			
 		</activity>
-		<activity 
-			android:name=".Settings"
-            android:label="@string/settings_title">
-        </activity>
-        
+		
     </application>
 </manifest>

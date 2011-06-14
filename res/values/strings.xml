@@ -23,13 +23,24 @@
     <string name="about_text">Vogueable is designed to ease the way you get the latest fashion trends in the market</string>
     
     <string name="settings_label">Options</string>
-   	<string name="settings_title">Change your Vogueable Settings</string>
+   	<string name="settings_title">Change Settings</string>
    	<string name="settings_shortcut">s</string>
    	
     
-  	<string name="wishlist_label">Take me to my Wishlist</string>
+  	<string name="wishlist_label">To Wishlist</string>
    	<string name="login_label">Login</string>
 	
-    
+	
+<!-- 	=========== -->
+   
+   <string name="music_title">Music</string>
+   <string name="music_summary">Play background music</string>
+  
+   <string name="hints_title">Hints</string>
+   <string name="hints_summary">Show hints during play</string>
+
+   <string name="high_score_title">High Score</string>
+   <string name="high_score_summary">Show highest score during play</string>
+   
 	
 </resources>
