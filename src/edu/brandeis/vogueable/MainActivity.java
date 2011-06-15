@@ -1,9 +1,14 @@
 package edu.brandeis.vogueable;
 
 
+
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Context;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewGroup.LayoutParams;
@@ -20,7 +25,8 @@ import android.widget.Toast;
  * @author gaspar obimba
  *
  */
-public class MainActivity extends Activity implements  android.view.View.OnClickListener{
+public class MainActivity extends Activity// implements  android.view.View.OnClickListener
+{
 
 	//instantiate objects
 	 ItemDB itemDB;
@@ -112,24 +118,47 @@ public class MainActivity extends Activity implements  android.view.View.OnClick
 	     * 
 	      * @param v view 
 	      */
-	     public void onClick(View v) {
-		   
+	    
+	     
+	     @Override
+	     public boolean onCreateOptionsMenu(Menu menu) {
+	         MenuInflater inflater = getMenuInflater();
+	         inflater.inflate(R.menu.menu, menu);
+	         return true;
+	     }
+	     @Override
+	     public boolean onOptionsItemSelected(MenuItem item) {
+	     	switch (item.getItemId()) {
+	     	
+	     	case R.id.wishlist_label:   
+	     		Toast.makeText(this, "Yulia will finish the wish list soon", Toast.LENGTH_LONG).show();
+	     		 //startActivity(new Intent(this, Wishlist.class));
+	     		break;
+
+	     	case R.id.browse_title: 
+	     		AlertDialog.Builder builder = new AlertDialog.Builder(this);
+	      	    builder.setMessage("Do you want men or women section?")
+	      	         .setCancelable(false)
+	      	         .setPositiveButton("Men", new DialogInterface.OnClickListener() {
+	      	             public void onClick(DialogInterface dialog, int id) {
+	      		     		// startActivity(new Intent(this, Wishlist.class));
+
+	      	             }
+	      	         })
+	      	         .setNegativeButton("Women", new DialogInterface.OnClickListener() {
+	      	             public void onClick(DialogInterface dialog, int id) {
+	      	                  dialog.cancel();
+	      	             }
+	      	         }).show();
+	      	
+	     		
+
+	     		break;
+	     	}
+	     	return true;
+		   }
 		
-	    	switch (v.getId()) { 
-	    	/*   
-			case R.id.like_button:
-				//adds the current item to the LikeList and also updates your flavors to predict what you have next 
-				taste_manager.likeFlavor(currItem.getTagList());
-				break;	
-	    	  
-			case R.id.dislike_button:
-				//adds the current item to the DisLikeList and also updates your flavors to predict what you have next 
-				taste_manager.dislikeFlavor(currItem.getTagList());
-				break;
-	    	 */  	  
-		    	  
-	    	}	
-	  }//end onClick view
+
 }
 
 
