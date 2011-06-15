@@ -3,12 +3,6 @@ package edu.brandeis.vogueable;
 
 import android.app.Activity;
 import android.content.Context;
-import android.content.DialogInterface;
-import android.content.Intent;
-import android.content.DialogInterface.OnClickListener;
-import android.content.res.TypedArray;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
@@ -68,17 +62,21 @@ public class MainActivity extends Activity implements  android.view.View.OnClick
 	    *
 	    */
 	     public class ImageAdapter extends BaseAdapter {
-	         int mGalleryItemBackground;
 	         private Context mContext;
 
 	         private Integer[] mImageIds = {
-	                 R.drawable.colorquizdress,
-	                 R.drawable.bedofroses
-	                // R.drawable.sample_3,
-	                // R.drawable.sample_4,
-	                // R.drawable.sample_5,
-	                // R.drawable.sample_6,
-	                // R.drawable.sample_7
+	                 R.drawable.item1,
+	                 R.drawable.item2,
+	                 R.drawable.item3,
+	                 R.drawable.item4,
+	                 R.drawable.item5,
+	                 R.drawable.item6,
+	                 R.drawable.item7,
+	                 R.drawable.item8,
+	                 R.drawable.item9,
+	                 R.drawable.item10,
+	                 R.drawable.item11,
+	                 R.drawable.item12
 	         };
 
 	         public ImageAdapter(Context c) {
