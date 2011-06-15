@@ -5,6 +5,7 @@ package edu.brandeis.vogueable;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
+import android.content.res.TypedArray;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -69,6 +70,7 @@ public class MainActivity extends Activity// implements  android.view.View.OnCli
 	    */
 	     public class ImageAdapter extends BaseAdapter {
 	         private Context mContext;
+	         int mGalleryItemBackground;
 
 	         private Integer[] mImageIds = {
 	                 R.drawable.item1,
@@ -106,9 +108,7 @@ public class MainActivity extends Activity// implements  android.view.View.OnCli
 
 	             i.setImageResource(mImageIds[position]);
 	             i.setLayoutParams(new Gallery.LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT));
-	             i.setScaleType(ImageView.ScaleType.CENTER_INSIDE);
-	             
-
+	             i.setScaleType(ImageView.ScaleType.CENTER_INSIDE);	             
 	             return i;
 	         }
 	    }
@@ -136,6 +136,7 @@ public class MainActivity extends Activity// implements  android.view.View.OnCli
 	     		break;
 
 	     	case R.id.browse_title: 
+	     		/*
 	     		AlertDialog.Builder builder = new AlertDialog.Builder(this);
 	      	    builder.setMessage("Do you want men or women section?")
 	      	         .setCancelable(false)
@@ -151,7 +152,7 @@ public class MainActivity extends Activity// implements  android.view.View.OnCli
 	      	             }
 	      	         }).show();
 	      	
-	     		
+	     		*/
 
 	     		break;
 	     	}
