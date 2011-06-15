@@ -2,20 +2,20 @@
 <PreferenceScreen
    xmlns:android="http://schemas.android.com/apk/res/android">
    <CheckBoxPreference
-      android:key="music"
-      android:title="@string/music_title"
-      android:summary="@string/music_summary"
-      android:defaultValue="true" />
+      android:key="@+id/dress_label"
+      android:title="@string/dress_label"
+      android:summary="@string/dress_summary"
+      android:defaultValue="false" />
    
    <CheckBoxPreference
-      android:key="hints"
-      android:title="@string/hints_title"
-      android:summary="@string/hints_summary"
-      android:defaultValue="true" />
+      android:key="@+id/shorts_label"
+      android:title="@string/shorts_label"
+      android:summary="@string/shorts_summary"
+      android:defaultValue="false" />
    
    <CheckBoxPreference
-      android:key="high_score"
-      android:title="@string/high_score_title"
-      android:summary="@string/high_score_summary"
-      android:defaultValue="true" />
+      android:key="@+id/pants_label"
+      android:title="@string/pants_label"
+      android:summary="@string/pants_summary"
+      android:defaultValue="false" />
 </PreferenceScreen>

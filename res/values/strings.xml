@@ -16,6 +16,13 @@
 	<string name="shorts_label">Shorts</string>
 	<string name="pants_label">Pants</string>
 	<string name="dress_label">Dresses</string>
+	
+	<string name="shoes_summary">browse shoes</string>
+	<string name="shorts_summary">browse shorts</string>
+	<string name="pants_summary">browse pants</string>
+	<string name="dress_summary">browse dresses</string>
+	
+	
 	<string name="category_label">Choose Category to browse</string>
 	<string name="browse_label">Browse</string>
 	

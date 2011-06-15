@@ -5,6 +5,8 @@ package edu.brandeis.vogueable;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -25,7 +27,7 @@ import android.widget.Toast;
  * @author gaspar obimba
  *
  */
-public class MainActivity extends Activity// implements  android.view.View.OnClickListener
+public class MainActivity extends Activity implements  android.view.View.OnClickListener
 {
 
 	//instantiate objects
@@ -39,6 +41,15 @@ public class MainActivity extends Activity// implements  android.view.View.OnCli
 	   public void onCreate(Bundle savedInstanceState) {
 	      super.onCreate(savedInstanceState);
 	      setContentView(R.layout.main);
+	    
+//	      View nextButton = findViewById(R.id.browse_label);
+//	      nextButton.setOnClickListener(this);
+//	      View prevButton = findViewById(R.id.dress_label);
+//	      prevButton.setOnClickListener(this);
+//	      View shorts = findViewById(R.id.shorts_label);
+//	      shorts.setOnClickListener(this);
+//	      View pants = findViewById(R.id.pants_label);
+//	      pants.setOnClickListener(this);
 	      
 	      /*
 	      //Set up objects
@@ -59,6 +70,17 @@ public class MainActivity extends Activity// implements  android.view.View.OnCli
 	      });
 	     
 	   }
+	   public void onClick(View v) {
+			switch (v.getId()) {
+		     
+		      case R.id.browse_label :
+		    	  Intent i = new Intent(this, MainActivity.class);
+			         startActivity(i);
+			         break;
+
+
+		      }
+		   }			
 	   
 	   /**
 	    * Image Adapter Class, used with Gallery
@@ -132,20 +154,19 @@ public class MainActivity extends Activity// implements  android.view.View.OnCli
 	     	
 	     	case R.id.wishlist_label:   
 	     		Toast.makeText(this, "Yulia will finish the wish list soon", Toast.LENGTH_LONG).show();
-	     		 //startActivity(new Intent(this, Wishlist.class));
-	     		break;
-
-	     	case R.id.browse_title: 
+	     		// startActivity(new Intent(this, Settings.class));
+	     		//break;
 	     		AlertDialog.Builder builder = new AlertDialog.Builder(this);
-	      	    builder.setMessage("Do you want men or women section?")
+	      	    builder.setMessage("Do you want to really see your wishlist?")
 	      	         .setCancelable(false)
-	      	         .setPositiveButton("Men", new DialogInterface.OnClickListener() {
+	      	         .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
 	      	             public void onClick(DialogInterface dialog, int id) {
+	      	            	 
 	      		     		// startActivity(new Intent(this, Wishlist.class));
 
 	      	             }
 	      	         })
-	      	         .setNegativeButton("Women", new DialogInterface.OnClickListener() {
+	      	         .setNegativeButton("No", new DialogInterface.OnClickListener() {
 	      	             public void onClick(DialogInterface dialog, int id) {
 	      	                  dialog.cancel();
 	      	             }
@@ -153,12 +174,19 @@ public class MainActivity extends Activity// implements  android.view.View.OnCli
 	      	
 	     		
 
-	     		break;
+	     	case R.id.browse_title: 
+	     		 startActivity(new Intent(this, CategoryChooser.class));
+		     		break;
+
+
+	     		
 	     	}
 	     	return true;
 		   }
 		
+		}
+		
 
-}
+
 
 
