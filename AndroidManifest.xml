@@ -38,15 +38,11 @@
 			android:label="@string/about_title" 
 			android:theme="@android:style/Theme.Dialog" >
 		</activity>
-<<<<<<< HEAD
+	
 		<activity 
-			android:icon="@drawable/menapp"
-=======
-		<!-- <activity 
-			android:icon="@drawable/icon"
->>>>>>> 4cdb52f8b4309fc5634d20c819757af16732497e
-			android:name=".Men" 
-			android:label="@string/app_name" >
+			android:name=".Men"
+			android:label="@string/app_name"
+			android:icon="@drawable/menapp">
 			 <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />

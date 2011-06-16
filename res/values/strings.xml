@@ -35,13 +35,12 @@
    	
     
   	<string name="wishlist_label">To Wishlist</string>
-<<<<<<< HEAD
+
    	<string name="login_label">Login</string>   	
-   	<string name="go_label">Go  </string>
+   	<string name="go_label">Go</string>
    	
 	
-=======
-   	<string name="login_label">Login</string>
+
   
   
   
@@ -49,9 +48,7 @@
    	<string name="getit_label">GET IT!</string>
    	<string name="item_info">GET IT!</string>
 	<string name="all_label">Check All</string>
->>>>>>> 4cdb52f8b4309fc5634d20c819757af16732497e
-	
-<!-- 	=========== -->
+
    
    <string name="music_title">Music</string>
    <string name="music_summary">Play background music</string>
