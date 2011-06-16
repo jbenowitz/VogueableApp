@@ -14,18 +14,23 @@
    		 android:debuggable ="true">
         
         <activity 
-        		android:name=".MainActivity"
-                android:label="@string/app_name">
-           
+        	android:name=".MainActivity"
+            android:label="@string/app_name"> 
         </activity>
+
         <activity
         	android:name=".CategoryChooser"
         	android:label="@string/app_name">
         
         </activity>
-		<activity 
+	<activity 
 			android:name=".Settings"
             android:label="@string/settings_label">
+        </activity>
+         <activity
+        	android:name=".Info"
+        	android:label="@string/item_info">
+        
         </activity>
         
 		<activity 
@@ -33,8 +38,13 @@
 			android:label="@string/about_title" 
 			android:theme="@android:style/Theme.Dialog" >
 		</activity>
+<<<<<<< HEAD
 		<activity 
 			android:icon="@drawable/menapp"
+=======
+		<!-- <activity 
+			android:icon="@drawable/icon"
+>>>>>>> 4cdb52f8b4309fc5634d20c819757af16732497e
 			android:name=".Men" 
 			android:label="@string/app_name" >
 			 <intent-filter>

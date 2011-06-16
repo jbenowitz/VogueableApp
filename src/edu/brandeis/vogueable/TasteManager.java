@@ -61,9 +61,18 @@ public class TasteManager {
 	
 	
 	//TODO finishthis one
-	public Item getNextItem(Item currItem){
+	public Item getNextItem(Item currItem, ArrayList<String> currCat){
+		
 		itemsNotUsed.remove(currItem);
-		return itemsNotUsed.get(new Random().nextInt(itemsNotUsed.size()));
+		ArrayList<Item> filtered = new ArrayList<Item>();
+		for(Item it : itemsNotUsed){
+			if (currCat.contains(it.getCategoryTag())){
+				filtered.add(it);
+			}
+		}
+		return filtered.get(new Random().nextInt(itemsNotUsed.size()));
 	}
+	
+	
 
 }
