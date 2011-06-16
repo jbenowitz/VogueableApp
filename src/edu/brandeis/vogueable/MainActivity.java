@@ -2,6 +2,9 @@ package edu.brandeis.vogueable;
 
 
 
+//import org.example.sudoku.Info;
+//import org.example.sudoku.i;
+
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
@@ -42,6 +45,10 @@ public class MainActivity extends Activity implements  android.view.View.OnClick
 	   public void onCreate(Bundle savedInstanceState) {
 	      super.onCreate(savedInstanceState);
 	      setContentView(R.layout.main);
+          Toast.makeText(MainActivity.this, "Tap for details! Slide for next item!", Toast.LENGTH_LONG).show();
+          //Intent x = new Intent(this, Info.class);
+	      //	startActivity(x);
+	      
 	    
 //	      View nextButton = findViewById(R.id.browse_label);
 //	      nextButton.setOnClickListener(this);
@@ -78,10 +85,12 @@ public class MainActivity extends Activity implements  android.view.View.OnClick
 		    	  Intent i = new Intent(this, MainActivity.class);
 			         startActivity(i);
 			         break;
-
-
+		      //case R.id.gallery:
+			  //    Intent x = new Intent(this, Info.class);
+			  //    	startActivity(x);
+			  //   	break;
 		      }
-		   }			
+		   }
 	   
 	   /**
 	    * Image Adapter Class, used with Gallery
@@ -180,8 +189,12 @@ public class MainActivity extends Activity implements  android.view.View.OnClick
 	     		*/
 
 	     	case R.id.browse_title: 
-	     		 startActivity(new Intent(this, CategoryChooser.class));
-		     		break;
+	     		Intent x = new Intent(this, Info.class);
+	     		startActivity(x);
+ 
+	     		
+	     		//startActivity(new Intent(this, CategoryChooser.class));
+		     	//	break;
 
 
 	     		

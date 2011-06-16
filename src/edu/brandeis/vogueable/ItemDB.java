@@ -40,7 +40,7 @@ public class ItemDB {
 					
 					ArrayList<String> tags= new ArrayList<String>();
 					tags.add("i'm a tag");
-					Item thing = new Item(image.getName(),image.getName(),"BRAND",12.00,"Oh Hey! You could wear this!", tags,"link");
+					Item thing = new Item(image.getName(),image.getName(),"BRAND",12.00,"Oh Hey! You could wear this!", tags,"link","short");
 					
 					items.add(thing);
 				}

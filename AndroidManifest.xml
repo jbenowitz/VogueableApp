@@ -27,6 +27,11 @@
 			android:name=".Settings"
             android:label="@string/settings_label">
         </activity>
+         <activity
+        	android:name=".Info"
+        	android:label="@string/item_info">
+        
+        </activity>
         
 		<activity 
 			android:name=".About" 

@@ -12,6 +12,7 @@ public class Item {
 	private String name, imageFile, brand, description, link;
 	private double price;
 	private ArrayList<String> taglist;
+	private String categorytag;
 	
 	
 	/**
@@ -20,7 +21,7 @@ public class Item {
 	 */
 	public Item (String name, String imageFile, String brand, 
 					double price, String description, ArrayList<String> taglist,
-					String link){
+					String link, String categorytag){
 		this.name = name;
 		this.imageFile = imageFile;
 		this.brand = brand;
@@ -28,6 +29,7 @@ public class Item {
 		this.description = description;
 		this.taglist = taglist;
 		this.link = link;
+		this.categorytag = categorytag;
 	}
 	
 	/**
@@ -94,6 +96,14 @@ public class Item {
 	 */
 	public String getLink(){
 		return link;
+	}
+	
+	/**
+	 * 
+	 * @return string of Item's name
+	 */
+	public String getCategoryTag(){
+		return categorytag;
 	}
 	
 }
