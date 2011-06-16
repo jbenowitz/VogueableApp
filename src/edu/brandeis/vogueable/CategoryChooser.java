@@ -11,11 +11,11 @@ public class CategoryChooser extends Activity implements OnClickListener {
 	        super.onCreate(savedInstanceState);
 	        setContentView(R.layout.category);
 	        // Set up click listeners for the category buttons buttons
-		      View nextButton = findViewById(R.id.browse_label);
-		      nextButton.setOnClickListener(this);
+		      View goButton = findViewById(R.id.go_label);
+		      goButton.setOnClickListener(this);
 		      
-		      View prevButton = findViewById(R.id.dress_label);
-		      prevButton.setOnClickListener(this);
+		      View dressButton = findViewById(R.id.dress_label);
+		      dressButton.setOnClickListener(this);
 		      
 		      View shorts = findViewById(R.id.shorts_label);
 		      shorts.setOnClickListener(this);
@@ -27,7 +27,7 @@ public class CategoryChooser extends Activity implements OnClickListener {
 	    public void onClick(View v) {
 		      switch (v.getId()) {
 		     
-		      case R.id.browse_label :
+		      case R.id.go_label :
 		    	  Intent i = new Intent(this, MainActivity.class);
 			         startActivity(i);
 			         break;

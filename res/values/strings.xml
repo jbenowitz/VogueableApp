@@ -5,8 +5,8 @@
 
 	<string name="prev_label">&lt;</string>
 	<string name="next_label">&gt;</string>
-	<string name="like_label">Like</string>
 	
+	<string name="like_label">Like</string>
 	<string name="dislike_label">Dislike</string>
 	
 	<string name="men_label">MEN</string>
@@ -35,7 +35,9 @@
    	
     
   	<string name="wishlist_label">To Wishlist</string>
-   	<string name="login_label">Login</string>
+   	<string name="login_label">Login</string>   	
+   	<string name="go_label">Go  </string>
+   	
 	
 	
 <!-- 	=========== -->

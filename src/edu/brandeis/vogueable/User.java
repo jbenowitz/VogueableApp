@@ -29,4 +29,8 @@ public class User {
 		MyLists.remove(list);
 	}
 	
+	public TasteManager getTasteManager(){
+		return mytaste;
+	}
+	
 }

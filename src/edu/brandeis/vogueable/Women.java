@@ -11,7 +11,7 @@ import android.os.Bundle;
 import android.view.View;
 
 /**
- * This is the main activity for the app.
+ * This is the activity for the Women app.
  * @author gaspar obimba
  *
  */
@@ -51,6 +51,7 @@ public class Women extends Activity implements  android.view.View.OnClickListene
 	      // do this for all buttons
 	      case R.id.login_label:
 	    	 //need to implement log in class 
+	    	  
 	    	  AlertDialog.Builder builder = new AlertDialog.Builder(this);
 	    	  builder.setMessage("Are you sure you want to login?")
 	    	         .setCancelable(false)
