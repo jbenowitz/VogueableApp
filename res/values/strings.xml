@@ -38,7 +38,7 @@
 
    	<string name="login_label">Login</string>   	
    	<string name="go_label">Go</string>
-   	
+   	<string name="wish_label">Add to Wishlist!</string>
 	
 
   
@@ -46,7 +46,7 @@
   
    	<string name="info_name">Nice Shirt</string>
    	<string name="getit_label">GET IT!</string>
-   	<string name="item_info">GET IT!</string>
+   	<string name="item_info">Item Info</string>
 	<string name="all_label">Check All</string>
 
    

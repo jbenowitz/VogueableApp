@@ -15,6 +15,7 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewGroup.LayoutParams;
@@ -24,6 +25,7 @@ import android.widget.BaseAdapter;
 import android.widget.Gallery;
 import android.widget.ImageView;
 import android.widget.Toast;
+import android.widget.PopupWindow;
 
 /**
  * This is the main activity for the app.
@@ -48,64 +50,32 @@ public class MainActivity extends Activity implements  android.view.View.OnClick
 		setContentView(R.layout.main);
 		Toast.makeText(MainActivity.this, "Tap for details! Slide for next item!", Toast.LENGTH_LONG).show();
 
-			      View likeButton = findViewById(R.id.like_button);
-			      likeButton.setOnClickListener(this);
-			      View dislikeButton = findViewById(R.id.dislike_button);
-			      dislikeButton.setOnClickListener(this);
+		View likeButton = findViewById(R.id.like_button);
+		likeButton.setOnClickListener(this);
+		View dislikeButton = findViewById(R.id.dislike_button);
+		dislikeButton.setOnClickListener(this);
 		
-		//	      View shorts = findViewById(R.id.shorts_label);
-		//	      shorts.setOnClickListener(this);
-		//	      View pants = findViewById(R.id.pants_label);
-		//	      pants.setOnClickListener(this);
-
-		/*
-		 * 
-		 */
-
-         
-          //Intent x = new Intent(this, Info.class);
-	      //	startActivity(x);
-	      
-	    
-//	      View nextButton = findViewById(R.id.browse_label);
-//	      nextButton.setOnClickListener(this);
-//	      View prevButton = findViewById(R.id.dress_label);
-//	      prevButton.setOnClickListener(this);
-//	      View shorts = findViewById(R.id.shorts_label);
-//	      shorts.setOnClickListener(this);
-//	      View pants = findViewById(R.id.pants_label);
-//	      pants.setOnClickListener(this);
-	      
-	      /*
->>>>>>> 4cdb52f8b4309fc5634d20c819757af16732497e
-	      //Set up objects
-	      itemDB = new ItemDB();
-	      taste_manager = new TasteManager(itemDB.getAllItem());
-	      item_cursor = new ItemCursor(itemDB);
-	      Item currItem = item_cursor.getCurrentItem();
-<<<<<<< HEAD
-		 */
 
 		// Set up Gallery
 		Gallery g = (Gallery) findViewById(R.id.gallery);
 		g.setAdapter(new ImageAdapter(this));
+		//g.setOnClickListener(this);
 
 		g.setOnItemClickListener(new OnItemClickListener() {
 			public void onItemClick(AdapterView parent, View v, int position, long id) {
 				Toast.makeText(MainActivity.this, "" + (position), Toast.LENGTH_SHORT).show();
-			
+				
 			}				
 		});
-		Toast.makeText(MainActivity.this, "" + (g.getChildAt(0)), Toast.LENGTH_SHORT).show();
-
 	}
 	public void onClick(View v) {
 		switch (v.getId()) {
 
 		case R.id.like_button :
+			Toast.makeText(MainActivity.this, "Liked!", Toast.LENGTH_SHORT).show();
 //			for(String tags: currItem.getTagList()){
 //					if (!user.getTasteManager().tagCount.containsKey(tags)){
-						user.mytaste.likeFlavor(currItem.getTagList());
+					/*	user.mytaste.likeFlavor(currItem.getTagList());
 			AlertDialog.Builder builder = new AlertDialog.Builder(this);
 	    	builder.setMessage("Are you sure you want to like?")
 	    	         .setCancelable(false)
@@ -120,15 +90,24 @@ public class MainActivity extends Activity implements  android.view.View.OnClick
 	    	                  dialog.cancel();
 	    	             }
 	    	         }).show();
-	    	  //finish();
+	    	  //finish();*/
 		break;
 		case R.id.browse_label :
 	    	  Intent i = new Intent(this, MainActivity.class);
 		         startActivity(i);
 		break;
+		case R.id.gallery:
+			Intent gallinten = new Intent(this, Info.class);
+				startActivity(gallinten);
+			break;
 		case R.id.dislike_button:
-			user.mytaste.dislikeFlavor(currItem.getTagList());
+			Toast.makeText(MainActivity.this, "Disliked!", Toast.LENGTH_SHORT).show();
+			/*user.mytaste.dislikeFlavor(currItem.getTagList());
 			Toast.makeText(MainActivity.this, "" + currItem.getName(), Toast.LENGTH_SHORT).show();
+			break;*/
+			break;
+		case R.id.wish_button:
+			Toast.makeText(MainActivity.this, "Added to Wishlist!", Toast.LENGTH_SHORT).show();
 			break;
 		}
 	}

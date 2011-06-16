@@ -3,12 +3,26 @@
   xmlns:android="http://schemas.android.com/apk/res/android"
   android:layout_height="fill_parent"
   android:layout_width="fill_parent"
-  android:padding="30dip"
+  android:padding="10dip"
   android:orientation="vertical">
+ 
   <RelativeLayout
+  	android:orientation="horizontal"
+  	android:layout_height="wrap_content"
+     android:layout_width="fill_parent">
+  	
+  	<Gallery xmlns:android="http://schemas.android.com/apk/res/android" 
+    	android:id="@+id/gallery"
+    	android:layout_width="wrap_content"
+    	android:layout_height="wrap_content"
+    	android:layout_centerInParent="true"
+	/>
+  </RelativeLayout>
+  
+   <RelativeLayout
      android:orientation="horizontal"
      android:layout_height="wrap_content"
-     android:layout_width="fill_parent">
+     android:layout_width="fill_parent" android:gravity="bottom">
      <Button
        	android:id = "@+id/like_button"
 		android:layout_height = "wrap_content"
@@ -24,16 +38,5 @@
 		android:layout_alignParentRight = "true" >
 	</Button>
   </RelativeLayout>
-  <RelativeLayout
-  	android:orientation="horizontal"
-  	android:layout_height="wrap_content"
-     android:layout_width="fill_parent">
-  	
-  	<Gallery xmlns:android="http://schemas.android.com/apk/res/android" 
-    	android:id="@+id/gallery"
-    	android:layout_width="wrap_content"
-    	android:layout_height="wrap_content"
-    	android:layout_centerInParent="true"
-	/>
-  </RelativeLayout>
+   <Button android:text="@string/wish_label" android:layout_height="wrap_content" android:id="@+id/wish_button" android:layout_gravity="center" android:layout_width="wrap_content"></Button>
 </LinearLayout>
