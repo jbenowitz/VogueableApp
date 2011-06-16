@@ -188,13 +188,10 @@ public class MainActivity extends Activity implements  android.view.View.OnClick
 	      	
 	     		*/
 
-	     	case R.id.browse_title: 
-	     		Intent x = new Intent(this, Info.class);
-	     		startActivity(x);
  
 	     		
-	     		//startActivity(new Intent(this, CategoryChooser.class));
-		     	//	break;
+	     		startActivity(new Intent(this, CategoryChooser.class));
+		     	break;
 
 
 	     		
