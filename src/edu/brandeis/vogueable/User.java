@@ -1,7 +1,12 @@
 package edu.brandeis.vogueable;
 
 import java.util.ArrayList;
-
+/**
+ * User class keeps track of a user's taste and wishlist
+ * 
+ * @author Yulia
+ *
+ */
 public class User {
 	public String name; 
 	public ArrayList<Wishlist> MyLists;

@@ -5,38 +5,54 @@
   android:layout_width="fill_parent"
   android:padding="10dip"
   android:orientation="vertical">
- 
-  <RelativeLayout
-  	android:orientation="horizontal"
-  	android:layout_height="wrap_content"
-     android:layout_width="fill_parent">
-  	
-  	<Gallery xmlns:android="http://schemas.android.com/apk/res/android" 
-    	android:id="@+id/gallery"
-    	android:layout_width="wrap_content"
-    	android:layout_height="wrap_content"
-    	android:layout_centerInParent="true"
-	/>
-  </RelativeLayout>
   
-   <RelativeLayout
+  
+  	 <RelativeLayout
      android:orientation="horizontal"
      android:layout_height="wrap_content"
-     android:layout_width="fill_parent" android:gravity="bottom">
+     android:layout_width="fill_parent" >
      <Button
        	android:id = "@+id/like_button"
 		android:layout_height = "wrap_content"
 		android:layout_width = "wrap_content"
 		android:text = "@string/like_label"
-		android:layout_alignParentLeft = "true">	
+		android:layout_alignParentLeft = "true"
+		android:textSize="15dip"
+        android:textColor="#FFCC00">	
 	</Button>
 	<Button
 		android:id = "@+id/dislike_button"
 		android:layout_height = "wrap_content"
 		android:layout_width = "wrap_content"
 		android:text = "@string/dislike_label"
+		 android:textSize="15dip"
+         android:textColor="#FFCC00"
 		android:layout_alignParentRight = "true" >
 	</Button>
+	<Button 
+		android:id="@+id/closet_button" 
+		android:text="@string/wish_label"
+		android:layout_height="wrap_content" 
+		android:layout_width="wrap_content"
+		android:layout_centerInParent="true"
+		android:textSize="15dip"
+        android:textColor="#FFCC00"></Button>
   </RelativeLayout>
-   <Button android:text="@string/wish_label" android:layout_height="wrap_content" android:id="@+id/wish_button" android:layout_gravity="center" android:layout_width="wrap_content"></Button>
+  
+  
+  
+   <RelativeLayout
+  	android:orientation="horizontal"
+  	android:layout_height="wrap_content"
+     android:layout_width="fill_parent">
+  	
+  	<Gallery xmlns:android="http://schemas.android.com/apk/res/android" 
+    	android:id="@+id/gallery"
+    	android:layout_width="fill_parent"
+    	android:layout_height="wrap_content"
+    	android:layout_centerInParent="true"
+	/>
+  </RelativeLayout>
+  
+   
 </LinearLayout>

@@ -52,6 +52,8 @@ public class MainActivity extends Activity implements  android.view.View.OnClick
 		likeButton.setOnClickListener(this);
 		View dislikeButton = findViewById(R.id.dislike_button);
 		dislikeButton.setOnClickListener(this);
+		View closetButton = findViewById(R.id.closet_button);
+		closetButton.setOnClickListener(this);
 		
 
 		// Set up Gallery
@@ -61,12 +63,13 @@ public class MainActivity extends Activity implements  android.view.View.OnClick
 
 		g.setOnItemClickListener(new OnItemClickListener() {
 			public void onItemClick(AdapterView parent, View v, int position, long id) {
-				Toast.makeText(MainActivity.this, imageDetails(position) , Toast.LENGTH_LONG).show();
+				//Toast.makeText(MainActivity.this, imageDetails(position) , Toast.LENGTH_LONG).show();
 			
 			}				
 		});
 		
 	}
+	
 	/**
 	 * method to return pop up with details about an item being viewed,
 	 * Use this before we figure out how to get info the right way
@@ -74,6 +77,7 @@ public class MainActivity extends Activity implements  android.view.View.OnClick
 	 * @param pos -image position in the viewer, used to get info about the image
 	 * @return details string of detailed image information
 	 */
+	/*
 	public String imageDetails(int pos){
 		String details="";
 		switch(pos){
@@ -93,16 +97,15 @@ public class MainActivity extends Activity implements  android.view.View.OnClick
 		return details;
 		
 	}
+	*/
+	
+	
+	
 	public void onClick(View v) {
 		switch (v.getId()) {
 
 		
-		case R.id.browse_label :
-	    	  Intent i = new Intent(this, MainActivity.class);
-		       startActivity(i);
-		break;
 		case R.id.like_button :
-			Toast.makeText(MainActivity.this, "Liked!", Toast.LENGTH_SHORT).show();
 //			for(String tags: currItem.getTagList()){
 //					if (!user.getTasteManager().tagCount.containsKey(tags)){
 
@@ -112,8 +115,7 @@ public class MainActivity extends Activity implements  android.view.View.OnClick
 	    	         .setCancelable(false)
 	    	         .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
 	    	             public void onClick(DialogInterface dialog, int id) {
-	    	                // Men.this.finish();
-	    	     			//Toast.makeText(this, "Yulia will finish the wish list soon", Toast.LENGTH_LONG).show();
+	    	            	 Toast.makeText(MainActivity.this, "Liked!", Toast.LENGTH_SHORT).show();
 	    	            	 }
 	    	         	})
 	    	         .setNegativeButton("No", new DialogInterface.OnClickListener() {
@@ -122,13 +124,28 @@ public class MainActivity extends Activity implements  android.view.View.OnClick
 	    	             }
 	    	         }).show();
 	    	  //finish();*/
-		break;
+	    	break;
+	    	
 		case R.id.dislike_button:
 			Toast.makeText(MainActivity.this, "disliked!", Toast.LENGTH_SHORT).show();
 			break;
-		case R.id.wish_button:
-		    Toast.makeText(MainActivity.this, "Added to Wishlist!", Toast.LENGTH_SHORT).show();
+		
+		case R.id.closet_button:
+			AlertDialog.Builder wishquest = new AlertDialog.Builder(this);
+	    	wishquest.setMessage("Added to your wishlist!  Would you like to view your wishlist?")
+	    	         .setCancelable(false)
+	    	         .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+	    	             public void onClick(DialogInterface dialog, int id) {
+	    	            	 Toast.makeText(MainActivity.this, "Go to wishlist, when implemented", Toast.LENGTH_SHORT).show();
+	    	            	 }
+	    	         	})
+	    	         .setNegativeButton("No", new DialogInterface.OnClickListener() {
+	    	             public void onClick(DialogInterface dialog, int id) {
+	    	                  dialog.cancel();
+	    	             }
+	    	         }).show();
 		    break;
+		
 		}
 	}
 	    
@@ -228,7 +245,7 @@ public class MainActivity extends Activity implements  android.view.View.OnClick
 				}
 			}).show();
 
-		case R.id.browse_title: 
+		case R.id.return_categories: 
 			startActivity(new Intent(this, CategoryChooser.class));
 			break;
 

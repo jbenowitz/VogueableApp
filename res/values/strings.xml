@@ -24,8 +24,8 @@
 	<string name="deselect_all_label">Deselect All</string>
 	
 	
-	<string name="category_label">Item Categories</string>
-	<string name="browse_label">Browse</string>
+	<string name="category_label">Choose Departments</string>
+	<string name="browse_label">Start Browsing</string>
 	
 	<string name="about_title">About this Vogueable app</string>
     <string name="about_text">Vogueable is designed to ease the way you get the latest fashion trends in the market</string>
@@ -35,7 +35,8 @@
    	<string name="settings_shortcut">s</string>
    	
     
-  	<string name="wishlist_label">To Wishlist</string>
+  	<string name="wishlist_label">View Wishlist</string>
+  	<string name="return_cat_label">Change Departments</string>
 
    	<string name="login_label">Login</string>   	
    	<string name="go_label">Go</string>

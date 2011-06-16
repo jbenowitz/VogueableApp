@@ -2,12 +2,10 @@
 <menu
   xmlns:android="http://schemas.android.com/apk/res/android">
 	
-	<item android:id="@+id/browse_title"
-        android:icon="@drawable/icon" 
-        android:title="@string/browse_label"/>
+	<item android:id="@+id/return_categories"
+        android:title="@string/return_cat_label"/>
    
     <item android:id="@+id/wishlist_label"
-        android:title="@string/wishlist_label"
-        android:icon="@drawable/icon"  />
+        android:title="@string/wishlist_label"/>
    
 </menu>
