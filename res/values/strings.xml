@@ -3,8 +3,6 @@
     <string name="hello"></string>
 	<string name="app_name">Vogueable</string>
 
-	<string name="prev_label">&lt;</string>
-	<string name="next_label">&gt;</string>
 	
 	<string name="like_label">Like</string>
 	<string name="dislike_label">Dislike</string>
@@ -16,14 +14,17 @@
 	<string name="shorts_label">Shorts</string>
 	<string name="pants_label">Pants</string>
 	<string name="dress_label">Dresses</string>
+	<string name="clothing_label">Clothing</string>
 	
 	<string name="shoes_summary">browse shoes</string>
 	<string name="shorts_summary">browse shorts</string>
 	<string name="pants_summary">browse pants</string>
 	<string name="dress_summary">browse dresses</string>
+	<string name="select_all_label">Select All</string>
+	<string name="deselect_all_label">Deselect All</string>
 	
 	
-	<string name="category_label">Choose Category to browse</string>
+	<string name="category_label">Item Categories</string>
 	<string name="browse_label">Browse</string>
 	
 	<string name="about_title">About this Vogueable app</string>
@@ -38,26 +39,10 @@
 
    	<string name="login_label">Login</string>   	
    	<string name="go_label">Go</string>
-   	
-	
-
-  
-  
   
    	<string name="info_name">Nice Shirt</string>
    	<string name="getit_label">GET IT!</string>
    	<string name="item_info">GET IT!</string>
-	<string name="all_label">Check All</string>
-
-   
-   <string name="music_title">Music</string>
-   <string name="music_summary">Play background music</string>
-  
-   <string name="hints_title">Hints</string>
-   <string name="hints_summary">Show hints during play</string>
-
-   <string name="high_score_title">High Score</string>
-   <string name="high_score_summary">Show highest score during play</string>
    
 	
 </resources>

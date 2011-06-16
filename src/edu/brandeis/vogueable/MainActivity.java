@@ -48,43 +48,11 @@ public class MainActivity extends Activity implements  android.view.View.OnClick
 		setContentView(R.layout.main);
 		Toast.makeText(MainActivity.this, "Tap for details! Slide for next item!", Toast.LENGTH_LONG).show();
 
-			      View likeButton = findViewById(R.id.like_button);
-			      likeButton.setOnClickListener(this);
-			      View dislikeButton = findViewById(R.id.dislike_button);
-			      dislikeButton.setOnClickListener(this);
+		View likeButton = findViewById(R.id.like_button);
+		likeButton.setOnClickListener(this);
+		View dislikeButton = findViewById(R.id.dislike_button);
+		dislikeButton.setOnClickListener(this);
 		
-		//	      View shorts = findViewById(R.id.shorts_label);
-		//	      shorts.setOnClickListener(this);
-		//	      View pants = findViewById(R.id.pants_label);
-		//	      pants.setOnClickListener(this);
-
-		/*
-		 * 
-		 */
-
-         
-          //Intent x = new Intent(this, Info.class);
-	      //	startActivity(x);
-	      
-	    
-//	      View nextButton = findViewById(R.id.browse_label);
-//	      nextButton.setOnClickListener(this);
-//	      View prevButton = findViewById(R.id.dress_label);
-//	      prevButton.setOnClickListener(this);
-//	      View shorts = findViewById(R.id.shorts_label);
-//	      shorts.setOnClickListener(this);
-//	      View pants = findViewById(R.id.pants_label);
-//	      pants.setOnClickListener(this);
-	      
-	      /*
->>>>>>> 4cdb52f8b4309fc5634d20c819757af16732497e
-	      //Set up objects
-	      itemDB = new ItemDB();
-	      taste_manager = new TasteManager(itemDB.getAllItem());
-	      item_cursor = new ItemCursor(itemDB);
-	      Item currItem = item_cursor.getCurrentItem();
-<<<<<<< HEAD
-		 */
 
 		// Set up Gallery
 		Gallery g = (Gallery) findViewById(R.id.gallery);
@@ -96,12 +64,17 @@ public class MainActivity extends Activity implements  android.view.View.OnClick
 			
 			}				
 		});
-		Toast.makeText(MainActivity.this, "" + (g.getChildAt(0)), Toast.LENGTH_SHORT).show();
+		
 
 	}
 	public void onClick(View v) {
 		switch (v.getId()) {
 
+		
+		case R.id.browse_label :
+	    	  Intent i = new Intent(this, MainActivity.class);
+		       startActivity(i);
+		break;
 		case R.id.like_button :
 //			for(String tags: currItem.getTagList()){
 //					if (!user.getTasteManager().tagCount.containsKey(tags)){
@@ -121,10 +94,6 @@ public class MainActivity extends Activity implements  android.view.View.OnClick
 	    	             }
 	    	         }).show();
 	    	  //finish();
-		break;
-		case R.id.browse_label :
-	    	  Intent i = new Intent(this, MainActivity.class);
-		         startActivity(i);
 		break;
 		case R.id.dislike_button:
 			user.mytaste.dislikeFlavor(currItem.getTagList());
@@ -215,15 +184,6 @@ public class MainActivity extends Activity implements  android.view.View.OnClick
 	         inflater.inflate(R.menu.menu, menu);
 	         return true;
 	     }	
-
-	/**
-	 * Image Adapter Class, used with Gallery
-	 * Used in Android SDK on Gallery
-	 * 
-	 * @author Jackie
-	 *
-	 */
-	
 
 	/**
 	 * 
