@@ -4,7 +4,7 @@
 
 	
 
-<RelativeLayout android:id="@+id/app_name"
+<ScrollView android:id="@+id/app_name"
 	android:layout_width="fill_parent" 
 	android:layout_height="fill_parent"
 	xmlns:android="http://schemas.android.com/apk/res/android">
@@ -12,8 +12,7 @@
 
 	<CheckBox android:id="@+id/dress_label" android:layout_width="wrap_content"
 		android:layout_height="wrap_content" android:text="@string/dress_label"
-		android:layout_below="@+id/category_label"
-		android:layout_centerHorizontal="true">
+		android:layout_below="@+id/category_label">
 	</CheckBox>
 
 	<CheckBox android:id="@+id/shoes_label" android:layout_width="wrap_content"
@@ -40,4 +39,4 @@
 		android:layout_height="wrap_content" android:text="@string/category_label"
 		android:layout_alignParentTop="true" >
 	</Button>
-	</RelativeLayout>
+	</ScrollView>
