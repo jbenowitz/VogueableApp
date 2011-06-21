@@ -52,8 +52,8 @@ public class MainActivity extends Activity implements  android.view.View.OnClick
 		likeButton.setOnClickListener(this);
 		View dislikeButton = findViewById(R.id.dislike_button);
 		dislikeButton.setOnClickListener(this);
-		View closetButton = findViewById(R.id.closet_button);
-		closetButton.setOnClickListener(this);
+		View wishlistButton = findViewById(R.id.wishlist_button);
+		wishlistButton.setOnClickListener(this);
 		
 
 		// Set up Gallery
@@ -130,7 +130,7 @@ public class MainActivity extends Activity implements  android.view.View.OnClick
 			Toast.makeText(MainActivity.this, "disliked!", Toast.LENGTH_SHORT).show();
 			break;
 		
-		case R.id.closet_button:
+		case R.id.wishlist_button:
 			AlertDialog.Builder wishquest = new AlertDialog.Builder(this);
 	    	wishquest.setMessage("Added to your wishlist!  Would you like to view your wishlist?")
 	    	         .setCancelable(false)

@@ -35,13 +35,15 @@
    	<string name="settings_shortcut">s</string>
    	
     
-  	<string name="wishlist_label">View Wishlist</string>
+  	<string name="wishlist_label">Add to wishlist</string>
   	<string name="return_cat_label">Change Departments</string>
+  	
 
    	<string name="login_label">Login</string>   	
    	<string name="go_label">Go</string>
 
-   	<string name="wish_label">Add to Wishlist!</string>  
+   	<string name="wish_label">W</string> 
+   	<string name="buy_label">B</string> 
    	<string name="info_name">Nice Shirt</string>
    	<string name="getit_label">GET IT!</string>
    	<string name="item_info">GET IT!</string>
