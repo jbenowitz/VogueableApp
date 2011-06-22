@@ -51,7 +51,12 @@ public class Men extends Activity implements  android.view.View.OnClickListener{
 		         break;
 	      // do this for all buttons
 	      case R.id.login_label:
-	    	 //need to implement log in class 
+	    	   Intent q = new Intent(this, Login.class);
+		         startActivity(q);
+		         break;
+		      
+		         //need to implement log in class 
+		       /*
 	    	  AlertDialog.Builder builder = new AlertDialog.Builder(this);
 	    	  builder.setMessage("Are you sure you want to login?")
 	    	         .setCancelable(false)
@@ -67,8 +72,8 @@ public class Men extends Activity implements  android.view.View.OnClickListener{
 	    	             }
 	    	         }).show();
 	    	  //finish();
-	         break;
-
+	    	   */
+	    	   
 	      }
 	   }
 }
