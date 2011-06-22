@@ -35,7 +35,7 @@
       	android:id="@+id/like_button"
       	android:padding="10dp"
         android:background="@drawable/like_button"
-        android:layout_height="fill_parent" 
+        android:layout_height="wrap_content" 
         android:layout_width="wrap_content"
         android:layout_alignParentRight="true"
        />
@@ -43,7 +43,7 @@
       	android:id="@+id/dislike_button"
       	android:padding="10dp"
       	android:background="@drawable/dislike_button"
-      	android:layout_height="match_parent"
+      	android:layout_height="wrap_content"
       	android:layout_width="wrap_content"
       	android:layout_toLeftOf="@id/like_button"
       />
@@ -51,7 +51,7 @@
       	android:id="@+id/info_button"
       	android:padding="10dp"
       	android:background="@drawable/info"
-      	android:layout_height="match_parent"
+      	android:layout_height="wrap_content"
       	android:layout_width="wrap_content"
       	android:layout_alignParentLeft="true"
       	/>
