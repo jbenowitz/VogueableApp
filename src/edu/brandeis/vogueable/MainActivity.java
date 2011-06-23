@@ -57,9 +57,6 @@ public class MainActivity extends Activity implements  android.view.View.OnClick
 		View infoButton = findViewById(R.id.info_button);
 		infoButton.setOnClickListener(this);
 		
-		View back = findViewById(R.id.back);
-		back.setOnClickListener(this);
-		
 
 		// Set up Gallery
 		Gallery g = (Gallery) findViewById(R.id.gallery);
@@ -153,11 +150,6 @@ public class MainActivity extends Activity implements  android.view.View.OnClick
 		case R.id.info_button:
 			Intent k = new Intent(this, Info.class);
 	         startActivity(k);
-	         break;
-		
-		case R.id.back :
-			Intent p = new Intent(this, Info.class);
-	         startActivity(p);
 	         break;
 		
 		}
