@@ -5,6 +5,7 @@ import android.accounts.AccountManager;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.LightingColorFilter;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -20,6 +21,7 @@ public class Login extends Activity implements OnClickListener{
 	    
 	    View goButton = findViewById(R.id.go_button);
 	      goButton.setOnClickListener(this);
+	      goButton.getBackground().setColorFilter(new LightingColorFilter(0x000000, 0x000000));
 	  
 	 /* 
 	  User violeta = new User("vsoued");  

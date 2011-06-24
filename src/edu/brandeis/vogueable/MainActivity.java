@@ -20,6 +20,7 @@ import android.view.ViewGroup.LayoutParams;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.BaseAdapter;
+import android.widget.Button;
 import android.widget.Gallery;
 import android.widget.ImageView;
 import android.widget.Toast;
@@ -112,20 +113,9 @@ public class MainActivity extends Activity implements  android.view.View.OnClick
 //					if (!user.getTasteManager().tagCount.containsKey(tags)){
 
 						//user.mytaste.likeFlavor(currItem.getTagList());
-			AlertDialog.Builder builder = new AlertDialog.Builder(this);
-	    	builder.setMessage("Are you sure you want to like?")
-	    	         .setCancelable(false)
-	    	         .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
-	    	             public void onClick(DialogInterface dialog, int id) {
-	    	            	 Toast.makeText(MainActivity.this, "Liked!", Toast.LENGTH_SHORT).show();
-	    	            	 }
-	    	         	})
-	    	         .setNegativeButton("No", new DialogInterface.OnClickListener() {
-	    	             public void onClick(DialogInterface dialog, int id) {
-	    	                  dialog.cancel();
-	    	             }
-	    	         }).show();
-	    	  //finish();*/
+			Button b = (Button) findViewById(R.id.like_button);
+			
+			
 	    	break;
 	    	
 		case R.id.dislike_button:
@@ -185,6 +175,10 @@ public class MainActivity extends Activity implements  android.view.View.OnClick
 
 	         public ImageAdapter(Context c) {
 	             mContext = c;
+	             TypedArray a = obtainStyledAttributes(R.styleable.HelloGallery);
+	             mGalleryItemBackground = a.getResourceId(
+	                     R.styleable.HelloGallery_android_galleryItemBackground, 0);
+	             a.recycle();
 	         }
 
 	         public int getCount() {
@@ -204,7 +198,8 @@ public class MainActivity extends Activity implements  android.view.View.OnClick
 
 	             i.setImageResource(mImageIds[position]);
 	             i.setLayoutParams(new Gallery.LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT));
-	             i.setScaleType(ImageView.ScaleType.CENTER_INSIDE);	             
+	             i.setScaleType(ImageView.ScaleType.CENTER_INSIDE);	 
+	             i.setBackgroundResource(mGalleryItemBackground);
 	             return i;
 	         }
 	    }
