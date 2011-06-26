@@ -16,9 +16,18 @@ public class Item {
 	
 	
 	/**
+	 * An easy to use constructor that just takes the name of the item;  
+	 * can set other fields later, using set methods; 
+	 * @param name - String name of Item
+	 */
+	public Item(String name){
+		this.name = name; 
+	}
+	/**
 	 * Constructor that begins with all inforamtion
 	 * @param String Name, Image File name, Brand, Price, Description, taglist, link
 	 */
+	
 	public Item (String name, String imageFile, String brand, 
 					double price, String description, ArrayList<String> taglist,
 					String link, String categorytag){

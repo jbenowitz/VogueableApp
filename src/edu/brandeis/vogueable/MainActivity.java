@@ -3,13 +3,24 @@ package edu.brandeis.vogueable;
 
 
 
+import java.io.BufferedInputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.net.URLConnection;
+import java.util.ArrayList;
+
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -38,7 +49,9 @@ public class MainActivity extends Activity implements  android.view.View.OnClick
 	TasteManager taste_manager=new TasteManager();
 	ItemCursor item_cursor;
 	Item currItem;
+	ArrayList<Item> currents = new ArrayList<Item>();
 	User user=new User("gaspar");
+	
 
 	/** Called when the activity is first created. */
 	
@@ -46,20 +59,27 @@ public class MainActivity extends Activity implements  android.view.View.OnClick
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.main);
-		Toast.makeText(MainActivity.this, "Slide for next item!", Toast.LENGTH_LONG).show();
+		Toast.makeText(MainActivity.this, "Tap for details! Slide for next item!", Toast.LENGTH_LONG).show();
 
 		View likeButton = findViewById(R.id.like_button);
 		likeButton.setOnClickListener(this);
 		View dislikeButton = findViewById(R.id.dislike_button);
 		dislikeButton.setOnClickListener(this);
-		View wishlistButton = findViewById(R.id.wishlist_button);
-		wishlistButton.setOnClickListener(this);
-		View infoButton = findViewById(R.id.info_button);
-		infoButton.setOnClickListener(this);
+		View closetButton = findViewById(R.id.wishlist_button);
+		closetButton.setOnClickListener(this);
+		ArrayList<String> tags = new ArrayList<String>();
+		tags.add("heeey");
+		currItem =new Item("NAME","http://ecx.images-amazon.com/images/I/813w6mGs3oL._SL1500_.jpg","description",100.00,"describe", tags,"link", "clothing");
+		//user.getTasteManager().itemsNotUsed.add(currItem);
+ 		
+ 		
+		//user.getTasteManager().itemsNotUsed.add(new Item("NAME","price", "1000", R.drawable.item2,"description", tags,"link", "clothing"));
+ 		//user.getTasteManager().itemsNotUsed.add(new Item("NAME","price", "1000", R.drawable.item3,"description", tags,"link", "clothing"));
 		
 
 		// Set up Gallery
 		Gallery g = (Gallery) findViewById(R.id.gallery);
+				
 		g.setAdapter(new ImageAdapter(this));
 		//g.setOnClickListener(this);
 
@@ -79,27 +99,7 @@ public class MainActivity extends Activity implements  android.view.View.OnClick
 	 * @param pos -image position in the viewer, used to get info about the image
 	 * @return details string of detailed image information
 	 */
-	/*
-	public String imageDetails(int pos){
-		String details="";
-		switch(pos){
-		case 0:details="Casual Chic Dress \n $72.79 \nJust for You & Retro Too! \nhttp://www.modcloth.com/Womens/Dresses/-Casual-Chic-Dress";
-			break;
-		case 1:details="Color Quiz Dress \n62.99 \nUnknown \nhttp://www.modcloth.com/Womens/Dresses/-Color-Quiz-Dress";break;
-		case 2:details="Belle of the Book Fair Dress \n24.99 \nunknown \nhttp://www.modcloth.com/Womens/Dresses/-Belle-of-the-Book-Fair-Dress";break;
-		case 11:details="Wild Stride Wedge\n$193.99\nhttp://www.modcloth.com/Womens/Shoes/Wedges/-Wild-Stride-Wedge\nUnknown";break;
-		case 4:details="Amelie Tunic \n$98.40 \nhttp://www.shopbop.com/amelie-tunic-elie-tahari/vp/v=1/845524441882644.htm?folderID=2534374302060562&fm=other-shopbysize&colorId=12867 \nElie Tahari";break;
-		case 5:details="Bed of Roses \n$82.00 \nhttp://www.helianthusny.com/Mink_Pink_Bed_of_Roses_Dress_p/mindre00001.htm \nMinkpink";break;
-		case 6:details="D&G Floral Jeans \n$267.00 \nhttp://store.dolcegabbana.com/item/store/DG/tskay/9BEC955A/rr/1/cod10/42193267LI/ /nDolce and Gabbana";break;
-		case 7:details="Medallion Pendant Necklace \n$55.00 \nhttp://www.shopbop.com/turquoise-brass-pendant-necklace-jadetribe/vp/v=1/845524441903665.htm \nJADETribe";break;
-		case 8:details="Mini Bessie Dress \n$375.00 \nhttp://www.shopbop.com/mini-bessie-dress-temperley-london/vp/v=1/845524441872501.htm?folderID=2534374302029887&fm=sale-shopbysize&colorId=12192 /nTemperley London";break;
-		case 9:details="Thakoon Sock Boots \n$388.50 \nhttp://www.shopbop.com/open-toe-high-heel-platform/vp/v=1/845524441878754.htm?folderID=2534374302029887&fm=sale-shopbysize&colorId=12054 /nGiuseppe Zanotti";break;
-		case 10:details="True Grid Heel \n$234.99 \nhttp://www.modcloth.com/Womens/Shoes/Sandals/-True-Grid-Heel \nUnknown";break;
-		}
-		return details;
-		
-	}
-	*/
+	
 	
 	
 	
@@ -147,10 +147,6 @@ public class MainActivity extends Activity implements  android.view.View.OnClick
 	    	             }
 	    	         }).show();
 		    break;
-		case R.id.info_button:
-			Intent k = new Intent(this, Info.class);
-	         startActivity(k);
-	         break;
 		
 		}
 	}
@@ -163,24 +159,81 @@ public class MainActivity extends Activity implements  android.view.View.OnClick
 	    * @author Jackie
 	    *
 	    */
-
+	/*
+	 public class ImageAdapter extends BaseAdapter {
+	       
+	        private Context myContext;
+	 
+	        
+	        private String[] myRemoteImages = {
+	        		"http://ecx.images-amazon.com/images/I/410oAxun7dL._AA300_.jpg",
+	        		 "http://ecx.images-amazon.com/images/I/41Hkj9aBsAL._AA300_.jpg",
+	        		 "http://ecx.images-amazon.com/images/I/41JMUzALgpL._AA300_.jpg",
+	        		 "http://ecx.images-amazon.com/images/I/51Iykkkx5LL._SX342_.jpg",
+	        		 "http://ecx.images-amazon.com/images/I/410oAxun7dL._AA300_.jpg",
+	        };
+	       
+	        
+	        public ImageAdapter(Context c) { this.myContext = c; }
+	 
+	        
+	        public int getCount() { return this.myRemoteImages.length; }
+	 
+	        
+	        public Object getItem(int position) { return position; }
+	        public long getItemId(int position) { return position; }
+	 
+	       
+	        public View getView(int position, View convertView, ViewGroup parent) {
+	            ImageView i = new ImageView(this.myContext);
+	 
+	            try {
+	                               
+	                                URL aURL = new URL(myRemoteImages[position]);
+	                                URLConnection conn = aURL.openConnection();
+	                                conn.connect();
+	                                InputStream is = conn.getInputStream();
+	                               
+	                                BufferedInputStream bis = new BufferedInputStream(is);
+	                               
+	                                Bitmap bm = BitmapFactory.decodeStream(bis);
+	                                bis.close();
+	                                is.close();
+	                                
+	                                i.setImageBitmap(bm);
+	                        } catch (IOException e) {
+	                                //i.setImageResource(R.drawable.error);
+	                                Log.e("DEBUGTAG", "Remtoe Image Exception", e);
+	                        }
+	           
+	                        i.setScaleType(ImageView.ScaleType.FIT_CENTER);
+	                        
+	                        i.setLayoutParams(new Gallery.LayoutParams(150, 150));
+	                        return i;}
+	 
+	        
+	        public float getScale(boolean focused, int offset) {
+                
+            return Math.max(0, 1.0f / (float)Math.pow(2, Math.abs(offset)));
+        }
+	        
+	        
+	    }
+	
+	*/
+	
+	
 	     public class ImageAdapter extends BaseAdapter {
 	         private Context mContext;
 	         int mGalleryItemBackground;
-
-	         private Integer[] mImageIds = {
-	                 R.drawable.item1,
-	                 R.drawable.item2,
-	                 R.drawable.item3,
-	                 R.drawable.item4,
-	                 R.drawable.item5,
-	                 R.drawable.item6,
-	                 R.drawable.item7,
-	                 R.drawable.item8,
-	                 R.drawable.item9,
-	                 R.drawable.item10,
-	                 R.drawable.item11,
-	                 R.drawable.item12
+   
+	         private String[] myImages = {
+	        		 
+	                 "http://ecx.images-amazon.com/images/I/410oAxun7dL._AA300_.jpg",
+	        		 "http://ecx.images-amazon.com/images/I/41Hkj9aBsAL._AA300_.jpg",
+	        		 "http://ecx.images-amazon.com/images/I/41JMUzALgpL._AA300_.jpg",
+	        		 "http://ecx.images-amazon.com/images/I/51Iykkkx5LL._SX342_.jpg",
+	        		 "http://ecx.images-amazon.com/images/I/410oAxun7dL._AA300_.jpg",
 	         };
 
 	         public ImageAdapter(Context c) {
@@ -188,7 +241,7 @@ public class MainActivity extends Activity implements  android.view.View.OnClick
 	         }
 
 	         public int getCount() {
-	             return mImageIds.length;
+	             return myImages.length;
 	         }
 
 	         public Object getItem(int position) {
@@ -198,11 +251,31 @@ public class MainActivity extends Activity implements  android.view.View.OnClick
 	         public long getItemId(int position) {
 	             return position;
 	         }
-
+	         
+	         public  Bitmap getBitmapFromURL(String src) {
+	             try {
+	                 Log.e("src",src);
+	                 URL url = new URL(src);
+	                 URLConnection connection = (URLConnection) url.openConnection();
+	                 ((HttpURLConnection) connection).setRequestMethod("GET");
+	                 connection.setDoInput(true);
+	                 connection.connect();
+	                 InputStream input = connection.getInputStream();
+	                 Bitmap myBitmap = BitmapFactory.decodeStream(input);
+	                 Log.e("Bitmap","returned");
+	                 return myBitmap;
+	             } catch (IOException e) {
+	                 e.printStackTrace();
+	                 Log.e("Exception",e.getMessage());
+	                 return null;
+	             }
+	         }
+             
 	         public View getView(int position, View convertView, ViewGroup parent) {
+	        	 System.out.print(position);
 	             ImageView i = new ImageView(mContext);
-
-	             i.setImageResource(mImageIds[position]);
+	             Bitmap bimage=  getBitmapFromURL(myImages[position]);
+	             i.setImageBitmap(bimage);
 	             i.setLayoutParams(new Gallery.LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT));
 	             i.setScaleType(ImageView.ScaleType.CENTER_INSIDE);	             
 	             return i;
