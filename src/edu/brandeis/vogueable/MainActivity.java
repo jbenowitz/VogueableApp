@@ -39,6 +39,9 @@ public class MainActivity extends Activity implements  android.view.View.OnClick
 	TasteManager taste_manager=new TasteManager();
 	ItemCursor item_cursor;
 	Item currItem;
+	
+	
+	
 	User user=new User("gaspar");
 	boolean itemliked=false, itemdisliked=false; //used to tell whether like or dislike button are pressed
 
