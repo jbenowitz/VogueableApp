@@ -55,6 +55,8 @@
 			    android:layout_width="wrap_content"
 			    android:layout_gravity="right"
 			    android:textSize="15dip"
+			    android:textColor="@color/yellow"
+			    android:background="@drawable/custom_button"
 			   />
 		</LinearLayout>
 
@@ -102,6 +104,8 @@
 			    android:layout_width="wrap_content"
 			    android:layout_gravity="right"
 			    android:textSize="15dip"
+			    android:textColor="@color/yellow"
+			    android:background="@drawable/custom_button"
 			   />
 		</LinearLayout>
 
@@ -149,6 +153,8 @@
 			    android:layout_width="wrap_content"
 			    android:layout_gravity="right"
 			    android:textSize="15dip"
+			    android:textColor="@color/yellow"
+			    android:background="@drawable/custom_button"
 			   />
 		</LinearLayout>
 
@@ -197,6 +203,8 @@
 			    android:layout_width="wrap_content"
 			    android:layout_gravity="right"
 			    android:textSize="15dip"
+			    android:textColor="@color/yellow"
+			    android:background="@drawable/custom_button"
 			   />
 		</LinearLayout>
 
@@ -245,6 +253,8 @@
 			    android:layout_width="wrap_content"
 			    android:layout_gravity="right"
 			    android:textSize="15dip"
+			    android:textColor="@color/yellow"
+			    android:background="@drawable/custom_button"
 			   />
 		</LinearLayout>
 
@@ -293,6 +303,8 @@
 			    android:layout_width="wrap_content"
 			    android:layout_gravity="right"
 			    android:textSize="15dip"
+			    android:textColor="@color/yellow"
+			    android:background="@drawable/custom_button"
 			   />
 		</LinearLayout>
 
@@ -341,6 +353,8 @@
 			    android:layout_width="wrap_content"
 			    android:layout_gravity="right"
 			    android:textSize="15dip"
+			    android:textColor="@color/yellow"
+			    android:background="@drawable/custom_button"
 			   />
 		</LinearLayout>
 
@@ -389,6 +403,8 @@
 			    android:layout_width="wrap_content"
 			    android:layout_gravity="right"
 			    android:textSize="15dip"
+			    android:textColor="@color/yellow"
+			    android:background="@drawable/custom_button"
 			   />
 		</LinearLayout>
 
@@ -437,6 +453,8 @@
 			    android:layout_width="wrap_content"
 			    android:layout_gravity="right"
 			    android:textSize="15dip"
+			    android:textColor="@color/yellow"
+			    android:background="@drawable/custom_button"
 			   />
 		</LinearLayout>
 
@@ -485,6 +503,8 @@
 			    android:layout_width="wrap_content"
 			    android:layout_gravity="right"
 			    android:textSize="15dip"
+			    android:textColor="@color/yellow"
+			    android:background="@drawable/custom_button"
 			   />
 		</LinearLayout>
 
@@ -533,6 +553,8 @@
 			    android:layout_width="wrap_content"
 			    android:layout_gravity="right"
 			    android:textSize="15dip"
+			    android:textColor="@color/yellow"
+			    android:background="@drawable/custom_button"
 			   />
 		</LinearLayout>
 
@@ -581,6 +603,8 @@
 			    android:layout_width="wrap_content"
 			    android:layout_gravity="right"
 			    android:textSize="15dip"
+			    android:textColor="@color/yellow"
+			    android:background="@drawable/custom_button"
 			   />
 		</LinearLayout>
 

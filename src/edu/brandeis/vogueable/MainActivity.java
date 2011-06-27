@@ -109,9 +109,12 @@ public class MainActivity extends Activity implements  android.view.View.OnClick
 		
 		case R.id.like_button :
 			
+			
 			if(itemliked){
 				//dislike();
 				itemliked=false;
+				
+				
 			}
 			else{
 				//like();
@@ -119,7 +122,6 @@ public class MainActivity extends Activity implements  android.view.View.OnClick
 			}
 			
 						
-			
 	    	break;
 	    	
 	    	
