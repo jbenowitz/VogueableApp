@@ -13,12 +13,15 @@ import java.util.Random;
  */
 public class ItemDB {
 	ArrayList<Item> items = new ArrayList<Item>();
+	FakeProxy prox;
 	
 	/**
 	 * Constructor to loadFromDisk()
 	 */
 	public ItemDB(){
 		this.loadFromDisk();
+		prox = new FakeProxy();
+		prox.connect();
 	}
 
 	/**
@@ -28,33 +31,14 @@ public class ItemDB {
 	 * 
 	 */
 	public ArrayList<Item> loadFromDisk(){
-		
-		File directory = new File("/Users/Jackie/Documents/2010-2011/Summer_2011/JBS/VogueableApp/res/drawable-ldpi/itemdb");
-		
-		if (directory.isDirectory()) {
-			
-			File AllFiles[] = directory.listFiles();
-			for(File aFile: AllFiles){
-				File ImageFiles[] = aFile.listFiles();
-				for(File image: ImageFiles){
-					
-					ArrayList<String> tags= new ArrayList<String>();
-					tags.add("i'm a tag");
-					Item thing = new Item(image.getName(),image.getName(),"BRAND",12.00,"Oh Hey! You could wear this!", tags,"link","short");
-					
-					items.add(thing);
-				}
-			}
+		 items = prox.getAllItems();
+		 return items;
 			
 			}
 
-		//TODO Just make a item for each of these using all the information
-		// in the item Constructor.
-		//Then add that item to the items ArrayList
 		
-		return items;
 		
-	}
+	
 	
 	
 	/**

@@ -1,6 +1,8 @@
 package edu.brandeis.vogueable;
 
 import java.util.ArrayList;
+
+import android.content.Context;
 /**
  * User class keeps track of a user's taste and wishlist
  * 
@@ -11,20 +13,22 @@ public class User {
 	public String name; 
 	public ArrayList<Wishlist> MyLists;
 	public TasteManager mytaste;
+	public Context con;
+
 	
-	public User(User user){
+	/*public User(User user){
 		this.name = user.name;
 		this.MyLists = new ArrayList<Wishlist>();
 		this.MyLists=user.MyLists;
 		this.mytaste=new TasteManager();
 		this.mytaste= user.mytaste;
-	}
+	}*/
 	
 	
-	public User(String myName){
+	public User(String myName, Context con){
 		name = myName;
 		MyLists = new ArrayList<Wishlist>();
-		mytaste = new TasteManager();
+		mytaste = new TasteManager( con);
 	}
 	
 	public String getName(){
