@@ -33,8 +33,9 @@
 		android:layout_marginTop="80dip"
     	android:text="@string/go_label" 
     	android:textSize="20dip"
-    	android:textColor="#FFCC00"
+    	android:textColor="@color/yellow"
     	android:layout_gravity="center_horizontal"
+    	android:background="@drawable/custom_button"
     	></Button>
 </LinearLayout>
 

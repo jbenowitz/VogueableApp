@@ -40,6 +40,7 @@ public class MainActivity extends Activity implements  android.view.View.OnClick
 	ItemCursor item_cursor;
 	Item currItem;
 	User user=new User("gaspar");
+	boolean itemliked=false, itemdisliked=false; //used to tell whether like or dislike button are pressed
 
 	/** Called when the activity is first created. */
 	
@@ -58,6 +59,8 @@ public class MainActivity extends Activity implements  android.view.View.OnClick
 		View infoButton = findViewById(R.id.info_button);
 		infoButton.setOnClickListener(this);
 		
+		
+		
 
 		// Set up Gallery
 		Gallery g = (Gallery) findViewById(R.id.gallery);
@@ -73,54 +76,67 @@ public class MainActivity extends Activity implements  android.view.View.OnClick
 		
 	}
 	
+	
+	
 	/**
-	 * method to return pop up with details about an item being viewed,
-	 * Use this before we figure out how to get info the right way
-	 * @author gasparobimba
-	 * @param pos -image position in the viewer, used to get info about the image
-	 * @return details string of detailed image information
+	 * Like the current item (add counts to hashtag list in taste manager)
+	 * 
+	 * @author Jackie
 	 */
-	/*
-	public String imageDetails(int pos){
-		String details="";
-		switch(pos){
-		case 0:details="Casual Chic Dress \n $72.79 \nJust for You & Retro Too! \nhttp://www.modcloth.com/Womens/Dresses/-Casual-Chic-Dress";
-			break;
-		case 1:details="Color Quiz Dress \n62.99 \nUnknown \nhttp://www.modcloth.com/Womens/Dresses/-Color-Quiz-Dress";break;
-		case 2:details="Belle of the Book Fair Dress \n24.99 \nunknown \nhttp://www.modcloth.com/Womens/Dresses/-Belle-of-the-Book-Fair-Dress";break;
-		case 11:details="Wild Stride Wedge\n$193.99\nhttp://www.modcloth.com/Womens/Shoes/Wedges/-Wild-Stride-Wedge\nUnknown";break;
-		case 4:details="Amelie Tunic \n$98.40 \nhttp://www.shopbop.com/amelie-tunic-elie-tahari/vp/v=1/845524441882644.htm?folderID=2534374302060562&fm=other-shopbysize&colorId=12867 \nElie Tahari";break;
-		case 5:details="Bed of Roses \n$82.00 \nhttp://www.helianthusny.com/Mink_Pink_Bed_of_Roses_Dress_p/mindre00001.htm \nMinkpink";break;
-		case 6:details="D&G Floral Jeans \n$267.00 \nhttp://store.dolcegabbana.com/item/store/DG/tskay/9BEC955A/rr/1/cod10/42193267LI/ /nDolce and Gabbana";break;
-		case 7:details="Medallion Pendant Necklace \n$55.00 \nhttp://www.shopbop.com/turquoise-brass-pendant-necklace-jadetribe/vp/v=1/845524441903665.htm \nJADETribe";break;
-		case 8:details="Mini Bessie Dress \n$375.00 \nhttp://www.shopbop.com/mini-bessie-dress-temperley-london/vp/v=1/845524441872501.htm?folderID=2534374302029887&fm=sale-shopbysize&colorId=12192 /nTemperley London";break;
-		case 9:details="Thakoon Sock Boots \n$388.50 \nhttp://www.shopbop.com/open-toe-high-heel-platform/vp/v=1/845524441878754.htm?folderID=2534374302029887&fm=sale-shopbysize&colorId=12054 /nGiuseppe Zanotti";break;
-		case 10:details="True Grid Heel \n$234.99 \nhttp://www.modcloth.com/Womens/Shoes/Sandals/-True-Grid-Heel \nUnknown";break;
-		}
-		return details;
-		
+	public void like(){
+		user.mytaste.likeFlavor(currItem.getTagList());
 	}
-	*/
+	
+	/**
+	 * dislike the current item (subtract counts to hashtag list in taste manager)
+	 * 
+	 * @author Jackie
+	 */
+	public void dislike(){
+		user.mytaste.dislikeFlavor(currItem.getTagList());
+	}
 	
 	
 	
+	
+	/**
+	 * Deals with figuring out what buttons are pressed and what actions to take.
+	 * 
+	 */
 	public void onClick(View v) {
 		switch (v.getId()) {
 
 		
 		case R.id.like_button :
-//			for(String tags: currItem.getTagList()){
-//					if (!user.getTasteManager().tagCount.containsKey(tags)){
-
-						//user.mytaste.likeFlavor(currItem.getTagList());
-			Button b = (Button) findViewById(R.id.like_button);
+			
+			if(itemliked){
+				//dislike();
+				itemliked=false;
+			}
+			else{
+				//like();
+				itemliked=true;
+			}
+			
+			
 			
 			
 	    	break;
 	    	
+	    	
 		case R.id.dislike_button:
-			Toast.makeText(MainActivity.this, "disliked!", Toast.LENGTH_SHORT).show();
+			
+			if(itemdisliked){
+				//like();
+				itemdisliked=false;
+			}
+			else{
+				//dislike();
+				itemdisliked=true;
+			}
 			break;
+			
+			
 		
 		case R.id.wishlist_button:
 			AlertDialog.Builder wishquest = new AlertDialog.Builder(this);
@@ -137,6 +153,9 @@ public class MainActivity extends Activity implements  android.view.View.OnClick
 	    	             }
 	    	         }).show();
 		    break;
+		    
+		    
+		    
 		case R.id.info_button:
 			Intent k = new Intent(this, Info.class);
 	         startActivity(k);
@@ -153,7 +172,6 @@ public class MainActivity extends Activity implements  android.view.View.OnClick
 	    * @author Jackie
 	    *
 	    */
-
 	     public class ImageAdapter extends BaseAdapter {
 	         private Context mContext;
 	         int mGalleryItemBackground;

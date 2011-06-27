@@ -23,7 +23,7 @@
 		android:text="@string/select_all_label"
 		android:layout_width="wrap_content"
 		android:layout_height="wrap_content"
-		android:textColor="#FFCC00"
+		android:textColor="@color/yellow"
 		android:textSize="20dip"
 		android:background="@drawable/custom_button">	
 	</Button>
@@ -35,7 +35,7 @@
 		android:layout_width="wrap_content"
 		android:layout_height="wrap_content"
 		android:layout_alignParentRight="true"
-		android:textColor="#FFCC00"
+		android:textColor="@color/yellow"
 		android:textSize="20dip"
 		android:background="@drawable/custom_button">	
 	</Button>
@@ -43,32 +43,32 @@
 	</RelativeLayout>
 	<CheckBox android:id="@+id/dress_check" android:layout_width="wrap_content"
 		android:layout_height="wrap_content" android:text="@string/dress_label"
-		android:textColor="#FFCC00"
+		android:textColor="@color/yellow"
 		android:textSize="20dip"
 		android:layout_marginLeft="10dip">
 	</CheckBox>
 
 	<CheckBox android:id="@+id/shoes_check" android:layout_width="wrap_content"
 		android:layout_height="wrap_content" android:text="@string/shoes_label"
-		android:textColor="#FFCC00"
+		android:textColor="@color/yellow"
 		android:textSize="20dip"
 		android:layout_marginLeft="10dip">
 	</CheckBox>
 	<CheckBox android:id="@+id/shorts_check" android:layout_width="wrap_content"
 		android:layout_height="wrap_content" android:text="@string/shorts_label"
-		android:textColor="#FFCC00"
+		android:textColor="@color/yellow"
 		android:textSize="20dip"
 		android:layout_marginLeft="10dip">
 	</CheckBox>
 	<CheckBox android:id="@+id/pants_check" android:layout_width="wrap_content"
 		android:layout_height="wrap_content" android:text="@string/pants_label"
-		android:textColor="#FFCC00"
+		android:textColor="@color/yellow"
 		android:textSize="20dip"
 		android:layout_marginLeft="10dip">
 	</CheckBox>
 	<CheckBox android:id="@+id/clothing_check" android:layout_width="wrap_content"
 		android:layout_height="wrap_content" android:text="@string/clothing_label"
-		android:textColor="#FFCC00"
+		android:textColor="@color/yellow"
 		android:textSize="20dip"
 		android:layout_marginLeft="10dip">
 	</CheckBox>
@@ -81,7 +81,7 @@
 		android:layout_width="wrap_content"
 		android:layout_height="wrap_content"
 		android:layout_gravity="center"
-		android:textColor="#FFCC00"
+		android:textColor="@color/yellow"
 		android:textSize="20dip"
 		android:background="@drawable/custom_button">
 	</Button>
