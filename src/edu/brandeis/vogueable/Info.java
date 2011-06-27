@@ -37,6 +37,8 @@ public class Info extends Activity implements OnClickListener{
 	    	         .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
 	    	             public void onClick(DialogInterface dialog, int id) {
 	    	            	 startActivity(new Intent(Info.this, WishAct.class));
+	    	            	 dialog.cancel();
+	    	            	 finish();
 	    	            	 }
 	    	         	})
 	    	         .setNegativeButton("No", new DialogInterface.OnClickListener() {
