@@ -34,8 +34,10 @@
    	<string name="settings_title">Change Settings</string>
    	<string name="settings_shortcut">s</string>
    	
-    
+    <string name="buy_buy">Buy!</string>
   	<string name="wishlist_label">Add to wishlist!</string>
+  	<string name="view_wishlist">View Wishlist</string>
+  	<string name="wishlist">Wishlist</string>
   	<string name="return_cat_label">Change Departments</string>
   	
 

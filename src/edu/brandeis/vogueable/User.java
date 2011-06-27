@@ -12,6 +12,15 @@ public class User {
 	public ArrayList<Wishlist> MyLists;
 	public TasteManager mytaste;
 	
+	public User(User user){
+		this.name = user.name;
+		this.MyLists = new ArrayList<Wishlist>();
+		this.MyLists=user.MyLists;
+		this.mytaste=new TasteManager();
+		this.mytaste= user.mytaste;
+	}
+	
+	
 	public User(String myName){
 		name = myName;
 		MyLists = new ArrayList<Wishlist>();

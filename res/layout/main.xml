@@ -21,7 +21,7 @@
   
 
   <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-     android:id="@+id/back"
+    android:id="@+id/back"
     android:orientation="horizontal"
     android:layout_height="50dip"
     android:layout_width="fill_parent" 

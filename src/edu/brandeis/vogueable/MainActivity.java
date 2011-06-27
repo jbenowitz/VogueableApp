@@ -118,8 +118,7 @@ public class MainActivity extends Activity implements  android.view.View.OnClick
 				itemliked=true;
 			}
 			
-			
-			
+						
 			
 	    	break;
 	    	
@@ -134,26 +133,33 @@ public class MainActivity extends Activity implements  android.view.View.OnClick
 				//dislike();
 				itemdisliked=true;
 			}
+
 			break;
 			
 			
 		
 		case R.id.wishlist_button:
-			AlertDialog.Builder wishquest = new AlertDialog.Builder(this);
-	    	wishquest.setMessage("Added to your wishlist!  Would you like to view your wishlist?")
-	    	         .setCancelable(false)
-	    	         .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+			//Intent j = new Intent(this, WishAct.class);
+	         //startActivity(j);
+	         //break;
+
+			
+	        AlertDialog.Builder wishquest = new AlertDialog.Builder(this);
+	    	//wishquest.setMessage("Added to your wishlist!  Would you like to view your wishlist?")
+	    	         //wishquest.setCancelable(false)
+	    	         wishquest
+	    	         .setPositiveButton("Add to wishlist", new DialogInterface.OnClickListener() {
 	    	             public void onClick(DialogInterface dialog, int id) {
-	    	            	 Toast.makeText(MainActivity.this, "Go to wishlist, when implemented", Toast.LENGTH_SHORT).show();
-	    	            	 }
+	    	            	 Toast.makeText(MainActivity.this, "Added to wishlist", Toast.LENGTH_SHORT).show();
+	    	            	 dialog.cancel();
+	    	             }
 	    	         	})
-	    	         .setNegativeButton("No", new DialogInterface.OnClickListener() {
+	    	         .setNegativeButton("View wishlist", new DialogInterface.OnClickListener() {
 	    	             public void onClick(DialogInterface dialog, int id) {
-	    	                  dialog.cancel();
+	    	            	 startActivity(new Intent(MainActivity.this, WishAct.class));
 	    	             }
 	    	         }).show();
 		    break;
-		    
 		    
 		    
 		case R.id.info_button:
@@ -245,11 +251,11 @@ public class MainActivity extends Activity implements  android.view.View.OnClick
 	public boolean onOptionsItemSelected(MenuItem item) {
 		switch (item.getItemId()) {
 
-		case R.id.wishlist_label:   
-			Toast.makeText(this, "Yulia will finish the wish list soon", Toast.LENGTH_LONG).show();
+		case R.id.wishlist_menu:   
+			//Toast.makeText(this, "Yulia will finish the wish list soon", Toast.LENGTH_LONG).show();
 			// startActivity(new Intent(this, Settings.class));
 			//break;
-			AlertDialog.Builder builder = new AlertDialog.Builder(this);
+			/*AlertDialog.Builder builder = new AlertDialog.Builder(this);
 			builder.setMessage("Do you want to really see your wishlist?")
 			.setCancelable(false)
 			.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
@@ -262,7 +268,10 @@ public class MainActivity extends Activity implements  android.view.View.OnClick
 				public void onClick(DialogInterface dialog, int id) {
 					dialog.cancel();
 				}
-			}).show();
+			}).show();*/
+			startActivity(new Intent(this, WishAct.class));
+			break;
+			
 
 		case R.id.return_categories: 
 			startActivity(new Intent(this, CategoryChooser.class));
