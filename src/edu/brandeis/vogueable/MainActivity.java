@@ -109,6 +109,7 @@ public class MainActivity extends Activity implements  android.view.View.OnClick
 
 		
 		case R.id.like_button :
+			Toast.makeText(MainActivity.this, "Liked!", Toast.LENGTH_SHORT).show();
 //			for(String tags: currItem.getTagList()){
 //					if (!user.getTasteManager().tagCount.containsKey(tags)){
 
@@ -119,7 +120,7 @@ public class MainActivity extends Activity implements  android.view.View.OnClick
 	    	break;
 	    	
 		case R.id.dislike_button:
-			Toast.makeText(MainActivity.this, "disliked!", Toast.LENGTH_SHORT).show();
+			Toast.makeText(MainActivity.this, "Disliked!", Toast.LENGTH_SHORT).show();
 			break;
 		
 		case R.id.wishlist_button:

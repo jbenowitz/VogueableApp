@@ -393,6 +393,198 @@
 		</LinearLayout>
 
     </LinearLayout>
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:weightSum=".7"
+        android:layout_marginTop="15dip"
+       >
+
+       <ImageView
+           android:id="@+id/item9"
+           android:layout_weight="1.0"
+           android:layout_width="wrap_content"
+           android:src="@drawable/item9"
+           android:layout_height="match_parent"
+         	 />
+       <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:orientation="vertical">
+	        <TextView
+	           android:id="@+id/description"
+	           android:layout_width="wrap_content"
+	           android:text="@string/curr_name"
+	           android:layout_height="wrap_content"
+	           android:textSize="20dip"
+	           android:paddingLeft="6dip"
+	           android:paddingRight="6dip" />
+	        <TextView
+	           android:id="@+id/description"
+	           android:layout_width="wrap_content"
+	           android:text="@string/curr_price"
+	           android:layout_height="wrap_content"
+	           android:textSize="15dip"
+	           android:paddingLeft="6dip"
+	           android:paddingRight="6dip"
+	           android:paddingBottom="6dip"
+	          />
+	        <Button 
+			    android:id="@+id/buy_buy"
+			    android:text="@string/buy_buy"
+			    android:layout_height="wrap_content"
+			    android:layout_width="wrap_content"
+			    android:layout_gravity="right"
+			    android:textSize="15dip"
+			   />
+		</LinearLayout>
+
+    </LinearLayout>
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:weightSum=".7"
+        android:layout_marginTop="15dip"
+       >
+
+       <ImageView
+           android:id="@+id/item10"
+           android:layout_weight="1.0"
+           android:layout_width="wrap_content"
+           android:src="@drawable/item10"
+           android:layout_height="match_parent"
+         	 />
+       <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:orientation="vertical">
+	        <TextView
+	           android:id="@+id/description"
+	           android:layout_width="wrap_content"
+	           android:text="@string/curr_name"
+	           android:layout_height="wrap_content"
+	           android:textSize="20dip"
+	           android:paddingLeft="6dip"
+	           android:paddingRight="6dip" />
+	        <TextView
+	           android:id="@+id/description"
+	           android:layout_width="wrap_content"
+	           android:text="@string/curr_price"
+	           android:layout_height="wrap_content"
+	           android:textSize="15dip"
+	           android:paddingLeft="6dip"
+	           android:paddingRight="6dip"
+	           android:paddingBottom="6dip"
+	          />
+	        <Button 
+			    android:id="@+id/buy_buy"
+			    android:text="@string/buy_buy"
+			    android:layout_height="wrap_content"
+			    android:layout_width="wrap_content"
+			    android:layout_gravity="right"
+			    android:textSize="15dip"
+			   />
+		</LinearLayout>
+
+    </LinearLayout>
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:weightSum=".7"
+        android:layout_marginTop="15dip"
+       >
+
+       <ImageView
+           android:id="@+id/item11"
+           android:layout_weight="1.0"
+           android:layout_width="wrap_content"
+           android:src="@drawable/item11"
+           android:layout_height="match_parent"
+         	 />
+       <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:orientation="vertical">
+	        <TextView
+	           android:id="@+id/description"
+	           android:layout_width="wrap_content"
+	           android:text="@string/curr_name"
+	           android:layout_height="wrap_content"
+	           android:textSize="20dip"
+	           android:paddingLeft="6dip"
+	           android:paddingRight="6dip" />
+	        <TextView
+	           android:id="@+id/description"
+	           android:layout_width="wrap_content"
+	           android:text="@string/curr_price"
+	           android:layout_height="wrap_content"
+	           android:textSize="15dip"
+	           android:paddingLeft="6dip"
+	           android:paddingRight="6dip"
+	           android:paddingBottom="6dip"
+	          />
+	        <Button 
+			    android:id="@+id/buy_buy"
+			    android:text="@string/buy_buy"
+			    android:layout_height="wrap_content"
+			    android:layout_width="wrap_content"
+			    android:layout_gravity="right"
+			    android:textSize="15dip"
+			   />
+		</LinearLayout>
+
+    </LinearLayout>
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:weightSum=".7"
+        android:layout_marginTop="15dip"
+       >
+
+       <ImageView
+           android:id="@+id/item12"
+           android:layout_weight="1.0"
+           android:layout_width="wrap_content"
+           android:src="@drawable/item12"
+           android:layout_height="match_parent"
+         	 />
+       <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:orientation="vertical">
+	        <TextView
+	           android:id="@+id/description"
+	           android:layout_width="wrap_content"
+	           android:text="@string/curr_name"
+	           android:layout_height="wrap_content"
+	           android:textSize="20dip"
+	           android:paddingLeft="6dip"
+	           android:paddingRight="6dip" />
+	        <TextView
+	           android:id="@+id/description"
+	           android:layout_width="wrap_content"
+	           android:text="@string/curr_price"
+	           android:layout_height="wrap_content"
+	           android:textSize="15dip"
+	           android:paddingLeft="6dip"
+	           android:paddingRight="6dip"
+	           android:paddingBottom="6dip"
+	          />
+	        <Button 
+			    android:id="@+id/buy_buy"
+			    android:text="@string/buy_buy"
+			    android:layout_height="wrap_content"
+			    android:layout_width="wrap_content"
+			    android:layout_gravity="right"
+			    android:textSize="15dip"
+			   />
+		</LinearLayout>
+
+    </LinearLayout>
     
  
 
