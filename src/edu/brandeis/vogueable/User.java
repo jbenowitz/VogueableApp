@@ -13,6 +13,17 @@ public class User {
 	public String name; 
 	public ArrayList<Wishlist> MyLists;
 	public TasteManager mytaste;
+	public Context con;
+
+	
+	/*public User(User user){
+		this.name = user.name;
+		this.MyLists = new ArrayList<Wishlist>();
+		this.MyLists=user.MyLists;
+		this.mytaste=new TasteManager();
+		this.mytaste= user.mytaste;
+	}*/
+	
 	
 	public User(String myName, Context con){
 		name = myName;

@@ -16,8 +16,9 @@
     	android:text="@string/login_label" 
     	android:textSize="20dip"
     	android:id="@+id/login_label"
-    	android:textColor="#FFCC00"
-    	android:layout_gravity="center_horizontal"></Button>
+    	android:textColor="@color/yellow"
+    	android:layout_gravity="center_horizontal"
+    	android:background="@drawable/custom_button"></Button>
       <Button
       	 android:layout_marginTop="25dip"
          android:id="@+id/browse_label"
@@ -25,7 +26,8 @@
          android:layout_height="wrap_content"
          android:text="@string/category_label"
          android:textSize="20dip"
-         android:textColor="#FFCC00"
-  		 android:layout_gravity="center_horizontal"></Button>
+         android:textColor="@color/yellow"
+  		 android:layout_gravity="center_horizontal"
+  		 android:background="@drawable/custom_button"></Button>
 </LinearLayout>
 

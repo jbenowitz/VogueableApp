@@ -36,7 +36,9 @@ public class Info extends Activity implements OnClickListener{
 	    	         .setCancelable(false)
 	    	         .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
 	    	             public void onClick(DialogInterface dialog, int id) {
-	    	            	 Toast.makeText(Info.this, "Go to wishlist, when implemented", Toast.LENGTH_SHORT).show();
+	    	            	 startActivity(new Intent(Info.this, WishAct.class));
+	    	            	 dialog.cancel();
+	    	            	 finish();
 	    	            	 }
 	    	         	})
 	    	         .setNegativeButton("No", new DialogInterface.OnClickListener() {
