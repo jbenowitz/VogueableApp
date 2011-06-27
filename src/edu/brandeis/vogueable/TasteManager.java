@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Random;
 
+import android.content.Context;
+
 /**
  * Keeps track of what the user likes/dislikes
  * Gives next item based on likes/dislikes
@@ -15,18 +17,28 @@ public class TasteManager {
 	
 	HashMap<String,Integer> tagCount;
 	ArrayList<Item> itemsNotUsed;
-	
+	FakeProxy prox;
+	Context context;
 	/**
 	 * Constructor
 	 * Initialize tagCount HashMap to be empty.
 	 * 
 	 * @param ArrayList of items, to choose next item
 	 */
-	public TasteManager(){
+	public TasteManager(Context con){
+		final Context mContext = this.getApplicationContext();
 		tagCount = new HashMap<String,Integer>();
+		prox = new FakeProxy();
+		//prox.connect(con);
+		itemsNotUsed = new ArrayList<Item>();
 		//this.itemsNotUsed = items;
 	}
 	
+	private Context getApplicationContext() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 	/**
 	 * Increments each liked tag in HashMap
 	 * 
@@ -70,7 +82,7 @@ public class TasteManager {
 				filtered.add(it);
 			}
 		}
-		return filtered.get(new Random().nextInt(itemsNotUsed.size()));
+		return prox.getNextItem(currItem, currCat);
 	}
 	
 	

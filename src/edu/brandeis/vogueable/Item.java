@@ -10,7 +10,7 @@ import java.util.ArrayList;
 public class Item {
 	
 	private String name, imageFile, brand, description, link;
-	private double price;
+	private String price;
 	private ArrayList<String> taglist;
 	private String categorytag;
 	
@@ -29,7 +29,7 @@ public class Item {
 	 */
 	
 	public Item (String name, String imageFile, String brand, 
-					double price, String description, ArrayList<String> taglist,
+					String price, String description, ArrayList<String> taglist,
 					String link, String categorytag){
 		this.name = name;
 		this.imageFile = imageFile;
@@ -48,6 +48,9 @@ public class Item {
 	public String getName(){
 		return name;
 	}
+	public void setName(String name){
+		this.name = name; 
+	}
 	
 	/**
 	 * 
@@ -57,6 +60,9 @@ public class Item {
 		return imageFile;
 	}
 	
+	public void setImageFileString(String url){
+		imageFile = url; 
+	}
 	/**
 	 * 
 	 * @return string name of brand of item
@@ -65,19 +71,28 @@ public class Item {
 		return brand;
 	}
 	
+	public void setBrand(String mybrand){
+		brand = mybrand; 
+	}
 	/**
 	 * 
 	 * @return price of item
 	 */
-	public double getPrice(){
+	public String getPrice(){
 		return price;
 	}
 	
+	public void setPrice(String money){
+		price = money;
+	}
 	/**
 	 * @return description of item
 	 */
 	public String getDescription(){
 		return description;
+	}
+	public void setDescription(String descriibe){
+		description = descriibe;
 	}
 	
 	/**

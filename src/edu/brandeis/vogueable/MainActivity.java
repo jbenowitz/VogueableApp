@@ -14,6 +14,7 @@ import java.util.ArrayList;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
+import android.content.res.Resources;
 import android.content.res.TypedArray;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -46,11 +47,13 @@ public class MainActivity extends Activity implements  android.view.View.OnClick
 	protected static final String id = null;
 	//instantiate objects
 	ItemDB itemDB;
-	TasteManager taste_manager=new TasteManager();
+	
 	ItemCursor item_cursor;
 	Item currItem;
 	ArrayList<Item> currents = new ArrayList<Item>();
-	User user=new User("gaspar");
+	//Resources rr = this.getResources();
+	//Context myContext = getApplicationContext();
+	User user=new User("gaspar",this); 
 	
 
 	/** Called when the activity is first created. */
@@ -69,8 +72,10 @@ public class MainActivity extends Activity implements  android.view.View.OnClick
 		closetButton.setOnClickListener(this);
 		ArrayList<String> tags = new ArrayList<String>();
 		tags.add("heeey");
-		currItem =new Item("NAME","http://ecx.images-amazon.com/images/I/813w6mGs3oL._SL1500_.jpg","description",100.00,"describe", tags,"link", "clothing");
-		//user.getTasteManager().itemsNotUsed.add(currItem);
+		currItem =new Item("NAME","http://ecx.images-amazon.com/images/I/813w6mGs3oL._SL1500_.jpg","description","100.00","describe", tags,"link", "clothing");
+		
+		user.getTasteManager().itemsNotUsed.add(currItem);
+		
  		
  		
 		//user.getTasteManager().itemsNotUsed.add(new Item("NAME","price", "1000", R.drawable.item2,"description", tags,"link", "clothing"));
@@ -159,68 +164,7 @@ public class MainActivity extends Activity implements  android.view.View.OnClick
 	    * @author Jackie
 	    *
 	    */
-	/*
-	 public class ImageAdapter extends BaseAdapter {
-	       
-	        private Context myContext;
-	 
-	        
-	        private String[] myRemoteImages = {
-	        		"http://ecx.images-amazon.com/images/I/410oAxun7dL._AA300_.jpg",
-	        		 "http://ecx.images-amazon.com/images/I/41Hkj9aBsAL._AA300_.jpg",
-	        		 "http://ecx.images-amazon.com/images/I/41JMUzALgpL._AA300_.jpg",
-	        		 "http://ecx.images-amazon.com/images/I/51Iykkkx5LL._SX342_.jpg",
-	        		 "http://ecx.images-amazon.com/images/I/410oAxun7dL._AA300_.jpg",
-	        };
-	       
-	        
-	        public ImageAdapter(Context c) { this.myContext = c; }
-	 
-	        
-	        public int getCount() { return this.myRemoteImages.length; }
-	 
-	        
-	        public Object getItem(int position) { return position; }
-	        public long getItemId(int position) { return position; }
-	 
-	       
-	        public View getView(int position, View convertView, ViewGroup parent) {
-	            ImageView i = new ImageView(this.myContext);
-	 
-	            try {
-	                               
-	                                URL aURL = new URL(myRemoteImages[position]);
-	                                URLConnection conn = aURL.openConnection();
-	                                conn.connect();
-	                                InputStream is = conn.getInputStream();
-	                               
-	                                BufferedInputStream bis = new BufferedInputStream(is);
-	                               
-	                                Bitmap bm = BitmapFactory.decodeStream(bis);
-	                                bis.close();
-	                                is.close();
-	                                
-	                                i.setImageBitmap(bm);
-	                        } catch (IOException e) {
-	                                //i.setImageResource(R.drawable.error);
-	                                Log.e("DEBUGTAG", "Remtoe Image Exception", e);
-	                        }
-	           
-	                        i.setScaleType(ImageView.ScaleType.FIT_CENTER);
-	                        
-	                        i.setLayoutParams(new Gallery.LayoutParams(150, 150));
-	                        return i;}
-	 
-	        
-	        public float getScale(boolean focused, int offset) {
-                
-            return Math.max(0, 1.0f / (float)Math.pow(2, Math.abs(offset)));
-        }
-	        
-	        
-	    }
 	
-	*/
 	
 	
 	     public class ImageAdapter extends BaseAdapter {
@@ -275,9 +219,14 @@ public class MainActivity extends Activity implements  android.view.View.OnClick
 	        	 System.out.print(position);
 	             ImageView i = new ImageView(mContext);
 	             Bitmap bimage=  getBitmapFromURL(myImages[position]);
+	             
+	            
+	            
+	            
 	             i.setImageBitmap(bimage);
 	             i.setLayoutParams(new Gallery.LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT));
-	             i.setScaleType(ImageView.ScaleType.CENTER_INSIDE);	             
+	             i.setScaleType(ImageView.ScaleType.CENTER_INSIDE);	
+	             //myImages[position]= user.getTasteManager().getNextItem(currItem, null).getImageFileString();
 	             return i;
 	         }
 	    }
