@@ -3,6 +3,8 @@ package edu.brandeis.vogueable;
 import android.accounts.Account;
 import android.accounts.AccountManager;
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.LightingColorFilter;
@@ -22,7 +24,7 @@ public class Login extends Activity implements OnClickListener{
 	    View goButton = findViewById(R.id.go_button);
 	      goButton.setOnClickListener(this);
 	      goButton.getBackground().setColorFilter(new LightingColorFilter(0x000000, 0x000000));
-	  
+	      
 	 /* 
 	  User violeta = new User("vsoued");  
 	  
