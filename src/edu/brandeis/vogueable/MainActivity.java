@@ -22,6 +22,7 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.Gallery;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.Toast;
 import android.widget.PopupWindow;
@@ -39,6 +40,7 @@ public class MainActivity extends Activity implements  android.view.View.OnClick
 	TasteManager taste_manager=new TasteManager();
 	ItemCursor item_cursor;
 	Item currItem;
+	ImageButton likebutton;
 	
 	
 	
@@ -55,6 +57,7 @@ public class MainActivity extends Activity implements  android.view.View.OnClick
 
 		View likeButton = findViewById(R.id.like_button);
 		likeButton.setOnClickListener(this);
+		likebutton = (ImageButton) findViewById(R.id.like_button);
 		View dislikeButton = findViewById(R.id.dislike_button);
 		dislikeButton.setOnClickListener(this);
 		View wishlistButton = findViewById(R.id.wishlist_button);
@@ -116,6 +119,7 @@ public class MainActivity extends Activity implements  android.view.View.OnClick
 			if(itemliked){
 				//dislike();
 				itemliked=false;
+				//likebutton.setBackgroundResource(R.drawable.approvegreen);
 				
 				
 			}
