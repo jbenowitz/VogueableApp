@@ -41,7 +41,6 @@
 		android:gravity="center_horizontal"
 		android:padding="5dip"
 		android:layout_alignParentTop="true" 
-		android:background="@drawable/custom_button"
 		android:layout_margin="5dip">
 	</Button>
 	 <Button android:id="@+id/getit_button" 
