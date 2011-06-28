@@ -10,23 +10,48 @@ import java.util.ArrayList;
  *
  */
 public class Wishlist {
-	ArrayList<Item> wishlist;
-	String name; 
+	private ArrayList<Item> wishlist;
+	private String name; 
 	
+	
+	/**
+	 * Constructor to WishList.  
+	 * takes in a name for wishlist (like christmas or hannukkah for future)
+	 * @param Name
+	 */
 	public Wishlist(String Name){
 		wishlist = new ArrayList<Item>();
 		name = Name;
 	}
 	
-	public void addItem(Item like){
-		wishlist.add(like);
+	
+	/**
+	 * Adds an item to the wishlist
+	 * @param itemA item to be added
+	 */
+	public void addItem(Item itemA){
+		wishlist.add(itemA);
 	}
 	
+	
+	/**
+	 * removes an item from the wishlist
+	 * @param itemR - removable item
+	 */
+	public void remove(Item itemR){
+		if (wishlist.contains(itemR)){
+			wishlist.remove(itemR);
+		}
+	}
+	
+	
+	/**
+	 * 
+	 * @return
+	 */
 	public ArrayList<Item> showWishlist(){
 		return wishlist;
 	}
 	
-	public void remove(Item thing){
-		wishlist.remove(thing);
-	}
+	
 }

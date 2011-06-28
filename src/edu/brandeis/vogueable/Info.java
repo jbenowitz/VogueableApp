@@ -14,6 +14,7 @@ public class Info extends Activity implements OnClickListener{
 	    super.onCreate(savedInstanceState);
 	    setContentView(R.layout.info);
 	    
+	    //Create click listeners for all buttons on page
 	    View all = findViewById(R.id.content);
 		all.setOnClickListener(this);
 		View buy = findViewById(R.id.getit_button);
@@ -22,14 +23,21 @@ public class Info extends Activity implements OnClickListener{
 		add.setOnClickListener(this);
 	}
 
+	/**
+	 * on click listeners for Info pop-up
+	 */
 	@Override
 	public void onClick(View v) {
 		// TODO Auto-generated method stub
 		switch(v.getId()){
+		
 		case R.id.content :
 			this.finish();
+			break;
+			
 		case R.id.getit_button :
 			break;
+			
 		case R.id.wishlist_button:
 			AlertDialog.Builder wishquest = new AlertDialog.Builder(this);
 	    	wishquest.setMessage("Added to your wishlist!  Would you like to view your wishlist?")

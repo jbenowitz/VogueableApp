@@ -20,8 +20,8 @@ public class CategoryChooser extends Activity implements OnClickListener {
 	  public void onCreate(Bundle savedInstanceState) {
 	        super.onCreate(savedInstanceState);
 	        setContentView(R.layout.category);
-	        // Set up click listeners for the category buttons buttons
-		      
+	        
+	        // Set up click listeners for physical buttons (Select, Deselect, go)
 	        View selectall = findViewById(R.id.select_all);
 		    selectall.setOnClickListener(this);
 		    
@@ -31,6 +31,8 @@ public class CategoryChooser extends Activity implements OnClickListener {
 		    View goButton = findViewById(R.id.go_button);
 		    goButton.setOnClickListener(this);
 		      
+		    
+		    //Create hardwired click listeners for each category
 		    View dress = findViewById(R.id.dress_check);
 		    dress.setOnClickListener(this);
 		      
@@ -58,6 +60,8 @@ public class CategoryChooser extends Activity implements OnClickListener {
 	    	CheckBox shorts = (CheckBox) findViewById(R.id.shorts_check);  
 	    	CheckBox clothing = (CheckBox) findViewById(R.id.clothing_check);
 	    	
+	    	
+	    	
 		      switch (v.getId()) {
 		     
 		      case R.id.go_button :
@@ -79,8 +83,8 @@ public class CategoryChooser extends Activity implements OnClickListener {
 			         }
 			         
 			         startActivity(i);
-			         break;
 			         
+			         break;    
 			         
 		      case R.id.select_all :
 		    	  Intent in = new Intent(this, MainActivity.class);

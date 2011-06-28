@@ -30,6 +30,7 @@
 	        android:layout_width="wrap_content"
 	        android:layout_height="wrap_content"
 	        android:orientation="vertical">
+	        
 	        <TextView
 	           android:id="@+id/description"
 	           android:layout_width="wrap_content"
@@ -38,6 +39,7 @@
 	           android:textSize="20dip"
 	           android:paddingLeft="6dip"
 	           android:paddingRight="6dip" />
+	           
 	        <TextView
 	           android:id="@+id/description"
 	           android:layout_width="wrap_content"
@@ -48,6 +50,7 @@
 	           android:paddingRight="6dip"
 	           android:paddingBottom="6dip"
 	          />
+	          
 	        <Button 
 			    android:id="@+id/buy_buy"
 			    android:text="@string/buy_buy"
@@ -61,6 +64,7 @@
 		</LinearLayout>
 
     </LinearLayout>
+    
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -74,11 +78,13 @@
            android:layout_width="wrap_content"
            android:src="@drawable/item2"
            android:layout_height="match_parent"
-         	 />
+        />
+        
        <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
 	        android:layout_width="wrap_content"
 	        android:layout_height="wrap_content"
 	        android:orientation="vertical">
+	        
 	        <TextView
 	           android:id="@+id/description"
 	           android:layout_width="wrap_content"
@@ -86,7 +92,9 @@
 	           android:layout_height="wrap_content"
 	           android:textSize="20dip"
 	           android:paddingLeft="6dip"
-	           android:paddingRight="6dip" />
+	           android:paddingRight="6dip"
+	        />
+	        
 	        <TextView
 	           android:id="@+id/description"
 	           android:layout_width="wrap_content"
@@ -96,7 +104,8 @@
 	           android:paddingLeft="6dip"
 	           android:paddingRight="6dip"
 	           android:paddingBottom="6dip"
-	          />
+	        />
+	        
 	        <Button 
 			    android:id="@+id/buy_buy"
 			    android:text="@string/buy_buy"
@@ -106,10 +115,12 @@
 			    android:textSize="15dip"
 			    android:textColor="@color/yellow"
 			    android:background="@drawable/custom_button"
-			   />
+			 />
+			 
 		</LinearLayout>
 
     </LinearLayout>
+    
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -128,6 +139,7 @@
 	        android:layout_width="wrap_content"
 	        android:layout_height="wrap_content"
 	        android:orientation="vertical">
+	        
 	        <TextView
 	           android:id="@+id/description"
 	           android:layout_width="wrap_content"
@@ -136,6 +148,7 @@
 	           android:textSize="20dip"
 	           android:paddingLeft="6dip"
 	           android:paddingRight="6dip" />
+	           
 	        <TextView
 	           android:id="@+id/description"
 	           android:layout_width="wrap_content"
@@ -146,6 +159,7 @@
 	           android:paddingRight="6dip"
 	           android:paddingBottom="6dip"
 	          />
+	          
 	        <Button 
 			    android:id="@+id/buy_buy"
 			    android:text="@string/buy_buy"
@@ -159,6 +173,7 @@
 		</LinearLayout>
 
     </LinearLayout>
+    
      <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
