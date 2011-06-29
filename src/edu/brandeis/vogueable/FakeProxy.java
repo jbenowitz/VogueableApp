@@ -37,8 +37,8 @@ public class FakeProxy extends AbstractProxy {
 	@SuppressWarnings("deprecation")
 	public void connect(Context context){
 		con = context;
-		GetXML g = new GetXML();
-		String st = g.getString();
+		
+		
 		try {
 			
 			
