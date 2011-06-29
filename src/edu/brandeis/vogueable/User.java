@@ -11,42 +11,71 @@ import android.content.Context;
  */
 public class User {
 	public String name; 
-	public ArrayList<Wishlist> MyLists;
+	public Wishlist wishlist;
 	public TasteManager mytaste;
 	public Context con;
-
-	
-	/*public User(User user){
-		this.name = user.name;
-		this.MyLists = new ArrayList<Wishlist>();
-		this.MyLists=user.MyLists;
-		this.mytaste=new TasteManager();
-		this.mytaste= user.mytaste;
-	}*/
 	
 	
+	/**
+	 * Constructor to create a user
+	 * 
+	 * Initializes the name, 
+	 * 
+	 * @param myName- string name
+	 * @param con- context to create a TasteManager
+	 */
 	public User(String myName, Context con){
 		name = myName;
-		MyLists = new ArrayList<Wishlist>();
-		mytaste = new TasteManager( con);
+		wishlist = new Wishlist(null); //now initialized without a type
+		mytaste = new TasteManager(con);
 	}
 	
+	
+	/**
+	 * Name getter
+	 * 
+	 * @return name
+	 */
 	public String getName(){
 		return name;
 	}
 	
-	public ArrayList<Wishlist> getWishlists(){
-		return MyLists;
+	
+	/**
+	 * Wishlist getter
+	 * 
+	 * @return wishlist 
+	 */
+	public Wishlist getWishlists(){
+		return wishlist;
 	}
 	
-	public void addWishlist(String wish){
-		MyLists.add(new Wishlist(wish));
+	
+	/**
+	 * Adds a wishlist item
+	 * 
+	 * @param itemA (an item for the wishlist)
+	 */
+	public void addWishlist(Item itemA){
+		wishlist.addItem(itemA);
 	}
 	
-	public void removeWishlist( String list){
-		MyLists.remove(list);
+	
+	/**
+	 * removes an item from the wishlist
+	 * 
+	 * @param itemR (an item to be removed)
+	 */
+	public void removeWishlist(Item itemR){
+		wishlist.remove(itemR);
 	}
 	
+	
+	/**
+	 * returns the tasteManager
+	 * 
+	 * @return mytaste TasteMangager type
+	 */
 	public TasteManager getTasteManager(){
 		return mytaste;
 	}

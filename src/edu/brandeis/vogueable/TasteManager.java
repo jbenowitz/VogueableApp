@@ -17,8 +17,10 @@ public class TasteManager {
 	
 	HashMap<String,Integer> tagCount;
 	ArrayList<Item> itemsNotUsed;
-	FakeProxy prox;
+	//FakeProxy prox;
 	Context context;
+	
+	
 	/**
 	 * Constructor
 	 * Initialize tagCount HashMap to be empty.
@@ -28,16 +30,22 @@ public class TasteManager {
 	public TasteManager(Context con){
 		final Context mContext = this.getApplicationContext();
 		tagCount = new HashMap<String,Integer>();
-		prox = new FakeProxy();
+		//prox = new FakeProxy();
 		//prox.connect(con);
 		itemsNotUsed = new ArrayList<Item>();
 		//this.itemsNotUsed = items;
 	}
 	
+	
+	/**
+	 * To implement, YULIA comment this one
+	 * @return
+	 */
 	private Context getApplicationContext() {
 		// TODO Auto-generated method stub
 		return null;
 	}
+	
 
 	/**
 	 * Increments each liked tag in HashMap
@@ -54,6 +62,7 @@ public class TasteManager {
 			tagCount.put(tag, likes);
 		}
 	}
+	
 	
 	/**
 	 * Decrements each disliked tag in HashMap
@@ -72,7 +81,12 @@ public class TasteManager {
 	}
 	
 	
-	//TODO finishthis one
+	/**
+	 * TO COMMENT
+	 * @param currItem
+	 * @param currCat
+	 * @return
+	 */
 	public Item getNextItem(Item currItem, ArrayList<String> currCat){
 		
 		itemsNotUsed.remove(currItem);
@@ -82,9 +96,6 @@ public class TasteManager {
 				filtered.add(it);
 			}
 		}
-		return prox.getNextItem(currItem, currCat);
+		return null;//prox.getNextItem(currItem, currCat);
 	}
-	
-	
-
 }

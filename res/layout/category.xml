@@ -1,9 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-
-
-	
-
 <LinearLayout android:id="@+id/app_name"
 	android:layout_width="fill_parent" 
 	android:layout_height="fill_parent"
@@ -17,57 +13,77 @@
 		android:layout_marginBottom="10dip"
 		android:layout_width="fill_parent" 
 		android:layout_height="wrap_content">
-	<Button 
-		android:padding="12dip"
-		android:id="@+id/select_all"
-		android:text="@string/select_all_label"
-		android:layout_width="wrap_content"
-		android:layout_height="wrap_content"
-		android:textColor="@color/yellow"
-		android:textSize="20dip"
-		android:background="@drawable/custom_button">	
-	</Button>
+		
+		<Button 
+			android:padding="12dip"
+			android:id="@+id/select_all"
+			android:text="@string/select_all_label"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:textColor="@color/yellow"
+			android:textSize="20dip"
+			android:background="@drawable/custom_button">	
+		</Button>
 
-	<Button 
-		android:padding="12dip"
-		android:id="@+id/deselect_all"
-		android:text="@string/deselect_all_label"
-		android:layout_width="wrap_content"
-		android:layout_height="wrap_content"
-		android:layout_alignParentRight="true"
-		android:textColor="@color/yellow"
-		android:textSize="20dip"
-		android:background="@drawable/custom_button">	
-	</Button>
+		<Button 
+			android:padding="12dip"
+			android:id="@+id/deselect_all"
+			android:text="@string/deselect_all_label"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_alignParentRight="true"
+			android:textColor="@color/yellow"
+			android:textSize="20dip"
+			android:background="@drawable/custom_button">	
+		</Button>
 		
 	</RelativeLayout>
-	<CheckBox android:id="@+id/dress_check" android:layout_width="wrap_content"
-		android:layout_height="wrap_content" android:text="@string/dress_label"
+	
+	<CheckBox 
+		android:id="@+id/dress_check" 
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content" 
+		android:text="@string/dress_label"
 		android:textColor="@color/yellow"
 		android:textSize="20dip"
 		android:layout_marginLeft="10dip">
 	</CheckBox>
 
-	<CheckBox android:id="@+id/shoes_check" android:layout_width="wrap_content"
-		android:layout_height="wrap_content" android:text="@string/shoes_label"
+	<CheckBox 
+		android:id="@+id/shoes_check" 
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content" 
+		android:text="@string/shoes_label"
 		android:textColor="@color/yellow"
 		android:textSize="20dip"
 		android:layout_marginLeft="10dip">
 	</CheckBox>
-	<CheckBox android:id="@+id/shorts_check" android:layout_width="wrap_content"
-		android:layout_height="wrap_content" android:text="@string/shorts_label"
+	
+	<CheckBox 
+		android:id="@+id/shorts_check" 
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content" 
+		android:text="@string/shorts_label"
 		android:textColor="@color/yellow"
 		android:textSize="20dip"
 		android:layout_marginLeft="10dip">
 	</CheckBox>
-	<CheckBox android:id="@+id/pants_check" android:layout_width="wrap_content"
-		android:layout_height="wrap_content" android:text="@string/pants_label"
+	
+	<CheckBox 
+		android:id="@+id/pants_check" 
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content" 
+		android:text="@string/pants_label"
 		android:textColor="@color/yellow"
 		android:textSize="20dip"
 		android:layout_marginLeft="10dip">
 	</CheckBox>
-	<CheckBox android:id="@+id/clothing_check" android:layout_width="wrap_content"
-		android:layout_height="wrap_content" android:text="@string/clothing_label"
+	
+	<CheckBox 
+		android:id="@+id/clothing_check" 
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content" 
+		android:text="@string/clothing_label"
 		android:textColor="@color/yellow"
 		android:textSize="20dip"
 		android:layout_marginLeft="10dip">
@@ -85,4 +101,5 @@
 		android:textSize="20dip"
 		android:background="@drawable/custom_button">
 	</Button>
-	</LinearLayout>
+	
+</LinearLayout>

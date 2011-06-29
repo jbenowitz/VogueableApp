@@ -11,6 +11,7 @@ public class ItemCursor {
 	Item prevItem;
 	ItemDB itemDB;
 	
+	
 	/**
 	 * Constructor
 	 * @param itemDB- so it can choose items
@@ -20,6 +21,7 @@ public class ItemCursor {
 		prevItem = currItem;
 		this.itemDB = itemDB;
 	}
+	
 	
 	/**
 	 * Gets initial item
@@ -31,6 +33,7 @@ public class ItemCursor {
 		return itemDB.getRandomItem();
 	}
 	
+	
 	/**
 	 * Gets current item in image view
 	 * @return current item
@@ -38,6 +41,7 @@ public class ItemCursor {
 	public Item getCurrentItem(){
 		return currItem;
 	}
+	
 	
 	/**
 	 * Sets current item
@@ -47,6 +51,7 @@ public class ItemCursor {
 		prevItem = currItem;
 		currItem = item;
 	}
+	
 	
 	/**
 	 * @return previous item

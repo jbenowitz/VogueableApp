@@ -34,6 +34,7 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.Gallery;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.Toast;
 import android.widget.PopupWindow;
@@ -46,22 +47,9 @@ import android.widget.PopupWindow;
 public class MainActivity extends Activity implements  android.view.View.OnClickListener{
 
 	protected static final String id = null;
-	//instantiate objects
-	ItemDB itemDB;
-	
-	ItemCursor item_cursor;
 	Item currItem;
-
-	ArrayList<Item> currents = new ArrayList<Item>();
-	//Resources rr = this.getResources();
-	//Context myContext = getApplicationContext();
-	User user=new User("gaspar",this); 
-	
-
-	
-	
-	
-	
+	ImageButton likebutton;
+	User user=new User("gaspar",this);  //TODO change this to actually be current user
 	boolean itemliked=false, itemdisliked=false; //used to tell whether like or dislike button are pressed
 
 
@@ -73,39 +61,26 @@ public class MainActivity extends Activity implements  android.view.View.OnClick
 		setContentView(R.layout.main);
 		Toast.makeText(MainActivity.this, "Tap for details! Slide for next item!", Toast.LENGTH_LONG).show();
 
+		/*
+		 * Buttons onClick Listeners and backgrounds
+		 */
 		View likeButton = findViewById(R.id.like_button);
 		likeButton.setOnClickListener(this);
+		//likebutton = (ImageButton) findViewById(R.id.like_button);
 		View dislikeButton = findViewById(R.id.dislike_button);
 		dislikeButton.setOnClickListener(this);
 		View closetButton = findViewById(R.id.wishlist_button);
 		closetButton.setOnClickListener(this);
-		ArrayList<String> tags = new ArrayList<String>();
-		tags.add("heeey");
-		currItem =new Item("NAME","http://ecx.images-amazon.com/images/I/813w6mGs3oL._SL1500_.jpg","description","100.00","describe", tags,"link", "clothing");
-		
-		user.getTasteManager().itemsNotUsed.add(currItem);
-		
- 		
- 		
-		//user.getTasteManager().itemsNotUsed.add(new Item("NAME","price", "1000", R.drawable.item2,"description", tags,"link", "clothing"));
- 		//user.getTasteManager().itemsNotUsed.add(new Item("NAME","price", "1000", R.drawable.item3,"description", tags,"link", "clothing"));
+		View infoButton = findViewById(R.id.info_button);
+		infoButton.setOnClickListener(this);
 		
 		
-		
+		user.getTasteManager().itemsNotUsed.add(currItem); 
 
+		
 		// Set up Gallery
-		Gallery g = (Gallery) findViewById(R.id.gallery);
-				
-		g.setAdapter(new ImageAdapter(this));
-		//g.setOnClickListener(this);
-
-		g.setOnItemClickListener(new OnItemClickListener() {
-			public void onItemClick(AdapterView parent, View v, int position, long id) {
-				//Toast.makeText(MainActivity.this, imageDetails(position) , Toast.LENGTH_LONG).show();
-			
-			}				
-		});
-		
+		Gallery g = (Gallery) findViewById(R.id.gallery);		
+		g.setAdapter(new ImageAdapter(this));	
 	}
 	
 	
@@ -115,8 +90,21 @@ public class MainActivity extends Activity implements  android.view.View.OnClick
 	 * 
 	 * @author Jackie
 	 */
-	
-	
+    public void like(){
+	user.mytaste.likeFlavor(currItem.getTagList());
+    }
+
+    
+    
+    /**
+	 * Dislike the current item (subtract counts to hashtag list in taste manager)
+	 * 
+	 * @author Jackie
+	 */
+    public void dislike(){
+	user.mytaste.dislikeFlavor(currItem.getTagList());
+    }
+
 	
 	
 	/**
@@ -126,23 +114,22 @@ public class MainActivity extends Activity implements  android.view.View.OnClick
 	public void onClick(View v) {
 		switch (v.getId()) {
 
-		
-		case R.id.like_button :
+		//Like Button onClick
+		case R.id.like_button : 
 			
 			if(itemliked){
 				//dislike();
 				itemliked=false;
+				//likebutton.setBackgroundResource(R.drawable.approvegreen);	
 			}
 			else{
 				//like();
 				itemliked=true;
 			}
-			
 						
-			
 	    	break;
 	    	
-	    	
+	    //Dislike button onClick
 		case R.id.dislike_button:
 			
 			if(itemdisliked){
@@ -156,17 +143,10 @@ public class MainActivity extends Activity implements  android.view.View.OnClick
 
 			break;
 			
-			
-		
+		//Wishlist Button on click	
 		case R.id.wishlist_button:
-			//Intent j = new Intent(this, WishAct.class);
-	         //startActivity(j);
-	         //break;
 
-			
 	        AlertDialog.Builder wishquest = new AlertDialog.Builder(this);
-	    	//wishquest.setMessage("Added to your wishlist!  Would you like to view your wishlist?")
-	    	         //wishquest.setCancelable(false)
 	    	         wishquest
 	    	         .setPositiveButton("Add to wishlist", new DialogInterface.OnClickListener() {
 	    	             public void onClick(DialogInterface dialog, int id) {
@@ -179,17 +159,49 @@ public class MainActivity extends Activity implements  android.view.View.OnClick
 	    	            	 startActivity(new Intent(MainActivity.this, WishAct.class));
 	    	             }
 	    	         }).show();
+	    	         
 		    break;
-
 		    
-		    
+		//Info button on click    
 		case R.id.info_button:
 			Intent k = new Intent(this, Info.class);
 	         startActivity(k);
+	         
 	         break;
-
-		
 		}
+	}
+	
+	/**
+	 *   When clicking the physical menu button, inflates the two options 
+	 *   within the menu.xml
+	 */
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+		MenuInflater inflater = getMenuInflater();
+		inflater.inflate(R.menu.menu, menu);
+		return true;
+	}	
+
+	/**
+	 * Used with inflator above(?)
+	 * 
+	 * @param v view 
+	 */
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		switch (item.getItemId()) {
+
+		case R.id.wishlist_menu:   
+			startActivity(new Intent(this, WishAct.class));
+			break;
+			
+
+		case R.id.return_categories: //Return to categories
+			startActivity(new Intent(this, CategoryChooser.class));
+			break;
+
+		}
+		return true;
 	}
 	    
 	   
@@ -200,13 +212,12 @@ public class MainActivity extends Activity implements  android.view.View.OnClick
 	    * @author Jackie
 	    *
 	    */
-
 	     public class ImageAdapter extends BaseAdapter {
 	         private Context mContext;
 	         int mGalleryItemBackground;
    
+	         //Array of image URLs to be used within gallery
 	         private String[] myImages = {
-	        		 
 	                 "http://ecx.images-amazon.com/images/I/410oAxun7dL._AA300_.jpg",
 	        		 "http://ecx.images-amazon.com/images/I/41Hkj9aBsAL._AA300_.jpg",
 	        		 "http://ecx.images-amazon.com/images/I/41JMUzALgpL._AA300_.jpg",
@@ -214,6 +225,7 @@ public class MainActivity extends Activity implements  android.view.View.OnClick
 	        		 "http://ecx.images-amazon.com/images/I/410oAxun7dL._AA300_.jpg",
 	         };
 
+	         //Constructor that sets up the Image Adapter (what is inside the Gallery)
 	         public ImageAdapter(Context c) {
 	             mContext = c;
 	             TypedArray a = obtainStyledAttributes(R.styleable.HelloGallery);
@@ -222,18 +234,22 @@ public class MainActivity extends Activity implements  android.view.View.OnClick
 	             a.recycle();
 	         }
 
+	         //Returns count of images array
 	         public int getCount() {
 	             return myImages.length;
 	         }
 
+	         //returns the item in a certain position
 	         public Object getItem(int position) {
 	             return position;
 	         }
 
+	         //gets the itemID of a certain position
 	         public long getItemId(int position) {
 	             return position;
 	         }
 	         
+	         //creates a bitmap of the images from given URL
 	         public  Bitmap getBitmapFromURL(String src) {
 	             try {
 	                 Log.e("src",src);
@@ -253,19 +269,16 @@ public class MainActivity extends Activity implements  android.view.View.OnClick
 	             }
 	         }
              
+	         //Creates the view of the images.
 	         public View getView(int position, View convertView, ViewGroup parent) {
 	        	 System.out.print(position);
 	             ImageView i = new ImageView(mContext);
 	             Bitmap bimage=  getBitmapFromURL(myImages[position]);
-	             
-	            
-	            
-	            
+
 	             i.setImageBitmap(bimage);
 	             i.setLayoutParams(new Gallery.LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT));
 
 	             i.setScaleType(ImageView.ScaleType.CENTER_INSIDE);	
-	             //myImages[position]= user.getTasteManager().getNextItem(currItem, null).getImageFileString();
 
 	             i.setScaleType(ImageView.ScaleType.CENTER_INSIDE);	 
 	             i.setBackgroundResource(mGalleryItemBackground);
@@ -274,58 +287,7 @@ public class MainActivity extends Activity implements  android.view.View.OnClick
 	         }
 	    }
 	
-	  
-	    /**
-	     * 
-	      * @param v view 
-	      */
-	    
-	     
-	     @Override
-	     public boolean onCreateOptionsMenu(Menu menu) {
-	         MenuInflater inflater = getMenuInflater();
-	         inflater.inflate(R.menu.menu, menu);
-	         return true;
-	     }	
-
-	/**
-	 * 
-	 * @param v view 
-	 */
-
-	@Override
-	public boolean onOptionsItemSelected(MenuItem item) {
-		switch (item.getItemId()) {
-
-		case R.id.wishlist_menu:   
-			//Toast.makeText(this, "Yulia will finish the wish list soon", Toast.LENGTH_LONG).show();
-			// startActivity(new Intent(this, Settings.class));
-			//break;
-			/*AlertDialog.Builder builder = new AlertDialog.Builder(this);
-			builder.setMessage("Do you want to really see your wishlist?")
-			.setCancelable(false)
-			.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
-				public void onClick(DialogInterface dialog, int id) {		
-					// startActivity(new Intent(this, Wishlist.class));
-
-				}
-			})
-			.setNegativeButton("No", new DialogInterface.OnClickListener() {
-				public void onClick(DialogInterface dialog, int id) {
-					dialog.cancel();
-				}
-			}).show();*/
-			startActivity(new Intent(this, WishAct.class));
-			break;
-			
-
-		case R.id.return_categories: 
-			startActivity(new Intent(this, CategoryChooser.class));
-			break;
-
-		}
-		return true;
-	}
+	
 
 }
 

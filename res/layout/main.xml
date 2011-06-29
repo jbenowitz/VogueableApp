@@ -9,7 +9,7 @@
    <RelativeLayout
   	android:orientation="horizontal"
   	android:layout_height="wrap_content"
-     android:layout_width="fill_parent">
+    android:layout_width="fill_parent">
   	
   	<Gallery xmlns:android="http://schemas.android.com/apk/res/android" 
     	android:id="@+id/gallery"
@@ -17,6 +17,7 @@
     	android:layout_height="wrap_content"
     	android:layout_centerInParent="true"
 	/>
+	
   </RelativeLayout>
   
 
@@ -30,51 +31,56 @@
     style="@android:style/ButtonBar"
     android:gravity="center"
     >
-   <ImageButton
-    android:id="@+id/info_button"
-    android:background="@null"
-    android:src="@drawable/info"
-    android:layout_height="wrap_content"
-    android:layout_width="fill_parent"
-    android:layout_weight="1"
+    
+   	<ImageButton
+    	android:id="@+id/info_button"
+    	android:background="@null"
+    	android:src="@drawable/info"
+    	android:layout_height="wrap_content"
+    	android:layout_width="fill_parent"
+    	android:layout_weight="1"
     />
-  <Button 
-    android:id="@+id/wishlist_button" 
-    android:text="@string/wish_label"
-    android:background="@null"
-    android:layout_height="wrap_content" 
-    android:layout_width="fill_parent"
-    android:layout_weight="1"
-    android:textSize="15dip"
-    android:textColor="#b7b7b7"></Button>
-  <Button 
-    android:id="@+id/buy_button"
-    android:text="@string/buy_label"
-    android:background="@null"
-    android:layout_height="wrap_content"
-    android:layout_width="fill_parent"
-    android:layout_weight="1"
-    android:textSize="15dip"
-    android:textColor="#b7b7b7"/>
-  <ImageButton
-    android:id="@+id/dislike_button"
-    android:background="@null"
-    android:src="@drawable/dislike_button"
-    android:layout_height="wrap_content"
-    android:layout_width="fill_parent"
-    android:layout_weight="1"
-  />
-  <ImageButton
-    android:id="@+id/like_button"
-    android:background="@null"
-    android:src="@drawable/like_button"
-    android:layout_height="wrap_content" 
-    android:layout_width="fill_parent"
-    android:layout_weight="1"
-   />
+    
+  	<Button 
+    	android:id="@+id/wishlist_button" 
+    	android:text="@string/wish_label"
+    	android:background="@null"
+    	android:layout_height="wrap_content" 
+    	android:layout_width="fill_parent"
+    	android:layout_weight="1"
+    	android:textSize="15dip"
+    	android:textColor="#b7b7b7">
+    </Button>
+    
+  	<Button 
+    	android:id="@+id/buy_button"
+    	android:text="@string/buy_label"
+    	android:background="@null"
+    	android:layout_height="wrap_content"
+    	android:layout_width="fill_parent"
+    	android:layout_weight="1"
+    	android:textSize="15dip"
+    	android:textColor="#b7b7b7"
+    />
+    	
+  	<ImageButton
+    	android:id="@+id/dislike_button"
+    	android:background="@null"
+    	android:src="@drawable/dislike_button"
+    	android:layout_height="wrap_content"
+    	android:layout_width="fill_parent"
+    	android:layout_weight="1"
+  	/>
+  	
+  	<ImageButton
+    	android:id="@+id/like_button"
+    	android:background="@null"
+    	android:src="@drawable/like_button"
+    	android:layout_height="wrap_content" 
+    	android:layout_width="fill_parent"
+    	android:layout_weight="1"
+   	/>
+   	
 </LinearLayout>
-
-        
-  
-   
+ 
 </RelativeLayout>

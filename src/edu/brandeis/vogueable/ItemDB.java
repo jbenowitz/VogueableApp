@@ -13,16 +13,18 @@ import java.util.Random;
  */
 public class ItemDB {
 	ArrayList<Item> items = new ArrayList<Item>();
-	FakeProxy prox;
+	//FakeProxy prox;
+	
 	
 	/**
 	 * Constructor to loadFromDisk()
 	 */
 	public ItemDB(){
 		this.loadFromDisk();
-		prox = new FakeProxy();
-		prox.connect();
+		//prox = new FakeProxy();
+		//prox.connect();
 	}
+	
 
 	/**
 	 * To be implemented later
@@ -31,15 +33,10 @@ public class ItemDB {
 	 * 
 	 */
 	public ArrayList<Item> loadFromDisk(){
-		 items = prox.getAllItems();
-		 return items;
-			
-			}
+		 items = null;//prox.getAllItems();
+		 return items;	
+	}
 
-		
-		
-	
-	
 	
 	/**
 	 * Loads an Item from disk and returns 
@@ -58,14 +55,15 @@ public class ItemDB {
 		return null;
 	}
 	
-	//TODO getAllItemsForCategory("_______")
 	
+	//TODO getAllItemsForCategory("_______")
 	/**
 	 * @return ArrayList<Item> of all the items in the database
 	 */
 	public ArrayList<Item> getAllItem(){
 		return items;
 	}
+	
 	
 	/**
 	 * Draws a random item from the item list

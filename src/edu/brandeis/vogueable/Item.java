@@ -23,11 +23,12 @@ public class Item {
 	public Item(String name){
 		this.name = name; 
 	}
+	
+	
 	/**
 	 * Constructor that begins with all inforamtion
 	 * @param String Name, Image File name, Brand, Price, Description, taglist, link
 	 */
-	
 	public Item (String name, String imageFile, String brand, 
 					String price, String description, ArrayList<String> taglist,
 					String link, String categorytag){
@@ -41,6 +42,7 @@ public class Item {
 		this.categorytag = categorytag;
 	}
 	
+	
 	/**
 	 * 
 	 * @return string of Item's name
@@ -48,9 +50,17 @@ public class Item {
 	public String getName(){
 		return name;
 	}
+	
+	
+	/**
+	 * Re-sets the name of a certain Item
+	 * 
+	 * @param name of a certain Item
+	 */
 	public void setName(String name){
 		this.name = name; 
 	}
+	
 	
 	/**
 	 * 
@@ -60,9 +70,15 @@ public class Item {
 		return imageFile;
 	}
 	
+	/**
+	 * Set the url of an imagefile 
+	 * @param url
+	 */
 	public void setImageFileString(String url){
 		imageFile = url; 
 	}
+	
+	
 	/**
 	 * 
 	 * @return string name of brand of item
@@ -71,9 +87,16 @@ public class Item {
 		return brand;
 	}
 	
+	
+	/**
+	 * Sets the brand name of an item
+	 * @param mybrand
+	 */
 	public void setBrand(String mybrand){
 		brand = mybrand; 
 	}
+	
+	
 	/**
 	 * 
 	 * @return price of item
@@ -82,18 +105,34 @@ public class Item {
 		return price;
 	}
 	
+	
+	/**
+	 * Sets the price
+	 * 
+	 * @param money
+	 */
 	public void setPrice(String money){
 		price = money;
 	}
+	
+	
 	/**
 	 * @return description of item
 	 */
 	public String getDescription(){
 		return description;
 	}
-	public void setDescription(String descriibe){
-		description = descriibe;
+	
+	
+	/**
+	 * Sets description 
+	 * 
+	 * @param descriibe
+	 */
+	public void setDescription(String descript){
+		description = descript;
 	}
+	
 	
 	/**
 	 * 
@@ -102,6 +141,7 @@ public class Item {
 	public ArrayList<String> getTagList(){
 		return taglist;
 	}
+	
 	
 	/**
 	 * Add a specific tag to the tag list
@@ -114,6 +154,7 @@ public class Item {
 		}
 	}
 	
+	
 	/**
 	 * 
 	 * @return string of link
@@ -121,6 +162,7 @@ public class Item {
 	public String getLink(){
 		return link;
 	}
+	
 	
 	/**
 	 * 

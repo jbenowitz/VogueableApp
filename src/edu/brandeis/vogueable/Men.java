@@ -32,29 +32,27 @@ public class Men extends Activity implements  android.view.View.OnClickListener{
 	      View nextButton = findViewById(R.id.browse_label);
 	      nextButton.setOnClickListener(this);
 	      View prevButton = findViewById(R.id.login_label);
-	      prevButton.setOnClickListener(this);
-
-//	     
+	      prevButton.setOnClickListener(this);  
 	   }
 	  
 	  
-/**
- * @author gasparobimba
- * 
- *initial screen that asks you to choose whether you want to login or go straight ahead and browse
- *
- * @param v view 
- */
+	   /**
+	    * @author gasparobimba
+	    * 
+	    *initial screen that asks you to choose whether you want to login or go straight ahead and browse
+	    *
+	    * @param v view 
+	    */
 	    public void onClick(View v) {
 	      switch (v.getId()) {
 	     
 	      case R.id.browse_label :
 	    	  Intent i = new Intent(this, CategoryChooser.class);
 		         startActivity(i);
+		         
 		         break;
-	      // do this for all buttons
+	      
 	      case R.id.login_label:
-	    	  
 	    	  final AccountManager manager = AccountManager.get(this);
 		      final Account[] accounts = manager.getAccounts();
 		      if (accounts.length >=1){
@@ -74,31 +72,8 @@ public class Men extends Activity implements  android.view.View.OnClickListener{
 		      } else {
 		    	  Toast.makeText(Men.this, "No account registered", Toast.LENGTH_SHORT).show();
 		      } 
-	    	  
-	    	  
-	    	  //Intent q = new Intent(this, Login.class);
-		       //  startActivity(q);
-		         break;
-		      
-		         //need to implement log in class 
-		       /*
-	    	  AlertDialog.Builder builder = new AlertDialog.Builder(this);
-	    	  builder.setMessage("Are you sure you want to login?")
-	    	         .setCancelable(false)
-	    	         .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
-	    	             public void onClick(DialogInterface dialog, int id) {
-	    	                // Men.this.finish();
-	    	            	
-	    	             }
-	    	         })
-	    	         .setNegativeButton("No", new DialogInterface.OnClickListener() {
-	    	             public void onClick(DialogInterface dialog, int id) {
-	    	                  dialog.cancel();
-	    	             }
-	    	         }).show();
-	    	  //finish();
-	    	   */
-	    	   
+	    	 
+		      	break; 
 	      }
 	   }
 }
