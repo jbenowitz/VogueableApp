@@ -17,7 +17,7 @@ public class TasteManager {
 	
 	HashMap<String,Integer> tagCount;
 	ArrayList<Item> itemsNotUsed;
-	//FakeProxy prox;
+	FakeProxy prox;
 	Context context;
 	
 	
@@ -28,23 +28,15 @@ public class TasteManager {
 	 * @param ArrayList of items, to choose next item
 	 */
 	public TasteManager(Context con){
-		final Context mContext = this.getApplicationContext();
+		
 		tagCount = new HashMap<String,Integer>();
-		//prox = new FakeProxy();
-		//prox.connect(con);
+		prox = new FakeProxy();
+		prox.connect(con);
 		itemsNotUsed = new ArrayList<Item>();
-		//this.itemsNotUsed = items;
+		
 	}
 	
 	
-	/**
-	 * To implement, YULIA comment this one
-	 * @return
-	 */
-	private Context getApplicationContext() {
-		// TODO Auto-generated method stub
-		return null;
-	}
 	
 
 	/**
@@ -89,13 +81,13 @@ public class TasteManager {
 	 */
 	public Item getNextItem(Item currItem, ArrayList<String> currCat){
 		
-		itemsNotUsed.remove(currItem);
+		//itemsNotUsed.remove(currItem);
 		ArrayList<Item> filtered = new ArrayList<Item>();
-		for(Item it : itemsNotUsed){
+		/*for(Item it : itemsNotUsed){
 			if (currCat.contains(it.getCategoryTag())){
 				filtered.add(it);
 			}
-		}
-		return null;//prox.getNextItem(currItem, currCat);
+		}*/
+		return prox.getNextItem(currItem, currCat);
 	}
 }

@@ -66,7 +66,10 @@ public class FakeProxy extends AbstractProxy {
 		Node el = list.item(0);
 		NodeList nlList = el.getChildNodes();
 		Node nValue = (Node) nlList.item(0);
-		return nValue.getNodeValue();
+		if (nValue != null){
+			return nValue.getNodeValue();
+		}
+		return null; 
 	}
 	/**
 	 * disconnectes from webservice
