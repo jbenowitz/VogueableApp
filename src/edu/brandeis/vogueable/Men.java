@@ -58,7 +58,7 @@ public class Men extends Activity implements  android.view.View.OnClickListener{
 	    	  final AccountManager manager = AccountManager.get(this);
 		      final Account[] accounts = manager.getAccounts();
 		      if (accounts.length >=1){
-		    	  User user = new User(accounts[0].name);
+		    	  User user = new User(accounts[0].name, this);
 		    	  
 		    	  AlertDialog.Builder welcome = new AlertDialog.Builder(this);
 		    	  	welcome.setIcon(R.drawable.logobright);
