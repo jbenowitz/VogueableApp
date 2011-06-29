@@ -25,18 +25,17 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.view.MotionEvent;
+
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewGroup.LayoutParams;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.BaseAdapter;
-import android.widget.Button;
+
 import android.widget.Gallery;
 import android.widget.ImageView;
 import android.widget.Toast;
-import android.widget.PopupWindow;
 
 /**
  * This is the main activity for the app.
@@ -53,9 +52,8 @@ public class MainActivity extends Activity implements  android.view.View.OnClick
 	Item currItem;
 
 	ArrayList<Item> currents = new ArrayList<Item>();
-	//Resources rr = this.getResources();
-	//Context myContext = getApplicationContext();
-	User user=new User("gaspar",this); 
+	User user;
+	
 	
 
 	
@@ -82,9 +80,11 @@ public class MainActivity extends Activity implements  android.view.View.OnClick
 		ArrayList<String> tags = new ArrayList<String>();
 		tags.add("heeey");
 		currItem =new Item("NAME","http://ecx.images-amazon.com/images/I/813w6mGs3oL._SL1500_.jpg","description","100.00","describe", tags,"link", "clothing");
-		
+		user=new User("gaspar",this); 
 		user.getTasteManager().itemsNotUsed.add(currItem);
-		
+		currents.add(currItem);
+		currents.add(new Item("NAME","http://ecx.images-amazon.com/images/I/41Hkj9aBsAL._AA300_.jpg","description","100.00","describe", tags,"link", "clothing"));
+				
  		
  		
 		//user.getTasteManager().itemsNotUsed.add(new Item("NAME","price", "1000", R.drawable.item2,"description", tags,"link", "clothing"));
@@ -206,7 +206,7 @@ public class MainActivity extends Activity implements  android.view.View.OnClick
 	         int mGalleryItemBackground;
    
 	         private String[] myImages = {
-	        		 
+	          
 	                 "http://ecx.images-amazon.com/images/I/410oAxun7dL._AA300_.jpg",
 	        		 "http://ecx.images-amazon.com/images/I/41Hkj9aBsAL._AA300_.jpg",
 	        		 "http://ecx.images-amazon.com/images/I/41JMUzALgpL._AA300_.jpg",
@@ -220,10 +220,11 @@ public class MainActivity extends Activity implements  android.view.View.OnClick
 	             mGalleryItemBackground = a.getResourceId(
 	                     R.styleable.HelloGallery_android_galleryItemBackground, 0);
 	             a.recycle();
+	             
 	         }
 
 	         public int getCount() {
-	             return myImages.length;
+	             return 1000000;
 	         }
 
 	         public Object getItem(int position) {
@@ -254,18 +255,19 @@ public class MainActivity extends Activity implements  android.view.View.OnClick
 	         }
              
 	         public View getView(int position, View convertView, ViewGroup parent) {
+	        	 position = position % myImages.length;
+	        	 if (position < 0)
+	        	     position = position + myImages.length;
 	        	 System.out.print(position);
 	             ImageView i = new ImageView(mContext);
 	             Bitmap bimage=  getBitmapFromURL(myImages[position]);
-	             
-	            
-	            
-	            
+	             currItem = currents.get(position);
 	             i.setImageBitmap(bimage);
 	             i.setLayoutParams(new Gallery.LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT));
 
 	             i.setScaleType(ImageView.ScaleType.CENTER_INSIDE);	
-	             //myImages[position]= user.getTasteManager().getNextItem(currItem, null).getImageFileString();
+	             myImages[position]= user.getTasteManager().getNextItem(currItem, null).getImageFileString();
+	             currents.add(position,user.getTasteManager().getNextItem(currItem, null) );
 
 	             i.setScaleType(ImageView.ScaleType.CENTER_INSIDE);	 
 	             i.setBackgroundResource(mGalleryItemBackground);
@@ -298,23 +300,7 @@ public class MainActivity extends Activity implements  android.view.View.OnClick
 		switch (item.getItemId()) {
 
 		case R.id.wishlist_menu:   
-			//Toast.makeText(this, "Yulia will finish the wish list soon", Toast.LENGTH_LONG).show();
-			// startActivity(new Intent(this, Settings.class));
-			//break;
-			/*AlertDialog.Builder builder = new AlertDialog.Builder(this);
-			builder.setMessage("Do you want to really see your wishlist?")
-			.setCancelable(false)
-			.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
-				public void onClick(DialogInterface dialog, int id) {		
-					// startActivity(new Intent(this, Wishlist.class));
-
-				}
-			})
-			.setNegativeButton("No", new DialogInterface.OnClickListener() {
-				public void onClick(DialogInterface dialog, int id) {
-					dialog.cancel();
-				}
-			}).show();*/
+	
 			startActivity(new Intent(this, WishAct.class));
 			break;
 			

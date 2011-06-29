@@ -29,7 +29,7 @@ public class TasteManager {
 		final Context mContext = this.getApplicationContext();
 		tagCount = new HashMap<String,Integer>();
 		prox = new FakeProxy();
-		//prox.connect(con);
+		prox.connect(con);
 		itemsNotUsed = new ArrayList<Item>();
 		//this.itemsNotUsed = items;
 	}
