@@ -26,19 +26,18 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.view.MotionEvent;
+
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewGroup.LayoutParams;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.BaseAdapter;
-import android.widget.Button;
+
 import android.widget.Gallery;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.Toast;
-import android.widget.PopupWindow;
 
 /**
  * This is the main activity for the app.
@@ -49,8 +48,8 @@ public class MainActivity extends Activity implements  android.view.View.OnClick
 
 	protected static final String id = null;
 	Item currItem;
-	ImageButton likebutton, dislikebutton;
-	User user=new User("gaspar",this);  //TODO change this to actually be current user
+	User user;
+	ArrayList<Item> currents = new ArrayList<Item>();
 	boolean itemliked=false, itemdisliked=false; //used to tell whether like or dislike button are pressed
 	
 
@@ -75,11 +74,16 @@ public class MainActivity extends Activity implements  android.view.View.OnClick
 		closetButton.setOnClickListener(this);
 		View infoButton = findViewById(R.id.info_button);
 		infoButton.setOnClickListener(this);
-		
+		user=new User("gaspar",this);  //TODO change this to actually be current user
+		ArrayList<String> tags = new ArrayList<String>();
+		tags.add("heeey");
+		currItem =new Item("NAME","http://ecx.images-amazon.com/images/I/813w6mGs3oL._SL1500_.jpg","description","100.00","describe", tags,"link", "clothing");
+		user=new User("gaspar",this); 
+		user.getTasteManager().itemsNotUsed.add(currItem);
+		currents.add(currItem);
+		currents.add(new Item("NAME","http://ecx.images-amazon.com/images/I/41Hkj9aBsAL._AA300_.jpg","description","100.00","describe", tags,"link", "clothing"));
 		
 		user.getTasteManager().itemsNotUsed.add(currItem); 
-
-		
 		// Set up Gallery
 		Gallery g = (Gallery) findViewById(R.id.gallery);		
 		g.setAdapter(new ImageAdapter(this));	
@@ -238,11 +242,12 @@ public class MainActivity extends Activity implements  android.view.View.OnClick
 	             mGalleryItemBackground = a.getResourceId(
 	                     R.styleable.HelloGallery_android_galleryItemBackground, 0);
 	             a.recycle();
+	             
 	         }
 
 	         //Returns count of images array
 	         public int getCount() {
-	             return myImages.length;
+	             return 1000000;
 	         }
 
 	         //returns the item in a certain position
@@ -277,11 +282,12 @@ public class MainActivity extends Activity implements  android.view.View.OnClick
              
 	         //Creates the view of the images.
 	         public View getView(int position, View convertView, ViewGroup parent) {
+	        	 position = position % myImages.length;
+	        	 if (position < 0)
+	        	     position = position + myImages.length;
 	        	 System.out.print(position);
 	             ImageView i = new ImageView(mContext);
-	             Bitmap bimage=  getBitmapFromURL(myImages[position]);
-	             i.setImageBitmap(bimage);
-	             
+	             Bitmap bimage=  getBitmapFromURL(myImages[position]);	             
 	             
 	             
 	             //Set landscape or portrait gallery/image size
@@ -295,14 +301,16 @@ public class MainActivity extends Activity implements  android.view.View.OnClick
 	             
 	             i.setLayoutParams(galayout);
 	             i.setScaleType(ImageView.ScaleType.CENTER_INSIDE);	
+
+	             currItem = currents.get(position);
+	             i.setImageBitmap(bimage);
+	             myImages[position]= user.getTasteManager().getNextItem(currItem, null).getImageFileString();
+	             currents.add(position,user.getTasteManager().getNextItem(currItem, null) );
 	             i.setBackgroundResource(mGalleryItemBackground);
 
 	             return i;
 	         }
-	    }
-	
-	
-
+	     }
 }
 
 
