@@ -14,6 +14,7 @@ import java.util.ArrayList;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
+import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.content.res.TypedArray;
 import android.content.DialogInterface;
@@ -48,10 +49,10 @@ public class MainActivity extends Activity implements  android.view.View.OnClick
 
 	protected static final String id = null;
 	Item currItem;
-	ImageButton likebutton;
+	ImageButton likebutton, dislikebutton;
 	User user=new User("gaspar",this);  //TODO change this to actually be current user
 	boolean itemliked=false, itemdisliked=false; //used to tell whether like or dislike button are pressed
-
+	
 
 	/** Called when the activity is first created. */
 	
@@ -66,9 +67,10 @@ public class MainActivity extends Activity implements  android.view.View.OnClick
 		 */
 		View likeButton = findViewById(R.id.like_button);
 		likeButton.setOnClickListener(this);
-		//likebutton = (ImageButton) findViewById(R.id.like_button);
+		likebutton = (ImageButton) findViewById(R.id.like_button);
 		View dislikeButton = findViewById(R.id.dislike_button);
 		dislikeButton.setOnClickListener(this);
+		dislikebutton = (ImageButton) findViewById(R.id.dislike_button);
 		View closetButton = findViewById(R.id.wishlist_button);
 		closetButton.setOnClickListener(this);
 		View infoButton = findViewById(R.id.info_button);
@@ -120,11 +122,12 @@ public class MainActivity extends Activity implements  android.view.View.OnClick
 			if(itemliked){
 				//dislike();
 				itemliked=false;
-				//likebutton.setBackgroundResource(R.drawable.approvegreen);	
+				likebutton.setImageDrawable(getResources().getDrawable(R.drawable.approvegrey));
 			}
 			else{
 				//like();
 				itemliked=true;
+				likebutton.setImageDrawable(getResources().getDrawable(R.drawable.approvegreen));
 			}
 						
 	    	break;
@@ -135,10 +138,13 @@ public class MainActivity extends Activity implements  android.view.View.OnClick
 			if(itemdisliked){
 				//like();
 				itemdisliked=false;
+				dislikebutton.setImageDrawable(getResources().getDrawable(R.drawable.disapprovegrey));
+				
 			}
 			else{
 				//dislike();
 				itemdisliked=true;
+				dislikebutton.setImageDrawable(getResources().getDrawable(R.drawable.disapprovered));
 			}
 
 			break;
@@ -274,13 +280,21 @@ public class MainActivity extends Activity implements  android.view.View.OnClick
 	        	 System.out.print(position);
 	             ImageView i = new ImageView(mContext);
 	             Bitmap bimage=  getBitmapFromURL(myImages[position]);
-
 	             i.setImageBitmap(bimage);
-	             i.setLayoutParams(new Gallery.LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT));
-
+	             
+	             
+	             
+	             //Set landscape or portrait gallery/image size
+	             Gallery.LayoutParams galayout;
+	             if(getResources().getConfiguration().orientation==Configuration.ORIENTATION_LANDSCAPE){
+	            	 galayout = new Gallery.LayoutParams(200,200);
+	             }
+	             else{
+	            	 galayout = new Gallery.LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT);
+	             }
+	             
+	             i.setLayoutParams(galayout);
 	             i.setScaleType(ImageView.ScaleType.CENTER_INSIDE);	
-
-	             i.setScaleType(ImageView.ScaleType.CENTER_INSIDE);	 
 	             i.setBackgroundResource(mGalleryItemBackground);
 
 	             return i;
