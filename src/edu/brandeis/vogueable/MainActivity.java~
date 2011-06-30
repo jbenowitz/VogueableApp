@@ -1,0 +1,351 @@
+package edu.brandeis.vogueable;
+
+
+
+
+import java.io.BufferedInputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.net.URLConnection;
+import java.util.ArrayList;
+
+import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.Context;
+import android.content.res.Configuration;
+import android.content.res.Resources;
+import android.content.res.TypedArray;
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.os.Bundle;
+import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
+
+import android.view.View;
+import android.view.ViewGroup;
+import android.view.ViewGroup.LayoutParams;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
+import android.widget.BaseAdapter;
+
+import android.widget.Gallery;
+import android.widget.ImageButton;
+import android.widget.ImageView;
+import android.widget.Toast;
+
+/**
+ * This is the main activity for the app.
+ * @author gaspar obimba
+ *
+ */
+public class MainActivity extends Activity implements  android.view.View.OnClickListener{
+
+	protected static final String id = null;
+	Item currItem;
+<<<<<<< HEAD
+	ImageButton likebutton, dislikebutton;
+	User user=new User("gaspar",this);  //TODO change this to actually be current user
+=======
+	ImageButton likebutton;
+	User user;
+	
+	ArrayList<Item> currents = new ArrayList<Item>();
+	
+>>>>>>> e75d14d51f545757af03380969723e1723e7ca53
+	boolean itemliked=false, itemdisliked=false; //used to tell whether like or dislike button are pressed
+	
+
+	/** Called when the activity is first created. */
+	
+	@Override
+	public void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.main);
+		Toast.makeText(MainActivity.this, "Tap for details! Slide for next item!", Toast.LENGTH_LONG).show();
+
+		/*
+		 * Buttons onClick Listeners and backgrounds
+		 */
+		View likeButton = findViewById(R.id.like_button);
+		likeButton.setOnClickListener(this);
+		likebutton = (ImageButton) findViewById(R.id.like_button);
+		View dislikeButton = findViewById(R.id.dislike_button);
+		dislikeButton.setOnClickListener(this);
+		dislikebutton = (ImageButton) findViewById(R.id.dislike_button);
+		View closetButton = findViewById(R.id.wishlist_button);
+		closetButton.setOnClickListener(this);
+		View infoButton = findViewById(R.id.info_button);
+		infoButton.setOnClickListener(this);
+		user=new User("gaspar",this);  //TODO change this to actually be current user
+		ArrayList<String> tags = new ArrayList<String>();
+		tags.add("heeey");
+		currItem =new Item("NAME","http://ecx.images-amazon.com/images/I/813w6mGs3oL._SL1500_.jpg","description","100.00","describe", tags,"link", "clothing");
+		user=new User("gaspar",this); 
+		user.getTasteManager().itemsNotUsed.add(currItem);
+		currents.add(currItem);
+		currents.add(new Item("NAME","http://ecx.images-amazon.com/images/I/41Hkj9aBsAL._AA300_.jpg","description","100.00","describe", tags,"link", "clothing"));
+		
+		user.getTasteManager().itemsNotUsed.add(currItem); 
+		// Set up Gallery
+		Gallery g = (Gallery) findViewById(R.id.gallery);		
+		g.setAdapter(new ImageAdapter(this));	
+	}
+	
+	
+	
+	/**
+	 * Like the current item (add counts to hashtag list in taste manager)
+	 * 
+	 * @author Jackie
+	 */
+    public void like(){
+	user.mytaste.likeFlavor(currItem.getTagList());
+    }
+
+    
+    
+    /**
+	 * Dislike the current item (subtract counts to hashtag list in taste manager)
+	 * 
+	 * @author Jackie
+	 */
+    public void dislike(){
+	user.mytaste.dislikeFlavor(currItem.getTagList());
+    }
+
+	
+	
+	/**
+	 * Deals with figuring out what buttons are pressed and what actions to take.
+	 * 
+	 */
+	public void onClick(View v) {
+		switch (v.getId()) {
+
+		//Like Button onClick
+		case R.id.like_button : 
+			
+			if(itemliked){
+				//dislike();
+				itemliked=false;
+				likebutton.setImageDrawable(getResources().getDrawable(R.drawable.approvegrey));
+			}
+			else{
+				//like();
+				itemliked=true;
+				likebutton.setImageDrawable(getResources().getDrawable(R.drawable.approvegreen));
+			}
+						
+	    	break;
+	    	
+	    //Dislike button onClick
+		case R.id.dislike_button:
+			
+			if(itemdisliked){
+				//like();
+				itemdisliked=false;
+				dislikebutton.setImageDrawable(getResources().getDrawable(R.drawable.disapprovegrey));
+				
+			}
+			else{
+				//dislike();
+				itemdisliked=true;
+				dislikebutton.setImageDrawable(getResources().getDrawable(R.drawable.disapprovered));
+			}
+
+			break;
+			
+		//Wishlist Button on click	
+		case R.id.wishlist_button:
+
+	        AlertDialog.Builder wishquest = new AlertDialog.Builder(this);
+	    	         wishquest
+	    	         .setPositiveButton("Add to wishlist", new DialogInterface.OnClickListener() {
+	    	             public void onClick(DialogInterface dialog, int id) {
+	    	            	 Toast.makeText(MainActivity.this, "Added to wishlist", Toast.LENGTH_SHORT).show();
+	    	            	 dialog.cancel();
+	    	             }
+	    	         	})
+	    	         .setNegativeButton("View wishlist", new DialogInterface.OnClickListener() {
+	    	             public void onClick(DialogInterface dialog, int id) {
+	    	            	 startActivity(new Intent(MainActivity.this, WishAct.class));
+	    	             }
+	    	         }).show();
+	    	         
+		    break;
+		    
+		//Info button on click    
+		case R.id.info_button:
+			Intent k = new Intent(this, Info.class);
+	         startActivity(k);
+	         
+	         break;
+		}
+	}
+	
+	/**
+	 *   When clicking the physical menu button, inflates the two options 
+	 *   within the menu.xml
+	 */
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+		MenuInflater inflater = getMenuInflater();
+		inflater.inflate(R.menu.menu, menu);
+		return true;
+	}	
+
+	/**
+	 * Used with inflator above(?)
+	 * 
+	 * @param v view 
+	 */
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		switch (item.getItemId()) {
+
+		case R.id.wishlist_menu:   
+			startActivity(new Intent(this, WishAct.class));
+			break;
+			
+
+		case R.id.return_categories: //Return to categories
+			startActivity(new Intent(this, CategoryChooser.class));
+			break;
+
+		}
+		return true;
+	}
+	    
+	   
+	   /**
+	    * Image Adapter Class, used with Gallery
+	    * Used in Android SDK on Gallery
+	    * 
+	    * @author Jackie
+	    *
+	    */
+	     public class ImageAdapter extends BaseAdapter {
+	         private Context mContext;
+	         int mGalleryItemBackground;
+   
+	         //Array of image URLs to be used within gallery
+	         private String[] myImages = {
+	                 "http://ecx.images-amazon.com/images/I/410oAxun7dL._AA300_.jpg",
+	        		 "http://ecx.images-amazon.com/images/I/41Hkj9aBsAL._AA300_.jpg",
+	        		 "http://ecx.images-amazon.com/images/I/41JMUzALgpL._AA300_.jpg",
+	        		 "http://ecx.images-amazon.com/images/I/51Iykkkx5LL._SX342_.jpg",
+	        		 "http://ecx.images-amazon.com/images/I/410oAxun7dL._AA300_.jpg",
+	         };
+
+	         //Constructor that sets up the Image Adapter (what is inside the Gallery)
+	         public ImageAdapter(Context c) {
+	             mContext = c;
+	             TypedArray a = obtainStyledAttributes(R.styleable.HelloGallery);
+	             mGalleryItemBackground = a.getResourceId(
+	                     R.styleable.HelloGallery_android_galleryItemBackground, 0);
+	             a.recycle();
+	             
+	         }
+
+	         //Returns count of images array
+	         public int getCount() {
+	             return 1000000;
+	         }
+
+	         //returns the item in a certain position
+	         public Object getItem(int position) {
+	             return position;
+	         }
+
+	         //gets the itemID of a certain position
+	         public long getItemId(int position) {
+	             return position;
+	         }
+	         
+	         //creates a bitmap of the images from given URL
+	         public  Bitmap getBitmapFromURL(String src) {
+	             try {
+	                 Log.e("src",src);
+	                 URL url = new URL(src);
+	                 URLConnection connection = (URLConnection) url.openConnection();
+	                 ((HttpURLConnection) connection).setRequestMethod("GET");
+	                 connection.setDoInput(true);
+	                 connection.connect();
+	                 InputStream input = connection.getInputStream();
+	                 Bitmap myBitmap = BitmapFactory.decodeStream(input);
+	                 Log.e("Bitmap","returned");
+	                 return myBitmap;
+	             } catch (IOException e) {
+	                 e.printStackTrace();
+	                 Log.e("Exception",e.getMessage());
+	                 return null;
+	             }
+	         }
+             
+	         //Creates the view of the images.
+	         public View getView(int position, View convertView, ViewGroup parent) {
+	        	 position = position % myImages.length;
+	        	 if (position < 0)
+	        	     position = position + myImages.length;
+	        	 System.out.print(position);
+	             ImageView i = new ImageView(mContext);
+	             Bitmap bimage=  getBitmapFromURL(myImages[position]);
+<<<<<<< HEAD
+	             i.setImageBitmap(bimage);
+	             
+	             
+	             
+	             //Set landscape or portrait gallery/image size
+	             Gallery.LayoutParams galayout;
+	             if(getResources().getConfiguration().orientation==Configuration.ORIENTATION_LANDSCAPE){
+	            	 galayout = new Gallery.LayoutParams(200,200);
+	             }
+	             else{
+	            	 galayout = new Gallery.LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT);
+	             }
+	             
+	             i.setLayoutParams(galayout);
+	             i.setScaleType(ImageView.ScaleType.CENTER_INSIDE);	
+=======
+	             currItem = currents.get(position);
+	             i.setImageBitmap(bimage);
+	             i.setLayoutParams(new Gallery.LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT));
+	             i.setScaleType(ImageView.ScaleType.CENTER_INSIDE);	
+	             myImages[position]= user.getTasteManager().getNextItem(currItem, null).getImageFileString();
+	             currents.add(position,user.getTasteManager().getNextItem(currItem, null) );
+	             i.setScaleType(ImageView.ScaleType.CENTER_INSIDE);	 
+>>>>>>> e75d14d51f545757af03380969723e1723e7ca53
+	             i.setBackgroundResource(mGalleryItemBackground);
+
+	             return i;
+	         }
+	    }
+
+	  
+	    /**
+	     * 
+	      * @param v view 
+	      */
+	    
+	     
+	     
+	/**
+	 * 
+	 * @param v view 
+	 */
+
+	
+
+
+}
+
+
+
+
+
