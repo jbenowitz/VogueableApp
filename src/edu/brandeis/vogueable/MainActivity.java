@@ -48,7 +48,7 @@ public class MainActivity extends Activity implements  android.view.View.OnClick
 	protected static final String id = null;
 	Item currItem;
 	ImageButton likebutton;
-	User user;
+	User user;             
 	
 	ArrayList<Item> currents = new ArrayList<Item>();
 	
