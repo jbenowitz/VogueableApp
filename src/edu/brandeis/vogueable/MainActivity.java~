@@ -47,24 +47,25 @@ import android.widget.Toast;
 public class MainActivity extends Activity implements  android.view.View.OnClickListener{
 
 	protected static final String id = null;
-
+	Item currItem;
+<<<<<<< HEAD
+	ImageButton likebutton, dislikebutton;
+	User user=new User("gaspar",this);  //TODO change this to actually be current user
+=======
 	ImageButton likebutton;
-	ImageButton dislikebutton;
+	User user;
 	
-	Item[] currents = {new Item("baby1"), new Item("baby1"), new Item("baby2"), new Item("baby3"), new Item("baby4")};
+	ArrayList<Item> currents = new ArrayList<Item>();
+	
+>>>>>>> e75d14d51f545757af03380969723e1723e7ca53
 	boolean itemliked=false, itemdisliked=false; //used to tell whether like or dislike button are pressed
-    Provider provide; 
-
+	
 
 	/** Called when the activity is first created. */
 	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		RealProxy proxy = new RealProxy();
-		Context context = this; 
-		provide = Provider.instance(proxy, "AndroidUserName",context, "item from pref");
-		
 		setContentView(R.layout.main);
 		Toast.makeText(MainActivity.this, "Tap for details! Slide for next item!", Toast.LENGTH_LONG).show();
 
@@ -73,22 +74,24 @@ public class MainActivity extends Activity implements  android.view.View.OnClick
 		 */
 		View likeButton = findViewById(R.id.like_button);
 		likeButton.setOnClickListener(this);
-		//View dislikeButton = findViewById(R.id.dislike_button);
-		//dislikeButton.setOnClickListener(this);
+		likebutton = (ImageButton) findViewById(R.id.like_button);
+		View dislikeButton = findViewById(R.id.dislike_button);
+		dislikeButton.setOnClickListener(this);
 		dislikebutton = (ImageButton) findViewById(R.id.dislike_button);
 		View closetButton = findViewById(R.id.wishlist_button);
 		closetButton.setOnClickListener(this);
 		View infoButton = findViewById(R.id.info_button);
 		infoButton.setOnClickListener(this);
-		
+		user=new User("gaspar",this);  //TODO change this to actually be current user
 		ArrayList<String> tags = new ArrayList<String>();
 		tags.add("heeey");
+		currItem =new Item("NAME","http://ecx.images-amazon.com/images/I/813w6mGs3oL._SL1500_.jpg","description","100.00","describe", tags,"link", "clothing");
+		user=new User("gaspar",this); 
+		user.getTasteManager().itemsNotUsed.add(currItem);
+		currents.add(currItem);
+		currents.add(new Item("NAME","http://ecx.images-amazon.com/images/I/41Hkj9aBsAL._AA300_.jpg","description","100.00","describe", tags,"link", "clothing"));
 		
-		
-	
-		
-		
-		provide.getCurUser().getTasteManager().itemsNotUsed.add(provide.getCurItem()); 
+		user.getTasteManager().itemsNotUsed.add(currItem); 
 		// Set up Gallery
 		Gallery g = (Gallery) findViewById(R.id.gallery);		
 		g.setAdapter(new ImageAdapter(this));	
@@ -102,7 +105,7 @@ public class MainActivity extends Activity implements  android.view.View.OnClick
 	 * @author Jackie
 	 */
     public void like(){
-	provide.getCurTM().likeFlavor(provide.getCurItem().getTagList());
+	user.mytaste.likeFlavor(currItem.getTagList());
     }
 
     
@@ -113,7 +116,7 @@ public class MainActivity extends Activity implements  android.view.View.OnClick
 	 * @author Jackie
 	 */
     public void dislike(){
-	provide.getCurTM().dislikeFlavor(provide.getCurItem().getTagList());
+	user.mytaste.dislikeFlavor(currItem.getTagList());
     }
 
 	
@@ -271,12 +274,11 @@ public class MainActivity extends Activity implements  android.view.View.OnClick
 	                 Log.e("src",src);
 	                 URL url = new URL(src);
 	                 URLConnection connection = (URLConnection) url.openConnection();
-	                 //((HttpURLConnection) connection).setRequestMethod("GET");
-	                 ///connection.setDoInput(true);
+	                 ((HttpURLConnection) connection).setRequestMethod("GET");
+	                 connection.setDoInput(true);
 	                 connection.connect();
 	                 InputStream input = connection.getInputStream();
-	                 BufferedInputStream bis = new BufferedInputStream(input);
-	                 Bitmap myBitmap = BitmapFactory.decodeStream(bis);
+	                 Bitmap myBitmap = BitmapFactory.decodeStream(input);
 	                 Log.e("Bitmap","returned");
 	                 return myBitmap;
 	             } catch (IOException e) {
@@ -293,16 +295,11 @@ public class MainActivity extends Activity implements  android.view.View.OnClick
 	        	     position = position + myImages.length;
 	        	 System.out.print(position);
 	             ImageView i = new ImageView(mContext);
-
 	             Bitmap bimage=  getBitmapFromURL(myImages[position]);
-	             provide.setCurItem(currents[position]);
+<<<<<<< HEAD
 	             i.setImageBitmap(bimage);
-	            // i.setLayoutParams(new Gallery.LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT));
-	             i.setScaleType(ImageView.ScaleType.CENTER_INSIDE);	
-	             myImages[position]= provide.getCurTM().getNextItem(provide.getCurItem(), null).getImageFileString();
-	             currents[position]=provide.getCurTM().getNextItem(provide.getCurItem(), null);
-	             i.setScaleType(ImageView.ScaleType.CENTER_INSIDE);	 
-
+	             
+	             
 	             
 	             //Set landscape or portrait gallery/image size
 	             Gallery.LayoutParams galayout;
@@ -314,16 +311,38 @@ public class MainActivity extends Activity implements  android.view.View.OnClick
 	             }
 	             
 	             i.setLayoutParams(galayout);
-	            
-
-	            // currItem = currents.get(position);
+	             i.setScaleType(ImageView.ScaleType.CENTER_INSIDE);	
+=======
+	             currItem = currents.get(position);
 	             i.setImageBitmap(bimage);
-
+	             i.setLayoutParams(new Gallery.LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT));
+	             i.setScaleType(ImageView.ScaleType.CENTER_INSIDE);	
+	             myImages[position]= user.getTasteManager().getNextItem(currItem, null).getImageFileString();
+	             currents.add(position,user.getTasteManager().getNextItem(currItem, null) );
+	             i.setScaleType(ImageView.ScaleType.CENTER_INSIDE);	 
+>>>>>>> e75d14d51f545757af03380969723e1723e7ca53
 	             i.setBackgroundResource(mGalleryItemBackground);
 
 	             return i;
 	         }
-	     }
+	    }
+
+	  
+	    /**
+	     * 
+	      * @param v view 
+	      */
+	    
+	     
+	     
+	/**
+	 * 
+	 * @param v view 
+	 */
+
+	
+
+
 }
 
 

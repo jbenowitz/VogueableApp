@@ -8,37 +8,60 @@
 
    <RelativeLayout
   	android:orientation="horizontal"
-  	android:layout_height="wrap_content"
-    android:layout_width="fill_parent">
+  	android:layout_height="fill_parent"
+    android:layout_width="fill_parent"
+    >
   	
   	<Gallery xmlns:android="http://schemas.android.com/apk/res/android" 
     	android:id="@+id/gallery"
-    	android:layout_width="fill_parent"
-    	android:layout_height="wrap_content"
-    	android:layout_centerInParent="true"
+    	android:layout_width="wrap_content"
+    	android:layout_height="fill_parent"
+    	android:layout_alignParentLeft="true"
 	/>
+	
+	<TextView
+		android:id="@+id/name"
+		android:textSize="25dip"
+	    android:layout_width="wrap_content"
+	    android:layout_height="wrap_content" 
+	    android:text="@string/curr_name"
+	    android:layout_toRightOf="@id/gallery"
+	/>
+	
+	<TextView
+		android:id="@+id/price"
+		android:textSize="20dip"
+	    android:layout_height="wrap_content"
+	    android:layout_width="wrap_content"
+	    android:layout_toRightOf="@id/gallery"
+	    android:layout_below="@id/name"
+	    android:text="@string/curr_price"
+	    />
+	    
 	
   </RelativeLayout>
   
 
   <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/back"
+    android:id="@+id/bbar"
     android:orientation="horizontal"
-    android:layout_height="50dip"
+    android:layout_height="30dip"
     android:layout_width="fill_parent" 
     android:layout_alignParentBottom="true" 
     android:background="#000000"
-    style="@android:style/ButtonBar"
     android:gravity="center"
+    style="@android:style/ButtonBar"
     >
+    
     
    	<ImageButton
     	android:id="@+id/info_button"
     	android:background="@null"
     	android:src="@drawable/info"
-    	android:layout_height="wrap_content"
-    	android:layout_width="fill_parent"
+    	android:layout_height="match_parent"
+    	android:layout_width="wrap_content"
     	android:layout_weight="1"
+    	android:layout_margin="1dip"
     	android:scaleType="centerInside"
     />
     
@@ -46,8 +69,8 @@
     	android:id="@+id/wishlist_button" 
     	android:text="@string/wish_label"
     	android:background="@null"
-    	android:layout_height="wrap_content" 
-    	android:layout_width="fill_parent"
+    	android:layout_height="match_parent" 
+    	android:layout_width="wrap_content"
     	android:layout_weight="1"
     	android:textSize="15dip"
     	android:textColor="#b7b7b7">
@@ -57,8 +80,8 @@
     	android:id="@+id/buy_button"
     	android:text="@string/buy_label"
     	android:background="@null"
-    	android:layout_height="wrap_content"
-    	android:layout_width="fill_parent"
+    	android:layout_height="match_parent"
+    	android:layout_width="wrap_content"
     	android:layout_weight="1"
     	android:textSize="15dip"
     	android:textColor="#b7b7b7"
@@ -68,9 +91,10 @@
     	android:id="@+id/dislike_button"
     	android:background="@null"
     	android:src="@drawable/dislike_button"
-    	android:layout_height="wrap_content"
-    	android:layout_width="fill_parent"
+    	android:layout_height="match_parent"
+    	android:layout_width="wrap_content"
     	android:layout_weight="1"
+    	android:layout_margin="1dip"
     	android:scaleType="centerInside"
   	/>
   	
@@ -78,12 +102,13 @@
     	android:id="@+id/like_button"
     	android:background="@null"
     	android:src="@drawable/like_button"
-    	android:layout_height="wrap_content" 
-    	android:layout_width="fill_parent"
+    	android:layout_height="match_parent" 
+    	android:layout_width="wrap_content"
     	android:layout_weight="1"
+    	android:layout_margin="1dip"
     	android:scaleType="centerInside"
    	/>
    	
-</LinearLayout>
+  </LinearLayout>
  
 </RelativeLayout>
