@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Random;
 
+import org.xml.sax.SAXException;
+
 import android.content.Context;
 
 /**
@@ -26,15 +28,18 @@ public class TasteManager {
 	 * Initialize tagCount HashMap to be empty.
 	 * 
 	 * @param ArrayList of items, to choose next item
+	 * @throws SAXException 
 	 */
-	public TasteManager(Context con){
+	public TasteManager(Context con, RealProxy Prox) {
 		
 		tagCount = new HashMap<String,Integer>();
-		prox = new FakeProxy();
+		prox = Prox;
 		prox.connect(con);
 		itemsNotUsed = new ArrayList<Item>();
 		
 	}
+	
+	
 	
 	
 	

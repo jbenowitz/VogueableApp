@@ -2,6 +2,10 @@ package edu.brandeis.vogueable;
 
 import java.util.ArrayList;
 
+import org.xml.sax.SAXException;
+
+import android.content.Context;
+
 /**
  * This is an abstract class for the proxy for the server for Vogueable; 
  * @author Yulia
@@ -16,8 +20,9 @@ public abstract class AbstractProxy {
 	}
 	/**
 	 * connects to web service
+	 * @throws SAXException 
 	 */
-	public void connect(){
+	public void connect(Context con) {
 		
 	}
 	
@@ -51,7 +56,7 @@ public abstract class AbstractProxy {
 	 * @return Returns user object instantiated with data from webservice 
 	 */
 	public User getUser(String email){
-		User user = new User("yoooser@mail.ru", null);
+		User user = new User("yoooser@mail.ru");
 		return user; 
 	}
 	

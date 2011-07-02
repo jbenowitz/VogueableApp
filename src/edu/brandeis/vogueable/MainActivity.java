@@ -46,20 +46,21 @@ import android.widget.Toast;
 public class MainActivity extends Activity implements  android.view.View.OnClickListener{
 
 	protected static final String id = null;
-	Item currItem;
 	ImageButton likebutton;
-	User user;             
-	
-	ArrayList<Item> currents = new ArrayList<Item>();
-	
+	//Item[] currents; 
+	Item[] currents = {new Item("baby1"), new Item("baby1"), new Item("baby2"), new Item("baby3"), new Item("baby4")};
 	boolean itemliked=false, itemdisliked=false; //used to tell whether like or dislike button are pressed
-
+    Provider provide; 
 
 	/** Called when the activity is first created. */
 	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		RealProxy proxy = new RealProxy();
+		Context context = this; 
+		provide = Provider.instance(proxy, "AndroidUserName",context, "item from pref");
+		
 		setContentView(R.layout.main);
 		Toast.makeText(MainActivity.this, "Tap for details! Slide for next item!", Toast.LENGTH_LONG).show();
 
@@ -68,23 +69,21 @@ public class MainActivity extends Activity implements  android.view.View.OnClick
 		 */
 		View likeButton = findViewById(R.id.like_button);
 		likeButton.setOnClickListener(this);
-		//likebutton = (ImageButton) findViewById(R.id.like_button);
 		View dislikeButton = findViewById(R.id.dislike_button);
 		dislikeButton.setOnClickListener(this);
 		View closetButton = findViewById(R.id.wishlist_button);
 		closetButton.setOnClickListener(this);
 		View infoButton = findViewById(R.id.info_button);
 		infoButton.setOnClickListener(this);
-		user=new User("gaspar",this);  //TODO change this to actually be current user
+		
 		ArrayList<String> tags = new ArrayList<String>();
 		tags.add("heeey");
-		currItem =new Item("NAME","http://ecx.images-amazon.com/images/I/813w6mGs3oL._SL1500_.jpg","description","100.00","describe", tags,"link", "clothing");
-		user=new User("gaspar",this); 
-		user.getTasteManager().itemsNotUsed.add(currItem);
-		currents.add(currItem);
-		currents.add(new Item("NAME","http://ecx.images-amazon.com/images/I/41Hkj9aBsAL._AA300_.jpg","description","100.00","describe", tags,"link", "clothing"));
 		
-		user.getTasteManager().itemsNotUsed.add(currItem); 
+		
+	
+		
+		
+		provide.getCurUser().getTasteManager().itemsNotUsed.add(provide.getCurItem()); 
 		// Set up Gallery
 		Gallery g = (Gallery) findViewById(R.id.gallery);		
 		g.setAdapter(new ImageAdapter(this));	
@@ -98,7 +97,7 @@ public class MainActivity extends Activity implements  android.view.View.OnClick
 	 * @author Jackie
 	 */
     public void like(){
-	user.mytaste.likeFlavor(currItem.getTagList());
+	provide.getCurTM().likeFlavor(provide.getCurItem().getTagList());
     }
 
     
@@ -109,7 +108,7 @@ public class MainActivity extends Activity implements  android.view.View.OnClick
 	 * @author Jackie
 	 */
     public void dislike(){
-	user.mytaste.dislikeFlavor(currItem.getTagList());
+	provide.getCurTM().dislikeFlavor(provide.getCurItem().getTagList());
     }
 
 	
@@ -263,11 +262,12 @@ public class MainActivity extends Activity implements  android.view.View.OnClick
 	                 Log.e("src",src);
 	                 URL url = new URL(src);
 	                 URLConnection connection = (URLConnection) url.openConnection();
-	                 ((HttpURLConnection) connection).setRequestMethod("GET");
-	                 connection.setDoInput(true);
+	                 //((HttpURLConnection) connection).setRequestMethod("GET");
+	                 ///connection.setDoInput(true);
 	                 connection.connect();
 	                 InputStream input = connection.getInputStream();
-	                 Bitmap myBitmap = BitmapFactory.decodeStream(input);
+	                 BufferedInputStream bis = new BufferedInputStream(input);
+	                 Bitmap myBitmap = BitmapFactory.decodeStream(bis);
 	                 Log.e("Bitmap","returned");
 	                 return myBitmap;
 	             } catch (IOException e) {
@@ -285,12 +285,12 @@ public class MainActivity extends Activity implements  android.view.View.OnClick
 	        	 System.out.print(position);
 	             ImageView i = new ImageView(mContext);
 	             Bitmap bimage=  getBitmapFromURL(myImages[position]);
-	             currItem = currents.get(position);
+	             provide.setCurItem(currents[position]);
 	             i.setImageBitmap(bimage);
 	             i.setLayoutParams(new Gallery.LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT));
 	             i.setScaleType(ImageView.ScaleType.CENTER_INSIDE);	
-	             myImages[position]= user.getTasteManager().getNextItem(currItem, null).getImageFileString();
-	             currents.add(position,user.getTasteManager().getNextItem(currItem, null) );
+	             myImages[position]= provide.getCurTM().getNextItem(provide.getCurItem(), null).getImageFileString();
+	             currents[position]=provide.getCurTM().getNextItem(provide.getCurItem(), null);
 	             i.setScaleType(ImageView.ScaleType.CENTER_INSIDE);	 
 	             i.setBackgroundResource(mGalleryItemBackground);
 

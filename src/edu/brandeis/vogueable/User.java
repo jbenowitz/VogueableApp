@@ -24,10 +24,10 @@ public class User {
 	 * @param myName- string name
 	 * @param con- context to create a TasteManager
 	 */
-	public User(String myName, Context con){
+	public User(String myName){
 		name = myName;
 		wishlist = new Wishlist(null); //now initialized without a type
-		mytaste = new TasteManager(con);
+		//mytaste = new TasteManager(null, null);
 	}
 	
 	
@@ -69,8 +69,6 @@ public class User {
 	public void removeWishlist(Item itemR){
 		wishlist.remove(itemR);
 	}
-	
-	
 	/**
 	 * returns the tasteManager
 	 * 
@@ -78,6 +76,10 @@ public class User {
 	 */
 	public TasteManager getTasteManager(){
 		return mytaste;
+	}
+	
+	public void setTasteManager(TasteManager taste){
+		mytaste = taste; 
 	}
 	
 }

@@ -16,6 +16,8 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
+import org.xml.sax.SAXException;
+
 import android.content.Context;
 import android.content.res.Resources;
 import android.nfc.Tag;
@@ -33,9 +35,10 @@ public class FakeProxy extends AbstractProxy {
 	}
 	/**
 	 * connects to web service
+	 * @throws SAXException 
 	 */
 	@SuppressWarnings("deprecation")
-	public void connect(Context context){
+	public void connect(Context context) {
 		con = context;
 		
 		
@@ -61,7 +64,7 @@ public class FakeProxy extends AbstractProxy {
 		
 	}
 	/*helper method*/
-	private String getTagValue(String sTag, Element eElement) {
+	protected String getTagValue(String sTag, Element eElement) {
 		NodeList list = eElement.getElementsByTagName(sTag);
 		Node el = list.item(0);
 		NodeList nlList = el.getChildNodes();
@@ -101,7 +104,7 @@ public class FakeProxy extends AbstractProxy {
 	 * @return Returns user object instantiated with data from webservice 
 	 */
 	public User getUser(String email){
-		User user = new User("yoooser@mail.ru",con);
+		User user = new User("yoooser@mail.ru");
 		return user; 
 	}
 	
@@ -115,7 +118,7 @@ public class FakeProxy extends AbstractProxy {
 				Element eElement = (Element) nNode;
 				it.setName(getTagValue("title", eElement));
 				Log.d(TAG,"name" + it.getName());
-				it.setImageFileString(getTagValue("image_url", eElement));
+				it.setImageFileString(getTagValue("imgage_url", eElement));
 				//it.setPrice(getTagValue("price", eElement));
 				//it.setBrand(getTagValue("brand", eElement));
 				//it.addTag(getTagValue("fabric_type", eElement));
