@@ -20,7 +20,6 @@ import us.monoid.web.Resty;
 import us.monoid.web.XMLResource;
 
 import android.content.Context;
-import android.content.res.Resources;
 import android.util.Log;
 
 
@@ -40,7 +39,6 @@ public class RealProxy extends FakeProxy {
 	 * connects to web service
 	 * @throws SAXException 
 	 */
-	@SuppressWarnings("deprecation")
 	public void connect(Context context) {
 		
 		Resty r = new Resty();
