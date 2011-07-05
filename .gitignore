@@ -5,5 +5,4 @@
 R.java
 *.DS_STORE
 *.log
-lib/
-
+bin/
