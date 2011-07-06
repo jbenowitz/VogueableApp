@@ -33,7 +33,7 @@ public class Provider {
 	 * @param it - the Item that will be currently displayed; 
 	 */
 	public void setCurItem(Item it){
-		curritem = it; 
+		curritem = it;
 	}
 	
 	public User getCurUser(){

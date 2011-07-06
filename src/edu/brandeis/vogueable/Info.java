@@ -29,8 +29,12 @@ public class Info extends Activity implements OnClickListener{
 	    
 	    Button buy = new Button(this);
 	    Button add = new Button(this);
+	    buy.findViewById(R.id.info_buy);
+	    add.findViewById(R.id.info_wish);
 	    buy.setText("Buy!");
 	    add.setText("Add to Wishlist!");
+	    buy.setOnClickListener(this);
+	    add.setOnClickListener(this);
 	    buy.setId(BIND_AUTO_CREATE);
 	    add.setId(BIND_AUTO_CREATE);
 	    //toclick = buy.getId();
@@ -106,20 +110,20 @@ public class Info extends Activity implements OnClickListener{
 	//@Override
 	public void onClick(View v) {
 		// TODO Auto-generated method stub
-		/*
+		
 		switch(v.getId()){
 		
-		case toclick :
+		case R.id.info_buy :
 			finish();
 			break;
 		
-		case toclick2 :
+		case R.id.info_wish :
 			prov.getCurUser().addWishlist(prov.getCurItem());
        	 	Toast.makeText(this, "Added to wishlist", Toast.LENGTH_SHORT).show();
        	 	finish();
        	 	break;
 		}
-		
+		/*
 		case R.id.content :
 			this.finish();
 			break;
