@@ -31,7 +31,7 @@ public class Wishlist {
 	 */
 	public void addItem(Item itemA){
 		if (!wishlist.contains(itemA))
-		wishlist.add(itemA);
+		wishlist.add(0,itemA);
 	}
 	
 	

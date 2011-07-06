@@ -18,6 +18,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
@@ -243,12 +244,21 @@ public class MainActivity extends Activity implements  android.view.View.OnClick
 	         break;
 	         
 		case R.id.buy_button:
-			Intent purchase = new Intent(this, PurchaseItem.class);
-			Log.d(provide.getCurItem().getLink(), "is this right");
+	
+			//Intent purchase = new Intent(this, PurchaseItem.class);
+			//Log.d(provide.getCurItem().getLink(),"?");
 			//pass curr item attributes to the new intent
-			purchase.putExtra("URL", link/*provide.getCurItem().getImageFileString()*/);
-			startActivity(purchase);
-
+			//purchase.putExtra("URL", link/*provide.getCurItem().getImageFileString()*/);
+			//startActivity(purchase);
+			//Uri uri = Uri.parse("http://www.amazon.com/");
+			//Uri uri = Uri.parse(provide.getCurItem().getLink());
+		      //Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+		     // startActivity(intent);
+		    if (provide.getCurItem().getLink() != null) {
+		    	startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(provide.getCurItem().getLink())));
+		    } else {
+		    	startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("http://www.amazon.com/l/1036592/ref=nb_sb_noss")));
+		    }
 			break;
 		}
 	}

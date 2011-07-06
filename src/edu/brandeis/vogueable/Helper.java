@@ -86,7 +86,7 @@ public class Helper extends BaseAdapter {
         //tv.findViewById(R.id.description);
         //tv.inflate(mContext, R.layout.item, l)
         tv.setText(pro.getCurUser().wishlist.showWishlist().get(position).getName());
-        tv2.setText("$"+pro.getCurUser().wishlist.showWishlist().get(position).getPrice());
+        tv2.setText(pro.getCurUser().wishlist.showWishlist().get(position).getPrice());
         
         b.setId(position);
         b.setText("Buy!");
