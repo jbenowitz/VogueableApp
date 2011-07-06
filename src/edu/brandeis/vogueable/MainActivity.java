@@ -73,22 +73,18 @@ public class MainActivity extends Activity implements  android.view.View.OnClick
 		 */
 		View likeButton = findViewById(R.id.like_button);
 		likeButton.setOnClickListener(this);
-		//View dislikeButton = findViewById(R.id.dislike_button);
-		//dislikeButton.setOnClickListener(this);
+		likebutton = (ImageButton) likeButton;
+		View dislikeButton = findViewById(R.id.dislike_button);
+		dislikeButton.setOnClickListener(this);
 		dislikebutton = (ImageButton) findViewById(R.id.dislike_button);
 		View closetButton = findViewById(R.id.wishlist_button);
 		closetButton.setOnClickListener(this);
 		View infoButton = findViewById(R.id.info_button);
 		infoButton.setOnClickListener(this);
 		
-		ArrayList<String> tags = new ArrayList<String>();
-		tags.add("heeey");
-		
-		
-	
-		
-		
+
 		provide.getCurUser().getTasteManager().itemsNotUsed.add(provide.getCurItem()); 
+		
 		// Set up Gallery
 		Gallery g = (Gallery) findViewById(R.id.gallery);		
 		g.setAdapter(new ImageAdapter(this));	
@@ -117,6 +113,44 @@ public class MainActivity extends Activity implements  android.view.View.OnClick
     }
 
 	
+    /**
+     * Greys the 'like' button
+     * 
+     * @author Jackie
+     */
+    public void greyLike(){
+    	likebutton.setImageDrawable(getResources().getDrawable(R.drawable.approvegrey));
+    }
+    
+    
+    /**
+     * Greens the 'like' button
+     * 
+     * @author Jackie
+     */
+    private void greenLike() {
+		likebutton.setImageDrawable(getResources().getDrawable(R.drawable.approvegreen));
+	}
+    
+    
+    /**
+     * Greys the 'dislike' button
+     * 
+     * @author Jackie
+     */
+    private void greyDislike() {
+		dislikebutton.setImageDrawable(getResources().getDrawable(R.drawable.disapprovegrey));
+	}
+    
+    
+    /**
+     * Reds the 'dislike' button
+     * 
+     * @author Jackie
+     */
+    private void redDislike() {
+		dislikebutton.setImageDrawable(getResources().getDrawable(R.drawable.disapprovered));
+	}
 	
 	/**
 	 * Deals with figuring out what buttons are pressed and what actions to take.
@@ -131,12 +165,12 @@ public class MainActivity extends Activity implements  android.view.View.OnClick
 			if(itemliked){
 				//dislike();
 				itemliked=false;
-				likebutton.setImageDrawable(getResources().getDrawable(R.drawable.approvegrey));
+				greyLike();
 			}
 			else{
 				//like();
 				itemliked=true;
-				likebutton.setImageDrawable(getResources().getDrawable(R.drawable.approvegreen));
+				greenLike();
 			}
 						
 	    	break;
@@ -147,13 +181,13 @@ public class MainActivity extends Activity implements  android.view.View.OnClick
 			if(itemdisliked){
 				//like();
 				itemdisliked=false;
-				dislikebutton.setImageDrawable(getResources().getDrawable(R.drawable.disapprovegrey));
+				greyDislike();
 				
 			}
 			else{
 				//dislike();
 				itemdisliked=true;
-				dislikebutton.setImageDrawable(getResources().getDrawable(R.drawable.disapprovered));
+				redDislike();
 			}
 
 			break;
@@ -185,6 +219,8 @@ public class MainActivity extends Activity implements  android.view.View.OnClick
 	         break;
 		}
 	}
+
+
 	
 	/**
 	 *   When clicking the physical menu button, inflates the two options 
@@ -271,8 +307,6 @@ public class MainActivity extends Activity implements  android.view.View.OnClick
 	                 Log.e("src",src);
 	                 URL url = new URL(src);
 	                 URLConnection connection = (URLConnection) url.openConnection();
-	                 //((HttpURLConnection) connection).setRequestMethod("GET");
-	                 ///connection.setDoInput(true);
 	                 connection.connect();
 	                 InputStream input = connection.getInputStream();
 	                 BufferedInputStream bis = new BufferedInputStream(input);
@@ -286,23 +320,29 @@ public class MainActivity extends Activity implements  android.view.View.OnClick
 	             }
 	         }
              
-	         //Creates the view of the images.
+	         /**
+	          * Creates the view of the images.
+	          */
 	         public View getView(int position, View convertView, ViewGroup parent) {
+	        	 //Finds the next position of items
 	        	 position = position % myImages.length;
 	        	 if (position < 0)
 	        	     position = position + myImages.length;
-	        	 System.out.print(position);
+	        	 System.out.print(position); //TODO CAN WE DELETE THIS!?
+	        	 
+	        	 //Sets the view context image
 	             ImageView i = new ImageView(mContext);
-
 	             Bitmap bimage=  getBitmapFromURL(myImages[position]);
-	             provide.setCurItem(currents[position]);
 	             i.setImageBitmap(bimage);
-	            // i.setLayoutParams(new Gallery.LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT));
+	             
+	             //Sets the current item to be referenced by other classes in the provider
+	             provide.setNextItem(currents[position]);	             
+
+	            //scales the images accordingly
 	             i.setScaleType(ImageView.ScaleType.CENTER_INSIDE);	
 	             myImages[position]= provide.getCurTM().getNextItem(provide.getCurItem(), null).getImageFileString();
 	             currents[position]=provide.getCurTM().getNextItem(provide.getCurItem(), null);
 	             i.setScaleType(ImageView.ScaleType.CENTER_INSIDE);	 
-
 	             
 	             //Set landscape or portrait gallery/image size
 	             Gallery.LayoutParams galayout;
@@ -312,13 +352,9 @@ public class MainActivity extends Activity implements  android.view.View.OnClick
 	             else{
 	            	 galayout = new Gallery.LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT);
 	             }
-	             
 	             i.setLayoutParams(galayout);
-	            
 
-	            // currItem = currents.get(position);
-	             i.setImageBitmap(bimage);
-
+	             //sets the border
 	             i.setBackgroundResource(mGalleryItemBackground);
 
 	             return i;

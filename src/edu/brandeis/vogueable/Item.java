@@ -175,8 +175,10 @@ public class Item {
 		return categorytag;
 	}
 	
+
 	public void setCategory(String s){
 		categorytag =s;
 	}
+
 	
 }

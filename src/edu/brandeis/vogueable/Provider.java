@@ -5,8 +5,9 @@ import android.content.Context;
 public class Provider {
 	private User user;
 	private Item curritem;
+	private Item nextitem;
 	private TasteManager usertaste;
-	private static Provider provider = null; 
+	private static Provider provider = null;
 	
 	
 	private Provider(RealProxy proxy, String username, Context con, String item){
@@ -33,6 +34,20 @@ public class Provider {
 	 */
 	public void setCurItem(Item it){
 		curritem = it; 
+	}
+	
+	/**
+	 * Sets next item to come up
+	 * @param it
+	 */
+	public void setNextItem(Item it){
+		if(nextitem==null){
+			setCurItem(it);
+		}
+		else{
+			setCurItem(nextitem);
+		}
+		nextitem = it;
 	}
 	
 	public User getCurUser(){

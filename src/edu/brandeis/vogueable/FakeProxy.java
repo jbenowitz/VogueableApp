@@ -37,7 +37,6 @@ public class FakeProxy extends AbstractProxy {
 	 * connects to web service
 	 * @throws SAXException 
 	 */
-	@SuppressWarnings("deprecation")
 	public void connect(Context context) {
 		con = context;
 		

@@ -1,17 +1,13 @@
 package edu.brandeis.vogueable;
 
 import java.util.ArrayList;
-import java.util.Random;
 
 import android.app.Activity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.CheckBox;
-import android.widget.CompoundButton;
-import android.widget.Toast;
 
 public class CategoryChooser extends Activity implements OnClickListener {
 	
