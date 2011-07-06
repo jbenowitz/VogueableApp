@@ -36,20 +36,6 @@ public class Provider {
 		curritem = it; 
 	}
 	
-	/**
-	 * Sets next item to come up
-	 * @param it
-	 */
-	public void setNextItem(Item it){
-		if(nextitem==null){
-			setCurItem(it);
-		}
-		else{
-			setCurItem(nextitem);
-		}
-		nextitem = it;
-	}
-	
 	public User getCurUser(){
 		return user;
 	}
