@@ -54,6 +54,7 @@ public class MainActivity extends Activity implements  android.view.View.OnClick
 	Item[] currents = {new Item("baby1"), new Item("baby1"), new Item("baby2"), new Item("baby3"), new Item("baby4")};
 	boolean itemliked=false, itemdisliked=false; //used to tell whether like or dislike button are pressed
     Provider provide; 
+    String link="http://www.vogueable.heroku.com/";
 
 
 	/** Called when the activity is first created. */
@@ -74,13 +75,19 @@ public class MainActivity extends Activity implements  android.view.View.OnClick
 		View likeButton = findViewById(R.id.like_button);
 		likeButton.setOnClickListener(this);
 		likebutton = (ImageButton) likeButton;
+		
 		View dislikeButton = findViewById(R.id.dislike_button);
 		dislikeButton.setOnClickListener(this);
 		dislikebutton = (ImageButton) findViewById(R.id.dislike_button);
+		
 		View closetButton = findViewById(R.id.wishlist_button);
 		closetButton.setOnClickListener(this);
+		
 		View infoButton = findViewById(R.id.info_button);
 		infoButton.setOnClickListener(this);
+		
+		View buyButton = findViewById(R.id.buy_button);
+		buyButton.setOnClickListener(this);
 		
 
 		provide.getCurUser().getTasteManager().itemsNotUsed.add(provide.getCurItem()); 
@@ -217,6 +224,15 @@ public class MainActivity extends Activity implements  android.view.View.OnClick
 	         startActivity(k);
 	         
 	         break;
+	         
+		case R.id.buy_button:
+			Intent purchase = new Intent(this, PurchaseItem.class);
+			Log.d(provide.getCurItem().getLink(), "is this right");
+			//pass curr item attributes to the new intent
+			purchase.putExtra("URL", link/*provide.getCurItem().getImageFileString()*/);
+			startActivity(purchase);
+
+			break;
 		}
 	}
 
@@ -336,13 +352,16 @@ public class MainActivity extends Activity implements  android.view.View.OnClick
 	             i.setImageBitmap(bimage);
 	             
 	             //Sets the current item to be referenced by other classes in the provider
-	             provide.setCurItem(currents[position]);	             
+	             provide.setCurItem(currents[position]);	
+	             link=provide.getCurItem().getLink();
 
 	            //scales the images accordingly
 	             i.setScaleType(ImageView.ScaleType.CENTER_INSIDE);	
 	             myImages[position]= provide.getCurTM().getNextItem(provide.getCurItem(), null).getImageFileString();
 	             currents[position]=provide.getCurTM().getNextItem(provide.getCurItem(), null);
+	             //link=currents[position].getLink();
 	             i.setScaleType(ImageView.ScaleType.CENTER_INSIDE);	 
+	             
 	             
 	             //Set landscape or portrait gallery/image size
 	             Gallery.LayoutParams galayout;
