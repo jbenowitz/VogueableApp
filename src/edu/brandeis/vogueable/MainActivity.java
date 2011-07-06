@@ -336,7 +336,7 @@ public class MainActivity extends Activity implements  android.view.View.OnClick
 	             i.setImageBitmap(bimage);
 	             
 	             //Sets the current item to be referenced by other classes in the provider
-	             provide.setNextItem(currents[position]);	             
+	             provide.setCurItem(currents[position]);	             
 
 	            //scales the images accordingly
 	             i.setScaleType(ImageView.ScaleType.CENTER_INSIDE);	
