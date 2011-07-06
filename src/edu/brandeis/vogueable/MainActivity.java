@@ -37,6 +37,7 @@ import android.widget.BaseAdapter;
 import android.widget.Gallery;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 /**
@@ -50,6 +51,7 @@ public class MainActivity extends Activity implements  android.view.View.OnClick
 
 	ImageButton likebutton;
 	ImageButton dislikebutton;
+	TextView namelandtext, pricelandtext;
 	
 	Item[] currents = {new Item("baby1"), new Item("baby1"), new Item("baby2"), new Item("baby3"), new Item("baby4")};
 	boolean itemliked=false, itemdisliked=false; //used to tell whether like or dislike button are pressed
@@ -81,6 +83,12 @@ public class MainActivity extends Activity implements  android.view.View.OnClick
 		closetButton.setOnClickListener(this);
 		View infoButton = findViewById(R.id.info_button);
 		infoButton.setOnClickListener(this);
+	
+		//Sets landscape text
+		namelandtext = (TextView) findViewById(R.id.name);
+		pricelandtext = (TextView) findViewById(R.id.price);
+		setLandscapeName();
+		setLandscapePrice();
 		
 
 		provide.getCurUser().getTasteManager().itemsNotUsed.add(provide.getCurItem()); 
@@ -90,6 +98,20 @@ public class MainActivity extends Activity implements  android.view.View.OnClick
 		g.setAdapter(new ImageAdapter(this));	
 	}
 	
+	
+	/**
+	 * Changes the landscape layout more info "name" field to a given string
+	 */
+	public void setLandscapeName(){
+		namelandtext.setText(provide.getCurItem().getName());
+	}
+	
+	/**
+	 * Changes the landscape layout more info "price" field to a given string
+	 */
+	public void setLandscapePrice(){
+		pricelandtext.setText(provide.getCurItem().getPrice());
+	}
 	
 	
 	/**
@@ -336,8 +358,10 @@ public class MainActivity extends Activity implements  android.view.View.OnClick
 	             i.setImageBitmap(bimage);
 	             
 	             //Sets the current item to be referenced by other classes in the provider
-	             provide.setCurItem(currents[position]);	             
-
+	             provide.setCurItem(currents[position]);
+	             setLandscapeName();
+	             setLandscapePrice();
+	             
 	            //scales the images accordingly
 	             i.setScaleType(ImageView.ScaleType.CENTER_INSIDE);	
 	             myImages[position]= provide.getCurTM().getNextItem(provide.getCurItem(), null).getImageFileString();

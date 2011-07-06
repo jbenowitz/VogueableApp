@@ -5,7 +5,6 @@ import android.content.Context;
 public class Provider {
 	private User user;
 	private Item curritem;
-	private Item nextitem;
 	private TasteManager usertaste;
 	private static Provider provider = null;
 	
