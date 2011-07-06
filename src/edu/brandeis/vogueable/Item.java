@@ -162,6 +162,9 @@ public class Item {
 	public String getLink(){
 		return link;
 	}
+	public void setLink(String st){
+		link= st;
+	}
 	
 	
 	/**
@@ -170,6 +173,10 @@ public class Item {
 	 */
 	public String getCategoryTag(){
 		return categorytag;
+	}
+	
+	public void setCategory(String s){
+		categorytag =s;
 	}
 	
 }

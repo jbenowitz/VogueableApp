@@ -81,9 +81,11 @@ public class RealProxy extends FakeProxy {
 				it.setName(getTagValue("name", eElement));
 				Log.d(TAG,"name" + it.getName());
 				it.setImageFileString(getTagValue("img-url", eElement));
-				//it.setPrice(getTagValue("price", eElement));
-				//it.setBrand(getTagValue("brand", eElement));
-				//it.addTag(getTagValue("fabric_type", eElement));
+				it.setLink(getTagValue("link-to-buy", eElement));
+				it.setPrice(getTagValue("price", eElement));
+				it.setCategory(getTagValue("category", eElement));
+				it.setBrand(getTagValue("brand", eElement));
+				it.addTag(getTagValue("fabric_type", eElement));
 				items.add(it);
 				
 			}
