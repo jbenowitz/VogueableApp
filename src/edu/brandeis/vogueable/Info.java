@@ -5,6 +5,8 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Color;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -29,20 +31,20 @@ public class Info extends Activity implements OnClickListener{
 	    
 	    Button buy = new Button(this);
 	    Button add = new Button(this);
-	    buy.findViewById(R.id.info_buy);
-	    add.findViewById(R.id.info_wish);
+	    //buy.findViewById(R.id.info_buy);
+	    //add.findViewById(R.id.info_wish);
 	    buy.setText("Buy!");
 	    add.setText("Add to Wishlist!");
-	    buy.setOnClickListener(this);
-	    add.setOnClickListener(this);
-	    buy.setId(BIND_AUTO_CREATE);
-	    add.setId(BIND_AUTO_CREATE);
+	    //buy.setOnClickListener(this);
+	    //add.setOnClickListener(this);
+	    //buy.setId(BIND_AUTO_CREATE);
+	    //add.setId(BIND_AUTO_CREATE);
 	    //toclick = buy.getId();
 	    //toclick2 = add.getId();
 	    //add.setTextSize((float)20);
 	    //buy.setTextSize((float)20);
-	    buy.setPadding(10,10,10,10);
-	    add.setPadding(10,10,10,10);
+	    //buy.setPadding(10,10,10,10);
+	    //add.setPadding(10,10,10,10);
     	//ImageView iv;
     	//LinearLayout l;
     	LinearLayout l2 = new LinearLayout(context);
@@ -52,15 +54,17 @@ public class Info extends Activity implements OnClickListener{
     	TextView tv = new TextView(context);
         
     	TextView tv2 = new TextView(context);
-    	tv.setTextSize((float)15);
-	    tv2.setTextSize((float)15);
+    	tv.setTextSize((float)20);
+	    tv2.setTextSize((float)25);
         
     	//iv.setImageResource(R.drawable.icon);
         //iv.setAdjustViewBounds(true);
         //iv.setLayoutParams(new LayoutParams(-2, -1));
         
     	tv.setText(prov.getCurItem().getName());
+    	tv2.setPadding(0, 0, 0, 10);
         tv2.setText(prov.getCurItem().getPrice());
+        tv2.setPadding(130, 0, 0, 20);
        
        // b.setId(position);
         //b.setText("Buy!");
@@ -68,7 +72,7 @@ public class Info extends Activity implements OnClickListener{
         l2.setOrientation(1);
         l2.addView(tv);
         l2.addView(tv2);
-        l2.setLayoutParams(new LayoutParams(-2, -2));
+        l2.setPadding(20, 20, 20, 0);
         
         
        // l2.setVisibility(0);
@@ -77,20 +81,28 @@ public class Info extends Activity implements OnClickListener{
         //l4.setOrientation(1);
         //l4.addView(l2);
         //l4.addView(b);
-        l3.setLayoutParams(new LayoutParams(-2, -2));
+        l3.setLayoutParams(new LayoutParams(-1, -1));
         
-        buy.setLayoutParams(new LayoutParams(-2, -2));
+        buy.setLayoutParams(new LayoutParams(-2, -1));
         
-        add.setLayoutParams(new LayoutParams(-2, -2));
+        add.setLayoutParams(new LayoutParams(-2, -1));
+        l3.setPadding(60,0,60,15);
         l3.addView(add);
         l3.addView(buy);
-        l2.setPadding(0, 0, 0, 20);
-        l2.setPadding(50, 0, 40, 50);
+        //l2.setPadding(0, 0, 0, 20);
+        //l2.setPadding(50, 0, 40, 50);
+        l2.setLayoutParams(new LayoutParams(-2, -1));
+        new Color();
+		l2.setBackgroundColor(Color.argb(50, 255, 255, 255));
         l2.addView(l3);
         //l.addView(b);
         //l.setPadding(5, 5, 0, 5);
         //l.addView(l3);
 	     setContentView(l2);
+	     buy.setOnClickListener(this);
+		 add.setOnClickListener(this);
+		 buy.setClickable(true);
+		 add.setClickable(true);
 	    
 	    
 	    
@@ -114,13 +126,18 @@ public class Info extends Activity implements OnClickListener{
 		switch(v.getId()){
 		
 		case R.id.info_buy :
-			finish();
+			 if (prov.getCurItem().getLink() != null) {
+			    	startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(prov.getCurItem().getLink())));
+			    } else {
+			    	startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("http://www.amazon.com/l/1036592/ref=nb_sb_noss")));
+			    }
+			this.finish();
 			break;
 		
 		case R.id.info_wish :
 			prov.getCurUser().addWishlist(prov.getCurItem());
        	 	Toast.makeText(this, "Added to wishlist", Toast.LENGTH_SHORT).show();
-       	 	finish();
+       	 	this.finish();
        	 	break;
 		}
 		/*

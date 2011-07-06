@@ -80,7 +80,7 @@ public class RealProxy extends FakeProxy {
 				Log.d(TAG,"name" + it.getName());
 				it.setImageFileString(getTagValue("img-url", eElement));
 				it.setLink(getTagValue("link-to-buy", eElement));
-				it.setPrice(getTagValue("price", eElement));
+				it.setPrice(getTagValue("item-price", eElement));
 				it.setCategory(getTagValue("category", eElement));
 				it.setBrand(getTagValue("brand", eElement));
 				it.addTag(getTagValue("fabric_type", eElement));
@@ -106,7 +106,8 @@ public class RealProxy extends FakeProxy {
 					
 					nextit.setName(getTagValue("name", eElement));
 					nextit.setImageFileString(getTagValue("img-url", eElement));
-					//nextit.setPrice(getTagValue("price", eElement));
+					nextit.setLink(getTagValue("link-to-buy", eElement));
+					nextit.setPrice(getTagValue("item-price", eElement));
 					nextit.setBrand(getTagValue("brand", eElement));
 					//nextit.addTag(getTagValue("fabric_type", eElement));
 				    break;

@@ -44,7 +44,7 @@
    	<string name="buy_label">B</string> 
    	<string name="info_name">Nice Shirt</string>
    	<string name="getit_label">Get it!</string>
-   <!--<string name="item_info">Item Info</string>-->
+    <string name="item_info"></string>
    	
    	<string name="curr_name">Current Name</string>
    	<string name="curr_price">Current Price</string>
