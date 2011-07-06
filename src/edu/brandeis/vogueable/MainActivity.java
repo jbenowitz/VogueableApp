@@ -37,6 +37,7 @@ import android.widget.BaseAdapter;
 import android.widget.Gallery;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 /**
@@ -47,9 +48,9 @@ import android.widget.Toast;
 public class MainActivity extends Activity implements  android.view.View.OnClickListener{
 
 	protected static final String id = null;
-
 	ImageButton likebutton;
 	ImageButton dislikebutton;
+	TextView namelandtext, pricelandtext;
 	
 	Item[] currents = {new Item("baby1"), new Item("baby1"), new Item("baby2"), new Item("baby3"), new Item("baby4")};
 	boolean itemliked=false, itemdisliked=false; //used to tell whether like or dislike button are pressed
@@ -85,6 +86,12 @@ public class MainActivity extends Activity implements  android.view.View.OnClick
 		
 		View infoButton = findViewById(R.id.info_button);
 		infoButton.setOnClickListener(this);
+	
+		//Sets landscape text
+		namelandtext = (TextView) findViewById(R.id.name);
+		pricelandtext = (TextView) findViewById(R.id.price);
+		setLandscapeName();
+		setLandscapePrice();
 		
 		View buyButton = findViewById(R.id.buy_button);
 		buyButton.setOnClickListener(this);
@@ -97,6 +104,20 @@ public class MainActivity extends Activity implements  android.view.View.OnClick
 		g.setAdapter(new ImageAdapter(this));	
 	}
 	
+	
+	/**
+	 * Changes the landscape layout more info "name" field to a given string
+	 */
+	public void setLandscapeName(){
+		namelandtext.setText(provide.getCurItem().getName());
+	}
+	
+	/**
+	 * Changes the landscape layout more info "price" field to a given string
+	 */
+	public void setLandscapePrice(){
+		pricelandtext.setText(provide.getCurItem().getPrice());
+	}
 	
 	
 	/**
@@ -206,6 +227,7 @@ public class MainActivity extends Activity implements  android.view.View.OnClick
 	    	         wishquest
 	    	         .setPositiveButton("Add to wishlist", new DialogInterface.OnClickListener() {
 	    	             public void onClick(DialogInterface dialog, int id) {
+	    	            	 provide.getCurUser().addWishlist(provide.getCurItem());
 	    	            	 Toast.makeText(MainActivity.this, "Added to wishlist", Toast.LENGTH_SHORT).show();
 	    	            	 dialog.cancel();
 	    	             }
@@ -352,8 +374,15 @@ public class MainActivity extends Activity implements  android.view.View.OnClick
 	             i.setImageBitmap(bimage);
 	             
 	             //Sets the current item to be referenced by other classes in the provider
+
 	             provide.setCurItem(currents[position]);	
 	             link=provide.getCurItem().getLink();
+
+
+	             provide.setCurItem(currents[position]);
+	             setLandscapeName();
+	             setLandscapePrice();
+	             
 
 	            //scales the images accordingly
 	             i.setScaleType(ImageView.ScaleType.CENTER_INSIDE);	

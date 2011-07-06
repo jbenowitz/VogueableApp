@@ -5,7 +5,6 @@ import android.content.Context;
 public class Provider {
 	private User user;
 	private Item curritem;
-	private Item nextitem;
 	private TasteManager usertaste;
 	private static Provider provider = null;
 	
@@ -33,7 +32,7 @@ public class Provider {
 	 * @param it - the Item that will be currently displayed; 
 	 */
 	public void setCurItem(Item it){
-		curritem = it; 
+		curritem = it;
 	}
 	
 	public User getCurUser(){

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="hello"></string>
-	<string name="app_name">Vogueable</string>
+	<string name="app_name"></string>
 
 	
 	<string name="like_label">Like</string>
@@ -44,7 +44,7 @@
    	<string name="buy_label">B</string> 
    	<string name="info_name">Nice Shirt</string>
    	<string name="getit_label">Get it!</string>
-   	<string name="item_info">Item Info</string>
+   <!--<string name="item_info">Item Info</string>-->
    	
    	<string name="curr_name">Current Name</string>
    	<string name="curr_price">Current Price</string>
