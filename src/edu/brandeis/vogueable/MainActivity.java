@@ -6,16 +6,13 @@ package edu.brandeis.vogueable;
 import java.io.BufferedInputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLConnection;
-import java.util.ArrayList;
 
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.res.Configuration;
-import android.content.res.Resources;
 import android.content.res.TypedArray;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -30,8 +27,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewGroup.LayoutParams;
-import android.widget.AdapterView;
-import android.widget.AdapterView.OnItemClickListener;
 import android.widget.BaseAdapter;
 
 import android.widget.Gallery;
@@ -362,34 +357,37 @@ public class MainActivity extends Activity implements  android.view.View.OnClick
 	          * Creates the view of the images.
 	          */
 	         public View getView(int position, View convertView, ViewGroup parent) {
-	        	 //Finds the next position of items
+	        	 
 	        	 position = position % myImages.length;
 	        	 if (position < 0)
 	        	     position = position + myImages.length;
-	        	 System.out.print(position); //TODO CAN WE DELETE THIS!?
+	        	 System.out.print(position); //TODO CAN WE DELETE THIS!
 	        	 
-	        	 //Sets the view context image
-	             ImageView i = new ImageView(mContext);
-	             Bitmap bimage=  getBitmapFromURL(myImages[position]);
-	             i.setImageBitmap(bimage);
 	             
 	             //Sets the current item to be referenced by other classes in the provider
 
 	             provide.setCurItem(currents[position]);	
 	             link=provide.getCurItem().getLink();
-
-
-	             provide.setCurItem(currents[position]);
 	             setLandscapeName();
 	             setLandscapePrice();
+	         
+	             
+	             //Gets the next item
+	             Item nextItem = provide.getCurTM().getNextItem(provide.getCurItem(), null);
+	             myImages[position+(getCount()/2)%1000] = nextItem.getImageFileString();
+	             currents[position+(getCount()/2)%1000] = nextItem;
+	             //link=currents[position].getLink();
+	             
+	             
+	             //Sets the view context image
+	             ImageView i = new ImageView(mContext);
+	             Bitmap bimage=  getBitmapFromURL(myImages[position]);
+	             i.setImageBitmap(bimage);
 	             
 
 	            //scales the images accordingly
-	             i.setScaleType(ImageView.ScaleType.CENTER_INSIDE);	
-	             myImages[position]= provide.getCurTM().getNextItem(provide.getCurItem(), null).getImageFileString();
-	             currents[position]=provide.getCurTM().getNextItem(provide.getCurItem(), null);
-	             //link=currents[position].getLink();
-	             i.setScaleType(ImageView.ScaleType.CENTER_INSIDE);	 
+	             i.setScaleType(ImageView.ScaleType.CENTER_INSIDE);
+	             
 	             
 	             
 	             //Set landscape or portrait gallery/image size
