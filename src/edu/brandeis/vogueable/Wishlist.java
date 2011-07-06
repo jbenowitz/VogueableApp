@@ -30,6 +30,7 @@ public class Wishlist {
 	 * @param itemA item to be added
 	 */
 	public void addItem(Item itemA){
+		if (!wishlist.contains(itemA))
 		wishlist.add(itemA);
 	}
 	

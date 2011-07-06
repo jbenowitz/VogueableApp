@@ -48,7 +48,6 @@ import android.widget.Toast;
 public class MainActivity extends Activity implements  android.view.View.OnClickListener{
 
 	protected static final String id = null;
-
 	ImageButton likebutton;
 	ImageButton dislikebutton;
 	TextView namelandtext, pricelandtext;
@@ -221,6 +220,7 @@ public class MainActivity extends Activity implements  android.view.View.OnClick
 	    	         wishquest
 	    	         .setPositiveButton("Add to wishlist", new DialogInterface.OnClickListener() {
 	    	             public void onClick(DialogInterface dialog, int id) {
+	    	            	 provide.getCurUser().addWishlist(provide.getCurItem());
 	    	            	 Toast.makeText(MainActivity.this, "Added to wishlist", Toast.LENGTH_SHORT).show();
 	    	            	 dialog.cancel();
 	    	             }
