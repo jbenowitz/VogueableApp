@@ -77,8 +77,13 @@ public class CategoryChooser extends Activity implements OnClickListener {
 			         if(clothing.isChecked()) {
 			        	 currCat.add("clothing");
 			         }
+			        
+			         /*pass the selected categories to the main activity 
+			          * so the items loaded reflect the categories the user selects
+			          * */
+			         i.putExtra("categories", currCat);
+			         startActivity(i);//start the activity
 			         
-			         startActivity(i);
 			         
 			         break;    
 			         

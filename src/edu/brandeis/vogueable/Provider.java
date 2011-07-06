@@ -5,7 +5,6 @@ import android.content.Context;
 public class Provider {
 	private User user;
 	private Item curritem;
-	private Item nextitem;
 	private TasteManager usertaste;
 	private static Provider provider = null;
 	
@@ -33,21 +32,7 @@ public class Provider {
 	 * @param it - the Item that will be currently displayed; 
 	 */
 	public void setCurItem(Item it){
-		curritem = it; 
-	}
-	
-	/**
-	 * Sets next item to come up
-	 * @param it
-	 */
-	public void setNextItem(Item it){
-		if(nextitem==null){
-			setCurItem(it);
-		}
-		else{
-			setCurItem(nextitem);
-		}
-		nextitem = it;
+		curritem = it;
 	}
 	
 	public User getCurUser(){
