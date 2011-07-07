@@ -64,7 +64,7 @@ public class MainActivity extends Activity implements  android.view.View.OnClick
 		provide = Provider.instance(proxy, "AndroidUserName",context, "item from pref");
 		
 		setContentView(R.layout.main);
-		Toast.makeText(MainActivity.this, "Tap for details! Slide for next item!", Toast.LENGTH_LONG).show();
+		Toast.makeText(MainActivity.this, "Slide for next item!", Toast.LENGTH_LONG).show();
 
 		/*
 		 * Buttons onClick Listeners and backgrounds
@@ -122,7 +122,7 @@ public class MainActivity extends Activity implements  android.view.View.OnClick
 	 * @author Jackie
 	 */
     public void like(){
-	provide.getCurTM().likeFlavor(provide.getCurItem().getTagList());
+    	provide.getCurTM().likeFlavor(provide.getCurItem().getTagList());
     }
 
     
@@ -238,8 +238,32 @@ public class MainActivity extends Activity implements  android.view.View.OnClick
 		    
 		//Info button on click    
 		case R.id.info_button:
-			Intent k = new Intent(this, Info.class);
-	         startActivity(k);
+			
+			 AlertDialog.Builder info = new AlertDialog.Builder(this);
+	         info
+	         .setMessage(provide.getCurItem().getName()+" - "+provide.getCurItem().getPrice())
+	         .setPositiveButton("Add to wishlist", new DialogInterface.OnClickListener() {
+	             public void onClick(DialogInterface dialog, int id) {
+	            	 provide.getCurUser().addWishlist(provide.getCurItem());
+	            	 Toast.makeText(MainActivity.this, "Added to wishlist", Toast.LENGTH_SHORT).show();
+	            	 dialog.cancel();
+	             }
+	         	})
+	         .setNegativeButton("Buy", new DialogInterface.OnClickListener() {
+	             public void onClick(DialogInterface dialog, int id) {
+	            	 if (provide.getCurItem().getLink() != null) {
+	     		    	startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(provide.getCurItem().getLink())));
+	     		    } else {
+	     		    	startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("http://www.amazon.com/l/1036592/ref=nb_sb_noss")));
+	     		    }
+	             }
+	         })
+	         .show();
+			
+			
+			
+			//Intent k = new Intent(this, Info.class);
+	        //startActivity(k);
 	         
 	         break;
 	         
