@@ -93,7 +93,7 @@ public class MainActivity extends Activity implements  android.view.View.OnClick
 		buyButton.setOnClickListener(this);
 		
 
-		provide.getCurUser().getTasteManager().itemsNotUsed.add(provide.getCurItem()); 
+		provide.getCurTM().itemsNotUsed.add(provide.getCurItem()); 
 		
 		// Set up Gallery
 		Gallery g = (Gallery) findViewById(R.id.gallery);		
