@@ -9,10 +9,9 @@ import java.util.ArrayList;
  */
 public class Item {
 	
-	private String name, imageFile, brand, description, link;
-	private String price;
+	private String name, imageFile, brand, description, link, price, categorytag;
 	private ArrayList<String> taglist;
-	private String categorytag;
+	private boolean itemliked=false, itemdisliked=false;
 	
 	
 	/**
@@ -22,6 +21,7 @@ public class Item {
 	 */
 	public Item(String name){
 		this.name = name; 
+		taglist = new ArrayList<String>();
 	}
 	
 	
@@ -102,7 +102,11 @@ public class Item {
 	 * @return price of item
 	 */
 	public String getPrice(){
-		return price;
+		if (price != null){
+			return price;
+		} else {
+			return "";
+		}
 	}
 	
 	
@@ -175,9 +179,50 @@ public class Item {
 		return categorytag;
 	}
 	
-
+	/**
+	 * Set category of this item
+	 * @param s- category string (dress, shirt, shoes...)
+	 */
 	public void setCategory(String s){
 		categorytag =s;
+	}
+	
+	/**
+	 * toggles the itemliked boolean (used to see if item was previously liked)
+	 */
+	public void toggleItemLiked(){
+		if(itemliked){
+			itemliked=false;
+		}else{
+			itemliked=true;
+		}
+	}
+	
+	/**
+	 * toggles the itemdisliked boolean (used to see if an item was previously disliked)
+	 */
+	public void toggleItemDisliked(){
+		if(itemdisliked){
+			itemdisliked=false;
+		}else{
+			itemdisliked=false;
+		}
+	}
+	
+	/**
+	 * gets the boolean of whether item was previously liked
+	 * @return itemliked boolean
+	 */
+	public boolean getItemLiked(){
+		return itemliked;
+	}
+	
+	/**
+	 * gets the boolean ofwhtether item was previously disliked
+	 * @return itemdisliked boolean
+	 */
+	public boolean getItemDisliked(){
+		return itemdisliked;
 	}
 
 	

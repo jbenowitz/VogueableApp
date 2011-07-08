@@ -83,7 +83,8 @@ public class RealProxy extends FakeProxy {
 				it.setPrice(getTagValue("item-price", eElement));
 				it.setCategory(getTagValue("category", eElement));
 				it.setBrand(getTagValue("brand", eElement));
-				it.addTag(getTagValue("fabric_type", eElement));
+				//it.addTag(getTagValue("fabric_type", eElement));
+				it.addTag("this");
 				items.add(it);
 				
 			}
@@ -105,8 +106,9 @@ public class RealProxy extends FakeProxy {
 					nextit.setImageFileString(getTagValue("img-url", eElement));
 					nextit.setLink(getTagValue("link-to-buy", eElement));
 					nextit.setPrice(getTagValue("item-price", eElement));
-					nextit.setBrand(getTagValue("brand", eElement));
-					nextit.addTag(getTagValue("fabric_type", eElement));
+
+					//nextit.addTag(getTagValue("fabric_type", eElement));
+					nextit.addTag("this");
 				    break;
 				
 			}
