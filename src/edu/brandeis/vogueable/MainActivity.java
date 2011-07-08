@@ -8,6 +8,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
 import java.net.URLConnection;
+import java.util.ArrayList;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -52,6 +53,11 @@ public class MainActivity extends Activity implements  android.view.View.OnClick
 	boolean itemliked=false, itemdisliked=false; //used to tell whether like or dislike button are pressed
     Provider provide; 
     String link="http://www.vogueable.heroku.com/";
+    Bundle currCat;
+    ArrayList<String> value=null;//new ArrayList<String>();
+    
+    //value=null;
+   
 
 
 	/** Called when the activity is first created. */
@@ -65,7 +71,10 @@ public class MainActivity extends Activity implements  android.view.View.OnClick
 		
 		setContentView(R.layout.main);
 		Toast.makeText(MainActivity.this, "Tap for details! Slide for next item!", Toast.LENGTH_LONG).show();
-
+	      //value = getIntent().getExtras().getStringArrayList("categories");
+//		      Log.d("currCat", "error from cat chooser");
+	      
+//		    }
 		/*
 		 * Buttons onClick Listeners and backgrounds
 		 */
@@ -245,15 +254,6 @@ public class MainActivity extends Activity implements  android.view.View.OnClick
 	         
 		case R.id.buy_button:
 	
-			//Intent purchase = new Intent(this, PurchaseItem.class);
-			//Log.d(provide.getCurItem().getLink(),"?");
-			//pass curr item attributes to the new intent
-			//purchase.putExtra("URL", link/*provide.getCurItem().getImageFileString()*/);
-			//startActivity(purchase);
-			//Uri uri = Uri.parse("http://www.amazon.com/");
-			//Uri uri = Uri.parse(provide.getCurItem().getLink());
-		      //Intent intent = new Intent(Intent.ACTION_VIEW, uri);
-		     // startActivity(intent);
 		    if (provide.getCurItem().getLink() != null) {
 		    	startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(provide.getCurItem().getLink())));
 		    } else {
@@ -382,8 +382,21 @@ public class MainActivity extends Activity implements  android.view.View.OnClick
 	             setLandscapePrice();
 	         
 	             
-	             //Gets the next item
-	             Item nextItem = provide.getCurTM().getNextItem(provide.getCurItem(), null);
+	             //Curr Category list
+//	             ArrayList<String> currCat =new ArrayList<String>();
+//	             
+//	             /*parse our string from category chooser activity*/
+//	             String[] list =value.split("\\|");
+//	             if(list.length>0){
+//	            	 for(int i=0;i<list.length;i++){
+//	            		 currCat.add(list[i]);
+//	            	 }
+//	             }
+	            
+	            TasteManager tm = provide.getCurTM();
+	            Item an_item = provide.getCurItem();
+	            Item nextItem = tm.getNextItem(an_item, null);
+	            Log.d("Vogueable", "checking next itemerror");
 	             myImages[position+(getCount()/2)%1000] = nextItem.getImageFileString();
 	             currents[position+(getCount()/2)%1000] = nextItem;
 	             //link=currents[position].getLink();
