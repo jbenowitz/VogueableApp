@@ -102,7 +102,11 @@ public class Item {
 	 * @return price of item
 	 */
 	public String getPrice(){
-		return price;
+		if (price != null){
+			return price;
+		} else {
+			return "";
+		}
 	}
 	
 	
