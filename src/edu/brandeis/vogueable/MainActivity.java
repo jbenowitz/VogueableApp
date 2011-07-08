@@ -404,7 +404,7 @@ public class MainActivity extends Activity implements  android.view.View.OnClick
 	             link=provide.getCurItem().getLink();
 	             setLandscapeName();
 	             setLandscapePrice();
-	         
+	             
 	             
 	             //Gets the next item
 	             Item nextItem = provide.getCurTM().getNextItem(provide.getCurItem(), null);
