@@ -41,17 +41,15 @@ import android.widget.Toast;
  * @author gaspar obimba
  *
  */
-public class MainActivity extends Activity implements  android.view.View.OnClickListener{
+public class MainActivity extends Activity implements android.view.View.OnClickListener{
 
 	protected static final String id = null;
 	ImageButton likebutton;
 	ImageButton dislikebutton;
 	TextView namelandtext, pricelandtext;
 	
-	Item[] currents = {new Item("baby1"), new Item("baby1"), new Item("baby2"), new Item("baby3"), new Item("baby4")};
-	boolean itemliked=false, itemdisliked=false; //used to tell whether like or dislike button are pressed
     Provider provide; 
-    String link="http://www.vogueable.heroku.com/";
+    LikeManager likeMan;
 
 
 	/** Called when the activity is first created. */
@@ -64,10 +62,11 @@ public class MainActivity extends Activity implements  android.view.View.OnClick
 		provide = Provider.instance(proxy, "AndroidUserName",context, "item from pref");
 		
 		setContentView(R.layout.main);
+
 		Toast.makeText(MainActivity.this, "Slide for next item!", Toast.LENGTH_LONG).show();
 
 		/*
-		 * Buttons onClick Listeners and backgrounds
+		 * Set up liking and disliking an item (with LikeManager)
 		 */
 		View likeButton = findViewById(R.id.like_button);
 		likeButton.setOnClickListener(this);
@@ -77,6 +76,12 @@ public class MainActivity extends Activity implements  android.view.View.OnClick
 		dislikeButton.setOnClickListener(this);
 		dislikebutton = (ImageButton) findViewById(R.id.dislike_button);
 		
+		likeMan = new LikeManager(likebutton, dislikebutton, this, provide);
+
+		
+		/*
+		 * Buttons onClick Listeners and backgrounds
+		 */
 		View closetButton = findViewById(R.id.wishlist_button);
 		closetButton.setOnClickListener(this);
 		
@@ -86,8 +91,8 @@ public class MainActivity extends Activity implements  android.view.View.OnClick
 		//Sets landscape text
 		namelandtext = (TextView) findViewById(R.id.name);
 		pricelandtext = (TextView) findViewById(R.id.price);
-		setLandscapeName();
-		setLandscapePrice();
+		namelandtext.setText(provide.getCurItem().getName());
+		pricelandtext.setText(provide.getCurItem().getPrice());
 		
 		View buyButton = findViewById(R.id.buy_button);
 		buyButton.setOnClickListener(this);
@@ -97,84 +102,10 @@ public class MainActivity extends Activity implements  android.view.View.OnClick
 		
 		// Set up Gallery
 		Gallery g = (Gallery) findViewById(R.id.gallery);		
-		g.setAdapter(new ImageAdapter(this));	
+		g.setAdapter(new ImageAdapter(this, provide, namelandtext, pricelandtext));	
+		
 	}
 	
-	
-	/**
-	 * Changes the landscape layout more info "name" field to a given string
-	 */
-	public void setLandscapeName(){
-		namelandtext.setText(provide.getCurItem().getName());
-	}
-	
-	/**
-	 * Changes the landscape layout more info "price" field to a given string
-	 */
-	public void setLandscapePrice(){
-		pricelandtext.setText(provide.getCurItem().getPrice());
-	}
-	
-	
-	/**
-	 * Like the current item (add counts to hashtag list in taste manager)
-	 * 
-	 * @author Jackie
-	 */
-    public void like(){
-    	provide.getCurTM().likeFlavor(provide.getCurItem().getTagList());
-    }
-
-    
-    
-    /**
-	 * Dislike the current item (subtract counts to hashtag list in taste manager)
-	 * 
-	 * @author Jackie
-	 */
-    public void dislike(){
-	provide.getCurTM().dislikeFlavor(provide.getCurItem().getTagList());
-    }
-
-	
-    /**
-     * Greys the 'like' button
-     * 
-     * @author Jackie
-     */
-    public void greyLike(){
-    	likebutton.setImageDrawable(getResources().getDrawable(R.drawable.approvegrey));
-    }
-    
-    
-    /**
-     * Greens the 'like' button
-     * 
-     * @author Jackie
-     */
-    private void greenLike() {
-		likebutton.setImageDrawable(getResources().getDrawable(R.drawable.approvegreen));
-	}
-    
-    
-    /**
-     * Greys the 'dislike' button
-     * 
-     * @author Jackie
-     */
-    private void greyDislike() {
-		dislikebutton.setImageDrawable(getResources().getDrawable(R.drawable.disapprovegrey));
-	}
-    
-    
-    /**
-     * Reds the 'dislike' button
-     * 
-     * @author Jackie
-     */
-    private void redDislike() {
-		dislikebutton.setImageDrawable(getResources().getDrawable(R.drawable.disapprovered));
-	}
 	
 	/**
 	 * Deals with figuring out what buttons are pressed and what actions to take.
@@ -185,35 +116,12 @@ public class MainActivity extends Activity implements  android.view.View.OnClick
 
 		//Like Button onClick
 		case R.id.like_button : 
-			
-			if(itemliked){
-				//dislike();
-				itemliked=false;
-				greyLike();
-			}
-			else{
-				//like();
-				itemliked=true;
-				greenLike();
-			}
-						
+			likeMan.like();			
 	    	break;
 	    	
 	    //Dislike button onClick
 		case R.id.dislike_button:
-			
-			if(itemdisliked){
-				//like();
-				itemdisliked=false;
-				greyDislike();
-				
-			}
-			else{
-				//dislike();
-				itemdisliked=true;
-				redDislike();
-			}
-
+			likeMan.dislike();
 			break;
 			
 		//Wishlist Button on click	
@@ -287,7 +195,7 @@ public class MainActivity extends Activity implements  android.view.View.OnClick
 		}
 	}
 
-
+	
 	
 	/**
 	 *   When clicking the physical menu button, inflates the two options 
