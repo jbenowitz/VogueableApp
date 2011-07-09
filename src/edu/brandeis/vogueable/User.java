@@ -10,7 +10,7 @@ import android.content.Context;
  *
  */
 public class User {
-	public String name; 
+	private String name,email; 
 	public Wishlist wishlist;
 	public TasteManager mytaste;
 	public Context con;
@@ -80,6 +80,16 @@ public class User {
 	
 	public void setTasteManager(TasteManager taste){
 		mytaste = taste; 
+	}
+
+
+	public void setEmail(String email) {
+		// TODO Auto-generated method stub
+		this.email=email;
+	}
+	public void setName(String name) {
+		// TODO Auto-generated method stub
+		this.name=name;
 	}
 	
 }

@@ -61,7 +61,7 @@ public class Women extends Activity implements  android.view.View.OnClickListene
 		    	  AlertDialog.Builder welcome = new AlertDialog.Builder(this);
 		    	  	welcome.setIcon(R.drawable.logobright);
 		    	  	welcome.setTitle(" ");
-		    	  	welcome.setMessage("Welcome, "+user.name);
+		    	  	welcome.setMessage("Welcome, "+user.getName());
 		    	  	welcome.setPositiveButton("Go!",new DialogInterface.OnClickListener() {
 			    	             public void onClick(DialogInterface dialog, int id) {
 			    			         startActivity(new Intent(Women.this, CategoryChooser.class));

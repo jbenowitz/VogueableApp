@@ -61,7 +61,7 @@ public class Men extends Activity implements  android.view.View.OnClickListener{
 		    	  AlertDialog.Builder welcome = new AlertDialog.Builder(this);
 		    	  	welcome.setIcon(R.drawable.logobright);
 		    	  	welcome.setTitle(" ");
-		    	  	welcome.setMessage("Welcome, "+user.name);
+		    	  	welcome.setMessage("Welcome, "+user.getName());
 		    	  	welcome.setPositiveButton("Go!",new DialogInterface.OnClickListener() {
 			    	             public void onClick(DialogInterface dialog, int id) {
 			    			         startActivity(new Intent(Men.this, CategoryChooser.class));
