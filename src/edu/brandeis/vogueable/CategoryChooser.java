@@ -10,8 +10,10 @@ import android.view.View.OnClickListener;
 import android.widget.CheckBox;
 
 public class CategoryChooser extends Activity implements OnClickListener {
+	Provider prov;
 	
-	public ArrayList<String> currCat = new ArrayList<String>();
+	//public String currCat = "";
+	public ArrayList<String> currCat =new ArrayList<String>();
 	
 	  public void onCreate(Bundle savedInstanceState) {
 	        super.onCreate(savedInstanceState);
@@ -64,31 +66,37 @@ public class CategoryChooser extends Activity implements OnClickListener {
 		    	  Intent i = new Intent(this, MainActivity.class);
 			         if (dress.isChecked()) {
 			             currCat.add("dress");
+			        	 //currCat+=" "+"dresses";
 			         }   
 			         if (shoes.isChecked()) {
-			        	 currCat.add("shoes");
+			        	currCat.add("shoes");
+			        	 //currCat+="|"+"shoes";
 			         }  
 			         if (pants.isChecked()) {
 			        	 currCat.add("pants");
+			        	 //currCat+="|"+"dresses";
 			         } 
 			         if (shorts.isChecked()) {
 			        	 currCat.add("shorts");
+			        	 //currCat+="|"+"shorts";
 			         } 
 			         if(clothing.isChecked()) {
 			        	 currCat.add("clothing");
+			        	 //currCat+="|"+"clothing";
 			         }
 			        
 			         /*pass the selected categories to the main activity 
 			          * so the items loaded reflect the categories the user selects
 			          * */
-			         i.putExtra("categories", currCat);
+			         
+			        // i.putStringArrayListExtra("categories", currCat);
 			         startActivity(i);//start the activity
 			         
 			         
 			         break;    
 			         
 		      case R.id.select_all :
-		    	  Intent in = new Intent(this, MainActivity.class);
+		    	 // Intent in = new Intent(this, MainActivity.class);
 		    	  
 		    	  dress.setChecked(true);
 		    	  shoes.setChecked(true);
@@ -99,7 +107,7 @@ public class CategoryChooser extends Activity implements OnClickListener {
 		    	  break;
 		    	  
 		      case R.id.deselect_all :
-		    	  Intent inten = new Intent(this, MainActivity.class);
+		    	//  Intent inten = new Intent(this, MainActivity.class);
 		    	  
 		    	  dress.setChecked(false);
 		    	  shoes.setChecked(false);

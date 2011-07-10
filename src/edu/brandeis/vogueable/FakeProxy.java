@@ -24,52 +24,59 @@ import android.nfc.Tag;
 import android.util.Log;
 
 public class FakeProxy extends AbstractProxy {
-	
+
 	User curruser;// user currently using app
 	NodeList nList;
 	Context con;
 	private final static String TAG = "FakeProxy";
-	public FakeProxy(){
-		
-		
-	}
+
+	private ArrayList<User> userList=new ArrayList<User>();//list of all our users
+
+	public FakeProxy(){}
+
 	/**
 	 * connects to web service
 	 * @throws SAXException 
 	 */
 	public void connect(Context context) {
 		con = context;
-		
-		
+
+
 		try {
-			
-			
+
+			/* get xmlfiles of items from server*/
 			Resources rr = context.getResources();
-			
+
 			InputStream stream = rr.openRawResource(R.raw.ouritems);
-			//StringBufferInputStream stream = new StringBufferInputStream (st);
-			//byte[] bits = st.getBytes();
-			//ByteArrayInputStream bais = new ByteArrayInputStream(stream);
-			DocumentBuilderFactory dbFactory = DocumentBuilderFactory
-					.newInstance();
+			DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
 			DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
 			Document doc = dBuilder.parse(stream);
 			doc.getDocumentElement().normalize();
-			nList = doc.getElementsByTagName("item");
+
+			nList = doc.getElementsByTagName("item");//list of all item nodes
 		}
 		catch(Exception e){
 			e.printStackTrace();
 		}
-		
-	}
-	/*helper method*/
+	}//end connect to server
+
+	/**
+	 * 
+	 * @param sTag
+	 * @param eElement
+	 * @return
+	 */
 	protected String getTagValue(String sTag, Element eElement) {
 		NodeList list = eElement.getElementsByTagName(sTag);
 		Node el = list.item(0);
-		NodeList nlList = el.getChildNodes();
-		Node nValue = (Node) nlList.item(0);
-		if (nValue != null){
-			return nValue.getNodeValue();
+		Log.d(TAG,"error on el");
+
+		if (el != null) {
+			NodeList nlList = el.getChildNodes();//get all children of the item node
+			Node nValue = (Node) nlList.item(0);
+			if (nValue != null){
+				return nValue.getNodeValue();
+			}
 		}
 		return null; 
 	}
@@ -77,36 +84,43 @@ public class FakeProxy extends AbstractProxy {
 	 * disconnectes from webservice
 	 */
 	public void disconnect(){
-		
+
 	}
-	
+
 	/***
 	 * Checks if user is in out database
+	 * will use this to determine whether user is also logged in or not
 	 * @param email - user's email- hopefully provided by Android; 
 	 * @return
 	 */
 	public boolean isKnownUser(String email){
-		return false; 
+		if (userList.contains(getUser(email)))
+			return true;
+		else
+			return false; 
 	}
-	
+
 	/**
 	 * Creates a User Entry, if we don't yet have that user' 
 	 * @param email user's email- hopefully provided by Android; 
 	 */
 	public void createUser(String email){
-		
+		if (!userList.contains(getUser(email))){
+			userList.add(getUser(email));
+		}
+		//return userList; 
 	}
-	
+
 	/**
 	 * Returns user object
 	 * @param email - user's email- hopefully provided by Android; 
 	 * @return Returns user object instantiated with data from webservice 
 	 */
 	public User getUser(String email){
-		User user = new User("yoooser@mail.ru");
+		User user = new User(email);//
 		return user; 
 	}
-	
+
 	public ArrayList<Item> getAllItems(){
 		ArrayList<Item> items = new ArrayList<Item>();
 		for (int temp = 0; temp < nList.getLength(); temp++) {
@@ -122,7 +136,7 @@ public class FakeProxy extends AbstractProxy {
 				//it.setBrand(getTagValue("brand", eElement));
 				//it.addTag(getTagValue("fabric_type", eElement));
 				items.add(it);
-				
+
 			}
 		}
 		return items;
@@ -137,38 +151,47 @@ public class FakeProxy extends AbstractProxy {
 		Item nextit = new Item("next");
 		int temp = new Random().nextInt(nList.getLength());
 		//Node nNode = nList.item(temp);
-	
+
 		for (int k = 0; k < nList.getLength(); k++) {
 
 			Node nNode = nList.item(temp);
 			if (nNode.getNodeType() == Node.ELEMENT_NODE) {
 				Element eElement = (Element) nNode;
 				//if(getTagValue("fabric_type",eElement)== tags.get(0)){
-					
-					
-					nextit.setName(getTagValue("title", eElement));
-					nextit.setImageFileString(getTagValue("image_url", eElement));
-					//nextit.setPrice(getTagValue("price", eElement));
-					nextit.setBrand(getTagValue("brand", eElement));
-					//nextit.addTag(getTagValue("fabric_type", eElement));
-				    break;
-				
-			//}
-		}
+
+
+				nextit.setName(getTagValue("title", eElement));
+				nextit.setImageFileString(getTagValue("image_url", eElement));
+				//nextit.setPrice(getTagValue("price", eElement));
+				nextit.setBrand(getTagValue("brand", eElement));
+				//nextit.addTag(getTagValue("fabric_type", eElement));
+				break;
+
+				//}
+			}
 		}
 		return nextit; 
 	}
-	
-	
+
+
 	/**
 	 * Updates the TasteManager table; It looks at each tag for the user, 
-	 * and if the counts in the local TasteManager are not the same as the webserver ones - chagnes them; 
+	 * and if the counts in the local TasteManager are not the same as the webserver ones - changes them; 
 	 * @param taste
 	 */
 	public void updateTasteManager(TasteManager taste){
-		
-	}
-	
+		TasteManager serverTasteManager = null;//TO_DO implement server taste manager 
+		//check if counts on server differ from ones on the local database
+		//
+		for(String tags:taste.tagCount.keySet())
+			if(serverTasteManager.tagCount.containsKey(tags))
+				if(taste.tagCount.get(tags)!=serverTasteManager.tagCount.get(tags)){ //compare counts	
+					int cnt=taste.tagCount.get(tags);//change web server count	
+					serverTasteManager.tagCount.get(tags);
+				}
+	}//end update
+
+
 	/**
 	 * 
 	 * @param email - user's email
@@ -176,9 +199,19 @@ public class FakeProxy extends AbstractProxy {
 	 */
 	public TasteManager getTasteManager(String email){
 		TasteManager tastes = null;
-		return tastes; 
+		if (userList.contains(getUser(email))){  //check if user is logged in
+			return getUser(email).getTasteManager();
+
+		}
+		else  { //create user account and initialise his taste manager
+			User t=new User(email);
+			t.setTasteManager(tastes);
+			return t.getTasteManager();
+		}
+
+
 	}
-	
+
 	/**
 	 * 
 	 * @param email - user's email; 
@@ -193,11 +226,20 @@ public class FakeProxy extends AbstractProxy {
 	 * @param wishlist - Wishlsit for User
 	 */
 	public void updateWishList(Wishlist wishlist){
-		
+
 	}
-	
-	
-	
-	
+
+
+	/**
+	 * return all the users currently in our database
+	 */
+	public void getAllUsers(){
+		if (!userList.isEmpty()){
+			for (User usr:userList){
+				System.out.println(usr.getName());
+
+			}
+		}
+	}
 
 }
