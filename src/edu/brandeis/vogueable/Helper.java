@@ -6,17 +6,27 @@ import java.io.InputStream;
 import java.net.URL;
 import java.net.URLConnection;
 
+import android.accounts.Account;
+import android.accounts.AccountManager;
+import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 import android.widget.LinearLayout.LayoutParams;
 
 
@@ -27,10 +37,6 @@ public class Helper extends BaseAdapter {
     public Helper(Context c,Provider pro) {
         mContext = c;
         this.pro=pro;
-
-        // get ref to view for the whole row in the list
-        // get ref to the view within that for the image
-        // get ref for the view within that for the title
     }
 
     public int getCount() {
@@ -45,113 +51,95 @@ public class Helper extends BaseAdapter {
         return position;
     }
 
-    // create a new ImageView for each item referenced by the Adapter
     public View getView(int position, View convertView, ViewGroup parent) {
-        
-    	LinearLayout l;
-    	LinearLayout l2;
-    	LinearLayout l3;
-    	LinearLayout l4;
-    	LinearLayout l5;
-    	
-    	Button b;
-        Button b2;
-    	
-        ImageView iv;
-    	
-        TextView tv;
-        TextView tv2;
-        
-        //View v;
-        // set image corresponding to item 'position' at the stored image view instance var
-        // set the text corresonding to item 'position' into the stored title view
-        // return the view for the whole row
-        
-        if (convertView == null) {  // if it's not recycled, initialize some attributes
+   
+    	View view;
+    	TextView name_txt, price_txt;
+    	ImageView image;
+    	Button buy_button, remove_button;
+
+    	if (convertView == null) {  // if it's not recycled
+    		
+    		view = (LinearLayout) LayoutInflater.from(mContext).inflate(R.layout.single,parent,false);
+    		
+    		name_txt = (TextView) view.findViewById(R.id.tryname);
+    		price_txt = (TextView) view.findViewById(R.id.tryprice);
+    		
+    		image = (ImageView) view.findViewById(R.id.tryitem);
+    		
+    		buy_button = (Button) view.findViewById(R.id.buy_buy);
+    		remove_button = (Button) view.findViewById(R.id.remove);
+    		
+        	name_txt.setText(pro.getCurUser().wishlist.showWishlist().get(position).getName());
+        	price_txt.setText(pro.getCurUser().wishlist.showWishlist().get(position).getPrice());
         	
-        	l = new LinearLayout(mContext);
-        	l2 = new LinearLayout(mContext);
-        	l3 = new LinearLayout(mContext);
-        	l4 = new LinearLayout(mContext);
-        	l5 = new LinearLayout(mContext);
+        	try {
+                Log.e("src",pro.getCurUser().wishlist.showWishlist().get(position).getImageFileString());
+                URL url = new URL(pro.getCurUser().wishlist.showWishlist().get(position).getImageFileString());
+                URLConnection connection = (URLConnection) url.openConnection();
+                connection.connect();
+                InputStream input = connection.getInputStream();
+                BufferedInputStream bis = new BufferedInputStream(input);
+                Bitmap myBitmap = BitmapFactory.decodeStream(bis);
+                image.setImageBitmap(myBitmap);
+            } catch (IOException e) {
+                e.printStackTrace();
+                Log.e("Exception",e.getMessage());
+                image.setImageResource(R.drawable.icon);
+            }
         	
-        	b = new Button(mContext);
-        	b2 = new Button(mContext);
+            buy_button.setTag(position);
+            remove_button.setTag(position);
             
-        	iv = new ImageView(mContext);
-        	
-        	tv = new TextView(mContext);
-        	tv2 = new TextView(mContext);
-        	//v = new View(mContext);
-        
-        } else {
-        	
-        	l = (LinearLayout) convertView;
-        	l2 = (LinearLayout) convertView;
-        	l3 = (LinearLayout) convertView;
-        	l4 = (LinearLayout) convertView;
-        	l5 = (LinearLayout) convertView;
-        	
-        	b = (Button) convertView;
-        	b2 = (Button) convertView;
-        	
-        	iv = (ImageView) convertView;
-        	
-        	tv = (TextView) convertView;
-        	tv2 = (TextView) convertView;
-        	//v = (View)convertView;
-        }
-        //iv.setImageResource(R.drawable.icon);
-        
-        try {
-            Log.e("src",pro.getCurUser().wishlist.showWishlist().get(position).getImageFileString());
-            URL url = new URL(pro.getCurUser().wishlist.showWishlist().get(position).getImageFileString());
-            URLConnection connection = (URLConnection) url.openConnection();
-            connection.connect();
-            InputStream input = connection.getInputStream();
-            BufferedInputStream bis = new BufferedInputStream(input);
-            Bitmap myBitmap = BitmapFactory.decodeStream(bis);
-            iv.setImageBitmap(myBitmap);
-        } catch (IOException e) {
-            e.printStackTrace();
-            Log.e("Exception",e.getMessage());
-            iv.setImageResource(R.drawable.icon);
-        }
-        
-        iv.setAdjustViewBounds(true);
-        iv.setMaxWidth(160);
-        iv.setMinimumWidth(160);
-        
-        tv.setText(pro.getCurUser().wishlist.showWishlist().get(position).getName());
-        tv2.setText(pro.getCurUser().wishlist.showWishlist().get(position).getPrice());
-        
-        b.setText("Buy!");
-        b2.setText("Remove");
-        
-        l2.setOrientation(1);
-        l2.setPadding(6, 0, 6, 0);
-        l2.addView(tv);
-        l2.addView(tv2);
-        
-        l5.setHorizontalGravity(5);
-        l5.addView(b,new LayoutParams(-2,-2));
-        l5.addView(b2,new LayoutParams(-2,-2));
-        
-        l4.setOrientation(1);
-        l4.addView(l2,new LayoutParams(-2, -2));
-        l4.addView(l5,new LayoutParams(-1,-2));
-        
-        l3.setVerticalGravity(16);
-        l3.addView(iv,new LayoutParams(-2, -2));
-        l3.addView(l4,new LayoutParams(-2, -2));
-        
-        l.setPadding(5, 5, 0, 5);
-        l.addView(l3,new LayoutParams(-2, -1));
-        
-        return l;
+            buy_button.setOnClickListener(new OnClickListener() {
 
+                public void onClick(View v) {
+                	switch (v.getId()) {
+           	     
+    	      	      case R.id.buy_buy :
+    	      	    	if (pro.getCurItem().getLink() != null) {
+    	      	    		int tag = (Integer) v.getTag();
+    	    		    	v.getContext().startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(pro.getCurUser().wishlist.showWishlist().get(tag).getLink())));
+    	    		    } else {
+    	    		    	v.getContext().startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("http://www.amazon.com/l/1036592/ref=nb_sb_noss")));
+    	    		    }
+    	    			break;
+        			
+    		      	  case R.id.remove :
+    		      	    int tag = (Integer) v.getTag();
+    		      	    pro.getCurUser().wishlist.showWishlist().remove(tag);
+    		      	    notifyDataSetChanged();
+    		      	    notifyDataSetInvalidated();
+    		    		break;
+                	}
+                }});
+            
+            remove_button.setOnClickListener(new OnClickListener() {
+
+                public void onClick(View v) {
+                	switch (v.getId()) {
+           	     
+    		      	    case R.id.remove :
+    		      	    	int tag = (Integer) v.getTag();
+    		      	    	pro.getCurUser().wishlist.showWishlist().remove(tag);
+    		      	    	//only good for now
+    		      	    	//v.getContext().startActivity(new Intent(mContext,WishAct.class));
+    		      	    	//notifyDataSetChanged();
+    		      	    	//notifyDataSetInvalidated();
+    		    			break;
+                	}
+                }});
+    		
+    	} else {
+    		
+    		view = (View)convertView;
+    		name_txt = (TextView) convertView;
+    		price_txt = (TextView) convertView;
+    		image = (ImageView) convertView;
+    		buy_button = (Button) convertView;
+    		remove_button = (Button) convertView;
+    	}
     	
-
-        
+    	return view;
     }
 }
