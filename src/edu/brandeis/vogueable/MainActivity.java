@@ -1,19 +1,33 @@
 package edu.brandeis.vogueable;
 
+import java.io.BufferedInputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.URL;
+import java.net.URLConnection;
+
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.res.Configuration;
+import android.content.res.TypedArray;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 
 import android.view.View;
+import android.widget.BaseAdapter;
 import android.widget.Gallery;
+import android.widget.Gallery.LayoutParams;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -203,116 +217,7 @@ public class MainActivity extends Activity implements android.view.View.OnClickL
 	    * @author Jackie
 	    *
 	    */
-	     public class ImageAdapter extends BaseAdapter {
-	         private Context mContext;
-	         int mGalleryItemBackground;
-   
-	         //Array of image URLs to be used within gallery
-	         private String[] myImages = {
-	                 "http://ecx.images-amazon.com/images/I/410oAxun7dL._AA300_.jpg",
-	        		 "http://ecx.images-amazon.com/images/I/41Hkj9aBsAL._AA300_.jpg",
-	        		 "http://ecx.images-amazon.com/images/I/41JMUzALgpL._AA300_.jpg",
-	        		 "http://ecx.images-amazon.com/images/I/51Iykkkx5LL._SX342_.jpg",
-	        		 "http://ecx.images-amazon.com/images/I/410oAxun7dL._AA300_.jpg",
-	         };
-
-	         //Constructor that sets up the Image Adapter (what is inside the Gallery)
-	         public ImageAdapter(Context c) {
-	             mContext = c;
-	             TypedArray a = obtainStyledAttributes(R.styleable.HelloGallery);
-	             mGalleryItemBackground = a.getResourceId(
-	                     R.styleable.HelloGallery_android_galleryItemBackground, 0);
-	             a.recycle();
-	             
-	         }
-
-	         //Returns count of images array
-	         public int getCount() {
-	             return 1000000;
-	         }
-
-	         //returns the item in a certain position
-	         public Object getItem(int position) {
-	             return position;
-	         }
-
-	         //gets the itemID of a certain position
-	         public long getItemId(int position) {
-	             return position;
-	         }
-	         
-	         //creates a bitmap of the images from given URL
-	         public  Bitmap getBitmapFromURL(String src) {
-	             try {
-	                 Log.e("src",src);
-	                 URL url = new URL(src);
-	                 URLConnection connection = (URLConnection) url.openConnection();
-	                 connection.connect();
-	                 InputStream input = connection.getInputStream();
-	                 BufferedInputStream bis = new BufferedInputStream(input);
-	                 Bitmap myBitmap = BitmapFactory.decodeStream(bis);
-	                 Log.e("Bitmap","returned");
-	                 return myBitmap;
-	             } catch (IOException e) {
-	                 e.printStackTrace();
-	                 Log.e("Exception",e.getMessage());
-	                 return null;
-	             }
-	         }
-             
-	         /**
-	          * Creates the view of the images.
-	          */
-	         public View getView(int position, View convertView, ViewGroup parent) {
-	        	 
-	        	 position = position % myImages.length;
-	        	 if (position < 0)
-	        	     position = position + myImages.length;
-	        	 System.out.print(position); //TODO CAN WE DELETE THIS!
-	        	 
-	             
-	             //Sets the current item to be referenced by other classes in the provider
-
-	             provide.setCurItem(currents[position]);	
-	             link=provide.getCurItem().getLink();
-	             setLandscapeName();
-	             setLandscapePrice();
-	             
-	             
-	             //Gets the next item
-	             Item nextItem = provide.getCurTM().getNextItem(provide.getCurItem(), null);
-	             myImages[position+(getCount()/2)%1000] = nextItem.getImageFileString();
-	             currents[position+(getCount()/2)%1000] = nextItem;
-	             //link=currents[position].getLink();
-	             
-	             
-	             //Sets the view context image
-	             ImageView i = new ImageView(mContext);
-	             Bitmap bimage=  getBitmapFromURL(myImages[position]);
-	             i.setImageBitmap(bimage);
-	             
-
-	            //scales the images accordingly
-	             i.setScaleType(ImageView.ScaleType.CENTER_INSIDE);
-	             
-	             
-	             
-	             //Set landscape or portrait gallery/image size
-	             Gallery.LayoutParams galayout;
-	             if(getResources().getConfiguration().orientation==Configuration.ORIENTATION_LANDSCAPE){
-	            	 galayout = new Gallery.LayoutParams(200,200);
-	             }
-	             else{
-	            	 galayout = new Gallery.LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT);
-	             }
-	             i.setLayoutParams(galayout);
-
-	             //sets the border
-	             i.setBackgroundResource(mGalleryItemBackground);
-
-	             return i;
-	         }
-	     }
+	     
 }
 
 
