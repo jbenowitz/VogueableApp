@@ -1,38 +1,19 @@
 package edu.brandeis.vogueable;
 
-
-
-
-import java.io.BufferedInputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.net.URL;
-import java.net.URLConnection;
-
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
-import android.content.res.Configuration;
-import android.content.res.TypedArray;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 
 import android.view.View;
-import android.view.ViewGroup;
-import android.view.ViewGroup.LayoutParams;
-import android.widget.BaseAdapter;
-
 import android.widget.Gallery;
 import android.widget.ImageButton;
-import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -49,6 +30,7 @@ public class MainActivity extends Activity implements android.view.View.OnClickL
 	TextView namelandtext, pricelandtext;
 	
     Provider provide; 
+    Bundle currCat;
     LikeManager likeMan;
 
 
@@ -62,7 +44,6 @@ public class MainActivity extends Activity implements android.view.View.OnClickL
 		provide = Provider.instance(proxy, "AndroidUserName",context, "item from pref");
 		
 		setContentView(R.layout.main);
-
 		Toast.makeText(MainActivity.this, "Slide for next item!", Toast.LENGTH_LONG).show();
 
 		/*
@@ -147,45 +128,30 @@ public class MainActivity extends Activity implements android.view.View.OnClickL
 		//Info button on click    
 		case R.id.info_button:
 			
-			 AlertDialog.Builder info = new AlertDialog.Builder(this);
-	         info
-	         .setMessage(provide.getCurItem().getName()+" - "+provide.getCurItem().getPrice())
-	         .setPositiveButton("Add to wishlist", new DialogInterface.OnClickListener() {
-	             public void onClick(DialogInterface dialog, int id) {
-	            	 provide.getCurUser().addWishlist(provide.getCurItem());
-	            	 Toast.makeText(MainActivity.this, "Added to wishlist", Toast.LENGTH_SHORT).show();
-	            	 dialog.cancel();
-	             }
-	         	})
-	         .setNegativeButton("Buy", new DialogInterface.OnClickListener() {
-	             public void onClick(DialogInterface dialog, int id) {
-	            	 if (provide.getCurItem().getLink() != null) {
-	     		    	startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(provide.getCurItem().getLink())));
-	     		    } else {
-	     		    	startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("http://www.amazon.com/l/1036592/ref=nb_sb_noss")));
-	     		    }
-	             }
-	         })
-	         .show();
-			
-			
-			
-			//Intent k = new Intent(this, Info.class);
-	        //startActivity(k);
-	         
-	         break;
-	         
+			AlertDialog.Builder info = new AlertDialog.Builder(this);
+			info
+			.setMessage(provide.getCurItem().getName()+" - "+provide.getCurItem().getPrice())
+			.setPositiveButton("Add to wishlist", new DialogInterface.OnClickListener() {
+				public void onClick(DialogInterface dialog, int id) {
+					provide.getCurUser().addWishlist(provide.getCurItem());
+					Toast.makeText(MainActivity.this, "Added to wishlist", Toast.LENGTH_SHORT).show();
+					dialog.cancel();
+				}
+			})
+			.setNegativeButton("Buy", new DialogInterface.OnClickListener() {
+				public void onClick(DialogInterface dialog, int id) {
+					if (provide.getCurItem().getLink() != null) {
+						startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(provide.getCurItem().getLink())));
+					} else {
+						startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("http://www.amazon.com/l/1036592/ref=nb_sb_noss")));
+					}
+				}
+			})
+			.show();
+			break;
+
 		case R.id.buy_button:
 	
-			//Intent purchase = new Intent(this, PurchaseItem.class);
-			//Log.d(provide.getCurItem().getLink(),"?");
-			//pass curr item attributes to the new intent
-			//purchase.putExtra("URL", link/*provide.getCurItem().getImageFileString()*/);
-			//startActivity(purchase);
-			//Uri uri = Uri.parse("http://www.amazon.com/");
-			//Uri uri = Uri.parse(provide.getCurItem().getLink());
-		      //Intent intent = new Intent(Intent.ACTION_VIEW, uri);
-		     // startActivity(intent);
 		    if (provide.getCurItem().getLink() != null) {
 		    	startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(provide.getCurItem().getLink())));
 		    } else {
@@ -220,8 +186,7 @@ public class MainActivity extends Activity implements android.view.View.OnClickL
 		case R.id.wishlist_menu:   
 			startActivity(new Intent(this, WishAct.class));
 			break;
-			
-
+		
 		case R.id.return_categories: //Return to categories
 			startActivity(new Intent(this, CategoryChooser.class));
 			break;

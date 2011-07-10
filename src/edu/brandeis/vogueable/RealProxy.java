@@ -103,9 +103,6 @@ public class RealProxy extends FakeProxy {
 			Node nNode = nList.item(temp);
 			if (nNode.getNodeType() == Node.ELEMENT_NODE) {
 				Element eElement = (Element) nNode;
-				//if(getTagValue("fabric_type",eElement)== tags.get(0)){
-					
-					
 					nextit.setName(getTagValue("name", eElement));
 					nextit.setImageFileString(getTagValue("img-url", eElement));
 					nextit.setLink(getTagValue("link-to-buy", eElement));
@@ -115,10 +112,10 @@ public class RealProxy extends FakeProxy {
 					nextit.setDescription(getTagValue("features", eElement));
 					nextit.addTag(getTagValue("brand", eElement));
 					nextit.getTags();
+
 				    break;
 				
-			//}
-		}
+			}
 		}
 		return nextit; 
 	}
