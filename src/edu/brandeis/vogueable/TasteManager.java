@@ -18,7 +18,7 @@ import android.content.Context;
 public class TasteManager {
 
 	HashMap<String,Integer> tagCount;
-	ArrayList<Item> itemsNotUsed;
+	ArrayList<Item> itemsUsed;
 	FakeProxy prox;
 	Context context;
 
@@ -30,12 +30,12 @@ public class TasteManager {
 	 * @param ArrayList of items, to choose next item
 	 * @throws SAXException 
 	 */
-	public TasteManager(Context con, RealProxy Prox) {
+	public TasteManager( RealProxy Prox) {
 
 		tagCount = new HashMap<String,Integer>();
 		prox = Prox;
-		prox.connect(con);
-		itemsNotUsed = new ArrayList<Item>();
+		prox.connect();
+		itemsUsed = new ArrayList<Item>();
 
 	}
 
@@ -85,14 +85,19 @@ public class TasteManager {
 	 * @return
 	 */
 	public Item getNextItem(Item currItem, ArrayList<String> currCat){
-
-		//itemsNotUsed.remove(currItem);
+         
+		Item next = null;
 		ArrayList<Item> filtered = new ArrayList<Item>();
 		/*for(Item it : itemsNotUsed){
 			if (currCat.contains(it.getCategoryTag())){
 				filtered.add(it);
 			}
 		}*/
-		return prox.getNextItem(currItem, currCat);
+		next = prox.getNextItem(currItem, currCat);
+		if(itemsUsed.contains(next)){
+			next = getNextItem(currItem, currCat);
+		}
+		
+		return next;
 	}
 }

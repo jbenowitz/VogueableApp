@@ -1,6 +1,7 @@
 package edu.brandeis.vogueable;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 import android.content.Context;
 import android.widget.ImageButton;
@@ -12,11 +13,11 @@ import android.widget.ImageButton;
  */
 public class Item {
 	
-	private String name, imageFile, brand, description, link;
-	private String price;
+	private String name, imageFile, brand, description, link, price, categorytag;
 	private ArrayList<String> taglist;
-	private String categorytag;
+
 	private boolean itemliked=false, itemdisliked=false; //tells MainActivity if user has item 'liked' or 'disliked' enabled
+
 	
 	
 	/**
@@ -26,6 +27,7 @@ public class Item {
 	 */
 	public Item(String name){
 		this.name = name; 
+		taglist = new ArrayList<String>();
 	}
 	
 	
@@ -106,7 +108,11 @@ public class Item {
 	 * @return price of item
 	 */
 	public String getPrice(){
-		return price;
+		if (price != null){
+			return price;
+		} else {
+			return "";
+		}
 	}
 	
 	
@@ -181,12 +187,52 @@ public class Item {
 	
 
 	/**
-	 * Sets the item's category
-	 * @param s
+	 * Set category of this item
+	 * @param s- category string (dress, shirt, shoes...)
 	 */
 	public void setCategory(String s){
 		categorytag =s;
 	}
+
+	
+	/**
+	 * toggles the itemliked boolean (used to see if item was previously liked)
+	 */
+	public void toggleItemLiked(){
+		if(itemliked){
+			itemliked=false;
+		}else{
+			itemliked=true;
+		}
+	}
+	
+	/**
+	 * toggles the itemdisliked boolean (used to see if an item was previously disliked)
+	 */
+	public void toggleItemDisliked(){
+		if(itemdisliked){
+			itemdisliked=false;
+		}else{
+			itemdisliked=false;
+		}
+	}
+	
+	/**
+	 * gets the boolean of whether item was previously liked
+	 * @return itemliked boolean
+	 */
+	public boolean getItemLiked(){
+		return itemliked;
+	}
+	
+	/**
+	 * gets the boolean ofwhtether item was previously disliked
+	 * @return itemdisliked boolean
+	 */
+	public boolean getItemDisliked(){
+		return itemdisliked;
+	}
+
 	
 	/**
 	 * Returns what is saved in itemliked (if previous liked returns true)
@@ -218,5 +264,23 @@ public class Item {
 	 */
 	public void setItemDisliked(boolean disliked){
 		itemdisliked = disliked;
+	}
+	/**
+	 * This Method creates a list of tags to describe the item that will be used by the Taste Manager,
+	 * it sees if the name and description contain some key words stores in the Tags constant class; 
+	 */
+	public void getTags(){
+		
+		ArrayList<String> dis = new ArrayList<String>();
+		dis.addAll(Arrays.asList(getName().split(" ")));
+		if(getDescription()!= null){
+			dis.addAll(Arrays.asList(getDescription().split(" ")));
+		}
+		for(String tag: dis){
+				if(Arrays.asList(Tags.tags).contains(tag.toLowerCase()) && !getTagList().contains(tag.toLowerCase())){
+					addTag(tag.toLowerCase());
+				}
+		}
+		
 	}
 }

@@ -33,6 +33,10 @@ public class FakeProxy extends AbstractProxy {
 
 
 	}
+	//Connect method with no context (for now for debugging purposes)
+	public void connect(){
+		
+	}
 	/**
 	 * connects to web service
 	 * @throws SAXException 
