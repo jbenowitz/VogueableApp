@@ -39,7 +39,7 @@ public class RealProxy extends FakeProxy {
 	 * connects to web service
 	 * @throws SAXException 
 	 */
-	public void connect(Context context) {
+	public void connect() {
 		
 		Resty r = new Resty();
 		XMLResource usr1 = null;
@@ -84,8 +84,8 @@ public class RealProxy extends FakeProxy {
 				it.setPrice(getTagValue("item-price", eElement));
 				it.setCategory(getTagValue("category", eElement));
 				it.setBrand(getTagValue("brand", eElement));
-				//it.addTag(getTagValue("fabric_type", eElement));
-				it.addTag("this");
+				it.addTag(getTagValue("fabric-type", eElement));
+				//it.addTag("this");
 				items.add(it);
 				
 			}
@@ -111,8 +111,10 @@ public class RealProxy extends FakeProxy {
 					nextit.setLink(getTagValue("link-to-buy", eElement));
 					nextit.setPrice(getTagValue("item-price", eElement));
 					nextit.setBrand(getTagValue("brand", eElement));
-					//nextit.addTag(getTagValue("fabric_type", eElement));
-					nextit.addTag("this");
+					nextit.addTag(getTagValue("fabric-type", eElement));
+					nextit.setDescription(getTagValue("features", eElement));
+					nextit.addTag(getTagValue("brand", eElement));
+					nextit.getTags();
 				    break;
 				
 			//}
