@@ -48,7 +48,7 @@ public class LikeManager {
 	 * 
 	 */
     private void rmTagItem(){
-	provide.getCurTM().dislikeFlavor(provide.getCurItem().getTagList());
+    	provide.getCurTM().dislikeFlavor(provide.getCurItem().getTagList());
     }
 
 	
@@ -56,7 +56,7 @@ public class LikeManager {
      * Greys the 'like' button
      * 
      */
-    private void greyLike(){
+    public void greyLike(){
     	likeb.setImageDrawable(context.getResources().getDrawable(R.drawable.approvegrey));
     }
     
@@ -74,7 +74,7 @@ public class LikeManager {
      * Greys the 'dislike' button
      * 
      */
-    private void greyDislike() {
+    public void greyDislike() {
 		dislikeb.setImageDrawable(context.getResources().getDrawable(R.drawable.disapprovegrey));
 	}
     
@@ -89,7 +89,7 @@ public class LikeManager {
 	
    
     /**
-     * preform action on click of liking an item 
+     * perform action on click of liking an item 
      * (e.g. if item was previously liked, remove tags from users Taste manager,
      *  toggle the boolean of if it was previously liked, grey the button)
      */

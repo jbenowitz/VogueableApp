@@ -85,7 +85,7 @@ public class MainActivity extends Activity implements android.view.View.OnClickL
 		
 		// Set up Gallery
 		Gallery g = (Gallery) findViewById(R.id.gallery);		
-		g.setAdapter(new ImageAdapter(this, provide, namelandtext, pricelandtext));	
+		g.setAdapter(new ImageAdapter(this, provide, namelandtext, pricelandtext, likebutton, dislikebutton));	
 		
 	}
 	
@@ -99,7 +99,7 @@ public class MainActivity extends Activity implements android.view.View.OnClickL
 
 		//Like Button onClick
 		case R.id.like_button :
-			Log.i(TAG, "clicked like_button");
+			Log.e(TAG, "clicked like_button");
 			likeMan.like();			
 	    	break;
 	    	
