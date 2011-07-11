@@ -11,7 +11,7 @@ public class Provider {
 	
 	private Provider(RealProxy proxy, String username, Context con, String item){
 		try {
-			usertaste = new TasteManager(con,proxy);
+			usertaste = new TasteManager(proxy);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

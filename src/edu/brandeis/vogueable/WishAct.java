@@ -38,13 +38,4 @@ public class WishAct extends Activity {
         ListView listview = (ListView) findViewById(R.id.listview);
         listview.setAdapter(new Helper(this,prov));
     }
-    
-    /*public void onClick(View v) {
-		switch (v.getId()) {
-
-		//Like Button onClick
-		case R.id.like_button :  
-	         break;
-		}
-    }*/
 }

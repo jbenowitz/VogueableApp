@@ -16,13 +16,13 @@ import android.content.Context;
  *
  */
 public class TasteManager {
-	
+
 	HashMap<String,Integer> tagCount;
-	ArrayList<Item> itemsNotUsed;
-	FakeProxy prox;
+	ArrayList<Item> itemsUsed;
+	RealProxy prox;
 	Context context;
-	
-	
+
+
 	/**
 	 * Constructor
 	 * Initialize tagCount HashMap to be empty.
@@ -30,19 +30,19 @@ public class TasteManager {
 	 * @param ArrayList of items, to choose next item
 	 * @throws SAXException 
 	 */
-	public TasteManager(Context con, RealProxy Prox) {
-		
+	public TasteManager( RealProxy Prox) {
+
 		tagCount = new HashMap<String,Integer>();
 		prox = Prox;
-		prox.connect(con);
-		itemsNotUsed = new ArrayList<Item>();
-		
+		prox.connect();
+		itemsUsed = new ArrayList<Item>();
+
 	}
-	
-	
-	
-	
-	
+
+
+
+
+
 
 	/**
 	 * Increments each liked tag in HashMap
@@ -59,8 +59,8 @@ public class TasteManager {
 			tagCount.put(tag, likes);
 		}
 	}
-	
-	
+
+
 	/**
 	 * Decrements each disliked tag in HashMap
 	 * 
@@ -76,8 +76,8 @@ public class TasteManager {
 			tagCount.put(tag, dislikes);
 		}
 	}
-	
-	
+
+
 	/**
 	 * TO COMMENT
 	 * @param currItem
@@ -85,14 +85,19 @@ public class TasteManager {
 	 * @return
 	 */
 	public Item getNextItem(Item currItem, ArrayList<String> currCat){
-		
-		//itemsNotUsed.remove(currItem);
+         
+		Item next = null;
 		ArrayList<Item> filtered = new ArrayList<Item>();
 		/*for(Item it : itemsNotUsed){
 			if (currCat.contains(it.getCategoryTag())){
 				filtered.add(it);
 			}
 		}*/
-		return prox.getNextItem(currItem, currCat);
+		next = prox.getNextItem(currItem, currCat);
+		if(itemsUsed.contains(next)){
+			next = getNextItem(currItem, currCat);
+		}
+		
+		return next;
 	}
 }

@@ -1,19 +1,29 @@
 package edu.brandeis.vogueable;
 
+import java.io.BufferedInputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.URL;
+import java.net.URLConnection;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.res.Configuration;
+import android.content.res.TypedArray;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-
 import android.view.View;
+import android.widget.BaseAdapter;
 import android.widget.Gallery;
+import android.widget.Gallery.LayoutParams;
 import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -81,7 +91,7 @@ public class MainActivity extends Activity implements android.view.View.OnClickL
 		buyButton.setOnClickListener(this);
 		
 
-		provide.getCurUser().getTasteManager().itemsNotUsed.add(provide.getCurItem()); 
+		provide.getCurTM().itemsUsed.add(provide.getCurItem()); 
 		
 		// Set up Gallery
 		Gallery g = (Gallery) findViewById(R.id.gallery);		
@@ -133,7 +143,7 @@ public class MainActivity extends Activity implements android.view.View.OnClickL
 			
 			AlertDialog.Builder info = new AlertDialog.Builder(this);
 			info
-			.setMessage(provide.getCurItem().getName()+" - "+provide.getCurItem().getPrice())
+			.setMessage(provide.getCurItem().getName()+" "+provide.getCurItem().getPrice())
 			.setPositiveButton("Add to wishlist", new DialogInterface.OnClickListener() {
 				public void onClick(DialogInterface dialog, int id) {
 					provide.getCurUser().addWishlist(provide.getCurItem());
@@ -197,6 +207,8 @@ public class MainActivity extends Activity implements android.view.View.OnClickL
 		}
 		return true;
 	}
+	   
+
 }
 
 

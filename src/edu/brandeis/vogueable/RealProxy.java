@@ -39,7 +39,7 @@ public class RealProxy extends FakeProxy {
 	 * connects to web service
 	 * @throws SAXException 
 	 */
-	public void connect(Context context) {
+	public void connect() {
 		
 		Resty r = new Resty();
 		XMLResource usr1 = null;
@@ -79,12 +79,13 @@ public class RealProxy extends FakeProxy {
 				it.setName(getTagValue("name", eElement));
 				Log.d(TAG,"name" + it.getName());
 				it.setImageFileString(getTagValue("img-url", eElement));
+				it.setDescription(getTagValue("features", eElement));
 				it.setLink(getTagValue("link-to-buy", eElement));
 				it.setPrice(getTagValue("item-price", eElement));
 				it.setCategory(getTagValue("category", eElement));
 				it.setBrand(getTagValue("brand", eElement));
-				//it.addTag(getTagValue("fabric_type", eElement));
-				it.addTag("this");
+				it.addTag(getTagValue("fabric-type", eElement));
+				//it.addTag("this");
 				items.add(it);
 				
 			}
@@ -106,9 +107,12 @@ public class RealProxy extends FakeProxy {
 					nextit.setImageFileString(getTagValue("img-url", eElement));
 					nextit.setLink(getTagValue("link-to-buy", eElement));
 					nextit.setPrice(getTagValue("item-price", eElement));
+					nextit.setBrand(getTagValue("brand", eElement));
+					nextit.addTag(getTagValue("fabric-type", eElement));
+					nextit.setDescription(getTagValue("features", eElement));
+					nextit.addTag(getTagValue("brand", eElement));
+					nextit.getTags();
 
-					//nextit.addTag(getTagValue("fabric_type", eElement));
-					nextit.addTag("this");
 				    break;
 				
 			}
