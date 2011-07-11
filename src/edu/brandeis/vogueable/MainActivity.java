@@ -7,6 +7,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -25,6 +26,7 @@ import android.widget.Toast;
 public class MainActivity extends Activity implements android.view.View.OnClickListener{
 
 	protected static final String id = null;
+	private static final String TAG = "MainActivity";
 	ImageButton likebutton;
 	ImageButton dislikebutton;
 	TextView namelandtext, pricelandtext;
@@ -96,7 +98,8 @@ public class MainActivity extends Activity implements android.view.View.OnClickL
 		switch (v.getId()) {
 
 		//Like Button onClick
-		case R.id.like_button : 
+		case R.id.like_button :
+			Log.i(TAG, "clicked like_button");
 			likeMan.like();			
 	    	break;
 	    	

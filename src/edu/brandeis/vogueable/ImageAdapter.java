@@ -27,6 +27,7 @@ import android.widget.TextView;
  *
  */
   public class ImageAdapter extends BaseAdapter {
+	  private static final String TAG = "ImageAdapter";
       private Context mContext;
       int mGalleryItemBackground;
       String link="http://www.vogueable.heroku.com/";
@@ -75,15 +76,15 @@ import android.widget.TextView;
       //creates a bitmap of the images from given URL
       public  Bitmap getBitmapFromURL(String src) {
           try {
-              Log.e("src",src);
+              Log.e(TAG,"GetbitmapfromURL");
               URL url = new URL(src);
               URLConnection connection = (URLConnection) url.openConnection();
               connection.connect();
-              Log.e("Bitmap","returned");
+              Log.e(TAG,"bitmap returned");
               return BitmapFactory.decodeStream(new BufferedInputStream(connection.getInputStream()));
           } catch (IOException e) {
               e.printStackTrace();
-              Log.e("Exception",e.getMessage());
+              Log.e(TAG,"exception thrown");
               return null;
           }
       }
@@ -92,6 +93,7 @@ import android.widget.TextView;
        * Creates the view of the images.
        */
       public View getView(int position, View convertView, ViewGroup parent) {
+    	  Log.i(TAG, "starting getView");
      	 
      	 position = position % myImages.length;
      	 if (position < 0)
