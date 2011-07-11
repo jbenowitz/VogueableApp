@@ -21,6 +21,8 @@ public class TasteManager {
 	ArrayList<Item> itemsUsed;
 	RealProxy prox;
 	Context context;
+	ArrayList<String> cats;
+	
 
 
 	/**
@@ -30,8 +32,9 @@ public class TasteManager {
 	 * @param ArrayList of items, to choose next item
 	 * @throws SAXException 
 	 */
-	public TasteManager( RealProxy Prox) {
+	public TasteManager( RealProxy Prox, ArrayList<String> cats) {
 
+		this.cats=cats;
 		tagCount = new HashMap<String,Integer>();
 		prox = Prox;
 		prox.connect();
@@ -84,20 +87,32 @@ public class TasteManager {
 	 * @param currCat
 	 * @return
 	 */
-	public Item getNextItem(Item currItem, ArrayList<String> currCat){
+	public Item getNextItem(Item currItem){
          
+		RealProxy proxy = new RealProxy();
+		Context context = null; 
+		Provider provide = Provider.instance(proxy, "AndroidUserName",context, "item from pref");
+		
 		Item next = null;
 		ArrayList<Item> filtered = new ArrayList<Item>();
-		/*for(Item it : itemsNotUsed){
-			if (currCat.contains(it.getCategoryTag())){
-				filtered.add(it);
-			}
-		}*/
-		next = prox.getNextItem(currItem, currCat);
-		if(itemsUsed.contains(next)){
-			next = getNextItem(currItem, currCat);
-		}
+		next = prox.getNextItem(currItem);
+		if(cats.isEmpty()){
+			return next;
+		}else 
 		
-		return next;
+		//for(Item it : itemsUsed){
+		//	if (cats.contains(it.getCategoryTag().toLowerCase())){
+		//		filtered.add(it);
+		//	}
+		//}
+			
+		//if(filtered.contains(next)){
+		//	return next;
+		//
+		if (cats.contains(next.getCategoryTag().toLowerCase())){
+			return next;
+		} else {
+			return next = getNextItem(currItem);
+		}
 	}
 }

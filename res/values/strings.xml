@@ -10,11 +10,18 @@
 	<string name="men_label">MEN</string>
 	<string name="women_label">WOMEN</string>
 	
-	<string name="shoes_label">Shoes</string>
-	<string name="shorts_label">Shorts</string>
-	<string name="pants_label">Pants</string>
+	<string name="shoe_label">Shoes</string>
+	<string name="accesories_label">Accessories</string>
+	<string name="romper_label">Jumpsuits and Rompers</string>
 	<string name="dress_label">Dresses</string>
-	<string name="clothing_label">Clothing</string>
+	<string name="active_label">Activewear</string>
+	<string name="hoodie_label">Hoodies</string>
+	<string name="jacket_label">Jackets, Blazers and Vests</string>
+	<string name="blouse_label">Blouses and Button-Down Shirts</string>
+	<string name="top_label">Tops and Tees</string>
+	<string name="intimate_label">Intimates</string>
+	<string name="bottom_label">Bottoms</string>
+	<string name="suit_label">Suits and Separates</string>
 	
 	<string name="select_all_label">Select All</string>
 	<string name="deselect_all_label">Deselect All</string>

@@ -106,7 +106,7 @@ import android.widget.TextView;
       
           
           //Gets the next item
-          Item nextItem = provide.getCurTM().getNextItem(provide.getCurItem(), null);
+          Item nextItem = provide.getCurTM().getNextItem(provide.getCurItem());
           myImages[position+(getCount()/2)%1000] = nextItem.getImageFileString();
           currents[position+(getCount()/2)%1000] = nextItem;
           

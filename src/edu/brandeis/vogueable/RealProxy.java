@@ -93,7 +93,7 @@ public class RealProxy extends FakeProxy {
 		return items;
 	}
 	
-	public Item getNextItem(Item currentitem, ArrayList<String> tags){
+	public Item getNextItem(Item currentitem){
 		Item nextit = new Item("next");
 		int temp = new Random().nextInt(nList.getLength());
 		//Node nNode = nList.item(temp);
@@ -110,6 +110,7 @@ public class RealProxy extends FakeProxy {
 					nextit.setBrand(getTagValue("brand", eElement));
 					nextit.addTag(getTagValue("fabric-type", eElement));
 					nextit.setDescription(getTagValue("features", eElement));
+					nextit.setCategory(getTagValue("category", eElement));
 					nextit.addTag(getTagValue("brand", eElement));
 					nextit.getTags();
 
