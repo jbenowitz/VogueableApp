@@ -134,7 +134,7 @@ public class MainActivity extends Activity implements android.view.View.OnClickL
 	    	             public void onClick(DialogInterface dialog, int id) {
 	    	            	 startActivity(new Intent(MainActivity.this, WishAct.class));
 	    	             }
-	    	         }).show();
+	    	         }).show().setCanceledOnTouchOutside(true);
 	    	         
 		    break;
 		    
@@ -160,7 +160,7 @@ public class MainActivity extends Activity implements android.view.View.OnClickL
 					}
 				}
 			})
-			.show();
+			.show().setCanceledOnTouchOutside(true);
 			break;
 
 		case R.id.buy_button:
