@@ -1,6 +1,10 @@
 package edu.brandeis.vogueable;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+
+import android.content.Context;
+import android.widget.ImageButton;
 
 /**
  * 
@@ -11,7 +15,9 @@ public class Item {
 	
 	private String name, imageFile, brand, description, link, price, categorytag;
 	private ArrayList<String> taglist;
-	private boolean itemliked=false, itemdisliked=false;
+
+	private boolean itemliked=false, itemdisliked=false; //tells MainActivity if user has item 'liked' or 'disliked' enabled
+
 	
 	
 	/**
@@ -179,6 +185,7 @@ public class Item {
 		return categorytag;
 	}
 	
+
 	/**
 	 * Set category of this item
 	 * @param s- category string (dress, shirt, shoes...)
@@ -186,6 +193,7 @@ public class Item {
 	public void setCategory(String s){
 		categorytag =s;
 	}
+
 	
 	/**
 	 * toggles the itemliked boolean (used to see if item was previously liked)
@@ -226,4 +234,53 @@ public class Item {
 	}
 
 	
+	/**
+	 * Returns what is saved in itemliked (if previous liked returns true)
+	 * @return boolean
+	 */
+	public boolean getWhetherLiked(){
+		return itemliked;
+	}
+	
+	/**
+	 * Sets a boolean into itemliked (when likeing it, true, when dislikeing it, false)
+	 * @param liked boolean
+	 */
+	public void setItemLiked(boolean liked){
+		itemliked = liked;
+	}
+	
+	/**
+	 * Returns what is saved in itemdisliked (if previous disliked returns true)
+	 * @return boolean
+	 */
+	public boolean getWhetherDisliked(){
+		return itemdisliked;
+	}
+	
+	/**
+	 * Sets a boolean into itemdisliked (when dislikeing it, true, when likeing it, false)
+	 * @param disliked boolean
+	 */
+	public void setItemDisliked(boolean disliked){
+		itemdisliked = disliked;
+	}
+	/**
+	 * This Method creates a list of tags to describe the item that will be used by the Taste Manager,
+	 * it sees if the name and description contain some key words stores in the Tags constant class; 
+	 */
+	public void getTags(){
+		
+		ArrayList<String> dis = new ArrayList<String>();
+		dis.addAll(Arrays.asList(getName().split(" ")));
+		if(getDescription()!= null){
+			dis.addAll(Arrays.asList(getDescription().split(" ")));
+		}
+		for(String tag: dis){
+				if(Arrays.asList(Tags.tags).contains(tag.toLowerCase()) && !getTagList().contains(tag.toLowerCase())){
+					addTag(tag.toLowerCase());
+				}
+		}
+		
+	}
 }
