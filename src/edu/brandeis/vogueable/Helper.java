@@ -6,9 +6,6 @@ import java.io.InputStream;
 import java.net.URL;
 import java.net.URLConnection;
 
-import android.accounts.Account;
-import android.accounts.AccountManager;
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -37,17 +34,21 @@ public class Helper extends BaseAdapter {
     public Helper(Context c,Provider pro) {
         mContext = c;
         this.pro=pro;
+        Log.d("constructor","created a a Helper");
     }
 
     public int getCount() {
+    	Log.d("getCount","returns"+ pro.getCurUser().wishlist.showWishlist().size());
         return pro.getCurUser().wishlist.showWishlist().size();
     }
 
     public Object getItem(int position) {
+    	Log.d("getItem","returns"+ pro.getCurUser().wishlist.showWishlist().get(position));
         return pro.getCurUser().wishlist.showWishlist().get(position);
     }
 
     public long getItemId(int position) {
+    	Log.d("getItemId","returns position "+position);
         return position;
     }
 
@@ -58,7 +59,8 @@ public class Helper extends BaseAdapter {
     	ImageView image;
     	Button buy_button, remove_button;
 
-    	if (convertView == null) {  // if it's not recycled
+    	//if (convertView == null) {  // if it's not recycled
+    		//Log.d("getView","created a view");
     		
     		view = (LinearLayout) LayoutInflater.from(mContext).inflate(R.layout.single,parent,false);
     		
@@ -90,6 +92,7 @@ public class Helper extends BaseAdapter {
         	
             buy_button.setTag(position);
             remove_button.setTag(position);
+            Log.d("getView","button tags set to "+position);
             
             buy_button.setOnClickListener(new OnClickListener() {
 
@@ -118,20 +121,39 @@ public class Helper extends BaseAdapter {
 
                 public void onClick(View v) {
                 	switch (v.getId()) {
-           	     
+                	
     		      	    case R.id.remove :
-    		      	    	int tag = (Integer) v.getTag();
-    		      	    	pro.getCurUser().wishlist.showWishlist().remove(tag);
+    		      	    	final int tag = (Integer) v.getTag(); 
+    		      	    	AlertDialog.Builder sure = new AlertDialog.Builder(v.getContext());
+    		      	    	
+    		    	         sure.setMessage("Are you sure you want to remove this item from your wishlist? There is no undo for this action.");
+    		    	         sure.setPositiveButton("Remove", new DialogInterface.OnClickListener() {
+    		    	        	 
+    		    	             public void onClick(DialogInterface dialog, int id) {
+    		    	            	 pro.getCurUser().wishlist.showWishlist().remove(tag);
+    		    	            	 //notifyDataSetChanged();
+    		    	            	 notifyDataSetInvalidated();
+    		    	            	 dialog.cancel();
+    		    	             }
+    		    	         	})
+    		    	         .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+    		    	             public void onClick(DialogInterface dialog, int id) {
+    		    	            	 dialog.cancel();
+    		    	             }
+    		    	         }).show();
+    		    	         
+    			    break;
+    		      	    	
     		      	    	//only good for now
     		      	    	//v.getContext().startActivity(new Intent(mContext,WishAct.class));
     		      	    	//notifyDataSetChanged();
     		      	    	//notifyDataSetInvalidated();
-    		    			break;
                 	}
                 }});
     		
-    	} else {
+    	/*} else {
     		
+    		Log.d("getView","recycled a view");
     		view = (View)convertView;
     		name_txt = (TextView) convertView;
     		price_txt = (TextView) convertView;
@@ -139,7 +161,7 @@ public class Helper extends BaseAdapter {
     		buy_button = (Button) convertView;
     		remove_button = (Button) convertView;
     	}
-    	
+    	Log.d("getView","a view is returned");*/
     	return view;
     }
 }
