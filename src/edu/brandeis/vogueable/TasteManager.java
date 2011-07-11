@@ -19,7 +19,7 @@ public class TasteManager {
 
 	HashMap<String,Integer> tagCount;
 	ArrayList<Item> itemsUsed;
-	FakeProxy prox;
+	RealProxy prox;
 	Context context;
 
 
