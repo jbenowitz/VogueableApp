@@ -16,6 +16,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -35,6 +36,7 @@ import android.widget.Toast;
 public class MainActivity extends Activity implements android.view.View.OnClickListener{
 
 	protected static final String id = null;
+	private static final String TAG = "MainActivity";
 	ImageButton likebutton;
 	ImageButton dislikebutton;
 	TextView namelandtext, pricelandtext;
@@ -93,7 +95,7 @@ public class MainActivity extends Activity implements android.view.View.OnClickL
 		
 		// Set up Gallery
 		Gallery g = (Gallery) findViewById(R.id.gallery);		
-		g.setAdapter(new ImageAdapter(this, provide, namelandtext, pricelandtext));	
+		g.setAdapter(new ImageAdapter(this, provide, namelandtext, pricelandtext, likebutton, dislikebutton));	
 		
 	}
 	
@@ -106,7 +108,8 @@ public class MainActivity extends Activity implements android.view.View.OnClickL
 		switch (v.getId()) {
 
 		//Like Button onClick
-		case R.id.like_button : 
+		case R.id.like_button :
+			Log.e(TAG, "clicked like_button");
 			likeMan.like();			
 	    	break;
 	    	
@@ -205,13 +208,7 @@ public class MainActivity extends Activity implements android.view.View.OnClickL
 		return true;
 	}
 	   
-	   /**
-	    * Image Adapter Class, used with Gallery
-	    * Used in Android SDK on Gallery
-	    * 
-	    * @author Jackie
-	    *
-	    */
+
 }
 
 
