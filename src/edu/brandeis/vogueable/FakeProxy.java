@@ -1,16 +1,11 @@
 package edu.brandeis.vogueable;
 
-import java.io.ByteArrayInputStream;
-import java.io.File;
-import java.io.IOException;
 import java.io.InputStream;
-import java.io.StringBufferInputStream;
 import java.util.ArrayList;
 import java.util.Random;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
-import javax.xml.parsers.ParserConfigurationException;
 
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
@@ -20,7 +15,6 @@ import org.xml.sax.SAXException;
 
 import android.content.Context;
 import android.content.res.Resources;
-import android.nfc.Tag;
 import android.util.Log;
 
 public class FakeProxy extends AbstractProxy {
@@ -60,26 +54,7 @@ public class FakeProxy extends AbstractProxy {
 		}
 	}//end connect to server
 
-	/**
-	 * 
-	 * @param sTag
-	 * @param eElement
-	 * @return
-	 */
-	protected String getTagValue(String sTag, Element eElement) {
-		NodeList list = eElement.getElementsByTagName(sTag);
-		Node el = list.item(0);
-		Log.d(TAG,"error on el");
-
-		if (el != null) {
-			NodeList nlList = el.getChildNodes();//get all children of the item node
-			Node nValue = (Node) nlList.item(0);
-			if (nValue != null){
-				return nValue.getNodeValue();
-			}
-		}
-		return null; 
-	}
+	
 	/**
 	 * disconnectes from webservice
 	 */

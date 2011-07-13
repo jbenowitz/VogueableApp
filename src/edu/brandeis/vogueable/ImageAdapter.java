@@ -39,7 +39,8 @@ import android.widget.TextView;
 
       //Constructor that sets up the Image Adapter (what is inside the Gallery)
       public ImageAdapter(Context c, Provider provide, TextView namelandtext, TextView pricelandtext, ImageButton lb, ImageButton db) {
-          mContext = c;
+          Log.i(TAG, "Constructor called");
+    	  mContext = c;
           this.provide = provide;
           this.namelandtext = namelandtext;
           this.pricelandtext = pricelandtext;
@@ -55,27 +56,30 @@ import android.widget.TextView;
 
       //Returns count of images array
       public int getCount() {
+    	  Log.i(TAG, "getCount() called");
           return MAXPICS;
       }
 
       //returns the item in a certain position
       public Object getItem(int position) {
+    	  Log.i(TAG, "getItem() called position = " + position);
           return items[checkPosition(position)];
       }
 
       //gets the itemID of a certain position
       public long getItemId(int position) {
+    	  Log.i(TAG, "getItemId() position = " + position);
           return checkPosition(position);
       }
       
       //creates a bitmap of the images from given URL
       public  Bitmap getBitmapFromURL(String src) {
           try {
-              Log.e(TAG,"GetbitmapfromURL");
+              Log.i(TAG,"GetbitmapfromURL");
               URL url = new URL(src);
               URLConnection connection = (URLConnection) url.openConnection();
               connection.connect();
-              Log.e(TAG,"bitmap returned");
+              Log.i(TAG,"bitmap returned");
               return BitmapFactory.decodeStream(new BufferedInputStream(connection.getInputStream()));
           } catch (IOException e) {
               e.printStackTrace();
@@ -90,7 +94,7 @@ import android.widget.TextView;
        * Creates the view of the images.
        */
       public View getView(int position, View convertView, ViewGroup parent) {
-    	  Log.i(TAG, "starting getView");
+    	  Log.i(TAG, "starting getView position = " + position );
     	  
     	  position = checkPosition(position);
       	 
@@ -117,7 +121,9 @@ import android.widget.TextView;
            
 
           //scales the images accordingly
+           i.setPadding(50, 0, 50, 0);
            i.setScaleType(ImageView.ScaleType.CENTER_INSIDE);
+           
            
            
            
@@ -132,13 +138,15 @@ import android.widget.TextView;
            i.setLayoutParams(galayout);
 
            //sets the border
-           i.setBackgroundResource(mGalleryItemBackground);
+           //i.setBackgroundResource(mGalleryItemBackground);
+           i.setBackgroundColor(R.color.white);
 
            return i;
       }
       
       
       public int checkPosition(int position) { 
+    	  Log.i(TAG, "checkPosition() called position = " + position);
           if (position >= items.length) { 
               position = position % items.length; 
           } 
@@ -146,10 +154,11 @@ import android.widget.TextView;
       } 
       
       
-      /**
+     /**
    	 * Changes the landscape layout more info "name" field to a given string
    	 */
    	private void setLandscapeName(){
+   		Log.i(TAG, "setLandscapeName() called");
    		namelandtext.setText(provide.getCurItem().getName());
    	}
    	
@@ -157,6 +166,7 @@ import android.widget.TextView;
    	 * Changes the landscape layout more info "price" field to a given string
    	 */
    	private void setLandscapePrice(){
+   		Log.i(TAG, "setLandscapePrice() called");
    		pricelandtext.setText(provide.getCurItem().getPrice());
    	}
   }

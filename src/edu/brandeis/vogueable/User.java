@@ -1,6 +1,5 @@
 package edu.brandeis.vogueable;
 
-import java.util.ArrayList;
 
 import android.content.Context;
 /**

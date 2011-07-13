@@ -2,9 +2,13 @@ package edu.brandeis.vogueable;
 
 import java.util.ArrayList;
 
+import org.w3c.dom.Element;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
 import android.content.Context;
+import android.util.Log;
 
 /**
  * This is an abstract class for the proxy for the server for Vogueable; 
@@ -13,6 +17,7 @@ import android.content.Context;
  */
 public abstract class AbstractProxy {
 	User curruser;// user currently using app
+	private static String TAG = "AbstractProxy";
 	
 	
 	public AbstractProxy(){
@@ -105,6 +110,27 @@ public abstract class AbstractProxy {
 	 */
 	public void updateWishList(Wishlist wishlist){
 		
+	}
+	
+	/**
+	 * 
+	 * @param sTag
+	 * @param eElement
+	 * @return
+	 */
+	public String getTagValue(String sTag, Element eElement) {
+		NodeList list = eElement.getElementsByTagName(sTag);
+		Node el = list.item(0);
+		Log.d(TAG,"error on el");
+
+		if (el != null) {
+			NodeList nlList = el.getChildNodes();//get all children of the item node
+			Node nValue = (Node) nlList.item(0);
+			if (nValue != null){
+				return nValue.getNodeValue();
+			}
+		}
+		return null; 
 	}
 	
 	
