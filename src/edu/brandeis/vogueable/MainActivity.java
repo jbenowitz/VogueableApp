@@ -143,7 +143,7 @@ public class MainActivity extends Activity implements android.view.View.OnClickL
 			
 			AlertDialog.Builder info = new AlertDialog.Builder(this);
 			info
-			.setMessage(provide.getCurItem().getName()+" "+provide.getCurItem().getPrice()+" "+provide.getCatList()+provide.getCurItem().getCategoryTag())
+			.setMessage(provide.getCurItem().getName()+" "+provide.getCurItem().getPrice()+" "+provide.getCurItem().getCategoryTag())
 			.setPositiveButton("Add to wishlist", new DialogInterface.OnClickListener() {
 				public void onClick(DialogInterface dialog, int id) {
 					provide.getCurUser().addWishlist(provide.getCurItem());

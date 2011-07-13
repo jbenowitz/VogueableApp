@@ -119,79 +119,182 @@ public class CategoryChooser extends Activity implements OnClickListener {
 		    	  prov.clearCatList();
 		    	  
 		    	  	if (dresses.isChecked()) {
-			             currCat.add("dresses");
+			             //currCat.add("dresses");
 			             prov.setAcat("dresses");
 			            
 			        	 //currCat+=" "+"dresses";
 			         }   
 			         if (shoes.isChecked()) {
-			        	currCat.add("shoes");
+			        	//currCat.add("shoes");
 			        	prov.setAcat("shoes");
+			        	prov.setAcat("boots");
+			        	prov.setAcat("flats");
+			        	prov.setAcat("pumps");
+			        	prov.setAcat("sandals");
+			        	prov.setAcat("rompers");
+			        	prov.setAcat("oxfords");
+			        	prov.setAcat("espadrilles");
 			        	
 			        	 //currCat+="|"+"shoes";
 			         }  
 			         if (bottoms.isChecked()) {
-			        	 currCat.add("bottoms");
+			        	 //currCat.add("bottoms");
 			        	 prov.setAcat("bottoms");
 			        	 prov.setAcat("pants");
+			        	 prov.setAcat("capris");
+			        	 prov.setAcat("shorts");
+			        	 prov.setAcat("skirts");
+			        	 prov.setAcat("cargo");
+			        	 prov.setAcat("cargos");
+			        	 prov.setAcat("chinos");
+			        	 prov.setAcat("corduroys");
+			        	 prov.setAcat("cropped");
+			        	 prov.setAcat("jeans");
+			        	 prov.setAcat("leggings");
+			        	 prov.setAcat("knits");
+			        	 prov.setAcat("slacks");
+			        	 prov.setAcat("carpenters");
+			        	 prov.setAcat("cuffed");
+			        	 prov.setAcat("pleated");
+			        	 prov.setAcat("bermudas");
+			        	 prov.setAcat("culottes");
+			        	 prov.setAcat("cutoffs");
+			        	 prov.setAcat("khaki");
+			        	 prov.setAcat("skorts");
+			        	 
 			        	
 			        	 //currCat+="|"+"dresses";
 			         } 
 			         if (accesories.isChecked()) {
-			        	 currCat.add("accesories");
+			        	 //currCat.add("accesories");
 			        	 prov.setAcat("accessories");
+			        	 prov.setAcat("belts");
+			        	 prov.setAcat("handbags");
+			        	 prov.setAcat("hats");
+			        	 prov.setAcat("scarves");
+			        	 prov.setAcat("wallets");
+			        	 prov.setAcat("sunglasses");
+			        	 prov.setAcat("headbands");
+			        	 prov.setAcat("fedoras");
+			        	 prov.setAcat("berets");
+			        	 prov.setAcat("wraps");
+			        	 prov.setAcat("pashminas");
+			        	 prov.setAcat("keyrings");
+			        	 prov.setAcat("keychains");
 			        	
 			        	 //currCat+="|"+"shorts";
 			         } 
 			         if(jackets.isChecked()) {
 			        	
-			        	 currCat.add("jackets");
+			        	 //currCat.add("jackets");
 			        	 prov.setAcat("jackets");
 			        	 prov.setAcat("blazers");
+			        	 prov.setAcat("vests");
 			        	 //currCat+="|"+"clothing";
 			         }
 			         if (blouses.isChecked()) {
-			             currCat.add("blouses");
+			             //currCat.add("blouses");
 			             prov.setAcat("blouses");
+			             prov.setAcat("long-sleeve");
+			        	 prov.setAcat("short_sleeve");
+			        	 prov.setAcat("three-quarter-sleeve");
+			        	 prov.setAcat("peasant");
+			        	 prov.setAcat("sleeveless");
+			        	 prov.setAcat("button-down");
+			        	 prov.setAcat("oxfords");
+			        	 prov.setAcat("camisoles");
+			        	 prov.setAcat("halters");
 			           
 			        	 //currCat+=" "+"dresses";
 			         }   
 			         if (hoodies.isChecked()) {
-			        	currCat.add("hoodies");
+			        	//currCat.add("hoodies");
 			        	prov.setAcat("hoodies");
 			        	
 			        	//prov.setAcat("intimate");
 			        	 //currCat+="|"+"shoes";
 			         }  
 			         if (intimate.isChecked()) {
-			        	 currCat.add("intimate");
+			        	 //currCat.add("intimate");
 			        	 prov.setAcat("intimates");
 			        	 prov.setAcat("hosiery");
+			        	 prov.setAcat("bras");
+			        	 prov.setAcat("panties");
+			        	 prov.setAcat("lingerie");
+			        	 prov.setAcat("camisoles");
+			        	 prov.setAcat("chemises");
+			        	 prov.setAcat("teddies");
+			        	 prov.setAcat("negligees");
+			        	 prov.setAcat("corsets");
+			        	 prov.setAcat("bustiers");
+			        	 
 			        	
 			        	 //currCat+="|"+"dresses";
 			         } 
 			         if (activewear.isChecked()) {
-			        	 currCat.add("activewear");
+			        	 //currCat.add("activewear");
 			        	 prov.setAcat("active");
+			        	 prov.setAcat("swimwear");
+			        	 prov.setAcat("baselayers");
+			        	 prov.setAcat("bikinis");
+			        	 prov.setAcat("racerback");
+			        	 prov.setAcat("scoop-back");
+			        	 prov.setAcat("slimming");
+			        	 prov.setAcat("skirted");
+			        	 prov.setAcat("spaghetti-strap");
+			        	 prov.setAcat("strapless");
+			        	 prov.setAcat("coverups");
+			        	 
 			        
 			        	 //currCat+="|"+"shorts";
 			         } 
 			         if(rompers.isChecked()) {
-			        	 currCat.add("rompers");
+			        	 //currCat.add("rompers");
 			        	 prov.setAcat("rompers");
+			        	 prov.setAcat("jumpsuits");
 			        	
 			        	 //currCat+="|"+"clothing";
 			         }
 			         if (suits.isChecked()) {
-			        	 currCat.add("suits");
+			        	 //currCat.add("suits");
 			        	 prov.setAcat("suits");
+			        	 prov.setAcat("separates");
+			        	 prov.setAcat("pantsuits");
 			        	
 			        	 //currCat+="|"+"shorts";
 			         } 
 			         if(tops.isChecked()) {
-			        	 currCat.add("tops");
+			        	 //currCat.add("tops");
 			        	 prov.setAcat("tops");
-			        	
+			        	 prov.setAcat("tanks");
+			        	 prov.setAcat("camis");
+			        	 prov.setAcat("shirts");
+			        	 prov.setAcat("sweaters");
+			        	 prov.setAcat("sweatshirts");
+			        	 prov.setAcat("racerback");
+			        	 prov.setAcat("scoop-back");
+			        	 prov.setAcat("slimming");
+			        	 prov.setAcat("skirted");
+			        	 prov.setAcat("spaghetti-strap");
+			        	 prov.setAcat("strapless");
+			        	 prov.setAcat("long-sleeve");
+			        	 prov.setAcat("short_sleeve");
+			        	 prov.setAcat("three-quarter-sleeve");
+			        	 prov.setAcat("sleeveless");
+			        	 prov.setAcat("polos");
+			        	 prov.setAcat("crewnecks");
+			        	 prov.setAcat("v-necks");
+			        	 prov.setAcat("tunics");
+			        	 prov.setAcat("turtlenecks");
+			        	 prov.setAcat("mocks");
+			        	 prov.setAcat("cardigans");
+			        	 prov.setAcat("shells");
+			        	 prov.setAcat("hooded");
+			        	 prov.setAcat("ponchos");
+			        	 prov.setAcat("pullovers");
+			        	 prov.setAcat("shrugs");
+			        	 prov.setAcat("zippered");
+			        	 
 			        	 //currCat+="|"+"clothing";
 			         }
 			        

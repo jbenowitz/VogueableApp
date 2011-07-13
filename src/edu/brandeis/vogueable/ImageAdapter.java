@@ -124,10 +124,10 @@ import android.widget.TextView;
            //Set landscape or portrait gallery/image size
            Gallery.LayoutParams galayout;
            if(mContext.getResources().getConfiguration().orientation==Configuration.ORIENTATION_LANDSCAPE){
-          	 galayout = new Gallery.LayoutParams(200,200);
+          	 galayout = new Gallery.LayoutParams(300,LayoutParams.MATCH_PARENT);
            }
            else{
-          	 galayout = new Gallery.LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT);
+          	 galayout = new Gallery.LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT);
            }
            i.setLayoutParams(galayout);
 
@@ -144,7 +144,6 @@ import android.widget.TextView;
           } 
           return position; 
       } 
-      
       
       /**
    	 * Changes the landscape layout more info "name" field to a given string

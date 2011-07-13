@@ -109,7 +109,7 @@ public class TasteManager {
 		//if(filtered.contains(next)){
 		//	return next;
 		//
-		if (cats.contains(next.getCategoryTag().toLowerCase())){
+		if (cats.contains(next.getCategoryTag().toLowerCase()) && !(itemsUsed.contains(next))){
 			return next;
 		} else {
 			return next = getNextItem(currItem);
