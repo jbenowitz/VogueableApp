@@ -3,6 +3,32 @@ package edu.brandeis.vogueable;
 
 
 
+import java.io.ByteArrayInputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
+
+import org.apache.http.HttpResponse;
+import org.apache.http.NameValuePair;
+import org.apache.http.client.ClientProtocolException;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.entity.UrlEncodedFormEntity;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.message.BasicNameValuePair;
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
+import org.xml.sax.SAXException;
+
+import us.monoid.web.Resty;
+import us.monoid.web.XMLResource;
 import android.accounts.Account;
 import android.accounts.AccountManager;
 import android.app.Activity;
@@ -10,6 +36,7 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
@@ -20,6 +47,7 @@ import android.widget.Toast;
  *
  */
 public class Men extends Activity implements  android.view.View.OnClickListener{
+	private static String TAG = "Men Starting Activity";
 	
 	
 	/** Called when the activity is first created. */
@@ -43,7 +71,7 @@ public class Men extends Activity implements  android.view.View.OnClickListener{
 	    *
 	    * @param v view 
 	    */
-	    public void onClick(View v) {
+	   public void onClick(View v) {
 	      switch (v.getId()) {
 	     
 	      case R.id.browse_label :
@@ -53,11 +81,25 @@ public class Men extends Activity implements  android.view.View.OnClickListener{
 		         break;
 	      
 	      case R.id.login_label:
+	    	  Log.d(TAG, "Login button pressed");
+	    	  
 	    	  final AccountManager manager = AccountManager.get(this);
 		      final Account[] accounts = manager.getAccounts();
 		      if (accounts.length >=1){
 		    	  User user = new User(accounts[0].name);
 		    	  
+		    	  //Check to see if user in database
+		    	  //if in database, get information from user
+		    	  if(checkUser(user.name)){
+		    		  Log.d(TAG, "user exists in database " + user.getName());
+		    		  //TODO Pull TasteManager and WishList
+		    	  }
+		    	  //else add to database
+		    	  else{
+		    		  Log.d(TAG, "user being added to database");
+		    		  addUser(user);  
+		    	  }
+
 		    	  AlertDialog.Builder welcome = new AlertDialog.Builder(this);
 		    	  	welcome.setIcon(R.drawable.logobright);
 		    	  	welcome.setTitle(" ");
@@ -76,4 +118,101 @@ public class Men extends Activity implements  android.view.View.OnClickListener{
 		      	break; 
 	      }
 	   }
+	   
+	   
+	   /**
+	    * Adds a given user to the database
+	    * @param user
+	    */
+	    private void addUser(User user) {
+	    	HttpPost httppost = new HttpPost("http://vogueable.heroku.com/users");
+		  
+	    	try {
+	    	  List <NameValuePair> nvp = new ArrayList<NameValuePair>();
+			  nvp.add(new BasicNameValuePair("user[user_name]", user.name));
+			  nvp.add(new BasicNameValuePair("user[email]", user.name));
+			  //Add the e-mail address
+			  httppost.setEntity(new UrlEncodedFormEntity(nvp));
+			  
+			  //Execute HTTP Post Request
+			  HttpClient httpclient = new DefaultHttpClient();
+			  HttpResponse response = httpclient.execute(httppost);
+			  Log.d(TAG, "response made");
+	    	}catch (ClientProtocolException e){
+			  
+	    	}catch(IOException e){
+	    		
+	    	}
+	    }
+	    
+	    
+	    /**
+	     * Checks to see if a user is already in the database
+	     * For now, pulls all the users on the database and checks to see if phone user is on there
+	     * @param name
+	     * @return
+	     */
+	    private boolean checkUser(String name){
+	    	Log.d(TAG, "checking if this user exists " + name);
+	    	Resty r = new Resty();
+			XMLResource usr1 = null;
+			NodeList nList = null;
+			ArrayList<String> users = new ArrayList<String>();
+		
+			try {
+				usr1 = r.xml("http://vogueable.heroku.com/users.xml");
+				DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
+		        DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
+		        String st = ""+usr1;
+		        InputStream is = new ByteArrayInputStream(st.getBytes());
+		        
+		        Document doc = dBuilder.parse(is);
+		        doc.getDocumentElement().normalize();
+		        nList = doc.getElementsByTagName("user");
+				
+			} catch (IOException e) {
+				e.printStackTrace();
+				Log.e("gaspar", "exception on r.xml");
+			} catch (ParserConfigurationException e) {
+				e.printStackTrace();
+			} catch (SAXException e) {
+				e.printStackTrace();
+			}
+			
+			
+			//Parses through all the taken users from the database
+			//looks at e-mails solely
+			for (int temp = 0; temp < nList.getLength(); temp++) {
+				Node nNode = nList.item(temp);
+				if (nNode.getNodeType() == Node.ELEMENT_NODE) {
+					Element eElement = (Element) nNode;
+					users.add(getTagValue("email", eElement));
+					Log.d(TAG,"name" + users.get(temp));
+				}
+			}
+	    	return users.contains(name);
+	    }
+
+
+	    /**
+	     * Used to get a tag value of the xml for Users
+	     * 
+	     * @param sTag
+	     * @param eElement
+	     * @return
+	     */
+		public String getTagValue(String sTag, Element eElement) {
+			NodeList list = eElement.getElementsByTagName(sTag);
+			Node el = list.item(0);
+			Log.d(TAG,"error on el");
+
+			if (el != null) {
+				NodeList nlList = el.getChildNodes();//get all children of the item node
+				Node nValue = (Node) nlList.item(0);
+				if (nValue != null){
+					return nValue.getNodeValue();
+				}
+			}
+			return null; 
+		}
 }
