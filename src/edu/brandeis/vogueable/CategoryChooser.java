@@ -6,6 +6,9 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.CheckBox;
@@ -71,7 +74,20 @@ public class CategoryChooser extends Activity implements OnClickListener {
 		    rompersview.setOnClickListener(this);
 		      
 	    }
+	  public boolean onOptionsItemSelected(MenuItem item) {
+			switch (item.getItemId()) {
 
+			case R.id.wishlist_menu2:   
+				startActivity(new Intent(this, WishAct.class));
+				break;
+			}
+			return true;
+		}
+	  public boolean onCreateOptionsMenu(Menu menu) {
+			MenuInflater inflater = getMenuInflater();
+			inflater.inflate(R.menu.menu2, menu);
+			return true;
+		}	
 	    public void onClick(View v) {
 	    	
 	    	
