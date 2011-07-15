@@ -28,10 +28,11 @@ public class RealProxy extends AbstractProxy {
 	User curruser;// user currently using app
 	NodeList nList;
 	Context con;
+	DeptItemCache itemcache;
 	private final static String TAG = "RealProxy";
 	
-	public RealProxy(){
-		
+	public RealProxy(DeptItemCache itemcache){
+		this.itemcache = itemcache;
 	}
 		
 	

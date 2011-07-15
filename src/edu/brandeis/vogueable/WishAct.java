@@ -14,9 +14,8 @@ public class WishAct extends Activity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.allwishes);
-        RealProxy proxy = new RealProxy();
 		Context context = this;
-        prov = Provider.instance(proxy, "AndroidUserName",context, "item from pref");
+        prov = Provider.instance("AndroidUserName",context, "item from pref");
         
         ListView listview = (ListView) findViewById(R.id.listview);
         listview.setAdapter(new Helper(this,prov));

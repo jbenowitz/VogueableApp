@@ -109,10 +109,9 @@ public class CategoryChooser extends Activity implements OnClickListener {
 		      switch (v.getId()) {
 		     
 		      case R.id.go_button :
-		    	  RealProxy proxy = new RealProxy();
 			      Context context = this; 
 			       
-			      prov = Provider.instance(proxy, "AndroidUserName",context, "item from pref");
+			      prov = Provider.instance("AndroidUserName",context, "item from pref");
 		    	  
 		    	  Intent i = new Intent(this, MainActivity.class);
 			         

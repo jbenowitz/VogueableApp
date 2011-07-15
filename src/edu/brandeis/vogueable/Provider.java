@@ -4,29 +4,36 @@ import java.util.ArrayList;
 
 import android.content.Context;
 
+
 public class Provider {
+	
+	private static final int BATCH_SIZE = 30;
+	
 	private User user;
 	private Item curritem;
 	private TasteManager usertaste;
 	private static Provider provider = null;
 	private ArrayList<String> cats; 
 	private Context context;
+	private DeptItemCache itemcache;
+	private RealProxy proxy;
 	
 	
-	private Provider(RealProxy proxy, String username, Context con, String item){
+	private Provider(String username, Context con, String item){
 		
 		user = new User(username);
 		user.setTasteManager(usertaste);
 	    curritem = new Item(item);
 	    cats = new ArrayList<String>();
+	    itemcache = new DeptItemCache(BATCH_SIZE);
+	    proxy = new RealProxy(itemcache);
 	    context = con;
 	    try {
 			usertaste = new TasteManager(proxy,cats);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}
-	    
+		}  
 	}
 	/**
 	 * 
@@ -61,10 +68,14 @@ public class Provider {
 		 return cats;
 	}
 	
+	public DeptItemCache getItemCache(){
+		return itemcache;
+	}
 	
-	public static synchronized Provider instance(RealProxy proxy, String username, Context con, String item) {
+	
+	public static synchronized Provider instance(String username, Context con, String item) {
 		if (provider == null){
-			provider = new Provider(proxy, username, con, item);
+			provider = new Provider(username, con, item);
 		}
 		provider.context = con;
 		return provider;
