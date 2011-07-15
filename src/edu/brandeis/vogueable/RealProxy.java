@@ -28,7 +28,7 @@ public class RealProxy extends AbstractProxy {
 	User curruser;// user currently using app
 	NodeList nList;
 	Context con;
-	private final static String TAG = "FakeProxy";
+	private final static String TAG = "RealProxy";
 	
 	public RealProxy(){
 		
@@ -66,6 +66,14 @@ public class RealProxy extends AbstractProxy {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		
+		
+		populateDeptItemCache();
+	}
+	
+	
+	public void populateDeptItemCache(){
+		
 	}
 	
 	public ArrayList<Item> getAllItems(){

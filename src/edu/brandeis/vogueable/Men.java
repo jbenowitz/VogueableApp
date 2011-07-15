@@ -139,9 +139,9 @@ public class Men extends Activity implements  android.view.View.OnClickListener{
 			  HttpResponse response = httpclient.execute(httppost);
 			  Log.d(TAG, "response made");
 	    	}catch (ClientProtocolException e){
-			  
+	    		Log.e(TAG, "Client Protocol Exception");
 	    	}catch(IOException e){
-	    		
+	    		Log.e(TAG, "IO Exception");
 	    	}
 	    }
 	    

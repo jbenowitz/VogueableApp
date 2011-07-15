@@ -27,7 +27,7 @@
     android:layout_height="50dip"
     android:layout_width="fill_parent" 
     android:layout_alignParentBottom="true" 
-    android:background="#000000"
+    android:background="@drawable/buttonbargradient"
     style="@android:style/ButtonBar"
     android:gravity="center"
     >
