@@ -26,7 +26,7 @@ public class Provider {
 	    curritem = new Item(item);
 	    cats = new ArrayList<String>();
 	    itemcache = new DeptItemCache(BATCH_SIZE);
-	    proxy = new RealProxy(itemcache);
+	    proxy = new RealProxy(itemcache, cats);
 	    context = con;
 	    try {
 			usertaste = new TasteManager(proxy,cats);
@@ -60,9 +60,11 @@ public class Provider {
 	
 	public void setAcat(String cat){
 		 cats.add(cat);
+		 proxy = new RealProxy(itemcache, cats); //update proxy
 	}
 	public void clearCatList(){
 		 cats.clear();
+		 proxy = new RealProxy(itemcache,cats); //update proxy
 	}
 	public ArrayList<String> getCatList(){
 		 return cats;

@@ -61,7 +61,7 @@ public class DeptItemCache {
 	
 	
 	/**
-	 * Assumes correct arraylist size (batchsize)
+	 * inserts the ArrayList items to the end of itemcache
 	 * @param items
 	 */
 	public void insertItems(ArrayList<Item> items){

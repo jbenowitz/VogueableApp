@@ -206,7 +206,6 @@ public class CategoryChooser extends Activity implements OnClickListener {
 			         break;    
 			         
 		      case R.id.select_all :
-		    	 // Intent in = new Intent(this, MainActivity.class);
 		    	  
 		    	  dresses.setChecked(true);
 		    	  shoes.setChecked(true);
@@ -224,7 +223,6 @@ public class CategoryChooser extends Activity implements OnClickListener {
 		    	  break;
 		    	  
 		      case R.id.deselect_all :
-		    	//  Intent inten = new Intent(this, MainActivity.class);
 		    	  
 		    	  dresses.setChecked(false);
 		    	  shoes.setChecked(false);

@@ -30,9 +30,11 @@ public class RealProxy extends AbstractProxy {
 	Context con;
 	DeptItemCache itemcache;
 	private final static String TAG = "RealProxy";
+	ArrayList<String> departments;
 	
-	public RealProxy(DeptItemCache itemcache){
+	public RealProxy(DeptItemCache itemcache, ArrayList<String> categories){
 		this.itemcache = itemcache;
+		departments=categories;
 	}
 		
 	
@@ -57,11 +59,9 @@ public class RealProxy extends AbstractProxy {
 	        nList = doc.getElementsByTagName("item");
 			
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
-			Log.e("gaspar", "exception on r.xml");
+			Log.e(TAG, "exception on r.xml");
 		} catch (ParserConfigurationException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (SAXException e) {
 			// TODO Auto-generated catch block
@@ -73,8 +73,17 @@ public class RealProxy extends AbstractProxy {
 	}
 	
 	
+	/**
+	 * populates the DeptItemCache datastructure
+	 * 
+	 */
 	public void populateDeptItemCache(){
-		
+		if(!itemcache.hasData()){
+			for(String dept : departments){
+				//TODO itemcache.insertItems(getItems(BATCH_SIZE/departments.size(), dept));
+			}
+			itemcache.shuffle();
+		}
 	}
 	
 	public ArrayList<Item> getAllItems(){
