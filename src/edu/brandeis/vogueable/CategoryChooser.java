@@ -135,13 +135,15 @@ public class CategoryChooser extends Activity implements OnClickListener {
 		    	  
 		    	  	if (dresses.isChecked()) {
 			             currCat.add("dresses");
-			             prov.setAcat("dresses");
+			             prov.setAcat("1"); //ID for dresses
+			             Log.i(TAG, "adding dresses/1" );
 			            
 			        	 //currCat+=" "+"dresses";
 			         }   
 			         if (shoes.isChecked()) {
 			        	currCat.add("shoes");
 			        	prov.setAcat("shoes");
+			        	Log.i(TAG, "adding shoes" );
 			        	
 			        	 //currCat+="|"+"shoes";
 			         }  
@@ -149,12 +151,14 @@ public class CategoryChooser extends Activity implements OnClickListener {
 			        	 currCat.add("bottoms");
 			        	 prov.setAcat("bottoms");
 			        	 prov.setAcat("pants");
+			        	 Log.i(TAG, "adding bottoms and pants" );
 			        	
 			        	 //currCat+="|"+"dresses";
 			         } 
 			         if (accesories.isChecked()) {
 			        	 currCat.add("accesories");
 			        	 prov.setAcat("accessories");
+			        	 Log.i(TAG, "adding accessories" );
 			        	
 			        	 //currCat+="|"+"shorts";
 			         } 
@@ -163,17 +167,20 @@ public class CategoryChooser extends Activity implements OnClickListener {
 			        	 currCat.add("jackets");
 			        	 prov.setAcat("jackets");
 			        	 prov.setAcat("blazers");
+			        	 Log.i(TAG, "adding jackets and blazers" );
 			        	 //currCat+="|"+"clothing";
 			         }
 			         if (blouses.isChecked()) {
 			             currCat.add("blouses");
 			             prov.setAcat("blouses");
+			             Log.i(TAG, "adding blouses" );
 			           
 			        	 //currCat+=" "+"dresses";
 			         }   
 			         if (hoodies.isChecked()) {
 			        	currCat.add("hoodies");
 			        	prov.setAcat("hoodies");
+			        	Log.i(TAG, "adding hoodies" );
 			        	
 			        	//prov.setAcat("intimate");
 			        	 //currCat+="|"+"shoes";
@@ -182,30 +189,35 @@ public class CategoryChooser extends Activity implements OnClickListener {
 			        	 currCat.add("intimate");
 			        	 prov.setAcat("intimates");
 			        	 prov.setAcat("hosiery");
+			        	 Log.i(TAG, "adding hosiery and intimates" );
 			        	
 			        	 //currCat+="|"+"dresses";
 			         } 
 			         if (activewear.isChecked()) {
 			        	 currCat.add("activewear");
 			        	 prov.setAcat("active");
+			        	 Log.i(TAG, "adding active" );
 			        
 			        	 //currCat+="|"+"shorts";
 			         } 
 			         if(rompers.isChecked()) {
 			        	 currCat.add("rompers");
 			        	 prov.setAcat("rompers");
+			        	 Log.i(TAG, "adding rompers" );
 			        	
 			        	 //currCat+="|"+"clothing";
 			         }
 			         if (suits.isChecked()) {
 			        	 currCat.add("suits");
 			        	 prov.setAcat("suits");
+			        	 Log.i(TAG, "adding suits" );
 			        	
 			        	 //currCat+="|"+"shorts";
 			         } 
 			         if(tops.isChecked()) {
 			        	 currCat.add("tops");
 			        	 prov.setAcat("tops");
+			        	 Log.i(TAG, "adding tops" );
 			        	
 			        	 //currCat+="|"+"clothing";
 			         }

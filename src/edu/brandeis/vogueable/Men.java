@@ -112,6 +112,8 @@ public class Men extends Activity implements  android.view.View.OnClickListener{
 		    	  	welcome.setPositiveButton("Go!",new DialogInterface.OnClickListener() {
 			    	             public void onClick(DialogInterface dialog, int id) {
 			    	            	 Intent i = new Intent(Men.this, CategoryChooser.class);
+			    	            	 Log.i(TAG, "stashing user " + user.getName());
+			    	            	 Log.i(TAG, "Stashing ID " + user.getID());
 			    	            	 i.putExtra("currUserID", user.getID());
 			    	            	 i.putExtra("currUserName", user.getName());
 			    			         startActivity(i);

@@ -25,16 +25,17 @@ import android.util.Log;
 
 public class RealProxy extends AbstractProxy {
 	
-	User curruser;// user currently using app
 	NodeList nList;
 	Context con;
-	DeptItemCache itemcache;
 	private final static String TAG = "RealProxy";
 	ArrayList<String> departments;
+	Provider provide;
+	private static final int BATCH_SIZE = 30;
 	
-	public RealProxy(DeptItemCache itemcache, ArrayList<String> categories){
-		this.itemcache = itemcache;
-		departments=categories;
+	public RealProxy(){
+		Log.i(TAG, "Starting real Proxy");
+		departments=provide.getCatList();
+		provide = provide.instance(null, con, null);
 	}
 		
 	
@@ -70,6 +71,9 @@ public class RealProxy extends AbstractProxy {
 		
 		
 		populateDeptItemCache();
+		
+		
+		Log.i(TAG, "First in item cache: " +  provide.getItemCache().getItem(0).getName());
 	}
 	
 	
@@ -78,11 +82,20 @@ public class RealProxy extends AbstractProxy {
 	 * 
 	 */
 	public void populateDeptItemCache(){
-		if(!itemcache.hasData()){
+		if(!provide.getItemCache().hasData()){
 			for(String dept : departments){
-				//TODO itemcache.insertItems(getItems(BATCH_SIZE/departments.size(), dept));
+				Log.i(TAG, "getting items from department " + dept);
+				try {
+					provide.getItemCache().insertItems(getBatchbyDept(BATCH_SIZE, dept));
+				} catch (ParserConfigurationException e) {
+					Log.e(TAG, "Parser Configuration Exception getting batch items");
+				} catch (SAXException e) {
+					Log.e(TAG, "SAX Exception getting batch items");
+				} catch (IOException e) {
+					Log.e(TAG, "IO Exception getting batch items");
+				}
 			}
-			itemcache.shuffle();
+			provide.getItemCache().shuffle();
 		}
 	}
 	
@@ -138,5 +151,49 @@ public class RealProxy extends AbstractProxy {
 		}
 		return nextit; 
 	}
+	
+	
+	public ArrayList<Item> getBatchbyDept(int BatchSize, String  dept) throws ParserConfigurationException, SAXException, IOException{
+		ArrayList<Item> batch = new ArrayList<Item>();
+		Resty r = new Resty();
+		XMLResource usr1 = null;
+	
+		
+			try {
+				usr1 = r.xml("http://vogueable.heroku.com/find.xml?user="+provide.getCurUser()+"&dept="+dept+"&batch="+BatchSize+".xml");
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
+	        DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
+	        String st = ""+usr1;
+	        InputStream is = new ByteArrayInputStream(st.getBytes());
+	        Document doc = dBuilder.parse(is);
+	        doc.getDocumentElement().normalize();
+	        nList = doc.getElementsByTagName("item");
+			for(int k =0; k<nList.getLength(); k++){
+		        Node nNode = nList.item(k);
+				if (nNode.getNodeType() == Node.ELEMENT_NODE) {
+					Item it = new Item("it");
+					Element eElement = (Element) nNode;
+					it.setName(getTagValue("name", eElement));
+					Log.d(TAG,"name" + it.getName());
+					it.setImageFileString(getTagValue("img-url", eElement));
+					it.setDescription(getTagValue("features", eElement));
+					it.setLink(getTagValue("link-to-buy", eElement));
+					//it.setPrice(getTagValue("item-price", eElement));
+					it.setBrand(getTagValue("brand", eElement));
+					//it.addTag(getTagValue("fabric-type", eElement));
+					batch.add(it);
+				}
+			}
+		return batch; 
+	}
+	public ArrayList<Item> getBatchbyDept(int BatchSize) throws ParserConfigurationException, SAXException, IOException{
+		int temp = new Random().nextInt(4);
+		return getBatchbyDept(BatchSize,"");
+	}
+
 }
 
