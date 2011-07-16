@@ -6,6 +6,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -14,7 +15,11 @@ import android.view.View.OnClickListener;
 import android.widget.CheckBox;
 
 public class CategoryChooser extends Activity implements OnClickListener {
-	Provider prov;
+	
+	private static final String TAG = "CategoryChooser";
+	
+	private Provider prov;
+	private User user;
 	
 	//public String currCat = "";
 	public ArrayList<String> currCat =new ArrayList<String>();
@@ -22,8 +27,6 @@ public class CategoryChooser extends Activity implements OnClickListener {
 	  public void onCreate(Bundle savedInstanceState) {
 	        super.onCreate(savedInstanceState);
 	        setContentView(R.layout.category);
-	        
-	        
 	        
 	        // Set up click listeners for physical buttons (Select, Deselect, go)
 	        View selectall = findViewById(R.id.select_all);
@@ -110,12 +113,25 @@ public class CategoryChooser extends Activity implements OnClickListener {
 		     
 		      case R.id.go_button :
 			      Context context = this; 
-			       
-			      prov = Provider.instance("AndroidUserName",context, "item from pref");
 		    	  
+			      //Get user's information from last intent
+			      Bundle extras = getIntent().getExtras(); 
+			      String id = null;
+			      String name = null;
+			      if(extras !=null) {
+			          id = extras.getString("currUserID");
+			          name = extras.getString("currUserName");
+			      }
+			      user = new User(name);
+			      
+			      prov = Provider.instance(user.getName(), context, null);//set provider with current user
+			      
+			      prov.getCurUser().setID(user.getID());//update current user's id
+			      Log.i(TAG, "provider current user name: " + prov.getCurUser().getName());
+			      Log.i(TAG, "provider current user ID: " + prov.getCurUser().getName());
+			      
 		    	  Intent i = new Intent(this, MainActivity.class);
 			         
-		    	  prov.clearCatList();
 		    	  
 		    	  	if (dresses.isChecked()) {
 			             currCat.add("dresses");

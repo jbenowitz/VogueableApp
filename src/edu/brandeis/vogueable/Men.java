@@ -7,6 +7,7 @@ import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import javax.xml.parsers.DocumentBuilder;
@@ -48,7 +49,7 @@ import android.widget.Toast;
  */
 public class Men extends Activity implements  android.view.View.OnClickListener{
 	private static String TAG = "Men Starting Activity";
-	
+	User user = new User(null);
 	
 	/** Called when the activity is first created. */
 	   @Override
@@ -76,9 +77,10 @@ public class Men extends Activity implements  android.view.View.OnClickListener{
 	     
 	      case R.id.browse_label :
 	    	  Intent i = new Intent(this, CategoryChooser.class);
-		         startActivity(i);
-		         
-		         break;
+	    	  i.putExtra("currUserID", user.getID());
+	    	  i.putExtra("currUserName", user.getName());
+		      startActivity(i);
+		      break;
 	      
 	      case R.id.login_label:
 	    	  Log.d(TAG, "Login button pressed");
@@ -86,27 +88,33 @@ public class Men extends Activity implements  android.view.View.OnClickListener{
 	    	  final AccountManager manager = AccountManager.get(this);
 		      final Account[] accounts = manager.getAccounts();
 		      if (accounts.length >=1){
-		    	  User user = new User(accounts[0].name);
+		    	  user = new User(accounts[0].name);
 		    	  
 		    	  //Check to see if user in database
 		    	  //if in database, get information from user
-		    	  if(checkUser(user.name)){
+		    	  String temp = checkUser(user.getName());
+		    	  if(!temp.equals(null)){
 		    		  Log.d(TAG, "user exists in database " + user.getName());
+		    		  user.setID(temp);
 		    		  //TODO Pull TasteManager and WishList
 		    	  }
 		    	  //else add to database
 		    	  else{
 		    		  Log.d(TAG, "user being added to database");
-		    		  addUser(user);  
+		    		  addUser(user);
+		    		  user.setID(checkUser(user.getName()));
 		    	  }
 
 		    	  AlertDialog.Builder welcome = new AlertDialog.Builder(this);
 		    	  	welcome.setIcon(R.drawable.logobright);
 		    	  	welcome.setTitle(" ");
-		    	  	welcome.setMessage("Welcome, "+user.name);
+		    	  	welcome.setMessage("Welcome, " + user.getName());
 		    	  	welcome.setPositiveButton("Go!",new DialogInterface.OnClickListener() {
 			    	             public void onClick(DialogInterface dialog, int id) {
-			    			         startActivity(new Intent(Men.this, CategoryChooser.class));
+			    	            	 Intent i = new Intent(Men.this, CategoryChooser.class);
+			    	            	 i.putExtra("currUserID", user.getID());
+			    	            	 i.putExtra("currUserName", user.getName());
+			    			         startActivity(i);
 			    	            	 dialog.cancel();
 			    	             }
 			    	         	})
@@ -129,8 +137,8 @@ public class Men extends Activity implements  android.view.View.OnClickListener{
 		  
 	    	try {
 	    	  List <NameValuePair> nvp = new ArrayList<NameValuePair>();
-			  nvp.add(new BasicNameValuePair("user[user_name]", user.name));
-			  nvp.add(new BasicNameValuePair("user[email]", user.name));
+			  nvp.add(new BasicNameValuePair("user[user_name]", user.getName()));
+			  nvp.add(new BasicNameValuePair("user[email]", user.getName()));
 			  //Add the e-mail address
 			  httppost.setEntity(new UrlEncodedFormEntity(nvp));
 			  
@@ -152,12 +160,12 @@ public class Men extends Activity implements  android.view.View.OnClickListener{
 	     * @param name
 	     * @return
 	     */
-	    private boolean checkUser(String name){
+	    private String checkUser(String name){
 	    	Log.d(TAG, "checking if this user exists " + name);
 	    	Resty r = new Resty();
 			XMLResource usr1 = null;
 			NodeList nList = null;
-			ArrayList<String> users = new ArrayList<String>();
+			HashMap<String, String> users = new HashMap<String, String>();
 		
 			try {
 				usr1 = r.xml("http://vogueable.heroku.com/users.xml");
@@ -181,16 +189,24 @@ public class Men extends Activity implements  android.view.View.OnClickListener{
 			
 			
 			//Parses through all the taken users from the database
-			//looks at e-mails solely
+			//looks at e-mails solely.  Create a Map connecting the email to
+			// their ID.
 			for (int temp = 0; temp < nList.getLength(); temp++) {
 				Node nNode = nList.item(temp);
 				if (nNode.getNodeType() == Node.ELEMENT_NODE) {
 					Element eElement = (Element) nNode;
-					users.add(getTagValue("email", eElement));
+					users.put(getTagValue("email", eElement), getTagValue("id", eElement));
 					Log.d(TAG,"name" + users.get(temp));
 				}
 			}
-	    	return users.contains(name);
+	    	
+			//returns their ID if they exist, otherwise null
+	    	if(users.keySet().contains(name)){
+	    		return users.get(name);
+	    	}
+	    	else{
+	    		return null;
+	    	}
 	    }
 
 

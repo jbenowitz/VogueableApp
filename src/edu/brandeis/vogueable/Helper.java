@@ -36,13 +36,13 @@ public class Helper extends BaseAdapter {
     }
 
     public int getCount() {
-    	Log.d("getCount","returns"+ pro.getCurUser().wishlist.showWishlist().size());
-        return pro.getCurUser().wishlist.showWishlist().size();
+    	Log.d("getCount","returns"+ pro.getCurUser().getWishlists().showWishlist().size());
+        return pro.getCurUser().getWishlists().showWishlist().size();
     }
 
     public Object getItem(int position) {
-    	Log.d("getItem","returns"+ pro.getCurUser().wishlist.showWishlist().get(position));
-        return pro.getCurUser().wishlist.showWishlist().get(position);
+    	Log.d("getItem","returns"+ pro.getCurUser().getWishlists().showWishlist().get(position));
+        return pro.getCurUser().getWishlists().showWishlist().get(position);
     }
 
     public long getItemId(int position) {
@@ -70,12 +70,12 @@ public class Helper extends BaseAdapter {
     		buy_button = (Button) view.findViewById(R.id.buy_buy);
     		remove_button = (Button) view.findViewById(R.id.remove);
     		
-        	name_txt.setText(pro.getCurUser().wishlist.showWishlist().get(position).getName());
-        	price_txt.setText(pro.getCurUser().wishlist.showWishlist().get(position).getPrice());
+        	name_txt.setText(pro.getCurUser().getWishlists().showWishlist().get(position).getName());
+        	price_txt.setText(pro.getCurUser().getWishlists().showWishlist().get(position).getPrice());
         	
         	try {
-                Log.e("src",pro.getCurUser().wishlist.showWishlist().get(position).getImageFileString());
-                URL url = new URL(pro.getCurUser().wishlist.showWishlist().get(position).getImageFileString());
+                Log.e("src",pro.getCurUser().getWishlists().showWishlist().get(position).getImageFileString());
+                URL url = new URL(pro.getCurUser().getWishlists().showWishlist().get(position).getImageFileString());
                 URLConnection connection = (URLConnection) url.openConnection();
                 connection.connect();
                 InputStream input = connection.getInputStream();
@@ -100,7 +100,7 @@ public class Helper extends BaseAdapter {
     	      	      case R.id.buy_buy :
     	      	    	if (pro.getCurItem().getLink() != null) {
     	      	    		int tag = (Integer) v.getTag();
-    	    		    	v.getContext().startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(pro.getCurUser().wishlist.showWishlist().get(tag).getLink())));
+    	    		    	v.getContext().startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(pro.getCurUser().getWishlists().showWishlist().get(tag).getLink())));
     	    		    } else {
     	    		    	v.getContext().startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("http://www.amazon.com/l/1036592/ref=nb_sb_noss")));
     	    		    }
@@ -108,7 +108,7 @@ public class Helper extends BaseAdapter {
         			
     		      	  case R.id.remove :
     		      	    int tag = (Integer) v.getTag();
-    		      	    pro.getCurUser().wishlist.showWishlist().remove(tag);
+    		      	    pro.getCurUser().getWishlists().showWishlist().remove(tag);
     		      	    notifyDataSetChanged();
     		      	    notifyDataSetInvalidated();
     		    		break;
@@ -128,7 +128,7 @@ public class Helper extends BaseAdapter {
     		    	         sure.setPositiveButton("Remove", new DialogInterface.OnClickListener() {
     		    	        	 
     		    	             public void onClick(DialogInterface dialog, int id) {
-    		    	            	 pro.getCurUser().wishlist.showWishlist().remove(tag);
+    		    	            	 pro.getCurUser().getWishlists().showWishlist().remove(tag);
     		    	            	 //notifyDataSetChanged();
     		    	            	 notifyDataSetInvalidated();
     		    	            	 dialog.cancel();
