@@ -40,7 +40,7 @@ public class MainActivity extends Activity implements android.view.View.OnClickL
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		provide = Provider.instance("AndroidUserName", this, "item from pref");
+		provide = Provider.instance("AndroidUserName", this);
 		
 		setContentView(R.layout.main);
 		Toast.makeText(MainActivity.this, "Slide for next item!", Toast.LENGTH_LONG).show();

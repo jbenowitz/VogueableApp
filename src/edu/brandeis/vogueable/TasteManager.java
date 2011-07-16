@@ -31,11 +31,11 @@ public class TasteManager {
 	 * @param ArrayList of items, to choose next item
 	 * @throws SAXException 
 	 */
-	public TasteManager( RealProxy Prox, ArrayList<String> cats) {
+	public TasteManager( ArrayList<String> cats) {
 
 		this.cats=cats;
 		tagCount = new HashMap<String,Integer>();
-		prox = Prox;
+		prox = new RealProxy();
 		prox.connect(context);
 		itemsUsed = new ArrayList<Item>();
 

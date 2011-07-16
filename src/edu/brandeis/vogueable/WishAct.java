@@ -15,7 +15,7 @@ public class WishAct extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.allwishes);
 		Context context = this;
-        prov = Provider.instance("AndroidUserName",context, "item from pref");
+        prov = Provider.instance("AndroidUserName",context);
         
         ListView listview = (ListView) findViewById(R.id.listview);
         listview.setAdapter(new Helper(this,prov));

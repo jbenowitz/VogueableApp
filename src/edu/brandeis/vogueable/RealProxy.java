@@ -34,8 +34,8 @@ public class RealProxy extends AbstractProxy {
 	
 	public RealProxy(){
 		Log.i(TAG, "Starting real Proxy");
+		provide = provide.instance(null, con);
 		departments=provide.getCatList();
-		provide = provide.instance(null, con, null);
 	}
 		
 	
@@ -44,6 +44,7 @@ public class RealProxy extends AbstractProxy {
 	 * @throws SAXException 
 	 */
 	public void connect(Context con) {
+		Log.i(TAG, "connecting");
 		
 		Resty r = new Resty();
 		XMLResource usr1 = null;
@@ -82,6 +83,7 @@ public class RealProxy extends AbstractProxy {
 	 * 
 	 */
 	public void populateDeptItemCache(){
+		Log.i(TAG, "populating the item cache");
 		if(!provide.getItemCache().hasData()){
 			for(String dept : departments){
 				Log.i(TAG, "getting items from department " + dept);
@@ -100,6 +102,7 @@ public class RealProxy extends AbstractProxy {
 	}
 	
 	public ArrayList<Item> getAllItems(){
+		Log.i(TAG, "getting all items from server");
 		ArrayList<Item> items = new ArrayList<Item>();
 		for (int temp = 0; temp < nList.getLength(); temp++) {
 
@@ -125,6 +128,7 @@ public class RealProxy extends AbstractProxy {
 	}
 	
 	public Item getNextItem(Item currentitem){
+		Log.i(TAG, "getting next item from server");
 		Item nextit = new Item("next");
 		int temp = new Random().nextInt(nList.getLength());
 		//Node nNode = nList.item(temp);
@@ -154,6 +158,8 @@ public class RealProxy extends AbstractProxy {
 	
 	
 	public ArrayList<Item> getBatchbyDept(int BatchSize, String  dept) throws ParserConfigurationException, SAXException, IOException{
+		Log.i(TAG,"getting batch of size " + BatchSize + " from department " + dept);
+		
 		ArrayList<Item> batch = new ArrayList<Item>();
 		Resty r = new Resty();
 		XMLResource usr1 = null;
@@ -191,6 +197,7 @@ public class RealProxy extends AbstractProxy {
 		return batch; 
 	}
 	public ArrayList<Item> getBatchbyDept(int BatchSize) throws ParserConfigurationException, SAXException, IOException{
+		Log.i(TAG, "getting batch with size " + BatchSize);
 		int temp = new Random().nextInt(4);
 		return getBatchbyDept(BatchSize,"");
 	}

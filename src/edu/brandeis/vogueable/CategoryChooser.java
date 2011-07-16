@@ -124,7 +124,7 @@ public class CategoryChooser extends Activity implements OnClickListener {
 			      }
 			      user = new User(name);
 			      
-			      prov = Provider.instance(user.getName(), context, null);//set provider with current user
+			      prov = Provider.instance(user.getName(), context );//set provider with current user
 			      
 			      prov.getCurUser().setID(user.getID());//update current user's id
 			      Log.i(TAG, "provider current user name: " + prov.getCurUser().getName());
