@@ -3,6 +3,7 @@ package edu.brandeis.vogueable;
 
 
 
+<<<<<<< HEAD
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -30,6 +31,8 @@ import org.xml.sax.SAXException;
 
 import us.monoid.web.Resty;
 import us.monoid.web.XMLResource;
+=======
+>>>>>>> 32f95e9dceeb78233a7dc4390e9ce4412262c1c5
 import android.accounts.Account;
 import android.accounts.AccountManager;
 import android.app.Activity;
@@ -77,6 +80,7 @@ public class Women extends Activity implements  android.view.View.OnClickListene
 	     
 	      case R.id.browse_label :
 	    	  Intent i = new Intent(this, CategoryChooser.class);
+<<<<<<< HEAD
 	    	  i.putExtra("currUserID", user.getID());
 	    	  i.putExtra("currUserName", user.getName());
 		      startActivity(i);
@@ -115,10 +119,34 @@ public class Women extends Activity implements  android.view.View.OnClickListene
 			    	            	 i.putExtra("currUserID", user.getID());
 			    	            	 i.putExtra("currUserName", user.getName());
 			    			         startActivity(i);
+=======
+		         startActivity(i);
+		         
+		         break;
+	      
+	      case R.id.login_label:
+	    	  final AccountManager manager = AccountManager.get(this);
+		      final Account[] accounts = manager.getAccounts();
+		      if (accounts.length >=1){
+		    	  User user = new User(accounts[0].name);
+		    	  
+		    	  AlertDialog.Builder welcome = new AlertDialog.Builder(this);
+		    	  	welcome.setIcon(R.drawable.logobright);
+		    	  	welcome.setTitle(" ");
+		    	  	welcome.setMessage("Welcome, "+user.getName());
+		    	  	welcome.setPositiveButton("Go!",new DialogInterface.OnClickListener() {
+			    	             public void onClick(DialogInterface dialog, int id) {
+			    			         startActivity(new Intent(Women.this, CategoryChooser.class));
+>>>>>>> 32f95e9dceeb78233a7dc4390e9ce4412262c1c5
 			    	            	 dialog.cancel();
 			    	             }
 			    	         	})
 			    	         .show();
+<<<<<<< HEAD
+=======
+		    	  	//Need to implement method to update server with user info
+		    	  	
+>>>>>>> 32f95e9dceeb78233a7dc4390e9ce4412262c1c5
 		      } else {
 		    	  Toast.makeText(Women.this, "No account registered", Toast.LENGTH_SHORT).show();
 		      } 
