@@ -89,9 +89,9 @@ public class TasteManager {
 	public Item getNextItem(Item currItem){
 		Item next = null;
 		next = prox.getNextItem(currItem);
-		if(cats.isEmpty()){
+		//if(cats.isEmpty()){
 			return next;
-		}else 
+		//}else 
 		
 		//for(Item it : itemsUsed){
 		//	if (cats.contains(it.getCategoryTag().toLowerCase())){
@@ -102,11 +102,11 @@ public class TasteManager {
 		//if(filtered.contains(next)){
 		//	return next;
 		//
-		if (cats.contains(next.getCategoryTag().toLowerCase()) && !(itemsUsed.contains(next))){
-			return next;
-		} 
-		else {
-			return next = getNextItem(currItem);
-		}
+		//if (cats.contains(next.getCategoryTag().toLowerCase()) && !(itemsUsed.contains(next))){
+		//	return next;
+		//} 
+		//else {
+			//return next = getNextItem(currItem);
+		//}
 	}
 }

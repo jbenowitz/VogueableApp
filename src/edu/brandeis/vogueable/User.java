@@ -1,7 +1,7 @@
 package edu.brandeis.vogueable;
 
 
-import android.content.Context;
+
 /**
  * User class keeps track of a user's taste and wishlist
  * 
@@ -9,10 +9,10 @@ import android.content.Context;
  *
  */
 public class User {
-	public String name; 
-	public Wishlist wishlist;
-	public TasteManager mytaste;
-	public Context con;
+	private String name; 
+	private Wishlist wishlist;
+	private TasteManager mytaste;
+	private String id;
 	
 	
 	/**
@@ -27,6 +27,7 @@ public class User {
 		name = myName;
 		wishlist = new Wishlist(null); //now initialized without a type
 		//mytaste = new TasteManager(null, null);
+		id = null;
 	}
 	
 	
@@ -68,6 +69,8 @@ public class User {
 	public void removeWishlist(Item itemR){
 		wishlist.remove(itemR);
 	}
+	
+	
 	/**
 	 * returns the tasteManager
 	 * 
@@ -77,8 +80,27 @@ public class User {
 		return mytaste;
 	}
 	
+	
 	public void setTasteManager(TasteManager taste){
 		mytaste = taste; 
+	}
+	
+	
+	/**
+	 * sets the UserID
+	 * @param id
+	 */
+	public void setID(String id){
+		this.id=id;
+	}
+	
+	
+	/**
+	 * gets the user ID
+	 * @return id
+	 */
+	public String getID(){
+		return id;
 	}
 	
 }

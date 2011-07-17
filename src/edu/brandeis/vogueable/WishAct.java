@@ -7,18 +7,23 @@ import android.widget.ListView;
 
 public class WishAct extends Activity {
 	
-	//Provider prov; 
+	Provider prov; 
 	
     /** Called when the activity is first created. */
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.allwishes);
+
         /*RealProxy proxy = new RealProxy();
 		Context context = this;
         prov = Provider.instance(proxy, "AndroidUserName",context, "item from pref");*/
+
+		Context context = this;
+        prov = Provider.instance("AndroidUserName",context, "item from pref");
+
         
         ListView listview = (ListView) findViewById(R.id.listview);
-        listview.setAdapter(new Helper(this/*,prov*/));
+        listview.setAdapter(new Helper(this,prov));
     }
 }

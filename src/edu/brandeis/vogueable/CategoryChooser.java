@@ -8,6 +8,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -16,7 +17,11 @@ import android.view.View.OnClickListener;
 import android.widget.CheckBox;
 
 public class CategoryChooser extends Activity implements OnClickListener {
-	Provider prov;
+	
+	private static final String TAG = "CategoryChooser";
+	
+	private Provider prov;
+	private User user;
 	
 	//public String currCat = "";
 	public ArrayList<String> currCat =new ArrayList<String>();
@@ -24,12 +29,6 @@ public class CategoryChooser extends Activity implements OnClickListener {
 	  public void onCreate(Bundle savedInstanceState) {
 	        super.onCreate(savedInstanceState);
 	        setContentView(R.layout.category);
-	        
-		     
-		      
-		      
-	        
-	        
 	        
 	        // Set up click listeners for physical buttons (Select, Deselect, go)
 	        View selectall = findViewById(R.id.select_all);
@@ -115,115 +114,126 @@ public class CategoryChooser extends Activity implements OnClickListener {
 		      switch (v.getId()) {
 		     
 		      case R.id.go_button :
-		    	  
 			      
 			      final ProgressDialog dialog = ProgressDialog.show(CategoryChooser.this,"", "Loading. Please wait...",true);
 			      	dialog.show();
 			         Handler handler = new Handler();
 			         handler.postDelayed(new Runnable() {
 			         public void run() {
-			 
-			 	        RealProxy proxy = new RealProxy();
-			 		    Context context = CategoryChooser.this; 
-			        	prov = Provider.instance(proxy, "AndroidUserName",context, "item from pref");
-			        	prov.clearCatList();
-			        	 
-			        	 if (dresses.isChecked()) {
-				             //currCat.add("dresses");
+		    	  
+				      Context context = CategoryChooser.this; 
+	
+				      //Get user's information from last intent
+				      Bundle extras = getIntent().getExtras(); 
+				      String id = null;
+				      String name = null;
+				      if(extras !=null) {
+				          id = extras.getString("currUserID");
+				          name = extras.getString("currUserName");
+				      }
+				      user = new User(name);
+	
+				      prov = Provider.instance(user.getName(), context, null);//set provider with current user
+				     
+				      
+				      prov.getCurUser().setID(user.getID());//update current user's id
+				      Log.i(TAG, "provider current user name: " + prov.getCurUser().getName());
+				      Log.i(TAG, "provider current user ID: " + prov.getCurUser().getName());
+	
+			    	  prov.clearCatList();
+	
+			    	  	if (dresses.isChecked()) {
+				             currCat.add("dresses");
 				             prov.setAcat("dresses");
-				            
+	
 				        	 //currCat+=" "+"dresses";
 				         }   
 				         if (shoes.isChecked()) {
-				        	//currCat.add("shoes");
+				        	currCat.add("shoes");
 				        	prov.setAcat("shoes");
-				        	
-				        	
+	
 				        	 //currCat+="|"+"shoes";
 				         }  
 				         if (bottoms.isChecked()) {
-				        	 //currCat.add("bottoms");
+				        	 currCat.add("bottoms");
 				        	 prov.setAcat("bottoms");
 				        	 prov.setAcat("pants");
 				        	 prov.setAcat("skirts");
-				        	 
-				        	
+	
 				        	 //currCat+="|"+"dresses";
 				         } 
 				         if (accesories.isChecked()) {
-				        	 //currCat.add("accesories");
+				        	 currCat.add("accesories");
 				        	 prov.setAcat("accessories");
-				        	 
-				        	
+	
 				        	 //currCat+="|"+"shorts";
 				         } 
 				         if(jackets.isChecked()) {
-				        	
-				        	 //currCat.add("jackets");
+	
+				        	 currCat.add("jackets");
 				        	 prov.setAcat("jackets");
 				        	 prov.setAcat("blazers");
-				        	 prov.setAcat("vests");
 				        	 //currCat+="|"+"clothing";
 				         }
 				         if (blouses.isChecked()) {
-				             //currCat.add("blouses");
+				             currCat.add("blouses");
 				             prov.setAcat("blouses");
-
+	
 				        	 //currCat+=" "+"dresses";
 				         }   
 				         if (hoodies.isChecked()) {
-				        	//currCat.add("hoodies");
+				        	currCat.add("hoodies");
 				        	prov.setAcat("hoodies");
-				        	
+	
 				        	//prov.setAcat("intimate");
 				        	 //currCat+="|"+"shoes";
 				         }  
 				         if (intimate.isChecked()) {
-				        	 //currCat.add("intimate");
+				        	 currCat.add("intimate");
 				        	 prov.setAcat("intimates");
 				        	 prov.setAcat("hosiery");
-				        	 
+	
 				        	 //currCat+="|"+"dresses";
 				         } 
 				         if (activewear.isChecked()) {
-				        	 //currCat.add("activewear");
+				        	 currCat.add("activewear");
 				        	 prov.setAcat("active");
-				        	
-				        	 
-				        
+	
 				        	 //currCat+="|"+"shorts";
 				         } 
 				         if(rompers.isChecked()) {
-				        	 //currCat.add("rompers");
+				        	 currCat.add("rompers");
 				        	 prov.setAcat("rompers");
-				        	 prov.setAcat("jumpsuits");
-				        	
+	
 				        	 //currCat+="|"+"clothing";
 				         }
 				         if (suits.isChecked()) {
-				        	 //currCat.add("suits");
+				        	 currCat.add("suits");
 				        	 prov.setAcat("suits");
-				        	
-				        	
+	
 				        	 //currCat+="|"+"shorts";
 				         } 
 				         if(tops.isChecked()) {
-				        	 //currCat.add("tops");
+				        	 currCat.add("tops");
 				        	 prov.setAcat("tops");
-				        	 
-				        	 
+	
 				        	 //currCat+="|"+"clothing";
 				         }
-			        	 
-			        	 
+
+
+			         /*pass the selected categories to the main activity 
+			          * so the items loaded reflect the categories the user selects
+			          * */
+
+			        // i.putStringArrayListExtra("categories", currCat);
+			         //startActivity(i);//start the activity
+
 			        	 Intent i = new Intent(CategoryChooser.this, MainActivity.class);
 			        	 startActivity(i);//start the activity
 			                 
 			       	 dialog.dismiss();
 			            }}, 100000); { // 3000 milliseconds
 			            }
-			      
-		    	  
 			         
 		    	  
 		    	  
@@ -247,7 +257,6 @@ public class CategoryChooser extends Activity implements OnClickListener {
 			         
 			         
 		      case R.id.select_all :
-		    	 // Intent in = new Intent(this, MainActivity.class);
 		    	  
 		    	  dresses.setChecked(true);
 		    	  shoes.setChecked(true);
@@ -265,7 +274,6 @@ public class CategoryChooser extends Activity implements OnClickListener {
 		    	  break;
 		    	  
 		      case R.id.deselect_all :
-		    	//  Intent inten = new Intent(this, MainActivity.class);
 		    	  
 		    	  dresses.setChecked(false);
 		    	  shoes.setChecked(false);

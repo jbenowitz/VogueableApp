@@ -82,26 +82,24 @@
     	android:scaleType="centerInside"
     />
     
-  	<Button 
+  	<ImageButton 
     	android:id="@+id/wishlist_button" 
-    	android:text="@string/wish_label"
+    	android:src="@drawable/wishlistbutto"
     	android:background="@null"
+    	android:padding="5dip"
     	android:layout_height="match_parent" 
     	android:layout_width="wrap_content"
     	android:layout_weight="1"
-    	android:textSize="15dip"
-    	android:textColor="#b7b7b7">
-    </Button>
+    />
     
-  	<Button 
+  	<ImageButton 
     	android:id="@+id/buy_button"
-    	android:text="@string/buy_label"
+    	android:src="@drawable/buybutton"
     	android:background="@null"
-    	android:layout_height="match_parent"
-    	android:layout_width="wrap_content"
+    	android:padding = "5dip"
+    	android:layout_height="wrap_content"
+    	android:layout_width="fill_parent"
     	android:layout_weight="1"
-    	android:textSize="15dip"
-    	android:textColor="#b7b7b7"
     />
     	
   	<ImageButton
