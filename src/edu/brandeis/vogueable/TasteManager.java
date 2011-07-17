@@ -2,7 +2,6 @@ package edu.brandeis.vogueable;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Random;
 
 import org.xml.sax.SAXException;
 
@@ -37,7 +36,7 @@ public class TasteManager {
 		this.cats=cats;
 		tagCount = new HashMap<String,Integer>();
 		prox = Prox;
-		prox.connect();
+		prox.connect(context);
 		itemsUsed = new ArrayList<Item>();
 
 	}
@@ -88,13 +87,7 @@ public class TasteManager {
 	 * @return
 	 */
 	public Item getNextItem(Item currItem){
-         
-		RealProxy proxy = new RealProxy();
-		Context context = null; 
-		Provider provide = Provider.instance(proxy, "AndroidUserName",context, "item from pref");
-		
 		Item next = null;
-		ArrayList<Item> filtered = new ArrayList<Item>();
 		next = prox.getNextItem(currItem);
 		if(cats.isEmpty()){
 			return next;
@@ -111,7 +104,8 @@ public class TasteManager {
 		//
 		if (cats.contains(next.getCategoryTag().toLowerCase()) && !(itemsUsed.contains(next))){
 			return next;
-		} else {
+		} 
+		else {
 			return next = getNextItem(currItem);
 		}
 	}

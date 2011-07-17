@@ -3,9 +3,11 @@ package edu.brandeis.vogueable;
 import java.util.ArrayList;
 
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -22,6 +24,10 @@ public class CategoryChooser extends Activity implements OnClickListener {
 	  public void onCreate(Bundle savedInstanceState) {
 	        super.onCreate(savedInstanceState);
 	        setContentView(R.layout.category);
+	        
+		     
+		      
+		      
 	        
 	        
 	        
@@ -92,211 +98,136 @@ public class CategoryChooser extends Activity implements OnClickListener {
 	    	
 	    	
 	    	//Create a CheckBox for all the checkboxes given:
-	    	CheckBox dresses = (CheckBox) findViewById(R.id.dresses_check);  
-	    	CheckBox shoes = (CheckBox) findViewById(R.id.shoes_check);
-	    	CheckBox bottoms = (CheckBox) findViewById(R.id.bottoms_check); 
-	    	CheckBox accesories = (CheckBox) findViewById(R.id.accesories_check);  
-	    	CheckBox jackets = (CheckBox) findViewById(R.id.jackets_check);  
-	    	CheckBox blouses = (CheckBox) findViewById(R.id.blouses_check);
-	    	CheckBox hoodies = (CheckBox) findViewById(R.id.hoodies_check); 
-	    	CheckBox intimate = (CheckBox) findViewById(R.id.intimates_check);  
-	    	CheckBox activewear = (CheckBox) findViewById(R.id.activewear_check);
-	    	CheckBox rompers = (CheckBox) findViewById(R.id.rompers_check);  
-	    	CheckBox suits = (CheckBox) findViewById(R.id.suits_check);
-	    	CheckBox tops = (CheckBox) findViewById(R.id.tops_check); 
+	    	final CheckBox dresses = (CheckBox) findViewById(R.id.dresses_check);  
+	    	final CheckBox shoes = (CheckBox) findViewById(R.id.shoes_check);
+	    	final CheckBox bottoms = (CheckBox) findViewById(R.id.bottoms_check); 
+	    	final CheckBox accesories = (CheckBox) findViewById(R.id.accesories_check);  
+	    	final CheckBox jackets = (CheckBox) findViewById(R.id.jackets_check);  
+	    	final CheckBox blouses = (CheckBox) findViewById(R.id.blouses_check);
+	    	final CheckBox hoodies = (CheckBox) findViewById(R.id.hoodies_check); 
+	    	final CheckBox intimate = (CheckBox) findViewById(R.id.intimates_check);  
+	    	final CheckBox activewear = (CheckBox) findViewById(R.id.activewear_check);
+	    	final CheckBox rompers = (CheckBox) findViewById(R.id.rompers_check);  
+	    	final CheckBox suits = (CheckBox) findViewById(R.id.suits_check);
+	    	final CheckBox tops = (CheckBox) findViewById(R.id.tops_check); 
 	    	
 	    	
 		      switch (v.getId()) {
 		     
 		      case R.id.go_button :
-		    	  RealProxy proxy = new RealProxy();
-			        Context context = this; 
-			       
-			 		prov = Provider.instance(proxy, "AndroidUserName",context, "item from pref");
 		    	  
-		    	  Intent i = new Intent(this, MainActivity.class);
+			      
+			      final ProgressDialog dialog = ProgressDialog.show(CategoryChooser.this,"", "Loading. Please wait...",true);
+			      	dialog.show();
+			         Handler handler = new Handler();
+			         handler.postDelayed(new Runnable() {
+			         public void run() {
+			 
+			 	        RealProxy proxy = new RealProxy();
+			 		    Context context = CategoryChooser.this; 
+			        	prov = Provider.instance(proxy, "AndroidUserName",context, "item from pref");
+			        	prov.clearCatList();
+			        	 
+			        	 if (dresses.isChecked()) {
+				             //currCat.add("dresses");
+				             prov.setAcat("dresses");
+				            
+				        	 //currCat+=" "+"dresses";
+				         }   
+				         if (shoes.isChecked()) {
+				        	//currCat.add("shoes");
+				        	prov.setAcat("shoes");
+				        	
+				        	
+				        	 //currCat+="|"+"shoes";
+				         }  
+				         if (bottoms.isChecked()) {
+				        	 //currCat.add("bottoms");
+				        	 prov.setAcat("bottoms");
+				        	 prov.setAcat("pants");
+				        	 prov.setAcat("skirts");
+				        	 
+				        	
+				        	 //currCat+="|"+"dresses";
+				         } 
+				         if (accesories.isChecked()) {
+				        	 //currCat.add("accesories");
+				        	 prov.setAcat("accessories");
+				        	 
+				        	
+				        	 //currCat+="|"+"shorts";
+				         } 
+				         if(jackets.isChecked()) {
+				        	
+				        	 //currCat.add("jackets");
+				        	 prov.setAcat("jackets");
+				        	 prov.setAcat("blazers");
+				        	 prov.setAcat("vests");
+				        	 //currCat+="|"+"clothing";
+				         }
+				         if (blouses.isChecked()) {
+				             //currCat.add("blouses");
+				             prov.setAcat("blouses");
+
+				        	 //currCat+=" "+"dresses";
+				         }   
+				         if (hoodies.isChecked()) {
+				        	//currCat.add("hoodies");
+				        	prov.setAcat("hoodies");
+				        	
+				        	//prov.setAcat("intimate");
+				        	 //currCat+="|"+"shoes";
+				         }  
+				         if (intimate.isChecked()) {
+				        	 //currCat.add("intimate");
+				        	 prov.setAcat("intimates");
+				        	 prov.setAcat("hosiery");
+				        	 
+				        	 //currCat+="|"+"dresses";
+				         } 
+				         if (activewear.isChecked()) {
+				        	 //currCat.add("activewear");
+				        	 prov.setAcat("active");
+				        	
+				        	 
+				        
+				        	 //currCat+="|"+"shorts";
+				         } 
+				         if(rompers.isChecked()) {
+				        	 //currCat.add("rompers");
+				        	 prov.setAcat("rompers");
+				        	 prov.setAcat("jumpsuits");
+				        	
+				        	 //currCat+="|"+"clothing";
+				         }
+				         if (suits.isChecked()) {
+				        	 //currCat.add("suits");
+				        	 prov.setAcat("suits");
+				        	
+				        	
+				        	 //currCat+="|"+"shorts";
+				         } 
+				         if(tops.isChecked()) {
+				        	 //currCat.add("tops");
+				        	 prov.setAcat("tops");
+				        	 
+				        	 
+				        	 //currCat+="|"+"clothing";
+				         }
+			        	 
+			        	 
+			        	 Intent i = new Intent(CategoryChooser.this, MainActivity.class);
+			        	 startActivity(i);//start the activity
+			                 
+			       	 dialog.dismiss();
+			            }}, 100000); { // 3000 milliseconds
+			            }
+			      
+		    	  
 			         
-		    	  prov.clearCatList();
 		    	  
-		    	  	if (dresses.isChecked()) {
-			             //currCat.add("dresses");
-			             prov.setAcat("dresses");
-			            
-			        	 //currCat+=" "+"dresses";
-			         }   
-			         if (shoes.isChecked()) {
-			        	//currCat.add("shoes");
-			        	prov.setAcat("shoes");
-			        	prov.setAcat("boots");
-			        	prov.setAcat("flats");
-			        	prov.setAcat("pumps");
-			        	prov.setAcat("sandals");
-			        	prov.setAcat("rompers");
-			        	prov.setAcat("oxfords");
-			        	prov.setAcat("espadrilles");
-			        	
-			        	 //currCat+="|"+"shoes";
-			         }  
-			         if (bottoms.isChecked()) {
-			        	 //currCat.add("bottoms");
-			        	 prov.setAcat("bottoms");
-			        	 prov.setAcat("pants");
-			        	 prov.setAcat("capris");
-			        	 prov.setAcat("shorts");
-			        	 prov.setAcat("skirts");
-			        	 prov.setAcat("cargo");
-			        	 prov.setAcat("cargos");
-			        	 prov.setAcat("chinos");
-			        	 prov.setAcat("corduroys");
-			        	 prov.setAcat("cropped");
-			        	 prov.setAcat("jeans");
-			        	 prov.setAcat("leggings");
-			        	 prov.setAcat("knits");
-			        	 prov.setAcat("slacks");
-			        	 prov.setAcat("carpenters");
-			        	 prov.setAcat("cuffed");
-			        	 prov.setAcat("pleated");
-			        	 prov.setAcat("bermudas");
-			        	 prov.setAcat("culottes");
-			        	 prov.setAcat("cutoffs");
-			        	 prov.setAcat("khaki");
-			        	 prov.setAcat("skorts");
-			        	 
-			        	
-			        	 //currCat+="|"+"dresses";
-			         } 
-			         if (accesories.isChecked()) {
-			        	 //currCat.add("accesories");
-			        	 prov.setAcat("accessories");
-			        	 prov.setAcat("belts");
-			        	 prov.setAcat("handbags");
-			        	 prov.setAcat("hats");
-			        	 prov.setAcat("scarves");
-			        	 prov.setAcat("wallets");
-			        	 prov.setAcat("sunglasses");
-			        	 prov.setAcat("headbands");
-			        	 prov.setAcat("fedoras");
-			        	 prov.setAcat("berets");
-			        	 prov.setAcat("wraps");
-			        	 prov.setAcat("pashminas");
-			        	 prov.setAcat("keyrings");
-			        	 prov.setAcat("keychains");
-			        	
-			        	 //currCat+="|"+"shorts";
-			         } 
-			         if(jackets.isChecked()) {
-			        	
-			        	 //currCat.add("jackets");
-			        	 prov.setAcat("jackets");
-			        	 prov.setAcat("blazers");
-			        	 prov.setAcat("vests");
-			        	 //currCat+="|"+"clothing";
-			         }
-			         if (blouses.isChecked()) {
-			             //currCat.add("blouses");
-			             prov.setAcat("blouses");
-			             prov.setAcat("long-sleeve");
-			        	 prov.setAcat("short_sleeve");
-			        	 prov.setAcat("three-quarter-sleeve");
-			        	 prov.setAcat("peasant");
-			        	 prov.setAcat("sleeveless");
-			        	 prov.setAcat("button-down");
-			        	 prov.setAcat("oxfords");
-			        	 prov.setAcat("camisoles");
-			        	 prov.setAcat("halters");
-			           
-			        	 //currCat+=" "+"dresses";
-			         }   
-			         if (hoodies.isChecked()) {
-			        	//currCat.add("hoodies");
-			        	prov.setAcat("hoodies");
-			        	
-			        	//prov.setAcat("intimate");
-			        	 //currCat+="|"+"shoes";
-			         }  
-			         if (intimate.isChecked()) {
-			        	 //currCat.add("intimate");
-			        	 prov.setAcat("intimates");
-			        	 prov.setAcat("hosiery");
-			        	 prov.setAcat("bras");
-			        	 prov.setAcat("panties");
-			        	 prov.setAcat("lingerie");
-			        	 prov.setAcat("camisoles");
-			        	 prov.setAcat("chemises");
-			        	 prov.setAcat("teddies");
-			        	 prov.setAcat("negligees");
-			        	 prov.setAcat("corsets");
-			        	 prov.setAcat("bustiers");
-			        	 
-			        	
-			        	 //currCat+="|"+"dresses";
-			         } 
-			         if (activewear.isChecked()) {
-			        	 //currCat.add("activewear");
-			        	 prov.setAcat("active");
-			        	 prov.setAcat("swimwear");
-			        	 prov.setAcat("baselayers");
-			        	 prov.setAcat("bikinis");
-			        	 prov.setAcat("racerback");
-			        	 prov.setAcat("scoop-back");
-			        	 prov.setAcat("slimming");
-			        	 prov.setAcat("skirted");
-			        	 prov.setAcat("spaghetti-strap");
-			        	 prov.setAcat("strapless");
-			        	 prov.setAcat("coverups");
-			        	 
-			        
-			        	 //currCat+="|"+"shorts";
-			         } 
-			         if(rompers.isChecked()) {
-			        	 //currCat.add("rompers");
-			        	 prov.setAcat("rompers");
-			        	 prov.setAcat("jumpsuits");
-			        	
-			        	 //currCat+="|"+"clothing";
-			         }
-			         if (suits.isChecked()) {
-			        	 //currCat.add("suits");
-			        	 prov.setAcat("suits");
-			        	 prov.setAcat("separates");
-			        	 prov.setAcat("pantsuits");
-			        	
-			        	 //currCat+="|"+"shorts";
-			         } 
-			         if(tops.isChecked()) {
-			        	 //currCat.add("tops");
-			        	 prov.setAcat("tops");
-			        	 prov.setAcat("tanks");
-			        	 prov.setAcat("camis");
-			        	 prov.setAcat("shirts");
-			        	 prov.setAcat("sweaters");
-			        	 prov.setAcat("sweatshirts");
-			        	 prov.setAcat("racerback");
-			        	 prov.setAcat("scoop-back");
-			        	 prov.setAcat("slimming");
-			        	 prov.setAcat("skirted");
-			        	 prov.setAcat("spaghetti-strap");
-			        	 prov.setAcat("strapless");
-			        	 prov.setAcat("long-sleeve");
-			        	 prov.setAcat("short_sleeve");
-			        	 prov.setAcat("three-quarter-sleeve");
-			        	 prov.setAcat("sleeveless");
-			        	 prov.setAcat("polos");
-			        	 prov.setAcat("crewnecks");
-			        	 prov.setAcat("v-necks");
-			        	 prov.setAcat("tunics");
-			        	 prov.setAcat("turtlenecks");
-			        	 prov.setAcat("mocks");
-			        	 prov.setAcat("cardigans");
-			        	 prov.setAcat("shells");
-			        	 prov.setAcat("hooded");
-			        	 prov.setAcat("ponchos");
-			        	 prov.setAcat("pullovers");
-			        	 prov.setAcat("shrugs");
-			        	 prov.setAcat("zippered");
-			        	 
-			        	 //currCat+="|"+"clothing";
-			         }
+		    	  
+		    	  	
 			        
 			        
 			         /*pass the selected categories to the main activity 
@@ -304,10 +235,16 @@ public class CategoryChooser extends Activity implements OnClickListener {
 			          * */
 			         
 			        // i.putStringArrayListExtra("categories", currCat);
-			         startActivity(i);//start the activity
+			        
+			         
+
+			   
 			         
 			         
-			         break;    
+			  break;    
+			         
+			         
+			         
 			         
 		      case R.id.select_all :
 		    	 // Intent in = new Intent(this, MainActivity.class);

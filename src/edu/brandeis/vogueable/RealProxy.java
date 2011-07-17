@@ -1,8 +1,11 @@
 package edu.brandeis.vogueable;
 
+import java.io.BufferedInputStream;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.net.URL;
+import java.net.URLConnection;
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -20,10 +23,12 @@ import us.monoid.web.Resty;
 import us.monoid.web.XMLResource;
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.util.Log;
 
 
-public class RealProxy extends FakeProxy {
+public class RealProxy extends AbstractProxy {
 	
 	User curruser;// user currently using app
 	NodeList nList;
@@ -39,7 +44,7 @@ public class RealProxy extends FakeProxy {
 	 * connects to web service
 	 * @throws SAXException 
 	 */
-	public void connect() {
+	public void connect(Context con) {
 		
 		Resty r = new Resty();
 		XMLResource usr1 = null;
@@ -51,9 +56,9 @@ public class RealProxy extends FakeProxy {
 	        String st = ""+usr1;
 	        InputStream is = new ByteArrayInputStream(st.getBytes());
 	        
-	Document doc = dBuilder.parse(is);
-	doc.getDocumentElement().normalize();
-	nList = doc.getElementsByTagName("item");
+	        Document doc = dBuilder.parse(is);
+	        doc.getDocumentElement().normalize();
+	        nList = doc.getElementsByTagName("item");
 			
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
@@ -85,9 +90,12 @@ public class RealProxy extends FakeProxy {
 				it.setCategory(getTagValue("category", eElement));
 				it.setBrand(getTagValue("brand", eElement));
 				it.addTag(getTagValue("fabric-type", eElement));
-				//it.addTag("this");
-				items.add(it);
 				
+				if (checkSize(it)){
+					items.add(it);
+				} else {
+					temp--;
+				}
 			}
 		}
 		return items;
@@ -118,7 +126,35 @@ public class RealProxy extends FakeProxy {
 				
 			}
 		}
-		return nextit; 
+		
+		if (checkSize(nextit)){
+			return nextit; 
+		} else {
+			return getNextItem(currentitem);
+		}
+		
+	}
+	
+	private static boolean checkSize(Item it){
+		try {
+            Log.e("src",it.getImageFileString());
+            URL url = new URL(it.getImageFileString());
+            URLConnection connection = (URLConnection) url.openConnection();
+            connection.connect();
+            InputStream input = connection.getInputStream();
+            BufferedInputStream bis = new BufferedInputStream(input);
+            Bitmap myBitmap = BitmapFactory.decodeStream(bis);
+            if (myBitmap.getHeight()>450){
+            	return true;
+            }else{
+            	return false;
+            }
+            
+        } catch (IOException e) {
+            e.printStackTrace();
+            Log.e("Exception",e.getMessage());
+            return true;
+        }
 	}
 }
 

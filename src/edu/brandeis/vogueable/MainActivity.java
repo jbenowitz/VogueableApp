@@ -1,30 +1,23 @@
 package edu.brandeis.vogueable;
 
-import java.io.BufferedInputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.net.URL;
-import java.net.URLConnection;
+
 import android.app.Activity;
 import android.app.AlertDialog;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.res.Configuration;
-import android.content.res.TypedArray;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.BaseAdapter;
+import android.view.ViewGroup;
 import android.widget.Gallery;
-import android.widget.Gallery.LayoutParams;
 import android.widget.ImageButton;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -51,13 +44,33 @@ public class MainActivity extends Activity implements android.view.View.OnClickL
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		RealProxy proxy = new RealProxy();
-		Context context = this; 
-		provide = Provider.instance(proxy, "AndroidUserName",context, "item from pref");
+		provide = Provider.instance(null, "AndroidUserName", this, "item from pref");
 		
 		setContentView(R.layout.main);
-		Toast.makeText(MainActivity.this, "Slide for next item!", Toast.LENGTH_LONG).show();
+		//Toast.makeText(MainActivity.this, "Slide for next item!", Toast.LENGTH_LONG).show();
+		
+		//LayoutInflater inflater = (LayoutInflater) this.getSystemService(LAYOUT_INFLATER_SERVICE);
+		//View layout = inflater.inflate(R.layout.help,(ViewGroup) findViewById(R.id.group));
 
+		AlertDialog.Builder builder;
+		AlertDialog alertDialog;
+
+		LayoutInflater inflater = (LayoutInflater) this.getSystemService(LAYOUT_INFLATER_SERVICE);
+		View layout = inflater.inflate(R.layout.help,
+		                               (ViewGroup) findViewById(R.id.group));
+		layout.setBackgroundColor(new Color().argb(75, 255, 255, 255));
+		builder = new AlertDialog.Builder(this);
+		builder.setView(layout);
+		alertDialog = builder.create();
+		alertDialog.setCanceledOnTouchOutside(true);
+		alertDialog.show();
+		
+		/*Toast t = new Toast(this);
+		View tv = LayoutInflater.from(this).inflate(R.layout.help,(ViewGroup) findViewById(R.id.group));
+		t.setView(tv);
+		t.setDuration(Toast.LENGTH_LONG);
+		t.show();*/
+		
 		/*
 		 * Set up liking and disliking an item (with LikeManager)
 		 */

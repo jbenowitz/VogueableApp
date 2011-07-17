@@ -10,6 +10,7 @@ public class Provider {
 	private TasteManager usertaste;
 	private static Provider provider = null;
 	private ArrayList<String> cats; 
+	private Context context;
 	
 	
 	private Provider(RealProxy proxy, String username, Context con, String item){
@@ -18,6 +19,7 @@ public class Provider {
 		user.setTasteManager(usertaste);
 	    curritem = new Item(item);
 	    cats = new ArrayList<String>();
+	    context = con;
 	    try {
 			usertaste = new TasteManager(proxy,cats);
 		} catch (Exception e) {
@@ -53,7 +55,7 @@ public class Provider {
 		 cats.add(cat);
 	}
 	public void clearCatList(){
-		 cats.clear();
+		 cats = new ArrayList<String>();
 	}
 	public ArrayList<String> getCatList(){
 		 return cats;
@@ -63,7 +65,8 @@ public class Provider {
 	public static synchronized Provider instance(RealProxy proxy, String username, Context con, String item) {
 		if (provider == null){
 			provider = new Provider(proxy, username, con, item);
-	}
+		}
+		provider.context = con;
 		return provider;
 	}
 

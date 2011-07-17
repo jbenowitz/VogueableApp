@@ -3,8 +3,6 @@ package edu.brandeis.vogueable;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-import android.content.Context;
-import android.widget.ImageButton;
 
 /**
  * 
