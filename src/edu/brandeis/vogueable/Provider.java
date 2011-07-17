@@ -29,7 +29,7 @@ public class Provider {
 	    proxy = new RealProxy(itemcache, cats);
 	    context = con;
 	    try {
-			usertaste = new TasteManager(proxy,cats);
+			usertaste = new TasteManager(cats);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -73,7 +73,9 @@ public class Provider {
 	public DeptItemCache getItemCache(){
 		return itemcache;
 	}
-	
+	public RealProxy getProxy(){
+		return proxy;
+	}
 	
 	public static synchronized Provider instance(String username, Context con, String item) {
 		if (provider == null){

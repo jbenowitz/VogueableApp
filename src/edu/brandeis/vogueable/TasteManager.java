@@ -18,7 +18,6 @@ public class TasteManager {
 
 	HashMap<String,Integer> tagCount;
 	ArrayList<Item> itemsUsed;
-	RealProxy prox;
 	Context context;
 	ArrayList<String> cats;
 	
@@ -31,12 +30,10 @@ public class TasteManager {
 	 * @param ArrayList of items, to choose next item
 	 * @throws SAXException 
 	 */
-	public TasteManager( RealProxy Prox, ArrayList<String> cats) {
+	public TasteManager( ArrayList<String> cats) {
 
 		this.cats=cats;
 		tagCount = new HashMap<String,Integer>();
-		prox = Prox;
-		prox.connect(context);
 		itemsUsed = new ArrayList<Item>();
 
 	}
@@ -80,23 +77,5 @@ public class TasteManager {
 	}
 
 
-	/**
-	 * TO COMMENT
-	 * @param currItem
-	 * @param currCat
-	 * @return
-	 */
-	public Item getNextItem(Item currItem){
-		Item next = null;
-		next = prox.getNextItem(currItem);
-		if(cats.isEmpty()){
-			return next;
-		}
-		else if (cats.contains(next.getCategoryTag().toLowerCase())){
-			return next;
-		} 
-		else {
-			return next = getNextItem(currItem);
-		}
-	}
+	
 }

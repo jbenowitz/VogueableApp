@@ -110,7 +110,8 @@ import android.widget.TextView;
        
            
            //Gets the next item
-           Item nextItem = provide.getCurTM().getNextItem(provide.getCurItem());
+           provide.getProxy().connect(null);
+           Item nextItem = provide.getProxy().getNextItem(provide.getCurItem());
            items[(position+5)%items.length] = nextItem;
            
            
