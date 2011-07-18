@@ -34,9 +34,11 @@ import android.accounts.Account;
 import android.accounts.AccountManager;
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
@@ -50,21 +52,21 @@ import android.widget.Toast;
 public class Men extends Activity implements  android.view.View.OnClickListener{
 	private static String TAG = "Men Starting Activity";
 	User user = new User(null);
-	
+
 	/** Called when the activity is first created. */
 	   @Override
 	   public void onCreate(Bundle savedInstanceState) {
 	      super.onCreate(savedInstanceState);
 	      setContentView(R.layout.intro);
-	   
+
 	      // Set up click listeners for the category buttons buttons
 	      View nextButton = findViewById(R.id.browse_label);
 	      nextButton.setOnClickListener(this);
 	      View prevButton = findViewById(R.id.login_label);
 	      prevButton.setOnClickListener(this);  
 	   }
-	  
-	  
+
+
 	   /**
 	    * @author gasparobimba
 	    * 
@@ -74,22 +76,28 @@ public class Men extends Activity implements  android.view.View.OnClickListener{
 	    */
 	   public void onClick(View v) {
 	      switch (v.getId()) {
-	     
+
 	      case R.id.browse_label :
 	    	  Intent i = new Intent(this, CategoryChooser.class);
 	    	  i.putExtra("currUserID", user.getID());
 	    	  i.putExtra("currUserName", user.getName());
 		      startActivity(i);
 		      break;
-	      
+
 	      case R.id.login_label:
 	    	  Log.d(TAG, "Login button pressed");
 	    	  
-	    	  final AccountManager manager = AccountManager.get(this);
+	    	  final ProgressDialog dialog = ProgressDialog.show(Men.this,"", "Loading. Please wait...",true);
+		      	dialog.show();
+		         Handler handler = new Handler();
+		         handler.postDelayed(new Runnable() {
+		         public void run() {
+
+	    	  final AccountManager manager = AccountManager.get(Men.this);
 		      final Account[] accounts = manager.getAccounts();
 		      if (accounts.length >=1){
 		    	  user = new User(accounts[0].name);
-		    	  
+
 		    	  //Check to see if user in database
 		    	  //if in database, get information from user
 		    	  String temp = checkUser(user.getName());
@@ -105,7 +113,7 @@ public class Men extends Activity implements  android.view.View.OnClickListener{
 		    		  user.setID(checkUser(user.getName()));
 		    	  }
 
-		    	  AlertDialog.Builder welcome = new AlertDialog.Builder(this);
+		    	  AlertDialog.Builder welcome = new AlertDialog.Builder(Men.this);
 		    	  	welcome.setIcon(R.drawable.logobright);
 		    	  	welcome.setTitle(" ");
 		    	  	welcome.setMessage("Welcome, " + user.getName());
@@ -122,26 +130,30 @@ public class Men extends Activity implements  android.view.View.OnClickListener{
 		      } else {
 		    	  Toast.makeText(Men.this, "No account registered", Toast.LENGTH_SHORT).show();
 		      } 
-	    	 
+
+		      dialog.dismiss();
+		            }}, 80000); { // 3000 milliseconds
+		            }
+		         
 		      	break; 
 	      }
 	   }
-	   
-	   
+
+
 	   /**
 	    * Adds a given user to the database
 	    * @param user
 	    */
 	    private void addUser(User user) {
 	    	HttpPost httppost = new HttpPost("http://vogueable.heroku.com/users");
-		  
+
 	    	try {
 	    	  List <NameValuePair> nvp = new ArrayList<NameValuePair>();
 			  nvp.add(new BasicNameValuePair("user[user_name]", user.getName()));
 			  nvp.add(new BasicNameValuePair("user[email]", user.getName()));
 			  //Add the e-mail address
 			  httppost.setEntity(new UrlEncodedFormEntity(nvp));
-			  
+
 			  //Execute HTTP Post Request
 			  HttpClient httpclient = new DefaultHttpClient();
 			  HttpResponse response = httpclient.execute(httppost);
@@ -152,8 +164,8 @@ public class Men extends Activity implements  android.view.View.OnClickListener{
 	    		Log.e(TAG, "IO Exception");
 	    	}
 	    }
-	    
-	    
+
+
 	    /**
 	     * Checks to see if a user is already in the database
 	     * For now, pulls all the users on the database and checks to see if phone user is on there
@@ -166,18 +178,18 @@ public class Men extends Activity implements  android.view.View.OnClickListener{
 			XMLResource usr1 = null;
 			NodeList nList = null;
 			HashMap<String, String> users = new HashMap<String, String>();
-		
+
 			try {
 				usr1 = r.xml("http://vogueable.heroku.com/users.xml");
 				DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
 		        DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
 		        String st = ""+usr1;
 		        InputStream is = new ByteArrayInputStream(st.getBytes());
-		        
+
 		        Document doc = dBuilder.parse(is);
 		        doc.getDocumentElement().normalize();
 		        nList = doc.getElementsByTagName("user");
-				
+
 			} catch (IOException e) {
 				e.printStackTrace();
 				Log.e("gaspar", "exception on r.xml");
@@ -186,8 +198,8 @@ public class Men extends Activity implements  android.view.View.OnClickListener{
 			} catch (SAXException e) {
 				e.printStackTrace();
 			}
-			
-			
+
+
 			//Parses through all the taken users from the database
 			//looks at e-mails solely.  Create a Map connecting the email to
 			// their ID.
@@ -199,7 +211,7 @@ public class Men extends Activity implements  android.view.View.OnClickListener{
 					Log.d(TAG,"name" + users.get(temp));
 				}
 			}
-	    	
+
 			//returns their ID if they exist, otherwise null
 	    	if(users.keySet().contains(name)){
 	    		return users.get(name);

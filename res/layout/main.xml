@@ -12,14 +12,14 @@
   	android:orientation="horizontal"
   	android:layout_gravity="center"
   	android:gravity="center"
+  	android:layout_marginTop="34dip"
   	android:layout_height="wrap_content"
     android:layout_width="fill_parent">
   	
   	<Gallery xmlns:android="http://schemas.android.com/apk/res/android" 
     	android:id="@+id/gallery"
     	android:layout_width="fill_parent"
-    	android:layout_height="400dip"
-    	android:minHeight="400dip"
+    	android:layout_height="wrap_content"
     	android:layout_centerInParent="true"
 	/>
 
@@ -41,7 +41,7 @@
     	android:background="@null"
     	android:src="@drawable/info"
     	android:layout_height="wrap_content"
-    	android:layout_width="fill_parent"
+    	android:layout_width="wrap_content"
     	android:layout_weight="1"
     	android:scaleType="centerInside"
     />
@@ -61,7 +61,7 @@
     	android:src="@drawable/buybutton"
     	android:background="@null"
     	android:layout_height="wrap_content"
-    	android:layout_width="fill_parent"
+    	android:layout_width="wrap_content"
     	android:layout_weight="1"
     	android:scaleType="centerInside"
     />
@@ -71,7 +71,7 @@
     	android:background="@null"
     	android:src="@drawable/dislike_button"
     	android:layout_height="wrap_content"
-    	android:layout_width="fill_parent"
+    	android:layout_width="wrap_content"
     	android:layout_weight="1"
     	android:scaleType="centerInside"
   	/>
@@ -81,7 +81,7 @@
     	android:background="@null"
     	android:src="@drawable/like_button"
     	android:layout_height="wrap_content" 
-    	android:layout_width="fill_parent"
+    	android:layout_width="wrap_content"
     	android:layout_weight="1"
     	android:scaleType="centerInside"
    	/>

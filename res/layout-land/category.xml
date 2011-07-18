@@ -85,16 +85,6 @@
 				</CheckBox>
 				
 				<CheckBox 
-					android:id="@+id/blouses_check" 
-					android:layout_width="wrap_content"
-					android:layout_height="wrap_content" 
-					android:text="@string/blouse_label"
-					android:textColor="@color/yellow"
-					android:textSize="17dip"
-					android:layout_marginLeft="10dip">
-				</CheckBox>
-				
-				<CheckBox 
 					android:id="@+id/bottoms_check" 
 					android:layout_width="wrap_content"
 					android:layout_height="wrap_content" 
@@ -121,15 +111,6 @@
 				</CheckBox>
 				
 				<CheckBox 
-					android:id="@+id/hoodies_check" 
-					android:layout_width="wrap_content"
-					android:layout_height="wrap_content" 
-					android:text="@string/hoodie_label"
-					android:textColor="@color/yellow"
-					android:textSize="17dip"
-					android:layout_marginLeft="10dip">
-				</CheckBox>
-				<CheckBox 
 					android:id="@+id/intimates_check" 
 					android:layout_width="wrap_content"
 					android:layout_height="wrap_content" 
@@ -139,7 +120,7 @@
 					android:layout_marginLeft="10dip">
 				</CheckBox>
 				<CheckBox 
-					android:id="@+id/jackets_check" 
+					android:id="@+id/outerwear_check" 
 					android:layout_width="wrap_content"
 					android:layout_height="wrap_content" 
 					android:text="@string/jacket_label"

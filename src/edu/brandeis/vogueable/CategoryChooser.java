@@ -57,14 +57,8 @@ public class CategoryChooser extends Activity implements OnClickListener {
 		    View accesoriesview = findViewById(R.id.accesories_check);
 		    accesoriesview.setOnClickListener(this);
 		    
-		    View jacketsview = findViewById(R.id.jackets_check);
+		    View jacketsview = findViewById(R.id.outerwear_check);
 		    jacketsview.setOnClickListener(this);
-		      
-		    View blousesview = findViewById(R.id.blouses_check);
-		    blousesview.setOnClickListener(this);
-		      
-		    View hoodiesview = findViewById(R.id.hoodies_check);
-		    hoodiesview.setOnClickListener(this);
 		      
 		    View intimateview = findViewById(R.id.intimates_check);
 		    intimateview.setOnClickListener(this);
@@ -101,9 +95,7 @@ public class CategoryChooser extends Activity implements OnClickListener {
 	    	final CheckBox shoes = (CheckBox) findViewById(R.id.shoes_check);
 	    	final CheckBox bottoms = (CheckBox) findViewById(R.id.bottoms_check); 
 	    	final CheckBox accesories = (CheckBox) findViewById(R.id.accesories_check);  
-	    	final CheckBox jackets = (CheckBox) findViewById(R.id.jackets_check);  
-	    	final CheckBox blouses = (CheckBox) findViewById(R.id.blouses_check);
-	    	final CheckBox hoodies = (CheckBox) findViewById(R.id.hoodies_check); 
+	    	final CheckBox outerwear = (CheckBox) findViewById(R.id.outerwear_check);  
 	    	final CheckBox intimate = (CheckBox) findViewById(R.id.intimates_check);  
 	    	final CheckBox activewear = (CheckBox) findViewById(R.id.activewear_check);
 	    	final CheckBox rompers = (CheckBox) findViewById(R.id.rompers_check);  
@@ -168,26 +160,15 @@ public class CategoryChooser extends Activity implements OnClickListener {
 	
 				        	 //currCat+="|"+"shorts";
 				         } 
-				         if(jackets.isChecked()) {
+				         if(outerwear.isChecked()) {
 	
 				        	 currCat.add("jackets");
 				        	 prov.setAcat("jackets");
 				        	 prov.setAcat("blazers");
+				        	 prov.setAcat("hoodies");
 				        	 //currCat+="|"+"clothing";
-				         }
-				         if (blouses.isChecked()) {
-				             currCat.add("blouses");
-				             prov.setAcat("blouses");
-	
-				        	 //currCat+=" "+"dresses";
 				         }   
-				         if (hoodies.isChecked()) {
-				        	currCat.add("hoodies");
-				        	prov.setAcat("hoodies");
-	
-				        	//prov.setAcat("intimate");
-				        	 //currCat+="|"+"shoes";
-				         }  
+				        
 				         if (intimate.isChecked()) {
 				        	 currCat.add("intimate");
 				        	 prov.setAcat("intimates");
@@ -216,6 +197,7 @@ public class CategoryChooser extends Activity implements OnClickListener {
 				         if(tops.isChecked()) {
 				        	 currCat.add("tops");
 				        	 prov.setAcat("tops");
+				        	 prov.setAcat("blouses");
 	
 				        	 //currCat+="|"+"clothing";
 				         }
@@ -232,7 +214,7 @@ public class CategoryChooser extends Activity implements OnClickListener {
 			        	 startActivity(i);//start the activity
 			                 
 			       	 dialog.dismiss();
-			            }}, 100000); { // 3000 milliseconds
+			            }}, 80000); { // 3000 milliseconds
 			            }
 			         
 		    	  
@@ -262,9 +244,7 @@ public class CategoryChooser extends Activity implements OnClickListener {
 		    	  shoes.setChecked(true);
 		    	  bottoms.setChecked(true);
 		    	  accesories.setChecked(true);
-		    	  jackets.setChecked(true);
-		    	  blouses.setChecked(true);
-		    	  hoodies.setChecked(true);
+		    	  outerwear.setChecked(true);
 		    	  intimate.setChecked(true);
 		    	  activewear.setChecked(true);
 		    	  rompers.setChecked(true);
@@ -279,9 +259,7 @@ public class CategoryChooser extends Activity implements OnClickListener {
 		    	  shoes.setChecked(false);
 		    	  bottoms.setChecked(false);
 		    	  accesories.setChecked(false);
-		    	  jackets.setChecked(false);
-		    	  blouses.setChecked(false);
-		    	  hoodies.setChecked(false);
+		    	  outerwear.setChecked(false);
 		    	  intimate.setChecked(false);
 		    	  activewear.setChecked(false);
 		    	  rompers.setChecked(false);

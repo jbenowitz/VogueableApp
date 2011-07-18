@@ -119,8 +119,8 @@ import android.widget.TextView;
            Bitmap bimage=  getBitmapFromURL(items[position].getImageFileString());
            i.setImageBitmap(bimage);
            i.setAdjustViewBounds(true);
-           i.setMaxHeight(450);
-           i.setMinimumHeight(450);
+           i.setMaxHeight(499);
+           i.setMinimumHeight(499);
 
           //scales the images accordingly
            i.setPadding(50, 0, 50, 0);
@@ -135,7 +135,7 @@ import android.widget.TextView;
           	 galayout = new Gallery.LayoutParams(300,LayoutParams.MATCH_PARENT);
            }
            else{
-          	 galayout = new Gallery.LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT);
+          	 galayout = new Gallery.LayoutParams(LayoutParams.MATCH_PARENT, 499);
            }
            i.setLayoutParams(galayout);
 

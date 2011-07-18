@@ -26,6 +26,7 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.util.Log;
+import android.widget.ImageView;
 
 
 public class RealProxy extends AbstractProxy {
@@ -109,7 +110,7 @@ public class RealProxy extends AbstractProxy {
 				it.setBrand(getTagValue("brand", eElement));
 				it.addTag(getTagValue("fabric-type", eElement));
 				
-				if (checkSize(it)){
+				if (checkSize(it, con)){
 					items.add(it);
 				} else {
 					temp--;
@@ -145,7 +146,7 @@ public class RealProxy extends AbstractProxy {
 			}
 		}
 		
-		if (checkSize(nextit)){
+		if (checkSize(nextit, con)){
 			return nextit; 
 		} else {
 			return getNextItem(currentitem);
@@ -153,7 +154,7 @@ public class RealProxy extends AbstractProxy {
 		
 	}
 	
-	private static boolean checkSize(Item it){
+	private static boolean checkSize(Item it, Context con){
 		try {
             Log.e("src",it.getImageFileString());
             URL url = new URL(it.getImageFileString());
@@ -162,7 +163,10 @@ public class RealProxy extends AbstractProxy {
             InputStream input = connection.getInputStream();
             BufferedInputStream bis = new BufferedInputStream(input);
             Bitmap myBitmap = BitmapFactory.decodeStream(bis);
-            if (myBitmap.getHeight()>450){
+            //ImageView v = new ImageView(con);
+            //v.setImageBitmap(myBitmap);
+            
+            if (myBitmap.getHeight()>499){
             	return true;
             }else{
             	return false;
