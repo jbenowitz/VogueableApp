@@ -4,6 +4,7 @@ import java.io.BufferedInputStream;
 import java.io.IOException;
 import java.net.URL;
 import java.net.URLConnection;
+import java.util.Random;
 
 import javax.xml.parsers.ParserConfigurationException;
 
@@ -119,8 +120,9 @@ import android.widget.TextView;
            Log.i(TAG, "User name " + provide.getCurUser().getName());
            Log.i(TAG, "User id " + provide.getCurUser().getID());
            Item nextItem = null;
+           Random r=new Random();
 		try {
-			nextItem = provide.getProxy().getBatch(1).get(0);
+			nextItem = provide.getProxy().getBatch(20).get(r.nextInt(10));
 		} catch (ParserConfigurationException e) {
 			Log.e(TAG, e.toString());
 		} catch (SAXException e) {
