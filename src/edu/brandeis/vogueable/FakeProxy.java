@@ -20,7 +20,7 @@ import android.util.Log;
 public class FakeProxy extends AbstractProxy {
 
 	User curruser;// user currently using app
-	NodeList nListItems,nListUsers;
+	NodeList nList;
 	Context con;
 	private final static String TAG = "FakeProxy";
 
@@ -47,7 +47,7 @@ public class FakeProxy extends AbstractProxy {
 			Document doc = dBuilder.parse(stream);
 			doc.getDocumentElement().normalize();
 
-			nListItems = doc.getElementsByTagName("item");//list of all item nodes
+			nList = doc.getElementsByTagName("item");//list of all item nodes
 		}
 		catch(Exception e){
 			e.printStackTrace();
@@ -98,9 +98,9 @@ public class FakeProxy extends AbstractProxy {
 
 	public ArrayList<Item> getAllItems(){
 		ArrayList<Item> items = new ArrayList<Item>();
-		for (int temp = 0; temp < nListItems.getLength(); temp++) {
+		for (int temp = 0; temp < nList.getLength(); temp++) {
 
-			Node nNode = nListItems.item(temp);
+			Node nNode = nList.item(temp);
 			if (nNode.getNodeType() == Node.ELEMENT_NODE) {
 				Item it = new Item("it");
 				Element eElement = (Element) nNode;
@@ -124,12 +124,12 @@ public class FakeProxy extends AbstractProxy {
 	 */
 	public Item getNextItem(Item currentitem, ArrayList<String> tags){
 		Item nextit = new Item("next");
-		int temp = new Random().nextInt(nListItems.getLength());
+		int temp = new Random().nextInt(nList.getLength());
 		//Node nNode = nList.item(temp);
 
-		for (int k = 0; k < nListItems.getLength(); k++) {
+		for (int k = 0; k < nList.getLength(); k++) {
 
-			Node nNode = nListItems.item(temp);
+			Node nNode = nList.item(temp);
 			if (nNode.getNodeType() == Node.ELEMENT_NODE) {
 				Element eElement = (Element) nNode;
 				//if(getTagValue("fabric_type",eElement)== tags.get(0)){
@@ -205,7 +205,16 @@ public class FakeProxy extends AbstractProxy {
 	}
 
 
-	
-	
+	/**
+	 * return all the users currently in our database
+	 */
+	public void getAllUsers(){
+		if (!userList.isEmpty()){
+			for (User usr:userList){
+				System.out.println(usr.getName());
+
+			}
+		}
+	}
 
 }

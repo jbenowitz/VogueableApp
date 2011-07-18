@@ -9,17 +9,10 @@ package edu.brandeis.vogueable;
  *
  */
 public class User {
-<<<<<<< HEAD
 	private String name; 
 	private Wishlist wishlist;
 	private TasteManager mytaste;
 	private String id;
-=======
-	private String name,email; 
-	public Wishlist wishlist;
-	public TasteManager mytaste;
-	public Context con;
->>>>>>> 32f95e9dceeb78233a7dc4390e9ce4412262c1c5
 	
 	
 	/**
@@ -90,16 +83,6 @@ public class User {
 	
 	public void setTasteManager(TasteManager taste){
 		mytaste = taste; 
-	}
-
-
-	public void setEmail(String email) {
-		// TODO Auto-generated method stub
-		this.email=email;
-	}
-	public void setName(String name) {
-		// TODO Auto-generated method stub
-		this.name=name;
 	}
 	
 	

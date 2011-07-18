@@ -55,15 +55,15 @@
 		</activity>
 	
 		<activity 
-			android:icon="@drawable/logobright"
-			android:name=".Women" 
-			android:label="@string/app_name" >
+			android:name="Women"
+			android:label="@string/app_name"
+			android:icon="@drawable/logo">
 			 <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-			
-		</activity>
+			</activity> -->
+		
 		
     </application>
     <uses-permission android:name="android.permission.INTERNET" /> 
