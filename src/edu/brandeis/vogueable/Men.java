@@ -87,11 +87,6 @@ public class Men extends Activity implements  android.view.View.OnClickListener{
 	      case R.id.login_label:
 	    	  Log.d(TAG, "Login button pressed");
 	    	  
-	    	  final ProgressDialog dialog = ProgressDialog.show(Men.this,"", "Loading. Please wait...",true);
-		      	dialog.show();
-		         Handler handler = new Handler();
-		         handler.postDelayed(new Runnable() {
-		         public void run() {
 
 	    	  final AccountManager manager = AccountManager.get(Men.this);
 		      final Account[] accounts = manager.getAccounts();
@@ -131,10 +126,6 @@ public class Men extends Activity implements  android.view.View.OnClickListener{
 		    	  Toast.makeText(Men.this, "No account registered", Toast.LENGTH_SHORT).show();
 		      } 
 
-		      dialog.dismiss();
-		            }}, 80000); { // 3000 milliseconds
-		            }
-		         
 		      	break; 
 	      }
 	   }

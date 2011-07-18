@@ -47,29 +47,8 @@ public class MainActivity extends Activity implements android.view.View.OnClickL
 		provide = Provider.instance("AndroidUserName", this, "item from pref");
 		
 		setContentView(R.layout.main);
-		//Toast.makeText(MainActivity.this, "Slide for next item!", Toast.LENGTH_LONG).show();
+		Toast.makeText(MainActivity.this, "Slide for next item!", Toast.LENGTH_LONG).show();
 		
-		//LayoutInflater inflater = (LayoutInflater) this.getSystemService(LAYOUT_INFLATER_SERVICE);
-		//View layout = inflater.inflate(R.layout.help,(ViewGroup) findViewById(R.id.group));
-
-		AlertDialog.Builder builder;
-		AlertDialog alertDialog;
-
-		LayoutInflater inflater = (LayoutInflater) this.getSystemService(LAYOUT_INFLATER_SERVICE);
-		View layout = inflater.inflate(R.layout.help,
-		                               (ViewGroup) findViewById(R.id.group));
-		layout.setBackgroundColor(new Color().argb(75, 255, 255, 255));
-		builder = new AlertDialog.Builder(this);
-		builder.setView(layout);
-		alertDialog = builder.create();
-		alertDialog.setCanceledOnTouchOutside(true);
-		alertDialog.show();
-		
-		/*Toast t = new Toast(this);
-		View tv = LayoutInflater.from(this).inflate(R.layout.help,(ViewGroup) findViewById(R.id.group));
-		t.setView(tv);
-		t.setDuration(Toast.LENGTH_LONG);
-		t.show();*/
 		
 		/*
 		 * Set up liking and disliking an item (with LikeManager)
