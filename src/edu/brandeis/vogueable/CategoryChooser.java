@@ -19,10 +19,7 @@ public class CategoryChooser extends Activity implements OnClickListener {
 	private static final String TAG = "CategoryChooser";
 	
 	private Provider prov;
-	private User user;
 	
-	//public String currCat = "";
-	public ArrayList<String> currCat =new ArrayList<String>();
 	
 	  public void onCreate(Bundle savedInstanceState) {
 	        super.onCreate(savedInstanceState);
@@ -122,93 +119,53 @@ public class CategoryChooser extends Activity implements OnClickListener {
 			          id = extras.getString("currUserID");
 			          name = extras.getString("currUserName");
 			      }
-			      user = new User(name);
 			      
-			      prov = Provider.instance(user.getName(), context, null);//set provider with current user
+			      prov = Provider.instance(name, context, null);//set provider with current user
 			      
-			      prov.getCurUser().setID(user.getID());//update current user's id
+			      prov.getCurUser().setID(id);//update current user's id
 			      Log.i(TAG, "provider current user name: " + prov.getCurUser().getName());
-			      Log.i(TAG, "provider current user ID: " + prov.getCurUser().getName());
+			      Log.i(TAG, "provider current user ID: " + prov.getCurUser().getID());
 			      
 		    	  Intent i = new Intent(this, MainActivity.class);
 			         
 		    	  
 		    	  	if (dresses.isChecked()) {
-			             currCat.add("dresses");
-			             prov.setAcat("dresses");
-			            
-			        	 //currCat+=" "+"dresses";
-			         }   
-			         if (shoes.isChecked()) {
-			        	currCat.add("shoes");
-			        	prov.setAcat("shoes");
-			        	
-			        	 //currCat+="|"+"shoes";
-			         }  
-			         if (bottoms.isChecked()) {
-			        	 currCat.add("bottoms");
-			        	 prov.setAcat("bottoms");
-			        	 prov.setAcat("pants");
-			        	
-			        	 //currCat+="|"+"dresses";
-			         } 
-			         if (accesories.isChecked()) {
-			        	 currCat.add("accesories");
-			        	 prov.setAcat("accessories");
-			        	
-			        	 //currCat+="|"+"shorts";
-			         } 
-			         if(jackets.isChecked()) {
-			        	
-			        	 currCat.add("jackets");
-			        	 prov.setAcat("jackets");
-			        	 prov.setAcat("blazers");
-			        	 //currCat+="|"+"clothing";
+			            prov.setAcat("1"); //dresses
+			        }   
+			        if (shoes.isChecked()) {
+			        	prov.setAcat("2"); //shoes
+			        }  
+			        if (bottoms.isChecked()) {
+			        	prov.setAcat("4"); //pants
+			        } 
+			        if (accesories.isChecked()) {
+			        	prov.setAcat("3"); //accessories 
+			        	prov.setAcat("5"); //jewlery
+			        } 
+			        if(jackets.isChecked()) {
+			        	//jackets and blazers go here
 			         }
-			         if (blouses.isChecked()) {
-			             currCat.add("blouses");
-			             prov.setAcat("blouses");
-			           
-			        	 //currCat+=" "+"dresses";
-			         }   
-			         if (hoodies.isChecked()) {
-			        	currCat.add("hoodies");
-			        	prov.setAcat("hoodies");
-			        	
-			        	//prov.setAcat("intimate");
-			        	 //currCat+="|"+"shoes";
-			         }  
-			         if (intimate.isChecked()) {
-			        	 currCat.add("intimate");
-			        	 prov.setAcat("intimates");
-			        	 prov.setAcat("hosiery");
-			        	
-			        	 //currCat+="|"+"dresses";
-			         } 
-			         if (activewear.isChecked()) {
-			        	 currCat.add("activewear");
-			        	 prov.setAcat("active");
-			        
-			        	 //currCat+="|"+"shorts";
-			         } 
-			         if(rompers.isChecked()) {
-			        	 currCat.add("rompers");
-			        	 prov.setAcat("rompers");
-			        	
-			        	 //currCat+="|"+"clothing";
-			         }
-			         if (suits.isChecked()) {
-			        	 currCat.add("suits");
-			        	 prov.setAcat("suits");
-			        	
-			        	 //currCat+="|"+"shorts";
-			         } 
-			         if(tops.isChecked()) {
-			        	 currCat.add("tops");
-			        	 prov.setAcat("tops");
-			        	
-			        	 //currCat+="|"+"clothing";
-			         }
+			        if (blouses.isChecked()) {
+			        	//blouses go here
+			        }   
+			        if (hoodies.isChecked()) {
+			        	//hoodies
+			        }  
+			        if (intimate.isChecked()) {
+			        	//intimates and hosiery go here
+			        } 
+			        if (activewear.isChecked()) {
+			        	//activewear
+			        } 
+			        if(rompers.isChecked()) {
+			        	//rompers
+			        }
+			        if (suits.isChecked()) {
+			        	//suits go here
+			        } 
+			        if (tops.isChecked()) {
+			        	//tops go here
+			        }
 			        
 			        
 			         /*pass the selected categories to the main activity 
