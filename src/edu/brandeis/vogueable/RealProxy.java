@@ -205,7 +205,7 @@ public class RealProxy extends AbstractProxy {
 					it.setLink(getTagValue("link-to-buy", eElement));
 					it.setPrice(getTagValue("item-price", eElement));
 					it.setBrand(getTagValue("brand", eElement));
-					//it.addTag(getTagValue("fabric-type", eElement));
+					it.setID(getTagValue("id", eElement));
 					batch.add(it);
 				}
 			}
