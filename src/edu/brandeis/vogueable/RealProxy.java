@@ -65,7 +65,7 @@ public class RealProxy extends AbstractProxy {
 		}
 		
 		
-		populateDeptItemCache();
+		
 	}
 	
 	
@@ -73,14 +73,14 @@ public class RealProxy extends AbstractProxy {
 	 * populates the DeptItemCache datastructure
 	 * 
 	 */
-	public void populateDeptItemCache(){
-		if(!provide.getItemCache().hasData()){
-			for(String dept : provide.getCatList()){
-				//TODO itemcache.insertItems(getItems(BATCH_SIZE/departments.size(), dept));
-			}
-			provide.getItemCache().shuffle();
-		}
-	}
+//	public void populateDeptItemCache(){
+//		if(!provide.getItemCache().hasData()){
+//			for(String dept : provide.getCatList()){
+//				//TODO itemcache.insertItems(getItems(BATCH_SIZE/departments.size(), dept));
+//			}
+//			provide.getItemCache().shuffle();
+//		}
+//	}
 	
 	public ArrayList<Item> getAllItems(){
 		ArrayList<Item> items = new ArrayList<Item>();
