@@ -21,10 +21,7 @@ public class CategoryChooser extends Activity implements OnClickListener {
 	private static final String TAG = "CategoryChooser";
 	
 	private Provider prov;
-	private User user;
 	
-	//public String currCat = "";
-	public ArrayList<String> currCat =new ArrayList<String>();
 	
 	  public void onCreate(Bundle savedInstanceState) {
 	        super.onCreate(savedInstanceState);
@@ -106,135 +103,74 @@ public class CategoryChooser extends Activity implements OnClickListener {
 		      switch (v.getId()) {
 		     
 		      case R.id.go_button :
+			      Context context = this; 
+		    	  
+			      //Get user's information from last intent
+			      Bundle extras = getIntent().getExtras(); 
+			      String id = null;
+			      String name = null;
+			      if(extras !=null) {
+			          id = extras.getString("currUserID");
+			          name = extras.getString("currUserName");
+			      }
 			      
-			      final ProgressDialog dialog = ProgressDialog.show(CategoryChooser.this,"", "Loading. Please wait...",true);
-			      	dialog.show();
-			         Handler handler = new Handler();
-			         handler.postDelayed(new Runnable() {
-			         public void run() {
-		    	  
-				      Context context = CategoryChooser.this; 
+			      prov = Provider.instance(name, context, null);//set provider with current user
+			      
+			      prov.getCurUser().setID(id);//update current user's id
+			      Log.i(TAG, "provider current user name: " + prov.getCurUser().getName());
+			      Log.i(TAG, "provider current user ID: " + prov.getCurUser().getID());
+			      
 	
-				      //Get user's information from last intent
-				      Bundle extras = getIntent().getExtras(); 
-				      String id = null;
-				      String name = null;
-				      if(extras !=null) {
-				          id = extras.getString("currUserID");
-				          name = extras.getString("currUserName");
-				      }
-				      user = new User(name);
-	
-				      prov = Provider.instance(user.getName(), context, null);//set provider with current user
-				     
-				      
-				      prov.getCurUser().setID(user.getID());//update current user's id
-				      Log.i(TAG, "provider current user name: " + prov.getCurUser().getName());
-				      Log.i(TAG, "provider current user ID: " + prov.getCurUser().getName());
-	
-			    	  prov.clearCatList();
-	
-			    	  	if (dresses.isChecked()) {
-				             currCat.add("dresses");
-				             prov.setAcat("dresses");
-	
-				        	 //currCat+=" "+"dresses";
-				         }   
-				         if (shoes.isChecked()) {
-				        	currCat.add("shoes");
-				        	prov.setAcat("shoes");
-	
-				        	 //currCat+="|"+"shoes";
-				         }  
-				         if (bottoms.isChecked()) {
-				        	 currCat.add("bottoms");
-				        	 prov.setAcat("bottoms");
-				        	 prov.setAcat("pants");
-				        	 prov.setAcat("skirts");
-	
-				        	 //currCat+="|"+"dresses";
-				         } 
-				         if (accesories.isChecked()) {
-				        	 currCat.add("accesories");
-				        	 prov.setAcat("accessories");
-	
-				        	 //currCat+="|"+"shorts";
-				         } 
-				         if(outerwear.isChecked()) {
-	
-				        	 currCat.add("jackets");
-				        	 prov.setAcat("jackets");
-				        	 prov.setAcat("blazers");
-				        	 prov.setAcat("hoodies");
-				        	 //currCat+="|"+"clothing";
-				         }   
-				        
-				         if (intimate.isChecked()) {
-				        	 currCat.add("intimate");
-				        	 prov.setAcat("intimates");
-				        	 prov.setAcat("hosiery");
-	
-				        	 //currCat+="|"+"dresses";
-				         } 
-				         if (activewear.isChecked()) {
-				        	 currCat.add("activewear");
-				        	 prov.setAcat("active");
-	
-				        	 //currCat+="|"+"shorts";
-				         } 
-				         if(rompers.isChecked()) {
-				        	 currCat.add("rompers");
-				        	 prov.setAcat("rompers");
-	
-				        	 //currCat+="|"+"clothing";
-				         }
-				         if (suits.isChecked()) {
-				        	 currCat.add("suits");
-				        	 prov.setAcat("suits");
-	
-				        	 //currCat+="|"+"shorts";
-				         } 
-				         if(tops.isChecked()) {
-				        	 currCat.add("tops");
-				        	 prov.setAcat("tops");
-				        	 prov.setAcat("blouses");
-	
-				        	 //currCat+="|"+"clothing";
-				         }
+		    	  prov.clearCatList();
+
+	    	  	if (dresses.isChecked()) {
+	        	    prov.setAcat("1"); //dresses
+	       		 }   
+	        	if (shoes.isChecked()) {
+	        		prov.setAcat("2"); //shoes
+	       		 }  
+	       		if (bottoms.isChecked()) {
+	        		prov.setAcat("4"); //pants
+	        		//skirts go here
+	        	} 
+	        	if (accesories.isChecked()) {
+	        		prov.setAcat("3"); //accessories 
+	        		prov.setAcat("5"); //jewlery
+	        	} 
+	        	if(outerwear.isChecked()) {
+	        		//jackets and blazers go here
+	        		//hoodies go here
+	        	}  
+	       		 if (intimate.isChecked()) {
+	        		//intimates and hosiery go here
+	        	} 
+	        	if (activewear.isChecked()) {
+	        		//activewear
+	        	} 
+	        	if(rompers.isChecked()) {
+	        		//rompers
+	        	}
+	        	if (suits.isChecked()) {
+	        		//suits go here
+	        	} 
+	        	if (tops.isChecked()) {
+	        		//tops go here
+	        		//blouses go here
+	        	}
 
 
-			         /*pass the selected categories to the main activity 
-			          * so the items loaded reflect the categories the user selects
-			          * */
+	         /*pass the selected categories to the main activity 
+	          * so the items loaded reflect the categories the user selects
+	          * */
 
-			        // i.putStringArrayListExtra("categories", currCat);
-			         //startActivity(i);//start the activity
+        	 Intent i = new Intent(CategoryChooser.this, MainActivity.class);
+        	 startActivity(i);//start the activity
+	                 
 
-			        	 Intent i = new Intent(CategoryChooser.this, MainActivity.class);
-			        	 startActivity(i);//start the activity
-			                 
-			       	 dialog.dismiss();
-			            }}, 80000); { // 3000 milliseconds
-			            }
+	            
+	            break;
 			         
-		    	  
-		    	  
-		    	  	
-			        
-			        
-			         /*pass the selected categories to the main activity 
-			          * so the items loaded reflect the categories the user selects
-			          * */
-			         
-			        // i.putStringArrayListExtra("categories", currCat);
-			        
-			         
-
-			   
-			         
-			         
-			  break;    
-			         
+		    
 			         
 			         
 			         

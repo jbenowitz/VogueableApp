@@ -5,6 +5,10 @@ import java.io.IOException;
 import java.net.URL;
 import java.net.URLConnection;
 
+import javax.xml.parsers.ParserConfigurationException;
+
+import org.xml.sax.SAXException;
+
 import android.content.Context;
 import android.content.res.Configuration;
 import android.content.res.TypedArray;
@@ -110,7 +114,20 @@ import android.widget.TextView;
        
            
            //Gets the next item
-           Item nextItem = provide.getCurTM().getNextItem(provide.getCurItem());
+           provide.getProxy().connect(null);
+           
+           Log.i(TAG, "User name " + provide.getCurUser().getName());
+           Log.i(TAG, "User id " + provide.getCurUser().getID());
+           Item nextItem = null;
+		try {
+			nextItem = provide.getProxy().getBatch(1).get(0);
+		} catch (ParserConfigurationException e) {
+			Log.e(TAG, e.toString());
+		} catch (SAXException e) {
+			Log.e(TAG, e.toString());
+		} catch (IOException e) {
+			Log.e(TAG, e.toString());
+		}
            items[(position+5)%items.length] = nextItem;
            
            

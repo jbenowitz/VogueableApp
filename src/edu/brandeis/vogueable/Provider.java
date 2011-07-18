@@ -26,10 +26,10 @@ public class Provider {
 	    curritem = new Item(item);
 	    cats = new ArrayList<String>();
 	    itemcache = new DeptItemCache(BATCH_SIZE);
-	    proxy = new RealProxy(itemcache, cats);
+	    proxy = new RealProxy(this);
 	    context = con;
 	    try {
-			usertaste = new TasteManager(proxy,cats);
+			usertaste = new TasteManager(cats);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -60,12 +60,10 @@ public class Provider {
 	
 	public void setAcat(String cat){
 		 cats.add(cat);
-		 proxy = new RealProxy(itemcache, cats); //update proxy
 	}
 	public void clearCatList(){
 		 //cats = new ArrayList<String>();
 		 cats.clear();
-		 proxy = new RealProxy(itemcache,cats); //update proxy
 	}
 	public ArrayList<String> getCatList(){
 		 return cats;
@@ -74,7 +72,9 @@ public class Provider {
 	public DeptItemCache getItemCache(){
 		return itemcache;
 	}
-	
+	public RealProxy getProxy(){
+		return proxy;
+	}
 	
 	public static synchronized Provider instance(String username, Context con, String item) {
 		if (provider == null){
