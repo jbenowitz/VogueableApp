@@ -93,7 +93,7 @@ public class Men extends Activity implements  android.view.View.OnClickListener{
 		    	  //Check to see if user in database
 		    	  //if in database, get information from user
 		    	  String temp = checkUser(user.getName());
-		    	  if(!temp.equals(null)){
+		    	  if(temp!=null){
 		    		  Log.d(TAG, "user exists in database " + user.getName());
 		    		  user.setID(temp);
 		    		  //TODO Pull TasteManager and WishList
