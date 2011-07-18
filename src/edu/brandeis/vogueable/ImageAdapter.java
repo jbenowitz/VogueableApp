@@ -135,11 +135,13 @@ import android.widget.TextView;
            ImageView i = new ImageView(mContext);
            Bitmap bimage=  getBitmapFromURL(items[position].getImageFileString());
            i.setImageBitmap(bimage);
-           
+           i.setAdjustViewBounds(true);
+           i.setMaxHeight(499);
+           i.setMinimumHeight(499);
 
           //scales the images accordingly
            i.setPadding(50, 0, 50, 0);
-           i.setScaleType(ImageView.ScaleType.CENTER_INSIDE);
+           i.setScaleType(ImageView.ScaleType.FIT_XY);
            
            
            
@@ -147,10 +149,10 @@ import android.widget.TextView;
            //Set landscape or portrait gallery/image size
            Gallery.LayoutParams galayout;
            if(mContext.getResources().getConfiguration().orientation==Configuration.ORIENTATION_LANDSCAPE){
-          	 galayout = new Gallery.LayoutParams(200,200);
+          	 galayout = new Gallery.LayoutParams(300,LayoutParams.MATCH_PARENT);
            }
            else{
-          	 galayout = new Gallery.LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT);
+          	 galayout = new Gallery.LayoutParams(LayoutParams.MATCH_PARENT, 499);
            }
            i.setLayoutParams(galayout);
 
@@ -169,9 +171,7 @@ import android.widget.TextView;
           } 
           return position; 
       } 
-      
-      
-     /**
+      /**
    	 * Changes the landscape layout more info "name" field to a given string
    	 */
    	private void setLandscapeName(){

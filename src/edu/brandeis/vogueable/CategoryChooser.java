@@ -3,9 +3,11 @@ package edu.brandeis.vogueable;
 import java.util.ArrayList;
 
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -52,14 +54,8 @@ public class CategoryChooser extends Activity implements OnClickListener {
 		    View accesoriesview = findViewById(R.id.accesories_check);
 		    accesoriesview.setOnClickListener(this);
 		    
-		    View jacketsview = findViewById(R.id.jackets_check);
+		    View jacketsview = findViewById(R.id.outerwear_check);
 		    jacketsview.setOnClickListener(this);
-		      
-		    View blousesview = findViewById(R.id.blouses_check);
-		    blousesview.setOnClickListener(this);
-		      
-		    View hoodiesview = findViewById(R.id.hoodies_check);
-		    hoodiesview.setOnClickListener(this);
 		      
 		    View intimateview = findViewById(R.id.intimates_check);
 		    intimateview.setOnClickListener(this);
@@ -92,18 +88,16 @@ public class CategoryChooser extends Activity implements OnClickListener {
 	    	
 	    	
 	    	//Create a CheckBox for all the checkboxes given:
-	    	CheckBox dresses = (CheckBox) findViewById(R.id.dresses_check);  
-	    	CheckBox shoes = (CheckBox) findViewById(R.id.shoes_check);
-	    	CheckBox bottoms = (CheckBox) findViewById(R.id.bottoms_check); 
-	    	CheckBox accesories = (CheckBox) findViewById(R.id.accesories_check);  
-	    	CheckBox jackets = (CheckBox) findViewById(R.id.jackets_check);  
-	    	CheckBox blouses = (CheckBox) findViewById(R.id.blouses_check);
-	    	CheckBox hoodies = (CheckBox) findViewById(R.id.hoodies_check); 
-	    	CheckBox intimate = (CheckBox) findViewById(R.id.intimates_check);  
-	    	CheckBox activewear = (CheckBox) findViewById(R.id.activewear_check);
-	    	CheckBox rompers = (CheckBox) findViewById(R.id.rompers_check);  
-	    	CheckBox suits = (CheckBox) findViewById(R.id.suits_check);
-	    	CheckBox tops = (CheckBox) findViewById(R.id.tops_check); 
+	    	final CheckBox dresses = (CheckBox) findViewById(R.id.dresses_check);  
+	    	final CheckBox shoes = (CheckBox) findViewById(R.id.shoes_check);
+	    	final CheckBox bottoms = (CheckBox) findViewById(R.id.bottoms_check); 
+	    	final CheckBox accesories = (CheckBox) findViewById(R.id.accesories_check);  
+	    	final CheckBox outerwear = (CheckBox) findViewById(R.id.outerwear_check);  
+	    	final CheckBox intimate = (CheckBox) findViewById(R.id.intimates_check);  
+	    	final CheckBox activewear = (CheckBox) findViewById(R.id.activewear_check);
+	    	final CheckBox rompers = (CheckBox) findViewById(R.id.rompers_check);  
+	    	final CheckBox suits = (CheckBox) findViewById(R.id.suits_check);
+	    	final CheckBox tops = (CheckBox) findViewById(R.id.tops_check); 
 	    	
 	    	
 		      switch (v.getId()) {
@@ -126,57 +120,59 @@ public class CategoryChooser extends Activity implements OnClickListener {
 			      Log.i(TAG, "provider current user name: " + prov.getCurUser().getName());
 			      Log.i(TAG, "provider current user ID: " + prov.getCurUser().getID());
 			      
-		    	  Intent i = new Intent(this, MainActivity.class);
+	
+		    	  prov.clearCatList();
+
+	    	  	if (dresses.isChecked()) {
+	        	    prov.setAcat("1"); //dresses
+	       		 }   
+	        	if (shoes.isChecked()) {
+	        		prov.setAcat("2"); //shoes
+	       		 }  
+	       		if (bottoms.isChecked()) {
+	        		prov.setAcat("4"); //pants
+	        		//skirts go here
+	        	} 
+	        	if (accesories.isChecked()) {
+	        		prov.setAcat("3"); //accessories 
+	        		prov.setAcat("5"); //jewlery
+	        	} 
+	        	if(outerwear.isChecked()) {
+	        		//jackets and blazers go here
+	        		//hoodies go here
+	        	}  
+	       		 if (intimate.isChecked()) {
+	        		//intimates and hosiery go here
+	        	} 
+	        	if (activewear.isChecked()) {
+	        		//activewear
+	        	} 
+	        	if(rompers.isChecked()) {
+	        		//rompers
+	        	}
+	        	if (suits.isChecked()) {
+	        		//suits go here
+	        	} 
+	        	if (tops.isChecked()) {
+	        		//tops go here
+	        		//blouses go here
+	        	}
+
+
+	         /*pass the selected categories to the main activity 
+	          * so the items loaded reflect the categories the user selects
+	          * */
+
+        	 Intent i = new Intent(CategoryChooser.this, MainActivity.class);
+        	 startActivity(i);//start the activity
+	                 
+
+	            
+	            break;
 			         
-		    	  
-		    	  	if (dresses.isChecked()) {
-			            prov.setAcat("1"); //dresses
-			        }   
-			        if (shoes.isChecked()) {
-			        	prov.setAcat("2"); //shoes
-			        }  
-			        if (bottoms.isChecked()) {
-			        	prov.setAcat("4"); //pants
-			        } 
-			        if (accesories.isChecked()) {
-			        	prov.setAcat("3"); //accessories 
-			        	prov.setAcat("5"); //jewlery
-			        } 
-			        if(jackets.isChecked()) {
-			        	//jackets and blazers go here
-			         }
-			        if (blouses.isChecked()) {
-			        	//blouses go here
-			        }   
-			        if (hoodies.isChecked()) {
-			        	//hoodies
-			        }  
-			        if (intimate.isChecked()) {
-			        	//intimates and hosiery go here
-			        } 
-			        if (activewear.isChecked()) {
-			        	//activewear
-			        } 
-			        if(rompers.isChecked()) {
-			        	//rompers
-			        }
-			        if (suits.isChecked()) {
-			        	//suits go here
-			        } 
-			        if (tops.isChecked()) {
-			        	//tops go here
-			        }
-			        
-			        
-			         /*pass the selected categories to the main activity 
-			          * so the items loaded reflect the categories the user selects
-			          * */
-			         
-			        // i.putStringArrayListExtra("categories", currCat);
-			         startActivity(i);//start the activity
+		    
 			         
 			         
-			         break;    
 			         
 		      case R.id.select_all :
 		    	  
@@ -184,9 +180,7 @@ public class CategoryChooser extends Activity implements OnClickListener {
 		    	  shoes.setChecked(true);
 		    	  bottoms.setChecked(true);
 		    	  accesories.setChecked(true);
-		    	  jackets.setChecked(true);
-		    	  blouses.setChecked(true);
-		    	  hoodies.setChecked(true);
+		    	  outerwear.setChecked(true);
 		    	  intimate.setChecked(true);
 		    	  activewear.setChecked(true);
 		    	  rompers.setChecked(true);
@@ -201,9 +195,7 @@ public class CategoryChooser extends Activity implements OnClickListener {
 		    	  shoes.setChecked(false);
 		    	  bottoms.setChecked(false);
 		    	  accesories.setChecked(false);
-		    	  jackets.setChecked(false);
-		    	  blouses.setChecked(false);
-		    	  hoodies.setChecked(false);
+		    	  outerwear.setChecked(false);
 		    	  intimate.setChecked(false);
 		    	  activewear.setChecked(false);
 		    	  rompers.setChecked(false);

@@ -15,10 +15,8 @@
 	<string name="romper_label">Jumpsuits and Rompers</string>
 	<string name="dress_label">Dresses</string>
 	<string name="active_label">Activewear</string>
-	<string name="hoodie_label">Hoodies</string>
-	<string name="jacket_label">Jackets, Blazers and Vests</string>
-	<string name="blouse_label">Blouses and Button-Down Shirts</string>
-	<string name="top_label">Tops and Tees</string>
+	<string name="jacket_label">Outerwear</string>
+	<string name="top_label">Tops</string>
 	<string name="intimate_label">Intimates</string>
 	<string name="bottom_label">Bottoms</string>
 	<string name="suit_label">Suits and Separates</string>

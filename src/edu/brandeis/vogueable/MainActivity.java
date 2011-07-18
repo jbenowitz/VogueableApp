@@ -5,15 +5,19 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Gallery;
 import android.widget.ImageButton;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -44,7 +48,8 @@ public class MainActivity extends Activity implements android.view.View.OnClickL
 		
 		setContentView(R.layout.main);
 		Toast.makeText(MainActivity.this, "Slide for next item!", Toast.LENGTH_LONG).show();
-
+		
+		
 		/*
 		 * Set up liking and disliking an item (with LikeManager)
 		 */
@@ -130,7 +135,7 @@ public class MainActivity extends Activity implements android.view.View.OnClickL
 			
 			AlertDialog.Builder info = new AlertDialog.Builder(this);
 			info
-			.setMessage(provide.getCurItem().getName()+" "+provide.getCurItem().getPrice()+" "+provide.getCatList()+provide.getCurItem().getCategoryTag())
+			.setMessage(provide.getCurItem().getName()+" "+provide.getCurItem().getPrice()+" "+provide.getCurItem().getCategoryTag())
 			.setPositiveButton("Add to wishlist", new DialogInterface.OnClickListener() {
 				public void onClick(DialogInterface dialog, int id) {
 					provide.getCurUser().addWishlist(provide.getCurItem());

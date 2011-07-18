@@ -4,10 +4,15 @@
   android:layout_height="fill_parent"
   android:layout_width="fill_parent"
   android:padding="10dip"
+  android:layout_gravity="center"
+  android:gravity="center"
   android:orientation="vertical">
 
    <RelativeLayout
   	android:orientation="horizontal"
+  	android:layout_gravity="center"
+  	android:gravity="center"
+  	android:layout_marginTop="34dip"
   	android:layout_height="wrap_content"
     android:layout_width="fill_parent">
   	
@@ -17,9 +22,8 @@
     	android:layout_height="wrap_content"
     	android:layout_centerInParent="true"
 	/>
-	
+
   </RelativeLayout>
-  
 
   <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/back"
@@ -37,7 +41,7 @@
     	android:background="@null"
     	android:src="@drawable/info"
     	android:layout_height="wrap_content"
-    	android:layout_width="fill_parent"
+    	android:layout_width="wrap_content"
     	android:layout_weight="1"
     	android:scaleType="centerInside"
     />
@@ -57,7 +61,7 @@
     	android:src="@drawable/buybutton"
     	android:background="@null"
     	android:layout_height="wrap_content"
-    	android:layout_width="fill_parent"
+    	android:layout_width="wrap_content"
     	android:layout_weight="1"
     	android:scaleType="centerInside"
     />
@@ -67,7 +71,7 @@
     	android:background="@null"
     	android:src="@drawable/dislike_button"
     	android:layout_height="wrap_content"
-    	android:layout_width="fill_parent"
+    	android:layout_width="wrap_content"
     	android:layout_weight="1"
     	android:scaleType="centerInside"
   	/>
@@ -77,7 +81,7 @@
     	android:background="@null"
     	android:src="@drawable/like_button"
     	android:layout_height="wrap_content" 
-    	android:layout_width="fill_parent"
+    	android:layout_width="wrap_content"
     	android:layout_weight="1"
     	android:scaleType="centerInside"
    	/>
@@ -92,7 +96,7 @@
 	    android:layout_height="0dip" 
 	    android:text="@string/curr_name"
 	/>
-	
+
 <TextView
 		android:id="@+id/price"
 		android:textSize="0dip"

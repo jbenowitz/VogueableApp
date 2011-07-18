@@ -24,14 +24,18 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-
 public class Helper extends BaseAdapter {
     private Context mContext;
     private Provider pro;
+    
 
     public Helper(Context c,Provider pro) {
         mContext = c;
-        this.pro=pro;
+        //this.pro=pro;
+        //RealProxy proxy = new RealProxy();
+    	//Context context = this;
+        this.pro = pro;
+        //pro = Provider.instance("AndroidUserName",mContext, "item from pref");
         Log.d("constructor","created a a Helper");
     }
 

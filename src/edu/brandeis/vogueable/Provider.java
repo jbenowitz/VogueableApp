@@ -62,6 +62,7 @@ public class Provider {
 		 cats.add(cat);
 	}
 	public void clearCatList(){
+		 //cats = new ArrayList<String>();
 		 cats.clear();
 	}
 	public ArrayList<String> getCatList(){

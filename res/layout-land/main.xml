@@ -65,9 +65,9 @@
     android:layout_height="30dip"
     android:layout_width="fill_parent" 
     android:layout_alignParentBottom="true" 
-    android:background="#000000"
     android:gravity="center"
     style="@android:style/ButtonBar"
+    android:background="@drawable/buttonbargradient"
     >
     
     
@@ -98,7 +98,7 @@
     	android:background="@null"
     	android:padding = "5dip"
     	android:layout_height="wrap_content"
-    	android:layout_width="fill_parent"
+    	android:layout_width="wrap_content"
     	android:layout_weight="1"
     />
     	
