@@ -2,14 +2,10 @@ package edu.brandeis.vogueable;
 
 import java.io.BufferedInputStream;
 import java.io.IOException;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.net.URL;
 import java.net.URLConnection;
-import java.util.ArrayList;
-import java.util.Random;
-
-import javax.xml.parsers.ParserConfigurationException;
-
-import org.xml.sax.SAXException;
 
 import android.content.Context;
 import android.content.res.Configuration;
@@ -33,8 +29,8 @@ import android.widget.TextView;
  * @author Jackie
  *
  */
-  public class ImageAdapter extends BaseAdapter {
-	  private static final String TAG = "ImageAdapter";
+ public class ImageAdapter extends BaseAdapter {
+      private static final String TAG = "ImageAdapter";
       private Context mContext;
       int mGalleryItemBackground;
      // private Item[] items = {new Item("baby1"), new Item("baby1"), new Item("baby2"), new Item("baby3"), new Item("baby4")};
@@ -194,3 +190,4 @@ import android.widget.TextView;
    		pricelandtext.setText(provide.getCurItem().getPrice());
    	}
   }
+
