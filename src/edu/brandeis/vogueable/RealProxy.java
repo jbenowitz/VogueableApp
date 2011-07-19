@@ -35,106 +35,15 @@ public class RealProxy extends AbstractProxy {
 		this.provide = provide;
 	}
 		
-	
 	/**
-	 * connects to web service
-	 * @throws SAXException 
+	 * Gets a Batch of Items from Server in Specific Department;
+	 * @param BatchSize - number of items wanted in batch;
+	 * @param dept - desired department
+	 * @return - an ArrayList of Items from give department; 
+	 * @throws ParserConfigurationException
+	 * @throws SAXException
+	 * @throws IOException
 	 */
-	public void connect(Context con) {
-		
-		Resty r = new Resty();
-		XMLResource usr1 = null;
-	
-		try {
-			usr1 = r.xml("http://vogueable.heroku.com/items.xml");
-			DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
-	        DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
-	        String st = ""+usr1;
-	        InputStream is = new ByteArrayInputStream(st.getBytes());
-	        
-	        Document doc = dBuilder.parse(is);
-	        doc.getDocumentElement().normalize();
-	        nList = doc.getElementsByTagName("item");
-			
-		} catch (IOException e) {
-			Log.e(TAG, "exception on r.xml");
-		} catch (ParserConfigurationException e) {
-			Log.e(TAG, e.toString());
-		} catch (SAXException e) {
-			Log.e(TAG, e.toString());
-		}
-		
-		
-		
-	}
-	
-	
-	/**
-	 * populates the DeptItemCache datastructure
-	 * 
-	 */
-//	public void populateDeptItemCache(){
-//		if(!provide.getItemCache().hasData()){
-//			for(String dept : provide.getCatList()){
-//				//TODO itemcache.insertItems(getItems(BATCH_SIZE/departments.size(), dept));
-//			}
-//			provide.getItemCache().shuffle();
-//		}
-//	}
-	
-	public ArrayList<Item> getAllItems(){
-		ArrayList<Item> items = new ArrayList<Item>();
-		for (int temp = 0; temp < nList.getLength(); temp++) {
-
-			Node nNode = nList.item(temp);
-			if (nNode.getNodeType() == Node.ELEMENT_NODE) {
-				Item it = new Item("it");
-				Element eElement = (Element) nNode;
-				it.setName(getTagValue("name", eElement));
-				Log.d(TAG,"name" + it.getName());
-				it.setImageFileString(getTagValue("img-url", eElement));
-				it.setDescription(getTagValue("features", eElement));
-				it.setLink(getTagValue("link-to-buy", eElement));
-				it.setPrice(getTagValue("item-price", eElement));
-				it.setCategory(getTagValue("category", eElement));
-				it.setBrand(getTagValue("brand", eElement));
-				it.addTag(getTagValue("fabric-type", eElement));
-
-				items.add(it);
-				
-			}
-		}
-		return items;
-	}
-	
-	public Item getNextItem(Item currentitem){
-		Item nextit = new Item("next");
-		int temp = new Random().nextInt(nList.getLength());
-		//Node nNode = nList.item(temp);
-	
-		for (int k = 0; k < nList.getLength(); k++) {
-
-			Node nNode = nList.item(temp);
-			if (nNode.getNodeType() == Node.ELEMENT_NODE) {
-				Element eElement = (Element) nNode;
-					nextit.setName(getTagValue("name", eElement));
-					nextit.setImageFileString(getTagValue("img-url", eElement));
-					nextit.setLink(getTagValue("link-to-buy", eElement));
-					nextit.setPrice(getTagValue("item-price", eElement));
-					nextit.setBrand(getTagValue("brand", eElement));
-					nextit.addTag(getTagValue("fabric-type", eElement));
-					nextit.setDescription(getTagValue("features", eElement));
-					nextit.setCategory(getTagValue("category", eElement));
-					nextit.addTag(getTagValue("brand", eElement));
-					nextit.getTags();
-
-				    break;
-				
-			}
-		}
-		return nextit; 
-	}
-	
 	public ArrayList<Item> getBatchbyDept(int BatchSize, String  dept) throws ParserConfigurationException, SAXException, IOException{
 		ArrayList<Item> batch = new ArrayList<Item>();
 		Resty r = new Resty();
@@ -171,6 +80,14 @@ public class RealProxy extends AbstractProxy {
 			}
 		return batch; 
 	}
+	/**
+	 * Gets a batch of items with unspecified department;
+	 * @param BatchSize - number of items needed
+	 * @return - ArrayList of Items from random departments; 
+	 * @throws ParserConfigurationException
+	 * @throws SAXException
+	 * @throws IOException
+	 */
 	public ArrayList<Item> getBatch(int BatchSize) throws ParserConfigurationException, SAXException, IOException{
 		//for now when things are deselected, will just pull dresses. TODO change this
 		return getBatchbyDept(BatchSize,"1");

@@ -15,11 +15,13 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.Gallery;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.widget.AdapterView.OnItemSelectedListener;
 
 /**
  * This is the main activity for the app.
@@ -87,7 +89,27 @@ public class MainActivity extends Activity implements android.view.View.OnClickL
 		
 		// Set up Gallery
 		Gallery g = (Gallery) findViewById(R.id.gallery);		
-		g.setAdapter(new ImageAdapter(this, provide, namelandtext, pricelandtext, likebutton, dislikebutton));	
+		g.setAdapter(new ImageAdapter(this, provide, namelandtext, pricelandtext, likebutton, dislikebutton));
+		g.setOnItemSelectedListener(new OnItemSelectedListener(){
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view,
+                    int position, long id) {
+            	 Log.i(TAG, "postion "+position);
+            	 Log.i(TAG, "old item "+provide.getCurItem().getName());
+            	 
+               provide.setCurItem(position);
+               provide.getCurItem().markAsViewed(provide.getCurUser());
+           	   Log.i(TAG, "now set to "+provide.getCurItem().getName());
+           	 Log.i(TAG, provide.getCurUser()+ " saw"+provide.getCurItem().getName());
+            }
+			@Override
+			public void onNothingSelected(AdapterView<?> arg0) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			
+});
 		
 	}
 	
