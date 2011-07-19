@@ -1,6 +1,11 @@
 package edu.brandeis.vogueable;
 
+import java.io.IOException;
 import java.util.ArrayList;
+
+import javax.xml.parsers.ParserConfigurationException;
+
+import org.xml.sax.SAXException;
 
 import android.app.Activity;
 import android.app.ProgressDialog;

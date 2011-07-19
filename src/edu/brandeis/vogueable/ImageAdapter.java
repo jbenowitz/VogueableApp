@@ -4,11 +4,6 @@ import java.io.BufferedInputStream;
 import java.io.IOException;
 import java.net.URL;
 import java.net.URLConnection;
-import java.util.Random;
-
-import javax.xml.parsers.ParserConfigurationException;
-
-import org.xml.sax.SAXException;
 
 import android.content.Context;
 import android.content.res.Configuration;
@@ -32,17 +27,24 @@ import android.widget.TextView;
  * @author Jackie
  *
  */
-  public class ImageAdapter extends BaseAdapter {
-	  private static final String TAG = "ImageAdapter";
+ public class ImageAdapter extends BaseAdapter {
+      private static final String TAG = "ImageAdapter";
       private Context mContext;
       int mGalleryItemBackground;
-      private Item[] items = {new Item("baby1"), new Item("baby1"), new Item("baby2"), new Item("baby3"), new Item("baby4")};
       TextView namelandtext, pricelandtext;
       Provider provide;
       private ImageButton likeb, dislikeb;
       private static final int MAXPICS = 100; //the max amount of pics pulled to your phone (can't go farther back than this)
 
-      //Constructor that sets up the Image Adapter (what is inside the Gallery)
+      /**
+       * Constructor that sets up the Image Adapter (what is inside the Gallery)
+       * @param c
+       * @param provide
+       * @param namelandtext
+       * @param pricelandtext
+       * @param lb
+       * @param db
+       */
       public ImageAdapter(Context c, Provider provide, TextView namelandtext, TextView pricelandtext, ImageButton lb, ImageButton db) {
           Log.i(TAG, "Constructor called");
     	  mContext = c;
@@ -52,6 +54,8 @@ import android.widget.TextView;
           this.likeb = lb;
           this.dislikeb = db;
           
+          provide.fillItemCache();
+          
           TypedArray a = mContext.obtainStyledAttributes(R.styleable.HelloGallery);
           mGalleryItemBackground = a.getResourceId(
                   R.styleable.HelloGallery_android_galleryItemBackground, 0);
@@ -59,25 +63,35 @@ import android.widget.TextView;
           
       }
 
-      //Returns count of images array
+      /**
+       * Returns count of images array
+       */
       public int getCount() {
     	  Log.i(TAG, "getCount() called");
           return MAXPICS;
       }
 
-      //returns the item in a certain position
+      /**
+       * returns the item in a certain position
+       */
       public Object getItem(int position) {
     	  Log.i(TAG, "getItem() called position = " + position);
-          return items[checkPosition(position)];
+    	  return provide.getItemCache().getItem(position);
       }
 
-      //gets the itemID of a certain position
+      /**
+       * gets the itemID of a certain position
+       */
       public long getItemId(int position) {
     	  Log.i(TAG, "getItemId() position = " + position);
-          return checkPosition(position);
+          return provide.getItemCache().getItemId(position);
       }
       
-      //creates a bitmap of the images from given URL
+      /**
+       * creates a bitmap of the images from given URL
+       * @param src
+       * @return
+       */
       public  Bitmap getBitmapFromURL(String src) {
           try {
               Log.i(TAG,"GetbitmapfromURL");
@@ -93,19 +107,15 @@ import android.widget.TextView;
           }
       }
       
-      
-      
       /**
        * Creates the view of the images.
        */
       public View getView(int position, View convertView, ViewGroup parent) {
     	  Log.i(TAG, "starting getView position = " + position );
-    	  
-    	  position = checkPosition(position);
       	 
            
            //Sets the current item to be referenced by other classes in the provider
-           provide.setCurItem(items[position]);	
+    	  provide.setCurItem(position);
            dislikeb.setImageDrawable(mContext.getResources().getDrawable(R.drawable.disapprovegrey));
            likeb.setImageDrawable(mContext.getResources().getDrawable(R.drawable.approvegrey));
            
@@ -113,29 +123,13 @@ import android.widget.TextView;
            setLandscapeName();
            setLandscapePrice();
        
-           
-           //Gets the next item
-           provide.getProxy().connect(null);
-           
            Log.i(TAG, "User name " + provide.getCurUser().getName());
            Log.i(TAG, "User id " + provide.getCurUser().getID());
-           Item nextItem = null;
-           Random r=new Random();
-		try {
-			nextItem = provide.getProxy().getBatch(20).get(r.nextInt(10));
-		} catch (ParserConfigurationException e) {
-			Log.e(TAG, e.toString());
-		} catch (SAXException e) {
-			Log.e(TAG, e.toString());
-		} catch (IOException e) {
-			Log.e(TAG, e.toString());
-		}
-           items[(position+5)%items.length] = nextItem;
            
            
            //Sets the view context image
            ImageView i = new ImageView(mContext);
-           Bitmap bimage=  getBitmapFromURL(items[position].getImageFileString());
+           Bitmap bimage = getBitmapFromURL(provide.getCurItem().getImageFileString());
            i.setImageBitmap(bimage);
            i.setAdjustViewBounds(true);
            i.setMaxHeight(499);
@@ -159,21 +153,14 @@ import android.widget.TextView;
            i.setLayoutParams(galayout);
 
            //sets the border
-           //i.setBackgroundResource(mGalleryItemBackground);
            i.setBackgroundColor(R.color.white);
 
            return i;
       }
       
       
-      public int checkPosition(int position) { 
-    	  Log.i(TAG, "checkPosition() called position = " + position);
-          if (position >= items.length) { 
-              position = position % items.length; 
-          } 
-          return position; 
-      } 
-      /**
+      
+    /**
    	 * Changes the landscape layout more info "name" field to a given string
    	 */
    	private void setLandscapeName(){
@@ -189,3 +176,4 @@ import android.widget.TextView;
    		pricelandtext.setText(provide.getCurItem().getPrice());
    	}
   }
+

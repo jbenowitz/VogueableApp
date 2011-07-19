@@ -1,89 +1,86 @@
 package edu.brandeis.vogueable;
 
 import java.util.ArrayList;
-import java.util.Collections;
 
 /**
- * Used as an item collection and cache for what's up next on the ImageAdapter/Gallery
- * 
- * 
+ * DeptItemCache
+ * To be put in the page table
+ * Glorified array list with correct methods to work with ImageAdapter
  * @author Jackie
  *
  */
 public class DeptItemCache {
-	
-	private int batchsize, virtindex;
 	private ArrayList<Item> itemcache;
-	private boolean beenfilled = false;
+	private int batchsize;
 	
 	/**
-	 * Sets up itemcache, batchsize, and starts the virtual address at 0
+	 * creates an empty deptitemcache with a certain batchsize
 	 * @param batchsize
 	 */
 	public DeptItemCache(int batchsize){
-		this.batchsize=batchsize;
-		itemcache = new ArrayList<Item>(batchsize);
-		virtindex=0;
+		this.batchsize = batchsize;
+		itemcache = new ArrayList<Item>(this.batchsize);
 	}
 	
-	
 	/**
-	 * Checks to see if the list was ever filled with items
-	 * 
-	 * @return boolean
-	 */
-	public boolean hasData(){
-		if(beenfilled){
-			return true;
-		}
-		else{
-			return false;
-		}
-	}
-	
-	
-	/**
-	 * Finds where the starting point of this array virtual address is
-	 * 
-	 * @return
-	 */
-	public int getVirtIndex(){
-		return virtindex;
-	}
-	
-	
-	/**
-	 * Privately increments the virtual index
-	 */
-	private void incrVirtIndex(){
-		virtindex += batchsize;
-	}
-	
-	
-	/**
-	 * inserts the ArrayList items to the end of itemcache
+	 * creates an deptitemcache with an array list of items
+	 * makes the batchsize the size of these items
 	 * @param items
 	 */
-	public void insertItems(ArrayList<Item> items){
-		itemcache.addAll(items);
+	public DeptItemCache(ArrayList<Item> items){
+		itemcache = items;
+		batchsize = items.size();
 	}
 	
-	
 	/**
-	 * shuffles arraylist
-	 */
-	public void shuffle(){
-		Collections.shuffle(itemcache);
-	}
-	
-	
-	/**
-	 * gets an item from position n(virtual position)
-	 * @param n
+	 * gets the batchsize (max count of arraylist)
 	 * @return
 	 */
-	public Item getItem(int n){
-		return itemcache.get(n-virtindex);
+	public int getCount(){
+		return batchsize;
+	}
+	
+	/**
+	 * returns an item at a given position
+	 * @param position
+	 * @return item
+	 */
+	public Item getItem(int position){
+		return itemcache.get(position);
+	}
+	
+	/**
+	 * returns the itemid used by gallery (position)
+	 * @param position
+	 * @return
+	 */
+	public int getItemId(int position){
+		return position;
+	}
+	
+	/**
+	 * gets the image URL of an item at a given position
+	 * @param position
+	 * @return
+	 */
+	public String getURL(int position){
+		return getItem(position).getImageFileString();
+	}
+	
+	/**
+	 * adds a single item to the end of the arraylist
+	 * @param i
+	 */
+	public void addItem(Item i){
+		itemcache.add(i);
+	}
+	
+	/**
+	 * adds a list of items to the end of the arraylist
+	 * @param items
+	 */
+	public void addItems(ArrayList<Item> items){
+		itemcache.addAll(items);
 	}
 
 }

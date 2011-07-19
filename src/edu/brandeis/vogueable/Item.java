@@ -1,7 +1,18 @@
 package edu.brandeis.vogueable;
 
+import java.io.IOException;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.Arrays;
+
+import org.apache.http.HttpResponse;
+import org.apache.http.client.ClientProtocolException;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.methods.HttpGet;
+import org.apache.http.impl.client.DefaultHttpClient;
+
+import android.util.Log;
 
 
 /**
@@ -11,7 +22,8 @@ import java.util.Arrays;
  */
 public class Item {
 	
-	private String name, imageFile, brand, description, link, price, categorytag;
+	private static final String TAG = "Vogueable Item";
+	private String name, imageFile, brand, description, link, price, categorytag,id;
 	private ArrayList<String> taglist;
 
 	private boolean itemliked=false, itemdisliked=false; //tells MainActivity if user has item 'liked' or 'disliked' enabled
@@ -35,7 +47,7 @@ public class Item {
 	 */
 	public Item (String name, String imageFile, String brand, 
 					String price, String description, ArrayList<String> taglist,
-					String link, String categorytag){
+					String link, String categorytag,String id){
 		this.name = name;
 		this.imageFile = imageFile;
 		this.brand = brand;
@@ -44,6 +56,7 @@ public class Item {
 		this.taglist = taglist;
 		this.link = link;
 		this.categorytag = categorytag;
+		this.id=id;
 	}
 	
 	
@@ -280,5 +293,52 @@ public class Item {
 				}
 		}
 		
+	}
+
+
+	public String getItemID() {
+		// TODO Auto-generated method stub
+		return id;
+	}
+
+
+	public void setID(String id) {
+		// TODO Auto-generated method stub
+		this.id=id;
+	}
+	
+	/**
+	 * Now we tell the server that User x has viewed item y and we shouldnt show him the 
+	 * item again
+	 */
+	public void markAsViewed(User user){
+		
+		
+		String link ="http://vogueable.heroku.com/users/"+user.getID()+"/items/"+this.getItemID()+"/viewed";
+		//HttpPost httppost = new HttpPost(link);
+		
+			HttpClient client = new DefaultHttpClient();
+            HttpGet request = new HttpGet();
+            try {
+				request.setURI(new URI(link));
+			
+            try {
+				HttpResponse response = client.execute(request);
+				Log.d(TAG, "Executed: " + link);
+			} catch (ClientProtocolException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+            
+            }
+            catch (URISyntaxException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+
+			
 	}
 }

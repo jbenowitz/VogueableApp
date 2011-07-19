@@ -96,7 +96,9 @@ public class Women extends Activity implements  android.view.View.OnClickListene
 		    	  //Check to see if user in database
 		    	  //if in database, get information from user
 		    	  String temp = checkUser(user.getName());
+
 		    	  if(temp != null){
+
 		    		  Log.d(TAG, "user exists in database " + user.getName());
 		    		  user.setID(temp);
 		    		  //TODO Pull TasteManager and WishList
@@ -213,7 +215,7 @@ public class Women extends Activity implements  android.view.View.OnClickListene
 	    }
 
 
-	    /**
+	    /** 
 	     * Used to get a tag value of the xml for Users
 	     * 
 	     * @param sTag
