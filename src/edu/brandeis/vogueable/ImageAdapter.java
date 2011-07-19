@@ -145,7 +145,7 @@ import android.widget.TextView;
            i.setPadding(50, 0, 50, 0);
            i.setScaleType(ImageView.ScaleType.FIT_XY);
            
-           
+           Log.e(TAG, ""+bimage.getWidth());
            
            
            //Set landscape or portrait gallery/image size

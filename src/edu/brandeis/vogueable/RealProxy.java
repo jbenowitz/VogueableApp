@@ -106,11 +106,11 @@ public class RealProxy extends AbstractProxy {
 				it.setBrand(getTagValue("brand", eElement));
 				it.addTag(getTagValue("fabric-type", eElement));
 				
-				if (checkSize(it, con)){
+				//if (checkSize(it, con)){
 					items.add(it);
-				} else {
-					temp--;
-				}
+				//} else {
+				//	temp--;
+				//}
 			}
 		}
 		return items;
@@ -142,11 +142,11 @@ public class RealProxy extends AbstractProxy {
 			}
 		}
 		
-		if (checkSize(nextit, con)){
+		//if (checkSize(nextit, con)){
 			return nextit; 
-		} else {
-			return getNextItem(currentitem);
-		}
+		//} else {
+		//	return getNextItem(currentitem);
+		//}
 		
 	}
 	
@@ -162,7 +162,7 @@ public class RealProxy extends AbstractProxy {
             //ImageView v = new ImageView(con);
             //v.setImageBitmap(myBitmap);
             
-            if (myBitmap.getHeight()>499){
+            if (myBitmap.getHeight()>499 && myBitmap.getWidth()>380){
             	return true;
             }else{
             	return false;

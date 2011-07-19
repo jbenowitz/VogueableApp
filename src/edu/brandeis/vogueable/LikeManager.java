@@ -90,7 +90,7 @@ public class LikeManager {
    
     /**
      * perform action on click of liking an item 
-     * (e.g. if item was previously liked, remove tags from users Taste manager,
+     * (e.g. if item was previously liked, remove tags from users Taste manager, 
      *  toggle the boolean of if it was previously liked, grey the button)
      */
     public void like(){

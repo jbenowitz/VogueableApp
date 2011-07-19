@@ -86,26 +86,28 @@
     	android:id="@+id/wishlist_button" 
     	android:src="@drawable/wishlistbutto"
     	android:background="@null"
-    	android:padding="5dip"
+    	android:padding="2dip"   
     	android:layout_height="match_parent" 
     	android:layout_width="wrap_content"
     	android:layout_weight="1"
-    />
+    	android:scaleType="centerInside"
+    /> 
     
   	<ImageButton 
     	android:id="@+id/buy_button"
     	android:src="@drawable/buybutton"
     	android:background="@null"
-    	android:padding = "5dip"
+    	android:padding = "2dip"
     	android:layout_height="wrap_content"
     	android:layout_width="wrap_content"
     	android:layout_weight="1"
+    	android:scaleType="centerInside"
     />
     	
   	<ImageButton
     	android:id="@+id/dislike_button"
     	android:background="@null"
-    	android:src="@drawable/dislike_button"
+    	android:src="@drawable/dislike_button" 
     	android:layout_height="match_parent"
     	android:layout_width="wrap_content"
     	android:layout_weight="1"
