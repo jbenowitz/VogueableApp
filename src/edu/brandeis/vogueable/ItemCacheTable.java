@@ -2,16 +2,20 @@ package edu.brandeis.vogueable;
 
 import java.util.ArrayList;
 
+import android.util.Log;
+
 /**
  * ItemCacheTable is the Page table of DeptItemCache arrays
  * @author Jackie
  *
  */
 public class ItemCacheTable {
+	private static final String TAG = "ItemCacheTable";
 	private ArrayList<DeptItemCache> table;
 	private int maxVirtAddy;
 	private int batchsize;
 	private int nextpage = 0;
+	private int circulations = 0;
 	
 	/**
 	 * Creates table based on batchsize
@@ -29,6 +33,7 @@ public class ItemCacheTable {
 	 * @return
 	 */
 	public int getCount(){
+		Log.i(TAG, "get count is " + maxVirtAddy);
 		return maxVirtAddy;
 	}
 	
@@ -51,7 +56,7 @@ public class ItemCacheTable {
 	}
 	
 	/**
-	 * gets the URL of the image of an item in a certian virtual position
+	 * gets the URL of the image of an item in a certain virtual position
 	 * @param position
 	 * @return
 	 */
@@ -76,6 +81,24 @@ public class ItemCacheTable {
 	 */
 	public boolean moreBatchEmpty(){
 		return (nextpage<=batchsize);
+	}
+	
+	public void circulate(){
+		Log.i(TAG, "recirculating table");
+		nextpage=0;
+		circulations++;
+	}
+	
+	public int getNextPage(){
+		Log.i(TAG, "next page to fill " + nextpage);
+		return nextpage;
+	}
+	
+	public int virtPosition(int position){
+		if (position > maxVirtAddy){
+			position = position - circulations*batchsize;
+		}
+		return position;
 	}
 	
 	

@@ -34,7 +34,6 @@ import android.widget.TextView;
       TextView namelandtext, pricelandtext;
       Provider provide;
       private ImageButton likeb, dislikeb;
-      private static final int MAXPICS = 100; //the max amount of pics pulled to your phone (can't go farther back than this)
 
       /**
        * Constructor that sets up the Image Adapter (what is inside the Gallery)
@@ -68,7 +67,7 @@ import android.widget.TextView;
        */
       public int getCount() {
     	  Log.i(TAG, "getCount() called");
-          return MAXPICS;
+          return provide.getItemCache().getCount();
       }
 
       /**
@@ -112,7 +111,9 @@ import android.widget.TextView;
        */
       public View getView(int position, View convertView, ViewGroup parent) {
     	  Log.i(TAG, "starting getView position = " + position );
-      	 
+    	  
+    	  //check to see if it's time to add another batch, if so do
+    	  addAnotherBatch(position);
            
            //Sets the current item to be referenced by other classes in the provider
     	  provide.setCurItem(position);
@@ -139,7 +140,7 @@ import android.widget.TextView;
            i.setPadding(50, 0, 50, 0);
            i.setScaleType(ImageView.ScaleType.FIT_XY);
            
-           Log.e(TAG, ""+bimage.getWidth());
+           Log.i(TAG, "bitmap width"+bimage.getWidth());
            
            
            //Set landscape or portrait gallery/image size
@@ -174,6 +175,25 @@ import android.widget.TextView;
    	private void setLandscapePrice(){
    		Log.i(TAG, "setLandscapePrice() called");
    		pricelandtext.setText(provide.getCurItem().getPrice());
+   	}
+   	
+   	/**
+   	 * checks to see if it's time (2/3 through current batch) to add
+   	 * another batch
+   	 * @param position
+   	 */
+   	private void addAnotherBatch(int position){
+   		if(position%provide.getBatchSize() == 2*provide.getBatchSize()/3
+   				&& position/provide.getBatchSize() == provide.getItemCache().getNextPage()-1){
+   			provide.fillItemCache();
+   		}
+   	}
+   	
+   	private int checkPosition(int position){
+   		if (position >= provide.getItemCache().getCount()) { 
+            position = position % provide.getItemCache().getCount(); 
+        } 
+   		return position;
    	}
   }
 

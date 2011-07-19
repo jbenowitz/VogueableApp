@@ -46,6 +46,7 @@ public class Provider {
 	 * @return - current item displayed; 
 	 */
 	public Item getCurItem(){
+		Log.i(TAG, "getCurItem() called");
 		return curritem;
 	}
 	/**
@@ -53,36 +54,48 @@ public class Provider {
 	 * @param it - the Item that will be currently displayed; 
 	 */
 	public void setCurItem(int position){
+		Log.i(TAG, "setcuritem(position) called with position " + position );
 		curritem = itemcache.getItem(position);
 	}
 	
 	public User getCurUser(){
+		Log.i(TAG, "getting current user name : " + user.getName());
 		return user;
 	}
 	
 	public TasteManager getCurTM(){
+		Log.i(TAG, "getting current taste manager");
 		return usertaste; 
 	}
 	
 	public void setAcat(String cat){
+		Log.i(TAG, "adding a category " + cat);
 		 cats.add(cat);
 	}
 	public void clearCatList(){
-		 //cats = new ArrayList<String>();
+		Log.i(TAG, "clearing category list");
 		 cats.clear();
 	}
 	public ArrayList<String> getCatList(){
+		Log.i(TAG, "getting category list");
 		 return cats;
 	}
 	
 	public ItemCacheTable getItemCache(){
+		Log.i(TAG, "getting itemcache");
 		return itemcache;
 	}
 	public RealProxy getProxy(){
+		Log.i(TAG, "getting proxy");
 		return proxy;
 	}
 	
 	public void fillItemCache(){
+		Log.i(TAG, "adding a batch with fillItemCache");
+		if(!itemcache.moreBatchEmpty()){
+			Log.i(TAG, "recirculating itemcache");
+			itemcache.circulate();
+		}
 		try {
 			itemcache.addBatch(getProxy().getBatch(BATCH_SIZE));
 		} catch (ParserConfigurationException e) {
@@ -92,6 +105,11 @@ public class Provider {
 		} catch (IOException e) {
 			Log.e(TAG, e.toString());
 		}
+	}
+	
+	public int getBatchSize(){
+		Log.i(TAG, "getting batch size " + BATCH_SIZE);
+		return BATCH_SIZE;
 	}
 	
 	public static synchronized Provider instance(String username, Context con, String item) {

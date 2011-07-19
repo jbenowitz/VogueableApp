@@ -89,8 +89,40 @@ public class RealProxy extends AbstractProxy {
 	 * @throws IOException
 	 */
 	public ArrayList<Item> getBatch(int BatchSize) throws ParserConfigurationException, SAXException, IOException{
-		//for now when things are deselected, will just pull dresses. TODO change this
-		return getBatchbyDept(BatchSize,"1");
+		ArrayList<Item> batch = new ArrayList<Item>();
+		Resty r = new Resty();
+		XMLResource usr1 = null;
+	
+		Log.i(TAG, "User id " + provide.getCurUser().getID());
+		try {
+			usr1 = r.xml("http://vogueable.heroku.com/find.xml?user="+provide.getCurUser().getID()+"&batch="+BatchSize+".xml");
+		} catch (IOException e) {
+			Log.e(TAG, e.toString());
+		}
+		DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
+        DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
+        String st = ""+usr1;
+        InputStream is = new ByteArrayInputStream(st.getBytes());
+        Document doc = dBuilder.parse(is);
+        doc.getDocumentElement().normalize();
+        nList = doc.getElementsByTagName("item");
+		for(int k =0; k<nList.getLength(); k++){
+	        Node nNode = nList.item(k);
+			if (nNode.getNodeType() == Node.ELEMENT_NODE) {
+				Item it = new Item("it");
+				Element eElement = (Element) nNode;
+				it.setName(getTagValue("name", eElement));
+				Log.d(TAG,"name" + it.getName());
+				it.setImageFileString(getTagValue("img-url", eElement));
+				it.setDescription(getTagValue("features", eElement));
+				it.setLink(getTagValue("link-to-buy", eElement));
+				it.setPrice(getTagValue("item-price", eElement));
+				it.setBrand(getTagValue("brand", eElement));
+				it.setID(getTagValue("id", eElement));
+				batch.add(it);
+			}
+		}
+		return batch; 
 	}
 	
 }
