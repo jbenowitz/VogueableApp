@@ -4,6 +4,7 @@ import java.io.BufferedInputStream;
 import java.io.IOException;
 import java.net.URL;
 import java.net.URLConnection;
+import java.util.ArrayList;
 import java.util.Random;
 
 import javax.xml.parsers.ParserConfigurationException;
@@ -36,7 +37,7 @@ import android.widget.TextView;
 	  private static final String TAG = "ImageAdapter";
       private Context mContext;
       int mGalleryItemBackground;
-      private Item[] items = {new Item("baby1"), new Item("baby1"), new Item("baby2"), new Item("baby3"), new Item("baby4")};
+     // private Item[] items = {new Item("baby1"), new Item("baby1"), new Item("baby2"), new Item("baby3"), new Item("baby4")};
       TextView namelandtext, pricelandtext;
       Provider provide;
       private ImageButton likeb, dislikeb;
@@ -51,6 +52,9 @@ import android.widget.TextView;
           this.pricelandtext = pricelandtext;
           this.likeb = lb;
           this.dislikeb = db;
+          
+          provide.getProxy().connect(null);
+          provide.fillItemCache();
           
           TypedArray a = mContext.obtainStyledAttributes(R.styleable.HelloGallery);
           mGalleryItemBackground = a.getResourceId(
@@ -68,13 +72,14 @@ import android.widget.TextView;
       //returns the item in a certain position
       public Object getItem(int position) {
     	  Log.i(TAG, "getItem() called position = " + position);
-          return items[checkPosition(position)];
+          //return items[checkPosition(position)];
+    	  return provide.getItemCache().getItem(position);
       }
 
       //gets the itemID of a certain position
       public long getItemId(int position) {
     	  Log.i(TAG, "getItemId() position = " + position);
-          return checkPosition(position);
+          return provide.getItemCache().getItemId(position);
       }
       
       //creates a bitmap of the images from given URL
@@ -101,11 +106,12 @@ import android.widget.TextView;
       public View getView(int position, View convertView, ViewGroup parent) {
     	  Log.i(TAG, "starting getView position = " + position );
     	  
-    	  position = checkPosition(position);
+    	  //position = checkPosition(position);
       	 
            
            //Sets the current item to be referenced by other classes in the provider
-           provide.setCurItem(items[position]);	
+           //provide.setCurItem(items[position]);
+    	  provide.setCurItem(provide.getItemCache().getItem(position));
            dislikeb.setImageDrawable(mContext.getResources().getDrawable(R.drawable.disapprovegrey));
            likeb.setImageDrawable(mContext.getResources().getDrawable(R.drawable.approvegrey));
            
@@ -119,23 +125,22 @@ import android.widget.TextView;
            
            Log.i(TAG, "User name " + provide.getCurUser().getName());
            Log.i(TAG, "User id " + provide.getCurUser().getID());
-           Item nextItem = null;
-           Random r=new Random();
-		try {
-			nextItem = provide.getProxy().getBatch(20).get(r.nextInt(10));
-		} catch (ParserConfigurationException e) {
-			Log.e(TAG, e.toString());
-		} catch (SAXException e) {
-			Log.e(TAG, e.toString());
-		} catch (IOException e) {
-			Log.e(TAG, e.toString());
-		}
-           items[(position+5)%items.length] = nextItem;
+//           Item nextItem = null;
+//		try {
+//			nextItem = provide.getProxy().getBatch(1).get(0);
+//		} catch (ParserConfigurationException e) {
+//			Log.e(TAG, e.toString());
+//		} catch (SAXException e) {
+//			Log.e(TAG, e.toString());
+//		} catch (IOException e) {
+//			Log.e(TAG, e.toString());
+//		}
            
            
            //Sets the view context image
            ImageView i = new ImageView(mContext);
-           Bitmap bimage=  getBitmapFromURL(items[position].getImageFileString());
+           //Bitmap bimage=  getBitmapFromURL(items[position].getImageFileString());
+           Bitmap bimage = getBitmapFromURL(provide.getCurItem().getImageFileString());
            i.setImageBitmap(bimage);
            i.setAdjustViewBounds(true);
            i.setMaxHeight(499);
@@ -166,13 +171,13 @@ import android.widget.TextView;
       }
       
       
-      public int checkPosition(int position) { 
-    	  Log.i(TAG, "checkPosition() called position = " + position);
-          if (position >= items.length) { 
-              position = position % items.length; 
-          } 
-          return position; 
-      } 
+//      public int checkPosition(int position) { 
+//    	  Log.i(TAG, "checkPosition() called position = " + position);
+//          if (position >= items.size()) { 
+//              position = position % items.size(); 
+//          } 
+//          return position; 
+//      } 
       /**
    	 * Changes the landscape layout more info "name" field to a given string
    	 */

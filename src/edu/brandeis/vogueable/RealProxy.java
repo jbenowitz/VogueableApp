@@ -1,11 +1,8 @@
 package edu.brandeis.vogueable;
 
-import java.io.BufferedInputStream;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.net.URL;
-import java.net.URLConnection;
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -23,10 +20,7 @@ import us.monoid.web.Resty;
 import us.monoid.web.XMLResource;
 
 import android.content.Context;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.util.Log;
-import android.widget.ImageView;
 
 
 public class RealProxy extends AbstractProxy {
@@ -105,12 +99,9 @@ public class RealProxy extends AbstractProxy {
 				it.setCategory(getTagValue("category", eElement));
 				it.setBrand(getTagValue("brand", eElement));
 				it.addTag(getTagValue("fabric-type", eElement));
+
+				items.add(it);
 				
-				if (checkSize(it, con)){
-					items.add(it);
-				} else {
-					temp--;
-				}
 			}
 		}
 		return items;
@@ -141,38 +132,7 @@ public class RealProxy extends AbstractProxy {
 				
 			}
 		}
-		
-		if (checkSize(nextit, con)){
-			return nextit; 
-		} else {
-			return getNextItem(currentitem);
-		}
-		
-	}
-	
-	private static boolean checkSize(Item it, Context con){
-		try {
-            Log.e("src",it.getImageFileString());
-            URL url = new URL(it.getImageFileString());
-            URLConnection connection = (URLConnection) url.openConnection();
-            connection.connect();
-            InputStream input = connection.getInputStream();
-            BufferedInputStream bis = new BufferedInputStream(input);
-            Bitmap myBitmap = BitmapFactory.decodeStream(bis);
-            //ImageView v = new ImageView(con);
-            //v.setImageBitmap(myBitmap);
-            
-            if (myBitmap.getHeight()>499){
-            	return true;
-            }else{
-            	return false;
-            }
-            
-        } catch (IOException e) {
-            e.printStackTrace();
-            Log.e("Exception",e.getMessage());
-            return true;
-        }
+		return nextit; 
 	}
 	
 	public ArrayList<Item> getBatchbyDept(int BatchSize, String  dept) throws ParserConfigurationException, SAXException, IOException{

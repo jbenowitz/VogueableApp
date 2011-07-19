@@ -1,13 +1,20 @@
 package edu.brandeis.vogueable;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
+import javax.xml.parsers.ParserConfigurationException;
+
+import org.xml.sax.SAXException;
+
 import android.content.Context;
+import android.util.Log;
 
 
 public class Provider {
 	
 	private static final int BATCH_SIZE = 30;
+	private static final String TAG = "Provider";
 	
 	private User user;
 	private Item curritem;
@@ -33,7 +40,8 @@ public class Provider {
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}  
+		} 
+		
 	}
 	/**
 	 * 
@@ -74,6 +82,18 @@ public class Provider {
 	}
 	public RealProxy getProxy(){
 		return proxy;
+	}
+	
+	public void fillItemCache(){
+		try {
+			itemcache.addItems(getProxy().getBatch(BATCH_SIZE));
+		} catch (ParserConfigurationException e) {
+			Log.e(TAG, e.toString());
+		} catch (SAXException e) {
+			Log.e(TAG, e.toString());
+		} catch (IOException e) {
+			Log.e(TAG, e.toString());
+		}
 	}
 	
 	public static synchronized Provider instance(String username, Context con, String item) {

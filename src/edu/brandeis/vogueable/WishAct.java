@@ -20,7 +20,7 @@ public class WishAct extends Activity {
         prov = Provider.instance(proxy, "AndroidUserName",context, "item from pref");*/
 
 		Context context = this;
-        prov = Provider.instance("AndroidUserName",context, "item from pref");
+        prov = Provider.instance("AndroidUserName",context, null);
 
         
         ListView listview = (ListView) findViewById(R.id.listview);

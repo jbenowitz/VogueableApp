@@ -17,7 +17,7 @@ import android.util.Log;
  */
 public abstract class AbstractProxy {
 	User curruser;// user currently using app
-	private static String TAG = "AbstractProxy";
+	private static final String TAG = "AbstractProxy";
 	
 	
 	public AbstractProxy(){
