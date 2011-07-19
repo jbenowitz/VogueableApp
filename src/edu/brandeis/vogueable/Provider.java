@@ -52,8 +52,8 @@ public class Provider {
 	 * Sets the current item to be displayed
 	 * @param it - the Item that will be currently displayed; 
 	 */
-	public void setCurItem(Item it){
-		curritem = it;
+	public void setCurItem(int position){
+		curritem = itemcache.getItem(position);
 	}
 	
 	public User getCurUser(){

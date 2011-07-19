@@ -115,7 +115,7 @@ import android.widget.TextView;
       	 
            
            //Sets the current item to be referenced by other classes in the provider
-    	  provide.setCurItem(provide.getItemCache().getItem(position));
+    	  provide.setCurItem(position);
            dislikeb.setImageDrawable(mContext.getResources().getDrawable(R.drawable.disapprovegrey));
            likeb.setImageDrawable(mContext.getResources().getDrawable(R.drawable.approvegrey));
            
@@ -123,7 +123,6 @@ import android.widget.TextView;
            setLandscapeName();
            setLandscapePrice();
        
-           
            Log.i(TAG, "User name " + provide.getCurUser().getName());
            Log.i(TAG, "User id " + provide.getCurUser().getID());
            

@@ -33,7 +33,17 @@ public class RealProxy extends AbstractProxy {
 	public RealProxy(Provider provide){
 		this.provide = provide;
 	}
-	
+
+		
+	/**
+	 * Gets a Batch of Items from Server in Specific Department;
+	 * @param BatchSize - number of items wanted in batch;
+	 * @param dept - desired department
+	 * @return - an ArrayList of Items from give department; 
+	 * @throws ParserConfigurationException
+	 * @throws SAXException
+	 * @throws IOException
+	 */
 	public ArrayList<Item> getBatchbyDept(int BatchSize, String  dept) throws ParserConfigurationException, SAXException, IOException{
 		ArrayList<Item> batch = new ArrayList<Item>();
 		Resty r = new Resty();
@@ -70,6 +80,14 @@ public class RealProxy extends AbstractProxy {
 			}
 		return batch; 
 	}
+	/**
+	 * Gets a batch of items with unspecified department;
+	 * @param BatchSize - number of items needed
+	 * @return - ArrayList of Items from random departments; 
+	 * @throws ParserConfigurationException
+	 * @throws SAXException
+	 * @throws IOException
+	 */
 	public ArrayList<Item> getBatch(int BatchSize) throws ParserConfigurationException, SAXException, IOException{
 		//for now when things are deselected, will just pull dresses. TODO change this
 		return getBatchbyDept(BatchSize,"1");
