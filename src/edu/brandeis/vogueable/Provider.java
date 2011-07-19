@@ -21,8 +21,7 @@ public class Provider {
 	private TasteManager usertaste;
 	private static Provider provider = null;
 	private ArrayList<String> cats; 
-	private Context context;
-	private DeptItemCache itemcache;
+	private ItemCacheTable itemcache;
 	private RealProxy proxy;
 	
 	
@@ -32,9 +31,8 @@ public class Provider {
 		user.setTasteManager(usertaste);
 	    curritem = new Item(item);
 	    cats = new ArrayList<String>();
-	    itemcache = new DeptItemCache(BATCH_SIZE);
+	    itemcache = new ItemCacheTable(BATCH_SIZE);
 	    proxy = new RealProxy(this);
-	    context = con;
 	    try {
 			usertaste = new TasteManager(cats);
 		} catch (Exception e) {
@@ -77,7 +75,7 @@ public class Provider {
 		 return cats;
 	}
 	
-	public DeptItemCache getItemCache(){
+	public ItemCacheTable getItemCache(){
 		return itemcache;
 	}
 	public RealProxy getProxy(){
@@ -86,7 +84,7 @@ public class Provider {
 	
 	public void fillItemCache(){
 		try {
-			itemcache.addItems(getProxy().getBatch(BATCH_SIZE));
+			itemcache.addBatch(getProxy().getBatch(BATCH_SIZE));
 		} catch (ParserConfigurationException e) {
 			Log.e(TAG, e.toString());
 		} catch (SAXException e) {
@@ -100,7 +98,7 @@ public class Provider {
 		if (provider == null){
 			provider = new Provider(username, con, item);
 		}
-		provider.context = con;
+
 		return provider;
 	}
 
