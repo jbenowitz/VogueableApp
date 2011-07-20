@@ -21,8 +21,6 @@ public class TasteManager {
 	Context context;
 	ArrayList<String> cats;
 	
-
-
 	/**
 	 * Constructor
 	 * Initialize tagCount HashMap to be empty.
@@ -34,10 +32,16 @@ public class TasteManager {
 
 		this.cats=cats;
 		tagCount = new HashMap<String,Integer>();
+		//tagCount.put("hola", 18);
 		itemsUsed = new ArrayList<Item>();
 
 	}
 
+	public HashMap<String,Integer> getTagCount() {
+
+		return tagCount;
+
+	}
 
 
 
@@ -49,14 +53,14 @@ public class TasteManager {
 	 * @param taglist- tags to add to like HashMap
 	 */
 	public void likeFlavor(ArrayList<String> taglist){
-		for(String tag : taglist){
-			Integer likes = 1;
-			if(tagCount.containsKey(tag)){
-				likes = likes + tagCount.get(tag);
-				tagCount.remove(tag);
+			for(String tag : taglist){
+				Integer likes = 1;
+					if(tagCount.containsKey(tag)){
+						likes = likes + tagCount.get(tag);
+						tagCount.remove(tag);
+					}
+					tagCount.put(tag, likes);
 			}
-			tagCount.put(tag, likes);
-		}
 	}
 
 
@@ -67,9 +71,9 @@ public class TasteManager {
 	 */
 	public void dislikeFlavor(ArrayList<String> taglist){
 		for(String tag : taglist){
-			Integer dislikes = 1;
+			Integer dislikes = -1;
 			if(tagCount.containsKey(tag)){
-				dislikes = tagCount.get(tag) - dislikes;
+				dislikes = tagCount.get(tag) + dislikes;
 				tagCount.remove(tag);
 			}
 			tagCount.put(tag, dislikes);

@@ -78,7 +78,6 @@
 					android:id="@+id/activewear_check" 
 					android:layout_width="wrap_content"
 					android:layout_height="wrap_content" 
-					android:text="@string/active_label"
 					android:textColor="@color/yellow"
 					android:textSize="17dip"
 					android:layout_marginLeft="10dip">
@@ -140,7 +139,6 @@
 					android:id="@+id/rompers_check" 
 					android:layout_width="wrap_content"
 					android:layout_height="wrap_content" 
-					android:text="@string/romper_label"
 					android:textColor="@color/yellow"
 					android:textSize="17dip"
 					android:layout_marginLeft="10dip">

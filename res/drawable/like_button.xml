@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <selector xmlns:android="http://schemas.android.com/apk/res/android">
-    <item android:drawable="@drawable/approvegreen"
-          android:state_pressed="true" />
-    <item android:drawable="@drawable/approvegreen"
-          android:state_focused="true" />
+    <item android:state_pressed="true"  
+    	  android:drawable="@drawable/approvegreen" />
+    <item android:state_focused="true"
+		  android:drawable="@drawable/approvegreen" />
     <item android:drawable="@drawable/approvegrey" />
 </selector>

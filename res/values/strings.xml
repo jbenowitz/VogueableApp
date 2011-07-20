@@ -10,11 +10,9 @@
 	<string name="men_label">MEN</string>
 	<string name="women_label">WOMEN</string>
 	
-	<string name="shoe_label">Shoes</string>
+	<string name="shoe_label">Foot-wear</string>
 	<string name="accesories_label">Accessories</string>
-	<string name="romper_label">Jumpsuits and Rompers</string>
 	<string name="dress_label">Dresses</string>
-	<string name="active_label">Activewear</string>
 	<string name="jacket_label">Outerwear</string>
 	<string name="top_label">Tops</string>
 	<string name="intimate_label">Intimates</string>

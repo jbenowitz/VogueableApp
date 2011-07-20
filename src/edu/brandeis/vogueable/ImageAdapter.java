@@ -118,9 +118,13 @@ import android.widget.TextView;
            
            //Sets the current item to be referenced by other classes in the provider
     	  provide.setCurItem(position);
-           dislikeb.setImageDrawable(mContext.getResources().getDrawable(R.drawable.disapprovegrey));
-           likeb.setImageDrawable(mContext.getResources().getDrawable(R.drawable.approvegrey));
            
+    	  //clears focus from like or dislike buttons
+    	  dislikeb.setFocusableInTouchMode(false);
+    	  likeb.setFocusableInTouchMode(false);
+    	  dislikeb.clearFocus();
+    	  likeb.clearFocus();
+    	  
            //Sets up the landscape based on Current item
            setLandscapeName();
            setLandscapePrice();
@@ -198,4 +202,3 @@ import android.widget.TextView;
    		return position;
    	}
   }
-

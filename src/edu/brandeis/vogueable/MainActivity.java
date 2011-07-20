@@ -1,6 +1,9 @@
 package edu.brandeis.vogueable;
 
 
+import java.util.ArrayList;
+import java.util.HashMap;
+
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
@@ -14,6 +17,7 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.View.OnFocusChangeListener;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.Gallery;
@@ -124,23 +128,22 @@ public class MainActivity extends Activity implements android.view.View.OnClickL
 
 		//Like Button onClick
 		case R.id.like_button :
-			//provide.getCurItem().setItemLiked(true);
+
 			Log.e(TAG, "clicked like_button");
-			likeMan.like();	
-			//Log.d(TAG, provide.getCurItem().getTagList().toString());
-			//provide.getCurUser().getTasteManager().likeFlavor(provide.getCurItem().getTagList());
-			//Log.d(TAG, provide.getCurUser().getTasteManager().tagCount.toString());
+			
+			likeMan.like();
+			
 	    	break;
 	    	
 	    //Dislike button onClick
 		case R.id.dislike_button:
-			Log.e(TAG, "clicked dislike_button");
-			likeMan.dislike();
-			Log.d(TAG, provide.getCurItem().getTagList().toString());
-			provide.getCurUser().getTasteManager().dislikeFlavor(provide.getCurItem().getTagList());
-			Log.d(TAG, provide.getCurUser().getTasteManager().tagCount.toString());
-			break;
 			
+			Log.e(TAG, "clicked dislike_button");
+			
+			likeMan.dislike();
+			
+	    	break;
+	    	
 		//Wishlist Button on click	
 		case R.id.wishlist_button:
 
@@ -197,8 +200,7 @@ public class MainActivity extends Activity implements android.view.View.OnClickL
 		}
 	}
 
-	
-	
+
 	/**
 	 *   When clicking the physical menu button, inflates the two options 
 	 *   within the menu.xml
@@ -233,8 +235,4 @@ public class MainActivity extends Activity implements android.view.View.OnClickL
 	   
 
 }
-
-
-
-
 

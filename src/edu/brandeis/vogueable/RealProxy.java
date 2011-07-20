@@ -23,18 +23,18 @@ import android.util.Log;
 
 
 public class RealProxy extends AbstractProxy {
-	
+
 	User curruser;// user currently using app
 	NodeList nList;
 	Context con;
 	private final static String TAG = "RealProxy";
 	Provider provide;
-	
+
 	public RealProxy(Provider provide){
 		this.provide = provide;
 	}
 
-		
+
 	/**
 	 * Gets a Batch of Items from Server in Specific Department;
 	 * @param BatchSize - number of items wanted in batch;
@@ -45,20 +45,20 @@ public class RealProxy extends AbstractProxy {
 	 * @throws IOException
 	 */
 	public ArrayList<Item> getBatchbyDept(int BatchSize, String  dept) throws ParserConfigurationException, SAXException, IOException{
-		
+
 		ArrayList<Item> batch = new ArrayList<Item>();
 		Resty r = new Resty();
 		XMLResource usr1 = null;
 		if(provide.getCurUser().getID()==null){
 			Log.i(TAG, "no user");
 			try {
-				usr1 = r.xml("http://vogueable.heroku.com/find.xml?dept="+1+"&batch="+BatchSize+".xml");
+				usr1 = r.xml("http://vogueable.heroku.com/find.xml?dept="+dept+"&batch="+BatchSize+".xml");
 			} catch (IOException e) {
 				Log.e(TAG, e.toString());
 			}
 		}
 		else{
-	
+
 			Log.i(TAG, "User id " + provide.getCurUser().getID());
 			try {
 				usr1 = r.xml("http://vogueable.heroku.com/find.xml?user="+provide.getCurUser().getID()+"&dept="+dept+"&batch="+BatchSize+".xml");
@@ -87,6 +87,7 @@ public class RealProxy extends AbstractProxy {
 						it.setPrice(getTagValue("item-price", eElement));
 						it.setBrand(getTagValue("brand", eElement));
 						it.setID(getTagValue("id", eElement));
+						it.getTags();
 						batch.add(it);
 					}
 				}
@@ -141,13 +142,13 @@ public class RealProxy extends AbstractProxy {
 				it.setPrice(getTagValue("item-price", eElement));
 				it.setBrand(getTagValue("brand", eElement));
 				it.setID(getTagValue("id", eElement));
-				
+				it.getTags();
 				batch.add(it);
 			}
 		}
 		return batch; 
 	}
-	
+
 	public ArrayList<Item> getBatch(int batchsize, ArrayList<String> depts) throws ParserConfigurationException, SAXException, IOException{
 		Log.i(TAG, "calling getBatch with depts" + depts.size());
 		if(depts.size()==0){
@@ -162,6 +163,6 @@ public class RealProxy extends AbstractProxy {
 			return items;
 		}
 	}
-	
+
 }
 

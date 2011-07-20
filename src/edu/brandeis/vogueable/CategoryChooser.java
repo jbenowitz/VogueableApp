@@ -65,14 +65,7 @@ public class CategoryChooser extends Activity implements OnClickListener {
 		    View intimateview = findViewById(R.id.intimates_check);
 		    intimateview.setOnClickListener(this);
 		      
-		    View activeview = findViewById(R.id.activewear_check);
-		    activeview.setOnClickListener(this);
 		    
-		    View suitsview = findViewById(R.id.suits_check);
-		    suitsview.setOnClickListener(this);
-		    
-		    View rompersview = findViewById(R.id.rompers_check);
-		    rompersview.setOnClickListener(this);
 		      
 	    }
 	  public boolean onOptionsItemSelected(MenuItem item) {
@@ -98,10 +91,7 @@ public class CategoryChooser extends Activity implements OnClickListener {
 	    	final CheckBox bottoms = (CheckBox) findViewById(R.id.bottoms_check); 
 	    	final CheckBox accesories = (CheckBox) findViewById(R.id.accesories_check);  
 	    	final CheckBox outerwear = (CheckBox) findViewById(R.id.outerwear_check);  
-	    	final CheckBox intimate = (CheckBox) findViewById(R.id.intimates_check);  
-	    	final CheckBox activewear = (CheckBox) findViewById(R.id.activewear_check);
-	    	final CheckBox rompers = (CheckBox) findViewById(R.id.rompers_check);  
-	    	final CheckBox suits = (CheckBox) findViewById(R.id.suits_check);
+	    	final CheckBox intimate = (CheckBox) findViewById(R.id.intimates_check); 
 	    	final CheckBox tops = (CheckBox) findViewById(R.id.tops_check); 
 	    	
 	    	
@@ -132,24 +122,23 @@ public class CategoryChooser extends Activity implements OnClickListener {
 	        	    prov.setAcat("1"); //dresses
 	       		 }   
 	        	if (shoes.isChecked()) {
-	        		prov.setAcat("2"); //shoes
+	        		prov.setAcat("20"); //shoes
 	       		 }  
 	       		if (bottoms.isChecked()) {
 	        		prov.setAcat("10"); //bottoms
 	        		//skirts go here
 	        	} 
 	        	if (accesories.isChecked()) {
+	        		prov.setAcat("15"); // belts, scarves, purses; 
 	        	} 
 	        	if(outerwear.isChecked()) {
+	        		prov.setAcat("14");
 	        	}  
+
 	       		if (intimate.isChecked()) {
+	       			prov.setAcat("18");// lingerie; 
 	        	} 
-	        	if (activewear.isChecked()) {
-	        	} 
-	        	if(rompers.isChecked()) {
-	        	}
-	        	if (suits.isChecked()) {
-	        	} 
+	        	
 	        	if (tops.isChecked()) {
 	        		prov.setAcat("11");
 	        	}
@@ -178,9 +167,6 @@ public class CategoryChooser extends Activity implements OnClickListener {
 		    	  accesories.setChecked(true);
 		    	  outerwear.setChecked(true);
 		    	  intimate.setChecked(true);
-		    	  activewear.setChecked(true);
-		    	  rompers.setChecked(true);
-		    	  suits.setChecked(true);
 		    	  tops.setChecked(true);
 		    	  
 		    	  break;
@@ -193,9 +179,6 @@ public class CategoryChooser extends Activity implements OnClickListener {
 		    	  accesories.setChecked(false);
 		    	  outerwear.setChecked(false);
 		    	  intimate.setChecked(false);
-		    	  activewear.setChecked(false);
-		    	  rompers.setChecked(false);
-		    	  suits.setChecked(false);
 		    	  tops.setChecked(false);
 			         
 		      }

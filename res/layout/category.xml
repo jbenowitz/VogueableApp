@@ -57,16 +57,7 @@
 					android:textSize="18dip"
 					android:layout_marginLeft="10dip">
 				</CheckBox>
-			
-				<CheckBox 
-					android:id="@+id/activewear_check" 
-					android:layout_width="wrap_content"
-					android:layout_height="wrap_content" 
-					android:text="@string/active_label"
-					android:textColor="@color/yellow"
-					android:textSize="18dip"
-					android:layout_marginLeft="10dip">
-				</CheckBox>
+			   
 				
 				<CheckBox 
 					android:id="@+id/bottoms_check" 
@@ -116,25 +107,6 @@
 					android:layout_marginLeft="10dip">
 				</CheckBox>
 			
-				<CheckBox 
-					android:id="@+id/rompers_check" 
-					android:layout_width="wrap_content"
-					android:layout_height="wrap_content" 
-					android:text="@string/romper_label"
-					android:textColor="@color/yellow"
-					android:textSize="18dip"
-					android:layout_marginLeft="10dip">
-				</CheckBox>
-				
-				<CheckBox 
-					android:id="@+id/suits_check" 
-					android:layout_width="wrap_content"
-					android:layout_height="wrap_content" 
-					android:text="@string/suit_label"
-					android:textColor="@color/yellow"
-					android:textSize="18dip"
-					android:layout_marginLeft="10dip">
-				</CheckBox>
 				
 				<CheckBox 
 					android:id="@+id/tops_check" 
