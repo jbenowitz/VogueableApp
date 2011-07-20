@@ -135,32 +135,23 @@ public class CategoryChooser extends Activity implements OnClickListener {
 	        		prov.setAcat("2"); //shoes
 	       		 }  
 	       		if (bottoms.isChecked()) {
-	        		prov.setAcat("4"); //pants
+	        		prov.setAcat("10"); //bottoms
 	        		//skirts go here
 	        	} 
 	        	if (accesories.isChecked()) {
-	        		prov.setAcat("3"); //accessories 
-	        		prov.setAcat("5"); //jewlery
 	        	} 
 	        	if(outerwear.isChecked()) {
-	        		//jackets and blazers go here
-	        		//hoodies go here
 	        	}  
-	       		 if (intimate.isChecked()) {
-	        		//intimates and hosiery go here
+	       		if (intimate.isChecked()) {
 	        	} 
 	        	if (activewear.isChecked()) {
-	        		//activewear
 	        	} 
 	        	if(rompers.isChecked()) {
-	        		//rompers
 	        	}
 	        	if (suits.isChecked()) {
-	        		//suits go here
 	        	} 
 	        	if (tops.isChecked()) {
-	        		//tops go here
-	        		//blouses go here
+	        		prov.setAcat("11");
 	        	}
 
 

@@ -101,6 +101,11 @@ public class ItemCacheTable {
 		return position;
 	}
 	
-	
+	public void clear(){
+		nextpage = 0;
+		circulations = 0;
+		table = new ArrayList<DeptItemCache>(this.batchsize);
+		
+	}
 
 }

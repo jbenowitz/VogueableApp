@@ -95,20 +95,20 @@ public class RealProxy extends AbstractProxy {
 	}
 	/**
 	 * Gets a batch of items with unspecified department;
-	 * @param BatchSize - number of items needed
+	 * @param batchsize - number of items needed
 	 * @return - ArrayList of Items from random departments; 
 	 * @throws ParserConfigurationException
 	 * @throws SAXException
 	 * @throws IOException
 	 */
-	public ArrayList<Item> getBatch(int BatchSize) throws ParserConfigurationException, SAXException, IOException{
+	public ArrayList<Item> getBatch(int batchsize) throws ParserConfigurationException, SAXException, IOException{
 		ArrayList<Item> batch = new ArrayList<Item>();
 		Resty r = new Resty();
 		XMLResource usr1 = null;
 		if(provide.getCurUser().getID()==null){
 			Log.i(TAG, "no user");
 			try {
-				usr1 = r.xml("http://vogueable.heroku.com/find.xml?dept="+1+"&batch="+BatchSize+".xml");
+				usr1 = r.xml("http://vogueable.heroku.com/find.xml?dept="+1+"&batch="+batchsize+".xml");
 			} catch (IOException e) {
 				Log.e(TAG, e.toString());
 			}
@@ -116,7 +116,7 @@ public class RealProxy extends AbstractProxy {
 		else{
 			Log.i(TAG, "User id " + provide.getCurUser().getID());
 			try {
-				usr1 = r.xml("http://vogueable.heroku.com/find.xml?user="+provide.getCurUser().getID()+"&batch="+BatchSize+".xml");
+				usr1 = r.xml("http://vogueable.heroku.com/find.xml?user="+provide.getCurUser().getID()+"&batch="+batchsize+".xml");
 			} catch (IOException e) {
 				Log.e(TAG, e.toString());
 			}
@@ -147,8 +147,20 @@ public class RealProxy extends AbstractProxy {
 		return batch; 
 	}
 	
-	
-	
+	public ArrayList<Item> getBatch(int batchsize, ArrayList<String> depts) throws ParserConfigurationException, SAXException, IOException{
+		Log.i(TAG, "calling getBatch with depts" + depts.size());
+		if(depts.size()==0){
+			return getBatch(batchsize);
+		}
+		else{
+			ArrayList<Item> items = new ArrayList<Item>();
+			for(String dept: depts){
+				Log.i(TAG, "getting " +batchsize/depts.size() + " items for dept " + dept);
+				items.addAll(getBatchbyDept(batchsize/depts.size(), dept));
+			}
+			return items;
+		}
+	}
 	
 }
 

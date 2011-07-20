@@ -97,7 +97,7 @@ public class Provider {
 			itemcache.circulate();
 		}
 		try {
-			itemcache.addBatch(getProxy().getBatch(BATCH_SIZE));
+			itemcache.addBatch(getProxy().getBatch(BATCH_SIZE, cats));
 		} catch (ParserConfigurationException e) {
 			Log.e(TAG, e.toString());
 		} catch (SAXException e) {
