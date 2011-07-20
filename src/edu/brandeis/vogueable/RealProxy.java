@@ -23,18 +23,18 @@ import android.util.Log;
 
 
 public class RealProxy extends AbstractProxy {
-	
+
 	User curruser;// user currently using app
 	NodeList nList;
 	Context con;
 	private final static String TAG = "RealProxy";
 	Provider provide;
-	
+
 	public RealProxy(Provider provide){
 		this.provide = provide;
 	}
 
-		
+
 	/**
 	 * Gets a Batch of Items from Server in Specific Department;
 	 * @param BatchSize - number of items wanted in batch;
@@ -45,16 +45,27 @@ public class RealProxy extends AbstractProxy {
 	 * @throws IOException
 	 */
 	public ArrayList<Item> getBatchbyDept(int BatchSize, String  dept) throws ParserConfigurationException, SAXException, IOException{
+
 		ArrayList<Item> batch = new ArrayList<Item>();
 		Resty r = new Resty();
 		XMLResource usr1 = null;
-	
+		if(provide.getCurUser().getID()==null){
+			Log.i(TAG, "no user");
+			try {
+				usr1 = r.xml("http://vogueable.heroku.com/find.xml?dept="+1+"&batch="+BatchSize+".xml");
+			} catch (IOException e) {
+				Log.e(TAG, e.toString());
+			}
+		}
+		else{
+
 			Log.i(TAG, "User id " + provide.getCurUser().getID());
 			try {
 				usr1 = r.xml("http://vogueable.heroku.com/find.xml?user="+provide.getCurUser().getID()+"&dept="+dept+"&batch="+BatchSize+".xml");
 			} catch (IOException e) {
 				Log.e(TAG, e.toString());
 			}
+		}
 			DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
 	        DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
 	        String st = ""+usr1;
@@ -67,32 +78,91 @@ public class RealProxy extends AbstractProxy {
 				if (nNode.getNodeType() == Node.ELEMENT_NODE) {
 					Item it = new Item("it");
 					Element eElement = (Element) nNode;
-					it.setName(getTagValue("name", eElement));
-					Log.d(TAG,"name" + it.getName());
-					it.setImageFileString(getTagValue("img-url", eElement));
-					it.setDescription(getTagValue("features", eElement));
-					it.setLink(getTagValue("link-to-buy", eElement));
-					it.setPrice(getTagValue("item-price", eElement));
-					it.setBrand(getTagValue("brand", eElement));
-					it.setID(getTagValue("id", eElement));
-					it.getTags();
-					batch.add(it);
+					if(getTagValue("img-url", eElement)!=null){
+						it.setName(getTagValue("name", eElement));
+						Log.d(TAG,"name" + it.getName());
+						it.setImageFileString(getTagValue("img-url", eElement));
+						it.setDescription(getTagValue("features", eElement));
+						it.setLink(getTagValue("link-to-buy", eElement));
+						it.setPrice(getTagValue("item-price", eElement));
+						it.setBrand(getTagValue("brand", eElement));
+						it.setID(getTagValue("id", eElement));
+						it.getTags();
+						batch.add(it);
+					}
 				}
 			}
 		return batch; 
 	}
 	/**
 	 * Gets a batch of items with unspecified department;
-	 * @param BatchSize - number of items needed
+	 * @param batchsize - number of items needed
 	 * @return - ArrayList of Items from random departments; 
 	 * @throws ParserConfigurationException
 	 * @throws SAXException
 	 * @throws IOException
 	 */
-	public ArrayList<Item> getBatch(int BatchSize) throws ParserConfigurationException, SAXException, IOException{
-		//for now when things are deselected, will just pull dresses. TODO change this
-		return getBatchbyDept(BatchSize,"1");
+	public ArrayList<Item> getBatch(int batchsize) throws ParserConfigurationException, SAXException, IOException{
+		ArrayList<Item> batch = new ArrayList<Item>();
+		Resty r = new Resty();
+		XMLResource usr1 = null;
+		if(provide.getCurUser().getID()==null){
+			Log.i(TAG, "no user");
+			try {
+				usr1 = r.xml("http://vogueable.heroku.com/find.xml?dept="+1+"&batch="+batchsize+".xml");
+			} catch (IOException e) {
+				Log.e(TAG, e.toString());
+			}
+		}
+		else{
+			Log.i(TAG, "User id " + provide.getCurUser().getID());
+			try {
+				usr1 = r.xml("http://vogueable.heroku.com/find.xml?user="+provide.getCurUser().getID()+"&batch="+batchsize+".xml");
+			} catch (IOException e) {
+				Log.e(TAG, e.toString());
+			}
+		}
+		DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
+        DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
+        String st = ""+usr1;
+        InputStream is = new ByteArrayInputStream(st.getBytes());
+        Document doc = dBuilder.parse(is);
+        doc.getDocumentElement().normalize();
+        nList = doc.getElementsByTagName("item");
+		for(int k =0; k<nList.getLength(); k++){
+	        Node nNode = nList.item(k);
+			if (nNode.getNodeType() == Node.ELEMENT_NODE) {
+				Item it = new Item("it");
+				Element eElement = (Element) nNode;
+				it.setName(getTagValue("name", eElement));
+				Log.d(TAG,"name" + it.getName());
+				it.setImageFileString(getTagValue("img-url", eElement));
+				it.setDescription(getTagValue("features", eElement));
+				it.setLink(getTagValue("link-to-buy", eElement));
+				it.setPrice(getTagValue("item-price", eElement));
+				it.setBrand(getTagValue("brand", eElement));
+				it.setID(getTagValue("id", eElement));
+				it.getTags();
+				batch.add(it);
+			}
+		}
+		return batch; 
 	}
-	
+
+	public ArrayList<Item> getBatch(int batchsize, ArrayList<String> depts) throws ParserConfigurationException, SAXException, IOException{
+		Log.i(TAG, "calling getBatch with depts" + depts.size());
+		if(depts.size()==0){
+			return getBatch(batchsize);
+		}
+		else{
+			ArrayList<Item> items = new ArrayList<Item>();
+			for(String dept: depts){
+				Log.i(TAG, "getting " +batchsize/depts.size() + " items for dept " + dept);
+				items.addAll(getBatchbyDept(batchsize/depts.size(), dept));
+			}
+			return items;
+		}
+	}
+
 }
 
