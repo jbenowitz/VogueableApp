@@ -94,7 +94,7 @@ public class Helper extends BaseAdapter {
             }
         	
             buy_button.setTag(position);
-            remove_button.setTag(position);
+            remove_button.setTag(position); 
             Log.d("getView","button tags set to "+position);
             
             buy_button.setOnClickListener(new OnClickListener() {

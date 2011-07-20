@@ -52,6 +52,7 @@ import android.widget.Toast;
 public class Women extends Activity implements  android.view.View.OnClickListener{
 	private static String TAG = "Men Starting Activity";
 	User user = new User(null);
+	
 
 	/** Called when the activity is first created. */
 	   @Override
@@ -101,6 +102,12 @@ public class Women extends Activity implements  android.view.View.OnClickListene
 
 		    		  Log.d(TAG, "user exists in database " + user.getName());
 		    		  user.setID(temp);
+		    		  
+		    		  Provider prov = Provider.instance(user.getName(), this, null);//set provider with current user
+				      
+				      prov.getCurUser().setID(user.getID());
+				      
+				      prov.getCurUser().setWishlist();
 		    		  //TODO Pull TasteManager and WishList
 		    	  }
 		    	  //else add to database
@@ -108,6 +115,7 @@ public class Women extends Activity implements  android.view.View.OnClickListene
 		    		  Log.d(TAG, "user being added to database");
 		    		  addUser(user);
 		    		  user.setID(checkUser(user.getName()));
+		    		  
 		    	  }
 
 		    	  AlertDialog.Builder welcome = new AlertDialog.Builder(Women.this);
@@ -213,15 +221,7 @@ public class Women extends Activity implements  android.view.View.OnClickListene
 	    		return null;
 	    	}
 	    }
-
-
-	    /** 
-	     * Used to get a tag value of the xml for Users
-	     * 
-	     * @param sTag
-	     * @param eElement
-	     * @return
-	     */
+	    
 		public String getTagValue(String sTag, Element eElement) {
 			NodeList list = eElement.getElementsByTagName(sTag);
 			Node el = list.item(0);
