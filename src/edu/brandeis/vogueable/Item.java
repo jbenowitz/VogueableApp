@@ -183,6 +183,8 @@ public class Item {
 	public String getLink(){
 		return link;
 	}
+	
+	
 	public void setLink(String st){
 		link= st;
 	}
@@ -217,6 +219,7 @@ public class Item {
 		}
 	}
 	
+	
 	/**
 	 * toggles the itemdisliked boolean (used to see if an item was previously disliked)
 	 */
@@ -228,6 +231,7 @@ public class Item {
 		}
 	}
 	
+	
 	/**
 	 * gets the boolean of whether item was previously liked
 	 * @return itemliked boolean
@@ -236,6 +240,7 @@ public class Item {
 		return itemliked;
 	}
 	
+	
 	/**
 	 * gets the boolean ofwhtether item was previously disliked
 	 * @return itemdisliked boolean
@@ -243,15 +248,7 @@ public class Item {
 	public boolean getItemDisliked(){
 		return itemdisliked;
 	}
-
 	
-	/**
-	 * Returns what is saved in itemliked (if previous liked returns true)
-	 * @return boolean
-	 */
-	public boolean getWhetherLiked(){
-		return itemliked;
-	}
 	
 	/**
 	 * Sets a boolean into itemliked (when likeing it, true, when dislikeing it, false)
@@ -261,13 +258,6 @@ public class Item {
 		itemliked = liked;
 	}
 	
-	/**
-	 * Returns what is saved in itemdisliked (if previous disliked returns true)
-	 * @return boolean
-	 */
-	public boolean getWhetherDisliked(){
-		return itemdisliked;
-	}
 	
 	/**
 	 * Sets a boolean into itemdisliked (when dislikeing it, true, when likeing it, false)
@@ -276,6 +266,8 @@ public class Item {
 	public void setItemDisliked(boolean disliked){
 		itemdisliked = disliked;
 	}
+	
+	
 	/**
 	 * This Method creates a list of tags to describe the item that will be used by the Taste Manager,
 	 * it sees if the name and description contain some key words stores in the Tags constant class; 

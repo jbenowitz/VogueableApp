@@ -38,6 +38,7 @@ public class Provider {
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+			Log.e("PROVIDER","FAILED TO CREATE TASTE MANAGER");
 		} 
 		
 	}

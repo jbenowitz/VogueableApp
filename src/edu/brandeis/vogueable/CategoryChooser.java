@@ -147,7 +147,7 @@ public class CategoryChooser extends Activity implements OnClickListener {
 	        		//hoodies go here
 	        	}  
 	       		 if (intimate.isChecked()) {
-	        		//intimates and hosiery go here
+	        		//intimates and h	qqqqAQ`		osiery go here
 	        	} 
 	        	if (activewear.isChecked()) {
 	        		//activewear
