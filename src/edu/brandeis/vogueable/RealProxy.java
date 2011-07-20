@@ -49,7 +49,7 @@ public class RealProxy extends AbstractProxy {
 		ArrayList<Item> batch = new ArrayList<Item>();
 		Resty r = new Resty();
 		XMLResource usr1 = null;
-		if(provide.getCurUser().getName()==null){
+		if(provide.getCurUser().getID()==null){
 			Log.i(TAG, "no user");
 			try {
 				usr1 = r.xml("http://vogueable.heroku.com/find.xml?dept="+1+"&batch="+BatchSize+".xml");
@@ -105,12 +105,21 @@ public class RealProxy extends AbstractProxy {
 		ArrayList<Item> batch = new ArrayList<Item>();
 		Resty r = new Resty();
 		XMLResource usr1 = null;
-	
-		Log.i(TAG, "User id " + provide.getCurUser().getID());
-		try {
-			usr1 = r.xml("http://vogueable.heroku.com/find.xml?user="+provide.getCurUser().getID()+"&batch="+BatchSize+".xml");
-		} catch (IOException e) {
-			Log.e(TAG, e.toString());
+		if(provide.getCurUser().getID()==null){
+			Log.i(TAG, "no user");
+			try {
+				usr1 = r.xml("http://vogueable.heroku.com/find.xml?dept="+1+"&batch="+BatchSize+".xml");
+			} catch (IOException e) {
+				Log.e(TAG, e.toString());
+			}
+		}
+		else{
+			Log.i(TAG, "User id " + provide.getCurUser().getID());
+			try {
+				usr1 = r.xml("http://vogueable.heroku.com/find.xml?user="+provide.getCurUser().getID()+"&batch="+BatchSize+".xml");
+			} catch (IOException e) {
+				Log.e(TAG, e.toString());
+			}
 		}
 		DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
         DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
