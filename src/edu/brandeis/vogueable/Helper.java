@@ -85,7 +85,8 @@ public class Helper extends BaseAdapter {
                 InputStream input = connection.getInputStream();
                 BufferedInputStream bis = new BufferedInputStream(input);
                 Bitmap myBitmap = BitmapFactory.decodeStream(bis);
-                image.setImageBitmap(myBitmap);
+                Log.e("helper", ""+myBitmap.getWidth());
+                image.setImageBitmap(myBitmap);   
             } catch (IOException e) {
                 e.printStackTrace();
                 Log.e("Exception",e.getMessage());

@@ -2,8 +2,6 @@ package edu.brandeis.vogueable;
 
 import java.io.BufferedInputStream;
 import java.io.IOException;
-import java.net.URI;
-import java.net.URISyntaxException;
 import java.net.URL;
 import java.net.URLConnection;
 
@@ -33,13 +31,19 @@ import android.widget.TextView;
       private static final String TAG = "ImageAdapter";
       private Context mContext;
       int mGalleryItemBackground;
-     // private Item[] items = {new Item("baby1"), new Item("baby1"), new Item("baby2"), new Item("baby3"), new Item("baby4")};
       TextView namelandtext, pricelandtext;
       Provider provide;
       private ImageButton likeb, dislikeb;
-      private static final int MAXPICS = 100; //the max amount of pics pulled to your phone (can't go farther back than this)
 
-      //Constructor that sets up the Image Adapter (what is inside the Gallery)
+      /**
+       * Constructor that sets up the Image Adapter (what is inside the Gallery)
+       * @param c
+       * @param provide
+       * @param namelandtext
+       * @param pricelandtext
+       * @param lb
+       * @param db
+       */
       public ImageAdapter(Context c, Provider provide, TextView namelandtext, TextView pricelandtext, ImageButton lb, ImageButton db) {
           Log.i(TAG, "Constructor called");
     	  mContext = c;
@@ -49,7 +53,6 @@ import android.widget.TextView;
           this.likeb = lb;
           this.dislikeb = db;
           
-          provide.getProxy().connect(null);
           provide.fillItemCache();
           
           TypedArray a = mContext.obtainStyledAttributes(R.styleable.HelloGallery);
@@ -59,26 +62,35 @@ import android.widget.TextView;
           
       }
 
-      //Returns count of images array
+      /**
+       * Returns count of images array
+       */
       public int getCount() {
     	  Log.i(TAG, "getCount() called");
-          return MAXPICS;
+          return provide.getItemCache().getCount();
       }
 
-      //returns the item in a certain position
+      /**
+       * returns the item in a certain position
+       */
       public Object getItem(int position) {
     	  Log.i(TAG, "getItem() called position = " + position);
-          //return items[checkPosition(position)];
     	  return provide.getItemCache().getItem(position);
       }
 
-      //gets the itemID of a certain position
+      /**
+       * gets the itemID of a certain position
+       */
       public long getItemId(int position) {
     	  Log.i(TAG, "getItemId() position = " + position);
           return provide.getItemCache().getItemId(position);
       }
       
-      //creates a bitmap of the images from given URL
+      /**
+       * creates a bitmap of the images from given URL
+       * @param src
+       * @return
+       */
       public  Bitmap getBitmapFromURL(String src) {
           try {
               Log.i(TAG,"GetbitmapfromURL");
@@ -94,19 +106,16 @@ import android.widget.TextView;
           }
       }
       
-      
-      
       /**
        * Creates the view of the images.
        */
       public View getView(int position, View convertView, ViewGroup parent) {
     	  Log.i(TAG, "starting getView position = " + position );
     	  
-    	  //position = checkPosition(position);
-      	 
+    	  //check to see if it's time to add another batch, if so do
+    	  addAnotherBatch(position);
            
            //Sets the current item to be referenced by other classes in the provider
-           //provide.setCurItem(items[position]);
     	  provide.setCurItem(position);
            dislikeb.setImageDrawable(mContext.getResources().getDrawable(R.drawable.disapprovegrey));
            likeb.setImageDrawable(mContext.getResources().getDrawable(R.drawable.approvegrey));
@@ -117,21 +126,10 @@ import android.widget.TextView;
        
            Log.i(TAG, "User name " + provide.getCurUser().getName());
            Log.i(TAG, "User id " + provide.getCurUser().getID());
-//           Item nextItem = null;
-//		try {
-//			nextItem = provide.getProxy().getBatch(1).get(0);
-//		} catch (ParserConfigurationException e) {
-//			Log.e(TAG, e.toString());
-//		} catch (SAXException e) {
-//			Log.e(TAG, e.toString());
-//		} catch (IOException e) {
-//			Log.e(TAG, e.toString());
-//		}
            
            
            //Sets the view context image
            ImageView i = new ImageView(mContext);
-           //Bitmap bimage=  getBitmapFromURL(items[position].getImageFileString());
            Bitmap bimage = getBitmapFromURL(provide.getCurItem().getImageFileString());
            i.setImageBitmap(bimage);
            i.setAdjustViewBounds(true);
@@ -142,7 +140,7 @@ import android.widget.TextView;
            i.setPadding(50, 0, 50, 0);
            i.setScaleType(ImageView.ScaleType.FIT_XY);
            
-           
+           Log.i(TAG, "bitmap width"+bimage.getWidth());
            
            
            //Set landscape or portrait gallery/image size
@@ -156,21 +154,14 @@ import android.widget.TextView;
            i.setLayoutParams(galayout);
 
            //sets the border
-           //i.setBackgroundResource(mGalleryItemBackground);
            i.setBackgroundColor(R.color.white);
 
            return i;
       }
       
       
-//      public int checkPosition(int position) { 
-//    	  Log.i(TAG, "checkPosition() called position = " + position);
-//          if (position >= items.size()) { 
-//              position = position % items.size(); 
-//          } 
-//          return position; 
-//      } 
-      /**
+      
+    /**
    	 * Changes the landscape layout more info "name" field to a given string
    	 */
    	private void setLandscapeName(){
@@ -184,6 +175,25 @@ import android.widget.TextView;
    	private void setLandscapePrice(){
    		Log.i(TAG, "setLandscapePrice() called");
    		pricelandtext.setText(provide.getCurItem().getPrice());
+   	}
+   	
+   	/**
+   	 * checks to see if it's time (2/3 through current batch) to add
+   	 * another batch
+   	 * @param position
+   	 */
+   	private void addAnotherBatch(int position){
+   		if(position%provide.getBatchSize() == 2*provide.getBatchSize()/3
+   				&& position/provide.getBatchSize() == provide.getItemCache().getNextPage()-1){
+   			provide.fillItemCache();
+   		}
+   	}
+   	
+   	private int checkPosition(int position){
+   		if (position >= provide.getItemCache().getCount()) { 
+            position = position % provide.getItemCache().getCount(); 
+        } 
+   		return position;
    	}
   }
 

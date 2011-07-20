@@ -126,13 +126,21 @@ public class MainActivity extends Activity implements android.view.View.OnClickL
 
 		//Like Button onClick
 		case R.id.like_button :
+			//provide.getCurItem().setItemLiked(true);
 			Log.e(TAG, "clicked like_button");
-			likeMan.like();			
+			likeMan.like();	
+			//Log.d(TAG, provide.getCurItem().getTagList().toString());
+			//provide.getCurUser().getTasteManager().likeFlavor(provide.getCurItem().getTagList());
+			//Log.d(TAG, provide.getCurUser().getTasteManager().tagCount.toString());
 	    	break;
 	    	
 	    //Dislike button onClick
 		case R.id.dislike_button:
+			Log.e(TAG, "clicked dislike_button");
 			likeMan.dislike();
+			Log.d(TAG, provide.getCurItem().getTagList().toString());
+			provide.getCurUser().getTasteManager().dislikeFlavor(provide.getCurItem().getTagList());
+			Log.d(TAG, provide.getCurUser().getTasteManager().tagCount.toString());
 			break;
 			
 		//Wishlist Button on click	
@@ -154,13 +162,13 @@ public class MainActivity extends Activity implements android.view.View.OnClickL
 	    	         }).show().setCanceledOnTouchOutside(true);
 	    	         
 		    break;
-		    
-		//Info button on click    
+		     
+		//Info button on click       
 		case R.id.info_button:
 			
 			AlertDialog.Builder info = new AlertDialog.Builder(this);
 			info
-			.setMessage(provide.getCurItem().getName()+" "+provide.getCurItem().getPrice()+" "+provide.getCurItem().getCategoryTag())
+			.setMessage(provide.getCurItem().getName()+" "+provide.getCurItem().getPrice())
 			.setPositiveButton("Add to wishlist", new DialogInterface.OnClickListener() {
 				public void onClick(DialogInterface dialog, int id) {
 					provide.getCurUser().addWishlist(provide.getCurItem());
