@@ -53,6 +53,7 @@ import android.widget.TextView;
           this.likeb = lb;
           this.dislikeb = db;
           
+          provide.getItemCache().clear();
           provide.fillItemCache();
           
           TypedArray a = mContext.obtainStyledAttributes(R.styleable.HelloGallery);
@@ -93,7 +94,7 @@ import android.widget.TextView;
        */
       public  Bitmap getBitmapFromURL(String src) {
           try {
-              Log.i(TAG,"GetbitmapfromURL");
+              Log.i(TAG,"GetbitmapfromURL src " + src);
               URL url = new URL(src);
               URLConnection connection = (URLConnection) url.openConnection();
               connection.connect();
@@ -101,7 +102,7 @@ import android.widget.TextView;
               return BitmapFactory.decodeStream(new BufferedInputStream(connection.getInputStream()));
           } catch (IOException e) {
               e.printStackTrace();
-              Log.e(TAG,"exception thrown");
+              Log.e(TAG,"exception thrown getting bitmap url");
               return null;
           }
       }
@@ -130,6 +131,7 @@ import android.widget.TextView;
            
            //Sets the view context image
            ImageView i = new ImageView(mContext);
+           Log.i(TAG,"GetbitmapfromURL item namae " + provide.getCurItem().getName());
            Bitmap bimage = getBitmapFromURL(provide.getCurItem().getImageFileString());
            i.setImageBitmap(bimage);
            i.setAdjustViewBounds(true);

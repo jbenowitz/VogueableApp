@@ -55,15 +55,6 @@ public abstract class AbstractProxy {
 		
 	}
 	
-	/**
-	 * Returns user object
-	 * @param email - user's email- hopefully provided by Android; 
-	 * @return Returns user object instantiated with data from webservice 
-	 */
-	public User getUser(String email){
-		User user = new User("yoooser@mail.ru");
-		return user; 
-	}
 	
 	/**
 	 * Returns Item that has the most tags out of the give list of tags; 
