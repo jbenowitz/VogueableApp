@@ -52,7 +52,7 @@ public class RealProxy extends AbstractProxy {
 		if(provide.getCurUser().getID()==null){
 			Log.i(TAG, "no user");
 			try {
-				usr1 = r.xml("http://vogueable.heroku.com/find.xml?dept="+1+"&batch="+BatchSize+".xml");
+				usr1 = r.xml("http://vogueable.heroku.com/find.xml?dept="+dept+"&batch="+BatchSize+".xml");
 			} catch (IOException e) {
 				Log.e(TAG, e.toString());
 			}
