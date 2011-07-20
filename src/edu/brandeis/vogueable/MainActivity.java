@@ -98,9 +98,12 @@ public class MainActivity extends Activity implements android.view.View.OnClickL
             	 Log.i(TAG, "old item "+provide.getCurItem().getName());
             	 
                provide.setCurItem(position);
-               provide.getCurItem().markAsViewed(provide.getCurUser());
+               if(provide.getCurUser()!=null){
+	               provide.getCurItem().markAsViewed(provide.getCurUser());
+	               Log.i(TAG, provide.getCurUser()+ " saw"+provide.getCurItem().getName());
+               }
            	   Log.i(TAG, "now set to "+provide.getCurItem().getName());
-           	 Log.i(TAG, provide.getCurUser()+ " saw"+provide.getCurItem().getName());
+           	
             }
 			@Override
 			public void onNothingSelected(AdapterView<?> arg0) {

@@ -59,8 +59,6 @@ public class User {
 	public void addWishlist(Item itemA){
 		wishlist.addItem(itemA);
 	}
-	
-	
 	/**
 	 * removes an item from the wishlist
 	 * 
@@ -69,7 +67,6 @@ public class User {
 	public void removeWishlist(Item itemR){
 		wishlist.remove(itemR);
 	}
-	
 	
 	/**
 	 * returns the tasteManager

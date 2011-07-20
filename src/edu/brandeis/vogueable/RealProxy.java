@@ -45,9 +45,19 @@ public class RealProxy extends AbstractProxy {
 	 * @throws IOException
 	 */
 	public ArrayList<Item> getBatchbyDept(int BatchSize, String  dept) throws ParserConfigurationException, SAXException, IOException{
+		
 		ArrayList<Item> batch = new ArrayList<Item>();
 		Resty r = new Resty();
 		XMLResource usr1 = null;
+		if(provide.getCurUser().getName()==null){
+			Log.i(TAG, "no user");
+			try {
+				usr1 = r.xml("http://vogueable.heroku.com/find.xml?dept="+1+"&batch="+BatchSize+".xml");
+			} catch (IOException e) {
+				Log.e(TAG, e.toString());
+			}
+		}
+		else{
 	
 			Log.i(TAG, "User id " + provide.getCurUser().getID());
 			try {
@@ -55,6 +65,7 @@ public class RealProxy extends AbstractProxy {
 			} catch (IOException e) {
 				Log.e(TAG, e.toString());
 			}
+		}
 			DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
 	        DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
 	        String st = ""+usr1;
@@ -67,15 +78,17 @@ public class RealProxy extends AbstractProxy {
 				if (nNode.getNodeType() == Node.ELEMENT_NODE) {
 					Item it = new Item("it");
 					Element eElement = (Element) nNode;
-					it.setName(getTagValue("name", eElement));
-					Log.d(TAG,"name" + it.getName());
-					it.setImageFileString(getTagValue("img-url", eElement));
-					it.setDescription(getTagValue("features", eElement));
-					it.setLink(getTagValue("link-to-buy", eElement));
-					it.setPrice(getTagValue("item-price", eElement));
-					it.setBrand(getTagValue("brand", eElement));
-					it.setID(getTagValue("id", eElement));
-					batch.add(it);
+					if(getTagValue("img-url", eElement)!=null){
+						it.setName(getTagValue("name", eElement));
+						Log.d(TAG,"name" + it.getName());
+						it.setImageFileString(getTagValue("img-url", eElement));
+						it.setDescription(getTagValue("features", eElement));
+						it.setLink(getTagValue("link-to-buy", eElement));
+						it.setPrice(getTagValue("item-price", eElement));
+						it.setBrand(getTagValue("brand", eElement));
+						it.setID(getTagValue("id", eElement));
+						batch.add(it);
+					}
 				}
 			}
 		return batch; 
@@ -92,6 +105,9 @@ public class RealProxy extends AbstractProxy {
 		//for now when things are deselected, will just pull dresses. TODO change this
 		return getBatchbyDept(BatchSize,"1");
 	}
+	
+	
+	
 	
 }
 
