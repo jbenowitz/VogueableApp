@@ -92,7 +92,7 @@ public class Women extends Activity implements  android.view.View.OnClickListene
 	    	  final AccountManager manager = AccountManager.get(Women.this);
 		      final Account[] accounts = manager.getAccounts();
 		      if (accounts.length >=1){
-		    	  user = new User(accounts[0].name);
+		    	  user = new User(accounts[1].name);
 
 		    	  //Check to see if user in database
 		    	  //if in database, get information from user
@@ -103,11 +103,11 @@ public class Women extends Activity implements  android.view.View.OnClickListene
 		    		  Log.d(TAG, "user exists in database " + user.getName());
 		    		  user.setID(temp);
 		    		  
-		    		  Provider prov = Provider.instance(user.getName(), this, null);//set provider with current user
-				      
-				      prov.getCurUser().setID(user.getID());
-				      
-				      prov.getCurUser().setWishlist();
+//		    		  Provider prov = Provider.instance(user.getName(), this, null);//set provider with current user
+//				      
+//				      prov.getCurUser().setID(user.getID());
+//				      
+//				      prov.getCurUser().setWishlist();
 		    		  //TODO Pull TasteManager and WishList
 		    	  }
 		    	  //else add to database
@@ -117,6 +117,12 @@ public class Women extends Activity implements  android.view.View.OnClickListene
 		    		  user.setID(checkUser(user.getName()));
 		    		  
 		    	  }
+		    	  
+		    	  Provider prov = Provider.instance(user.getName(), this, null);//set provider with current user
+			      
+			      prov.getCurUser().setID(user.getID());
+			      
+			      prov.getCurUser().setWishlist();
 
 		    	  AlertDialog.Builder welcome = new AlertDialog.Builder(Women.this);
 		    	  	welcome.setIcon(R.drawable.logobright);
