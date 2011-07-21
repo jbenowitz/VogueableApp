@@ -10,7 +10,7 @@
 
     
     <application 
-    	 android:icon="@drawable/logo" 
+    	 android:icon="@drawable/icon" 
     	 android:label="@string/app_name"
    		 android:debuggable ="true">
         
@@ -55,7 +55,7 @@
 		</activity>
 	
 		<activity 
-			android:icon="@drawable/logobright"
+			android:icon="@drawable/icon"
 			android:name=".Women" 
 			android:label="@string/app_name" >
 			 <intent-filter>
